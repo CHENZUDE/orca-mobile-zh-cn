@@ -110,7 +110,6 @@ export function TroubleshootView({
           onPress={onConnectionLog}
         >
           <ScrollText size={16} color={colors.textPrimary} />
-          <Text style={styles.diagnosticButtonLabel}>View network diagnostics</Text>
           <Text style={styles.diagnosticButtonLabel}>{t('diagnostics.troubleshoot.viewNetwork')}</Text>
         </Pressable>
 

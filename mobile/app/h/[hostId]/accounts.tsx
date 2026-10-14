@@ -335,7 +335,6 @@ export default function AccountsScreen() {
           <ChevronLeft size={22} color={colors.textPrimary} />
         </Pressable>
         <View style={styles.titleWrap}>
-          <Text style={styles.heading}>Accounts</Text>
           <Text style={styles.heading}>{t('host.accounts.heading')}</Text>
           {hostName ? (
             <Text style={styles.subheading} numberOfLines={1}>
@@ -369,7 +368,6 @@ export default function AccountsScreen() {
         {connState !== 'connected' && !snapshot ? (
           <View style={styles.placeholder}>
             <ActivityIndicator color={colors.textSecondary} />
-            <Text style={styles.placeholderText}>Connecting to {hostName || 'host'}…</Text>
             <Text style={styles.placeholderText}>{t('host.accounts.connecting', { name: hostName })}</Text>
           </View>
         ) : error && !snapshot ? (
@@ -379,7 +377,6 @@ export default function AccountsScreen() {
         ) : !snapshot ? (
           <View style={styles.placeholder}>
             <ActivityIndicator color={colors.textSecondary} />
-            <Text style={styles.placeholderText}>Loading accounts…</Text>
             <Text style={styles.placeholderText}>{t('host.accounts.loading')}</Text>
           </View>
         ) : (

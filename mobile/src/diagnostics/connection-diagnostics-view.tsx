@@ -71,7 +71,6 @@ export function ConnectionDiagnosticsView({
           </View>
           {diagnosis && (
             <View style={styles.diagnosisCard}>
-              <Text style={styles.diagnosisHeading}>What this suggests</Text>
             <Text style={styles.diagnosisHeading}>{t('diagnostics.connection.diagnosisHeading')}</Text>
               <Text style={styles.diagnosisText}>{diagnosis.likelyCause}</Text>
               <Text style={styles.diagnosisNext}>{diagnosis.nextStep}</Text>

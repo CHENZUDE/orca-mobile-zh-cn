@@ -77,7 +77,6 @@ export function PendingCredentialCleanupCard() {
       <View style={styles.credentialCleanupRow}>
         <KeyRound size={16} color={colors.statusAmber} />
         <View style={styles.credentialCleanupCopy}>
-          <Text style={styles.credentialCleanupTitle}>Pairing credential cleanup</Text>
           <Text style={styles.credentialCleanupTitle}>{t('settings.pendingCredentials.title')}</Text>
           <Text accessibilityLiveRegion="polite" style={styles.rowHint}>
             {credentialRetryFailed

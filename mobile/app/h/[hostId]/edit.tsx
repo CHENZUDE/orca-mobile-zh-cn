@@ -150,7 +150,6 @@ export default function EditHostScreen() {
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Edit host</Text>
         <Text style={styles.heading}>{t('host.edit.heading')}</Text>
         <Pressable
           style={({ pressed }) => [
@@ -174,7 +173,6 @@ export default function EditHostScreen() {
         <View style={styles.errorState}>
           <Text style={styles.errorText}>{loadError}</Text>
           <Pressable style={styles.secondaryButton} onPress={() => router.back()}>
-            <Text style={styles.secondaryButtonText}>Go back</Text>
             <Text style={styles.secondaryButtonText}>{t('host.edit.goBack')}</Text>
           </Pressable>
         </View>
