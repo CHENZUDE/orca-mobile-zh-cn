@@ -8,6 +8,8 @@
     "cancel": "Cancel",
     "retry": "Retry",
     "loading": "Loading…",
+    "on": "On",
+    "off": "Off",
     "nameLabel": "Name",
     "addressLabel": "Address"
   },
@@ -129,6 +131,46 @@
     "frame": {
       "back": "Back",
       "heading": "Settings"
+    },
+    "terminal": {
+      "noPairedDesktops": "No paired desktops yet. Pair one to control terminal behavior.",
+      "group": {
+        "leaveApp": {
+          "heading": "WHEN YOU LEAVE THE APP",
+          "body": "While you\u2019re using a terminal on your phone, Orca shrinks it to fit your screen. When you close the app or switch away, this controls whether it stays at phone size (so interactive CLI tools don\u2019t reflow) or resizes back to your desktop. You can always use Restore on the desktop banner to resize manually."
+        },
+        "textSize": {
+          "heading": "TEXT SIZE",
+          "body": "Scale the terminal text. Smaller sizes fit more columns with side margins; larger sizes show fewer columns \u2014 drag sideways to pan. You can also pinch to zoom in the terminal itself, which updates this setting. Per-device display only; doesn\u2019t change the desktop terminal."
+        },
+        "keyboard": {
+          "heading": "KEYBOARD INPUT",
+          "body": "Enable phone-style autocomplete, autocorrect, and spelling suggestions in the terminal command bar. Off by default so the keyboard never rewrites commands, flags, or paths. Direct keyboard input (when keys go straight to the terminal) always sends raw keystrokes, so suggestions don\u2019t apply there."
+        }
+      },
+      "textSizeRow": {
+        "label": "Text size"
+      },
+      "autocomplete": {
+        "label": "Autocomplete & autocorrect"
+      },
+      "textSizePickerTitle": "Terminal text size",
+      "autoRestore": {
+        "title": "Restore {{name}}",
+        "indefinite": "Keep at phone size (default)",
+        "60s": "After 1 minute",
+        "5m": "After 5 minutes",
+        "30m": "After 30 minutes",
+        "afterSeconds": "After {{seconds}}s"
+      },
+      "textSize": {
+        "smallest": "Smallest (50%)",
+        "smaller": "Smaller (75%)",
+        "default": "Default (100%)",
+        "large": "Large (125%)",
+        "larger": "Larger (150%)",
+        "largest": "Largest (200%)"
+      }
     }
   }
 }
