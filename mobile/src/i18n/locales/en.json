@@ -20,7 +20,32 @@
     "tryAgain": "Try Again",
     "connectWithThisDesktop": "Pair with this desktop?",
     "connect": "Pair",
-    "connecting": "Connecting…"
+    "connecting": "Connecting…",
+    "confirm": {
+      "subtitle": "You opened a pairing link from your desktop. Confirm to add it to your hosts."
+    },
+    "scan": {
+      "invalidQr": "Not a valid Orca QR code",
+      "invalidPaste": "Not a valid pairing code — copy it from your computer and paste again",
+      "timeout": "Couldn't connect within {{seconds}}s — see log below for where it stalled",
+      "failed": "Pairing failed: {{error}}",
+      "step1": "Open Orca on your computer",
+      "step2": "Go to Settings → Mobile",
+      "step3": "Scan the QR code",
+      "paste": {
+        "title": "Paste pairing code",
+        "message": "Copy the code shown under the QR on your computer."
+      },
+      "logTitle": "Pairing log",
+      "permission": {
+        "title": "Pair with desktop",
+        "blocked": "Camera Access Disabled",
+        "subtitleAllowed": "Scan the QR code from Orca on your desktop, or paste the pairing code instead.",
+        "subtitleBlocked": "Enable camera access in Settings, or paste the pairing code instead.",
+        "continue": "Continue",
+        "openSettings": "Open Settings"
+      }
+    }
   },
   "home": {
     "headline": "Welcome back",

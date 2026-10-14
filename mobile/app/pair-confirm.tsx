@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { View, Text, StyleSheet, Pressable, ActivityIndicator, BackHandler } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useTranslation } from 'react-i18next'
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router'
 import { ChevronLeft } from 'lucide-react-native'
 import { resolvePairConfirmRouteState } from '../src/transport/pair-confirm-state'
@@ -31,6 +32,7 @@ export default function PairConfirmScreen() {
   const refreshHostClient = useRefreshHostClient()
   const insets = useSafeAreaInsets()
   const params = useLocalSearchParams<{ code?: string }>()
+  const { t } = useTranslation()
   const [status, setStatus] = useState<Status>('awaiting-confirm')
   const [errorMessage, setErrorMessage] = useState('')
   const [logs, setLogs] = useState<ConnectionLogEntry[]>([])
@@ -133,8 +135,8 @@ export default function PairConfirmScreen() {
       setStatus('error')
       setErrorMessage(
         timedOut
-          ? `Couldn't connect within ${PAIRING_OVERALL_TIMEOUT_MS / 1000}s — see log below for where it stalled`
-          : `Pairing failed: ${err instanceof Error ? err.message : String(err)}`
+          ? t('pairing.scan.timeout', { seconds: PAIRING_OVERALL_TIMEOUT_MS / 1000 })
+          : t('pairing.scan.failed', { error: err instanceof Error ? err.message : String(err) })
       )
     }
   }
@@ -150,16 +152,16 @@ export default function PairConfirmScreen() {
       <View style={styles.content}>
         {offer && resolvedStatus === 'awaiting-confirm' && (
           <>
-            <Text style={styles.title}>Pair with this desktop?</Text>
+            <Text style={styles.title}>{t('pairing.connectWithThisDesktop')}</Text>
             <Text style={styles.subtitle}>
-              You opened a pairing link from your desktop. Confirm to add it to your hosts.
+              {t('pairing.confirm.subtitle')}
             </Text>
             <View style={styles.actionStack}>
               <Pressable style={styles.primaryButton} onPress={() => void confirm()}>
-                <Text style={styles.primaryButtonText}>Pair</Text>
+                <Text style={styles.primaryButtonText}>{t('pairing.connect')}</Text>
               </Pressable>
               <Pressable style={styles.secondaryButton} onPress={cancel}>
-                <Text style={styles.secondaryButtonText}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>{t('common.cancel')}</Text>
               </Pressable>
             </View>
           </>
@@ -168,9 +170,9 @@ export default function PairConfirmScreen() {
         {resolvedStatus === 'connecting' && (
           <>
             <ActivityIndicator size="large" color={colors.textSecondary} />
-            <Text style={styles.connectingText}>Connecting…</Text>
+            <Text style={styles.connectingText}>{t('pairing.connecting')}</Text>
             <View style={styles.logSlot}>
-              <ConnectionLog entries={logs} title="Pairing log" />
+              <ConnectionLog entries={logs} title={t('pairing.scan.logTitle')} />
             </View>
           </>
         )}
@@ -180,12 +182,12 @@ export default function PairConfirmScreen() {
             <Text style={styles.errorText}>{resolvedErrorMessage}</Text>
             {logs.length > 0 && (
               <View style={styles.logSlot}>
-                <ConnectionLog entries={logs} title="Pairing log" />
+                <ConnectionLog entries={logs} title={t('pairing.scan.logTitle')} />
               </View>
             )}
             <View style={styles.actionStack}>
               <Pressable style={styles.primaryButton} onPress={cancel}>
-                <Text style={styles.primaryButtonText}>Back to home</Text>
+                <Text style={styles.primaryButtonText}>{t('pairing.backToHome')}</Text>
               </Pressable>
             </View>
           </>
