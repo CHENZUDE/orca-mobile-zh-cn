@@ -1,25 +1,31 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import type { KnownAppUpdate } from '../storage/app-update-preferences'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { formatTimeAgo } from '../worktree/agent-row-display'
 
 export type AppUpdateCheckRowStatus = 'idle' | 'checking' | 'up-to-date' | 'failed'
 
-function checkRowValue(status: AppUpdateCheckRowStatus, lastCheckedAt: number | null, now: number) {
+function checkRowValue(
+  t: (k: string, opts?: Record<string, unknown>) => string,
+  status: AppUpdateCheckRowStatus,
+  lastCheckedAt: number | null,
+  now: number
+): string {
   if (status === 'checking') {
-    return 'Checking…'
+    return t('settings.appUpdate.check.checking')
   }
   if (status === 'up-to-date') {
-    return 'Up to date'
+    return t('settings.appUpdate.check.upToDate')
   }
   if (status === 'failed') {
-    return "Couldn't check"
+    return t('settings.appUpdate.check.failed')
   }
   if (lastCheckedAt === null) {
-    return 'Never'
+    return t('settings.appUpdate.check.never')
   }
   const ago = formatTimeAgo(lastCheckedAt, now)
-  return `Last checked ${ago === 'just now' ? ago : `${ago} ago`}`
+  return t('settings.appUpdate.check.lastChecked', { ago })
 }
 
 /** Settings' version row and manual check; the update row stays after the home card is dismissed. */
@@ -32,21 +38,22 @@ export function AppUpdateSettingsRows(props: {
   onUpdate: (url: string) => void
   onCheck: () => void
 }) {
-  const checkValue = checkRowValue(props.checkStatus, props.lastCheckedAt, props.now)
+  const { t } = useTranslation()
+  const checkValue = checkRowValue(t, props.checkStatus, props.lastCheckedAt, props.now)
   const { available, installedVersion, onUpdate } = props
   const versionRow = available ? (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Update to Orca ${available.version}`}
+      accessibilityLabel={t('settings.appUpdate.update.a11y', { version: available.version })}
       style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
       onPress={() => onUpdate(available.url)}
     >
-      <Text style={styles.rowLabel}>Update to Orca {available.version}</Text>
-      <Text style={styles.actionValue}>Update</Text>
+      <Text style={styles.rowLabel}>{t('settings.appUpdate.update.label', { version: available.version })}</Text>
+      <Text style={styles.actionValue}>{t('settings.appUpdate.update.cta')}</Text>
     </Pressable>
   ) : installedVersion ? (
     <View style={styles.row}>
-      <Text style={styles.rowLabel}>Version {installedVersion}</Text>
+      <Text style={styles.rowLabel}>{t('settings.appUpdate.version', { version: installedVersion })}</Text>
     </View>
   ) : null
   return (
@@ -55,13 +62,13 @@ export function AppUpdateSettingsRows(props: {
       {versionRow && <View style={styles.separator} />}
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`Check for updates, ${checkValue}`}
+        accessibilityLabel={t('settings.appUpdate.check.a11y', { value: checkValue })}
         accessibilityState={{ busy: props.checkStatus === 'checking' }}
         disabled={props.checkStatus === 'checking'}
         style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
         onPress={props.onCheck}
       >
-        <Text style={styles.rowLabel}>Check for updates</Text>
+        <Text style={styles.rowLabel}>{t('settings.appUpdate.check.label')}</Text>
         <Text style={styles.rowValue}>{checkValue}</Text>
       </Pressable>
     </View>

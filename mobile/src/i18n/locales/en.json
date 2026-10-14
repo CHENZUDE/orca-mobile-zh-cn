@@ -213,6 +213,114 @@
         "load": "Could not load browser preferences. Try again.",
         "save": "Could not save browser preferences. Try again."
       }
+    },
+    "voice": {
+      "empty": {
+        "notConnected": "Connect to a desktop to manage voice settings.",
+        "loadFailed": "Failed to load voice settings."
+      },
+      "group": {
+        "dictation": {
+          "heading": "DICTATION"
+        },
+        "speechModel": {
+          "heading": "SPEECH MODEL"
+        }
+      },
+      "enableDictation": {
+        "label": "Enable Voice Dictation",
+        "a11y": "Enable Voice Dictation",
+        "subtitle": "Dictate text into any focused pane on your desktop."
+      },
+      "dictationMode": {
+        "label": "Dictation Mode",
+        "subtitle": "Toggle: press once to start, again to stop. Hold: dictate while held.",
+        "toggle": "Toggle",
+        "hold": "Hold"
+      },
+      "speechModel": {
+        "label": "Speech Model",
+        "drawerTitle": "Speech Model",
+        "noneSelected": "None selected"
+      },
+      "errors": {
+        "load": "Failed to load voice settings",
+        "update": "Could not update",
+        "selectModel": "Could not select model",
+        "download": "Download failed",
+        "delete": "Delete failed"
+      }
+    },
+    "notifications": {
+      "enable": {
+        "label": "Enable notifications",
+        "a11y": "Enable notifications"
+      },
+      "blockedHint": "Notifications are disabled in system settings.",
+      "defaultHint": "Get notified on this device when an agent needs your input or finishes a task.",
+      "openSettings": "Open Settings",
+      "errors": {
+        "load": "Could not load notification settings. Try again.",
+        "save": "Could not save notification settings. Try again.",
+        "openSettings": "Could not open system settings. Try again."
+      },
+      "displayTest": {
+        "prompt": "Having trouble receiving alerts?",
+        "detail": "Send a test through Orca\u2019s push service.",
+        "send": "Send test notification",
+        "sending": "Sending\u2026",
+        "success": "Accepted by Orca\u2019s push service. Check for the notification.",
+        "errors": {
+          "loadHosts": "Could not load paired desktops.",
+          "noHost": "Pair a desktop and try again.",
+          "notConnected": "Connect a desktop and try again.",
+          "outdatedDesktop": "Update your desktop to run this test.",
+          "unreachable": "Could not reach the desktop. Try again.",
+          "notRegistered": "Reconnect to register this phone for notifications.",
+          "rateLimited": "Too many notifications. Try again later.",
+          "sendFailed": "Could not send through Orca\u2019s push service. Try again.",
+          "generic": "Could not send push test."
+        }
+      }
+    },
+    "chatUi": {
+      "group": {
+        "heading": "DEFAULT VIEW",
+        "body": "Choose how supported agent sessions (Claude, Codex, and other chat-capable agents) open on this device. Terminal shows the raw CLI; Chat UI shows a chat interface like the desktop app. You can still switch any individual session from its long-press menu."
+      },
+      "defaultView": {
+        "label": "Open sessions in Chat UI",
+        "a11y": "Open sessions in Chat UI"
+      }
+    },
+    "appUpdate": {
+      "version": "Version {{version}}",
+      "update": {
+        "label": "Update to Orca {{version}}",
+        "a11y": "Update to Orca {{version}}",
+        "cta": "Update"
+      },
+      "check": {
+        "label": "Check for updates",
+        "a11y": "Check for updates, {{value}}",
+        "checking": "Checking\u2026",
+        "upToDate": "Up to date",
+        "failed": "Couldn\u2019t check",
+        "never": "Never",
+        "lastChecked": "Last checked {{ago}} ago"
+      }
+    },
+    "pendingCredentials": {
+      "title": "Pairing credential cleanup",
+      "body": {
+        "failed": "Cleanup still couldn\u2019t be confirmed. Try again later.",
+        "pending_one": "Couldn\u2019t confirm cleanup for {{count}} credential on this device.",
+        "pending_other": "Couldn\u2019t confirm cleanup for {{count}} credentials on this device.",
+        "unreadable": "Couldn\u2019t check cleanup status on this device. Retry to be safe."
+      },
+      "retry": {
+        "a11y": "Retry clearing pairing credentials"
+      }
     }
   },
   "host": {

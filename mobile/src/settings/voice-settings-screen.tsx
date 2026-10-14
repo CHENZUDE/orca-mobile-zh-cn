@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, ScrollView, Switch, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import type { VoiceSettingsOperations } from './voice-settings-operations'
@@ -16,10 +17,7 @@ import {
 
 const POLL_INTERVAL_MS = 1500
 
-const DICTATION_MODES = [
-  { value: 'toggle', label: 'Toggle' },
-  { value: 'hold', label: 'Hold' }
-] as const
+const DICTATION_MODE_VALUES = ['toggle', 'hold'] as const
 
 type ModelBusyAction = { modelId: string; type: 'download' | 'select' | 'delete' }
 
@@ -32,6 +30,7 @@ export default function VoiceSettingsScreen({
   focused: boolean
   onBack: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const [setup, setSetup] = useState<MobileSpeechSetup | null>(null)
   const [loading, setLoading] = useState(true)
@@ -57,7 +56,7 @@ export default function VoiceSettingsScreen({
       setError(null)
       return next.models.some(isModelInFlight)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load voice settings')
+      setError(err instanceof Error ? err.message : t('settings.voice.errors.load'))
       return undefined
     } finally {
       setLoading(false)
@@ -93,7 +92,7 @@ export default function VoiceSettingsScreen({
       try {
         setSetup(await operations.configure(params))
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Could not update')
+        setError(err instanceof Error ? err.message : t('settings.voice.errors.update'))
         void refreshSetup()
       }
     },
@@ -112,7 +111,7 @@ export default function VoiceSettingsScreen({
         setSetup(await operations.configure({ enabled: true, modelId: model.id }))
         setModelDrawerOpen(false)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Could not select model')
+        setError(err instanceof Error ? err.message : t('settings.voice.errors.selectModel'))
       } finally {
         setBusyAction(null)
       }
@@ -132,7 +131,7 @@ export default function VoiceSettingsScreen({
         await operations.download(model.id)
         await refreshSetup()
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Download failed')
+        setError(err instanceof Error ? err.message : t('settings.voice.errors.download'))
       } finally {
         setBusyAction(null)
       }
@@ -155,7 +154,7 @@ export default function VoiceSettingsScreen({
           setModelDrawerOpen(false)
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Delete failed')
+        setError(err instanceof Error ? err.message : t('settings.voice.errors.delete'))
       } finally {
         setBusyAction(null)
       }
@@ -165,25 +164,25 @@ export default function VoiceSettingsScreen({
 
   const enabled = setup?.enabled ?? false
   const selectedModel = setup?.models.find((m) => m.id === setup.selectedModelId)
-  const selectedModelLabel = selectedModel?.label ?? 'None selected'
+  const selectedModelLabel = selectedModel?.label ?? t('settings.voice.speechModel.noneSelected')
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + spacing.sm }]}>
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('common.back')}
           style={styles.backButton}
           onPress={onBack}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Voice</Text>
+        <Text style={styles.heading}>{t('settings.menu.voice')}</Text>
       </View>
 
       {!operations ? (
         <View style={[styles.section, styles.sectionTopGap]}>
-          <Text style={styles.emptyText}>Connect to a desktop to manage voice settings.</Text>
+          <Text style={styles.emptyText}>{t('settings.voice.empty.notConnected')}</Text>
         </View>
       ) : loading && setup === null ? (
         <View style={styles.loading}>
@@ -191,25 +190,25 @@ export default function VoiceSettingsScreen({
         </View>
       ) : setup === null ? (
         <View style={[styles.section, styles.sectionTopGap]}>
-          <Text style={styles.errorText}>{error ?? 'Failed to load voice settings.'}</Text>
+          <Text style={styles.errorText}>{error ?? t('settings.voice.empty.loadFailed')}</Text>
         </View>
       ) : (
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.groupHeading}>DICTATION</Text>
+          <Text style={styles.groupHeading}>{t('settings.voice.group.dictation.heading')}</Text>
           <View style={[styles.section, styles.sectionTopGap]}>
             <View style={styles.row}>
               <View style={styles.rowContent}>
-                <Text style={styles.rowLabel}>Enable Voice Dictation</Text>
+                <Text style={styles.rowLabel}>{t('settings.voice.enableDictation.label')}</Text>
                 <Text style={styles.rowSublabel}>
-                  Dictate text into any focused pane on your desktop.
+                  {t('settings.voice.enableDictation.subtitle')}
                 </Text>
               </View>
               <Switch
                 testID="voice-enabled"
-                accessibilityLabel="Enable Voice Dictation"
+                accessibilityLabel={t('settings.voice.enableDictation.a11y')}
                 value={enabled}
                 onValueChange={(enabled) => void configure({ enabled })}
                 trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
@@ -224,25 +223,25 @@ export default function VoiceSettingsScreen({
               pointerEvents={enabled ? 'auto' : 'none'}
             >
               <View style={styles.rowContent}>
-                <Text style={styles.rowLabel}>Dictation Mode</Text>
+                <Text style={styles.rowLabel}>{t('settings.voice.dictationMode.label')}</Text>
                 <Text style={styles.rowSublabel}>
-                  Toggle: press once to start, again to stop. Hold: dictate while held.
+                  {t('settings.voice.dictationMode.subtitle')}
                 </Text>
               </View>
               <View style={styles.segmented}>
-                {DICTATION_MODES.map((mode) => {
-                  const active = setup.dictationMode === mode.value
+                {DICTATION_MODE_VALUES.map((value) => {
+                  const active = setup.dictationMode === value
                   return (
                     <Pressable
-                      key={mode.value}
+                      key={value}
                       accessibilityRole="radio"
                       aria-checked={active}
-                      testID={`voice-mode-${mode.value}`}
-                      onPress={() => void configure({ dictationMode: mode.value })}
+                      testID={`voice-mode-${value}`}
+                      onPress={() => void configure({ dictationMode: value })}
                       style={[styles.segment, active && styles.segmentActive]}
                     >
                       <Text style={[styles.segmentText, active && styles.segmentTextActive]}>
-                        {mode.label}
+                        {t(`settings.voice.dictationMode.${value}`)}
                       </Text>
                     </Pressable>
                   )
@@ -251,7 +250,7 @@ export default function VoiceSettingsScreen({
             </View>
           </View>
 
-          <Text style={[styles.groupHeading, styles.inputGroupGap]}>SPEECH MODEL</Text>
+          <Text style={[styles.groupHeading, styles.inputGroupGap]}>{t('settings.voice.group.speechModel.heading')}</Text>
           <View style={[styles.section, styles.sectionTopGap]}>
             <Pressable
               style={({ pressed }) => [
@@ -264,7 +263,7 @@ export default function VoiceSettingsScreen({
               onPress={() => setModelDrawerOpen(true)}
             >
               <View style={styles.rowContent}>
-                <Text style={styles.rowLabel}>Speech Model</Text>
+                <Text style={styles.rowLabel}>{t('settings.voice.speechModel.label')}</Text>
                 <Text style={styles.rowSublabel} numberOfLines={1}>
                   {selectedModelLabel}
                 </Text>
@@ -278,7 +277,7 @@ export default function VoiceSettingsScreen({
       )}
 
       <BottomDrawer visible={modelDrawerOpen} onClose={() => setModelDrawerOpen(false)}>
-        <Text style={styles.drawerTitle}>Speech Model</Text>
+        <Text style={styles.drawerTitle}>{t('settings.voice.speechModel.drawerTitle')}</Text>
         {setup ? (
           <VoiceModelList
             setup={setup}
