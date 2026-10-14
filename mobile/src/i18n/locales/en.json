@@ -159,7 +159,9 @@
       "voice": "Voice",
       "notifications": "Notifications",
       "troubleshooting": "Troubleshooting",
-      "about": "About"
+      "about": "About",
+      "privacyPolicy": "Privacy Policy",
+      "support": "Support"
     },
     "frame": {
       "back": "Back",
@@ -419,6 +421,64 @@
         "run": "Run diagnostics",
         "viewNetwork": "View network diagnostics",
         "commonIssuesHeading": "Common issues",
+        "commonIssues": {
+          "notifications": {
+            "title": "Push Notifications",
+            "steps": {
+              "system": "Check that system settings allow Orca notifications and that Focus or Do Not Disturb is off.",
+              "network": "Try cellular or another Wi-Fi network. If alerts arrive after switching, your network may be delaying delivery."
+            }
+          },
+          "wifi": {
+            "title": "Different WiFi Networks",
+            "steps": {
+              "sameLan": "Both devices must be on the same LAN (unless connected through Tailscale).",
+              "subnet": "Ethernet and WiFi must share the same subnet.",
+              "reconnect": "Try reconnecting WiFi on both devices."
+            }
+          },
+          "firewall": {
+            "title": "Firewall Blocking Port 6768",
+            "steps": {
+              "macos": "macOS: System Settings \u2192 Network \u2192 Firewall \u2014 allow Orca.",
+              "windows": "Windows: Defender Firewall \u2192 Allow app \u2014 enable Orca for Private networks.",
+              "linux": "Linux: sudo ufw allow 6768",
+              "corporate": "Corporate/school networks may block P2P \u2014 try a personal hotspot."
+            }
+          },
+          "desktop": {
+            "title": "Desktop App Not Running",
+            "steps": {
+              "mustRun": "Orca must be open on your desktop to accept connections.",
+              "restart": "Try restarting Orca \u2014 the companion server starts on launch.",
+              "repair": "After an update, you may need to re-pair via QR code."
+            }
+          },
+          "timeout": {
+            "title": "Connection Timeout",
+            "steps": {
+              "signal": "Check WiFi signal strength on your phone.",
+              "retry": "Go back to the host list and tap your host to retry.",
+              "restart": "Restart both apps if timeouts persist."
+            }
+          },
+          "tailscale": {
+            "title": "Tailscale Host Unreachable",
+            "steps": {
+              "keepOn": "Host addresses like 100.x.x.x or *.ts.net connect through Tailscale \u2014 keep it ON.",
+              "toggle": "iOS/Android can silently wedge the tunnel: toggle Tailscale off and back on in the Tailscale app.",
+              "awake": "Check the desktop is awake and shows as connected in your tailnet.",
+              "update": "Update the Tailscale app \u2014 recent releases fix reconnect bugs."
+            }
+          },
+          "vpn": {
+            "title": "Other VPN Interference",
+            "steps": {
+              "remote": "Non-Tailscale VPNs can route local traffic through a remote server.",
+              "splitTunnel": "Disable that VPN or enable split tunneling / \u201cAllow LAN\u201d."
+            }
+          }
+        },
         "checks": {
           "pairedHosts": {
             "label": "Paired hosts",

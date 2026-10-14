@@ -146,7 +146,7 @@ export function TroubleshootView({
                 onPress={() => toggleSection(section.id)}
               >
                 {section.icon}
-                <Text style={styles.accordionTitle}>{section.title}</Text>
+                <Text style={styles.accordionTitle}>{t(section.titleKey)}</Text>
                 {expandedId === section.id ? (
                   <ChevronUp size={16} color={colors.textMuted} />
                 ) : (
@@ -155,10 +155,10 @@ export function TroubleshootView({
               </Pressable>
               {expandedId === section.id && (
                 <View style={styles.accordionBody}>
-                  {section.steps.map((step, j) => (
+                  {section.stepKeys.map((stepKey, j) => (
                     <View key={j} style={styles.stepRow}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.stepText}>{step}</Text>
+                      <Text style={styles.stepText}>{t(stepKey)}</Text>
                     </View>
                   ))}
                 </View>

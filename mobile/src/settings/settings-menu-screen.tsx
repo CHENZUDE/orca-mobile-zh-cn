@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Shield, LifeBuoy } from 'lucide-react-native'
 import { MobileSettingsFrame, MobileSettingsSection } from './mobile-settings-menu'
 import { mobileSettingsMenuItems } from './mobile-settings-menu-items'
@@ -14,6 +15,7 @@ export default function SettingsMenuScreen({
   openExternal: (url: string) => Promise<unknown>
   children?: ReactNode
 }) {
+  const { t } = useTranslation()
   return (
     <MobileSettingsFrame onBack={onBack}>
       <MobileSettingsSection items={mobileSettingsMenuItems(push)} />
@@ -24,13 +26,13 @@ export default function SettingsMenuScreen({
         spaced
         items={[
           {
-            label: 'Privacy Policy',
+            label: t('settings.menu.privacyPolicy'),
             icon: Shield,
             external: true,
             onPress: () => void openExternal('https://www.onorca.dev/privacy')
           },
           {
-            label: 'Support',
+            label: t('settings.menu.support'),
             icon: LifeBuoy,
             external: true,
             onPress: () => void openExternal('https://github.com/stablyai/orca/issues')

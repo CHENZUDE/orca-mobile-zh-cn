@@ -4,80 +4,79 @@ import { colors } from '../theme/mobile-theme'
 export type TroubleshootSection = {
   id: string
   icon: React.ReactNode
-  title: string
-  steps: string[]
+  titleKey: string
+  stepKeys: string[]
 }
 
 export const troubleshootCommonIssues: TroubleshootSection[] = [
   {
     id: 'notifications',
     icon: <Bell size={16} color={colors.textSecondary} />,
-    title: 'Push Notifications',
-    steps: [
-      'Check that system settings allow Orca notifications and that Focus or Do Not Disturb is off.',
-      'Try cellular or another Wi-Fi network. If alerts arrive after switching, your network may be delaying delivery.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.notifications.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.notifications.steps.system',
+      'diagnostics.troubleshoot.commonIssues.notifications.steps.network'
     ]
   },
-
   {
     id: 'wifi',
     icon: <WifiOff size={16} color={colors.textSecondary} />,
-    title: 'Different WiFi Networks',
-    steps: [
-      'Both devices must be on the same LAN (unless connected through Tailscale).',
-      'Ethernet and WiFi must share the same subnet.',
-      'Try reconnecting WiFi on both devices.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.wifi.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.wifi.steps.sameLan',
+      'diagnostics.troubleshoot.commonIssues.wifi.steps.subnet',
+      'diagnostics.troubleshoot.commonIssues.wifi.steps.reconnect'
     ]
   },
   {
     id: 'firewall',
     icon: <Shield size={16} color={colors.textSecondary} />,
-    title: 'Firewall Blocking Port 6768',
-    steps: [
-      'macOS: System Settings → Network → Firewall — allow Orca.',
-      'Windows: Defender Firewall → Allow app — enable Orca for Private networks.',
-      'Linux: sudo ufw allow 6768',
-      'Corporate/school networks may block P2P — try a personal hotspot.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.firewall.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.firewall.steps.macos',
+      'diagnostics.troubleshoot.commonIssues.firewall.steps.windows',
+      'diagnostics.troubleshoot.commonIssues.firewall.steps.linux',
+      'diagnostics.troubleshoot.commonIssues.firewall.steps.corporate'
     ]
   },
   {
     id: 'desktop',
     icon: <Monitor size={16} color={colors.textSecondary} />,
-    title: 'Desktop App Not Running',
-    steps: [
-      'Orca must be open on your desktop to accept connections.',
-      'Try restarting Orca — the companion server starts on launch.',
-      'After an update, you may need to re-pair via QR code.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.desktop.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.desktop.steps.mustRun',
+      'diagnostics.troubleshoot.commonIssues.desktop.steps.restart',
+      'diagnostics.troubleshoot.commonIssues.desktop.steps.repair'
     ]
   },
   {
     id: 'timeout',
     icon: <Clock size={16} color={colors.textSecondary} />,
-    title: 'Connection Timeout',
-    steps: [
-      'Check WiFi signal strength on your phone.',
-      'Go back to the host list and tap your host to retry.',
-      'Restart both apps if timeouts persist.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.timeout.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.timeout.steps.signal',
+      'diagnostics.troubleshoot.commonIssues.timeout.steps.retry',
+      'diagnostics.troubleshoot.commonIssues.timeout.steps.restart'
     ]
   },
   {
     id: 'tailscale',
     icon: <Globe size={16} color={colors.textSecondary} />,
-    title: 'Tailscale Host Unreachable',
-    steps: [
-      'Host addresses like 100.x.x.x or *.ts.net connect through Tailscale — keep it ON.',
-      'iOS/Android can silently wedge the tunnel: toggle Tailscale off and back on in the Tailscale app.',
-      'Check the desktop is awake and shows as connected in your tailnet.',
-      'Update the Tailscale app — recent releases fix reconnect bugs.'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.tailscale.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.tailscale.steps.keepOn',
+      'diagnostics.troubleshoot.commonIssues.tailscale.steps.toggle',
+      'diagnostics.troubleshoot.commonIssues.tailscale.steps.awake',
+      'diagnostics.troubleshoot.commonIssues.tailscale.steps.update'
     ]
   },
   {
     id: 'vpn',
     icon: <Shield size={16} color={colors.textSecondary} />,
-    title: 'Other VPN Interference',
-    steps: [
-      'Non-Tailscale VPNs can route local traffic through a remote server.',
-      'Disable that VPN or enable split tunneling / "Allow LAN".'
+    titleKey: 'diagnostics.troubleshoot.commonIssues.vpn.title',
+    stepKeys: [
+      'diagnostics.troubleshoot.commonIssues.vpn.steps.remote',
+      'diagnostics.troubleshoot.commonIssues.vpn.steps.splitTunnel'
     ]
   }
 ]
