@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Animated, BackHandler, Text, View, type LayoutChangeEvent } from 'react-native'
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -44,6 +45,7 @@ function MobileOnboardingFlow({
   hostId: string | undefined
   rawSteps: string | undefined
 }) {
+  const { t } = useTranslation()
   const router = useRouter()
   const steps = useMemo(() => parseMobileOnboardingSteps(rawSteps), [rawSteps])
   // Why: an iPad modal is a centred sheet narrower than the window, so slides must
@@ -105,7 +107,7 @@ function MobileOnboardingFlow({
         await saveDefaultSessionView(view)
         advanceOrContinue()
       } catch {
-        setError('Your choice could not be saved. Try again.')
+        setError(t('onboarding.errors.sessionChoice'))
         setBusyChoice(null)
         choiceInFlightRef.current = false
       }
@@ -126,7 +128,7 @@ function MobileOnboardingFlow({
         await setRemotePushEnabled(enabled)
         advanceOrContinue()
       } catch {
-        setError('Notification settings could not be updated. Try again.')
+        setError(t('onboarding.errors.notifications'))
         setBusyChoice(null)
         choiceInFlightRef.current = false
       }
@@ -155,8 +157,8 @@ function MobileOnboardingFlow({
           <View
             accessible
             accessibilityRole="progressbar"
-            accessibilityLabel="Onboarding progress"
-            accessibilityValue={{ text: `Step ${activeIndex + 1} of ${steps.length}` }}
+            accessibilityLabel={t('onboarding.progressA11y')}
+            accessibilityValue={{ text: t('onboarding.stepProgress', { current: activeIndex + 1, total: steps.length }) }}
             style={styles.progress}
           >
             {steps.map((step, index) => (

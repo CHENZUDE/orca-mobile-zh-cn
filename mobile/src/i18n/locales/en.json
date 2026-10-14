@@ -111,6 +111,11 @@
   },
   "onboarding": {
     "progressA11y": "Onboarding progress",
+    "stepProgress": "Step {{current}} of {{total}}",
+    "errors": {
+      "sessionChoice": "Your choice could not be saved. Try again.",
+      "notifications": "Notification settings could not be updated. Try again."
+    },
     "a11y": {
       "openSessionsInChatUi": "Open sessions in Chat UI",
       "openSessionsInTerminal": "Open sessions in the terminal",
@@ -171,6 +176,48 @@
         "larger": "Larger (150%)",
         "largest": "Largest (200%)"
       }
+    }
+  },
+  "host": {
+    "accounts": {
+      "heading": "Accounts",
+      "connecting": "Connecting to {{name}}\u2026",
+      "loading": "Loading accounts\u2026",
+      "providers": {
+        "claude": "Claude",
+        "codex": "Codex"
+      },
+      "systemDefault": {
+        "title": "System default",
+        "subtitle": "Use the agent\u2019s own login"
+      },
+      "footer": "Add or re-authenticate accounts from desktop Settings \u2192 Accounts.",
+      "errors": {
+        "invalidSnapshot": "Invalid accounts snapshot from host",
+        "hostNotFound": "Host not found"
+      },
+      "alerts": {
+        "switchAccount": {
+          "title": "Could not switch account"
+        }
+      }
+    },
+    "edit": {
+      "heading": "Edit host",
+      "backA11y": "Back",
+      "saveA11y": "Save host",
+      "save": "Save",
+      "goBack": "Go back",
+      "nameLabel": "Name",
+      "nameA11y": "Name",
+      "addressLabel": "Address",
+      "addressA11y": "Address",
+      "namePlaceholder": "Host name",
+      "addressPlaceholder": "192.168.1.10:6768",
+      "help": "Change the display name or connection address. Leave the name empty to use the name the desktop reports. Address edits only switch where this phone connects \u2014 they do not re-pair. Use this when the same desktop is reachable at a different IP (for example home LAN vs Tailscale).",
+      "hint": "Accepts IP, host:port, or ws:// / wss://. Missing port defaults to the current port (or 6768).",
+      "preview": "Connects to {{endpoint}}",
+      "saveError": "Failed to save host."
     }
   }
 }

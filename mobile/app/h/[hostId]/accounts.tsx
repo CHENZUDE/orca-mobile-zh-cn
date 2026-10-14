@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   View,
   Text,
@@ -36,6 +37,7 @@ import { CodexResetCreditAction } from '../../../src/components/CodexResetCredit
 import { useCodexResetCreditAction } from '../../../src/components/use-codex-reset-credit-action'
 
 export default function AccountsScreen() {
+  const { t } = useTranslation()
   const router = useRouter()
   const insets = useSafeAreaInsets()
   const { hostId } = useLocalSearchParams<{ hostId: string }>()
@@ -57,7 +59,7 @@ export default function AccountsScreen() {
     // Why: a stale snapshot can expose a finite reset action for the wrong
     // account; fail closed if a host sends a shape this mobile cannot prove.
     setSnapshot(null)
-    setError('Invalid accounts snapshot from host')
+    setError(t('host.accounts.errors.invalidSnapshot'))
   }, [])
   const {
     supported: codexResetSupported,
@@ -94,7 +96,7 @@ export default function AccountsScreen() {
       }
       const host = hosts.find((h) => h.id === hostId)
       if (!host) {
-        setError('Host not found')
+        setError(t('host.accounts.errors.hostNotFound'))
         return
       }
       setHostName(host.name)
@@ -174,7 +176,7 @@ export default function AccountsScreen() {
           codexTarget?.runtime === 'wsl' ? { accountId, target: codexTarget } : { accountId }
         const res = await client.sendRequest(method, params)
         if (!res.ok) {
-          Alert.alert('Could not switch account', res.error.message)
+          Alert.alert(t('host.accounts.alerts.switchAccount.title'), res.error.message)
         } else {
           // Why: optimistic refresh — the streaming subscription will also
           // emit, but a one-shot keeps the UI responsive even if the stream
@@ -182,7 +184,7 @@ export default function AccountsScreen() {
           await refresh()
         }
       } catch (e) {
-        Alert.alert('Could not switch account', e instanceof Error ? e.message : String(e))
+        Alert.alert(t('host.accounts.alerts.switchAccount.title'), e instanceof Error ? e.message : String(e))
       } finally {
         setBusyAccountId(null)
       }
@@ -190,7 +192,7 @@ export default function AccountsScreen() {
     [client, refresh, snapshot]
   )
 
-  const renderProviderSection = (provider: ProviderKey, title: string) => {
+  const renderProviderSection = (provider: ProviderKey) => {
     if (!snapshot) {
       return null
     }
@@ -208,7 +210,7 @@ export default function AccountsScreen() {
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Icon size={14} />
-          <Text style={styles.sectionHeading}>{title}</Text>
+          <Text style={styles.sectionHeading}>{t(`host.accounts.providers.${provider}`)}</Text>
         </View>
         <View style={styles.card}>
           {/* System default row */}
@@ -218,8 +220,8 @@ export default function AccountsScreen() {
             disabled={busyAccountId !== null || resettingCodex || connState !== 'connected'}
           >
             <View style={styles.rowMain}>
-              <Text style={styles.rowTitle}>System default</Text>
-              <Text style={styles.rowSubtitle}>Use the agent's own login</Text>
+                <Text style={styles.rowTitle}>{t('host.accounts.systemDefault.title')}</Text>
+                <Text style={styles.rowSubtitle}>{t('host.accounts.systemDefault.subtitle')}</Text>
               {/* Why: when system default is the active selection, activeUsage
                   holds the system-default login's rate limits — surface them
                   here so non-managed users still see their usage. */}
@@ -334,6 +336,7 @@ export default function AccountsScreen() {
         </Pressable>
         <View style={styles.titleWrap}>
           <Text style={styles.heading}>Accounts</Text>
+          <Text style={styles.heading}>{t('host.accounts.heading')}</Text>
           {hostName ? (
             <Text style={styles.subheading} numberOfLines={1}>
               {hostName}
@@ -367,6 +370,7 @@ export default function AccountsScreen() {
           <View style={styles.placeholder}>
             <ActivityIndicator color={colors.textSecondary} />
             <Text style={styles.placeholderText}>Connecting to {hostName || 'host'}…</Text>
+            <Text style={styles.placeholderText}>{t('host.accounts.connecting', { name: hostName })}</Text>
           </View>
         ) : error && !snapshot ? (
           <View style={styles.placeholder}>
@@ -376,15 +380,19 @@ export default function AccountsScreen() {
           <View style={styles.placeholder}>
             <ActivityIndicator color={colors.textSecondary} />
             <Text style={styles.placeholderText}>Loading accounts…</Text>
+            <Text style={styles.placeholderText}>{t('host.accounts.loading')}</Text>
           </View>
         ) : (
           <>
-            {renderProviderSection('claude', 'Claude')}
-            {renderProviderSection('codex', 'Codex')}
+            {renderProviderSection('claude')}
+            {renderProviderSection('codex')}
             <View style={styles.footerHint}>
               <User size={14} color={colors.textMuted} />
               <Text style={styles.footerHintText}>
                 Add or re-authenticate accounts from desktop Settings → Accounts.
+              </Text>
+              <Text style={styles.footerHintText}>
+                {t('host.accounts.footer')}
               </Text>
             </View>
           </>

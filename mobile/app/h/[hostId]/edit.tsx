@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   View,
   Text,
@@ -22,6 +23,7 @@ import type { HostProfile } from '../../../src/transport/types'
 import { hostOs } from '../../../src/platform/host-os'
 
 export default function EditHostScreen() {
+  const { t } = useTranslation()
   const router = useRouter()
   const insets = useSafeAreaInsets()
   const { hostId } = useLocalSearchParams<{ hostId: string }>()
@@ -111,6 +113,7 @@ export default function EditHostScreen() {
       })
     } catch (err) {
       setSaveError(err instanceof Error ? err.message : 'Failed to save host.')
+      setSaveError(err instanceof Error ? err.message : t('host.edit.saveError'))
       savingRef.current = false
       setSaving(false)
       return
@@ -143,11 +146,12 @@ export default function EditHostScreen() {
           style={styles.backButton}
           onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('host.edit.backA11y')}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>Edit host</Text>
+        <Text style={styles.heading}>{t('host.edit.heading')}</Text>
         <Pressable
           style={({ pressed }) => [
             styles.saveButton,
@@ -156,12 +160,12 @@ export default function EditHostScreen() {
           onPress={() => void handleSave()}
           disabled={!canSave}
           accessibilityRole="button"
-          accessibilityLabel="Save host"
+          accessibilityLabel={t('host.edit.saveA11y')}
         >
           {saving ? (
             <ActivityIndicator size="small" color={colors.bgBase} />
           ) : (
-            <Text style={styles.saveButtonText}>Save</Text>
+            <Text style={styles.saveButtonText}>{t('host.edit.save')}</Text>
           )}
         </Pressable>
       </View>
@@ -171,6 +175,7 @@ export default function EditHostScreen() {
           <Text style={styles.errorText}>{loadError}</Text>
           <Pressable style={styles.secondaryButton} onPress={() => router.back()}>
             <Text style={styles.secondaryButtonText}>Go back</Text>
+            <Text style={styles.secondaryButtonText}>{t('host.edit.goBack')}</Text>
           </Pressable>
         </View>
       ) : !host ? (
@@ -186,39 +191,34 @@ export default function EditHostScreen() {
             contentContainerStyle={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}
             keyboardShouldPersistTaps="handled"
           >
-            <Text style={styles.help}>
-              Change the display name or connection address. Leave the name empty to use the name
-              the desktop reports. Address edits only switch where this phone connects — they do not
-              re-pair. Use this when the same desktop is reachable at a different IP (for example
-              home LAN vs Tailscale).
-            </Text>
+            <Text style={styles.help}>{t('host.edit.help')}</Text>
 
-            <Text style={styles.label}>Name</Text>
+            <Text style={styles.label}>{t('host.edit.nameLabel')}</Text>
             <TextInput
               style={styles.input}
-              accessibilityLabel="Name"
+              accessibilityLabel={t('host.edit.nameA11y')}
               value={name}
               onChangeText={(value) => {
                 setName(value)
                 setSaveError(null)
               }}
-              placeholder={host.lastKnownMachineName ?? 'Host name'}
+              placeholder={host.lastKnownMachineName ?? t('host.edit.namePlaceholder')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="words"
               autoCorrect={false}
               returnKeyType="next"
             />
 
-            <Text style={styles.label}>Address</Text>
+            <Text style={styles.label}>{t('host.edit.addressLabel')}</Text>
             <TextInput
               style={styles.input}
-              accessibilityLabel="Address"
+              accessibilityLabel={t('host.edit.addressA11y')}
               value={address}
               onChangeText={(value) => {
                 setAddress(value)
                 setSaveError(null)
               }}
-              placeholder="192.168.1.10:6768"
+              placeholder={t('host.edit.addressPlaceholder')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="none"
               autoCorrect={false}
@@ -231,14 +231,11 @@ export default function EditHostScreen() {
                 }
               }}
             />
-            <Text style={styles.hint}>
-              Accepts IP, host:port, or ws:// / wss://. Missing port defaults to the current port
-              (or 6768).
-            </Text>
+            <Text style={styles.hint}>{t('host.edit.hint')}</Text>
 
             {endpointEdit == null ? null : endpointEdit.kind !== 'invalid' ? (
               <Text style={styles.preview} numberOfLines={2}>
-                Connects to {endpointEdit.endpoint}
+                {t('host.edit.preview', { endpoint: endpointEdit.endpoint })}
               </Text>
             ) : address.trim().length > 0 ? (
               <Text style={styles.previewError}>{endpointEdit.error}</Text>
