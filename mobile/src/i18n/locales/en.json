@@ -1,5 +1,80 @@
 {
   "app": {
     "name": "Orca"
+  },
+  "common": {
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "loading": "Loading…",
+    "nameLabel": "Name",
+    "addressLabel": "Address"
+  },
+  "pairing": {
+    "missingCode": "Missing pairing code",
+    "backToHome": "Back to home",
+    "pasteInstead": "Paste code instead",
+    "orPasteCode": "Or paste pairing code",
+    "pastePlaceholder": "orca://pair?code=... or paste the code",
+    "tryAgain": "Try Again",
+    "connectWithThisDesktop": "Pair with this desktop?",
+    "connect": "Pair",
+    "connecting": "Connecting…"
+  },
+  "home": {
+    "headline": "Welcome back",
+    "stats": {
+      "agentsSpawned": "Agents spawned",
+      "agentTime": "Agent time",
+      "prsCreated": "PRs created",
+      "desktops": "Desktops"
+    },
+    "tasksHeading": "Tasks",
+    "resume": "Resume",
+    "accountUsageHeading": "Account usage",
+    "emptyState": {
+      "title": "Connect your desktop",
+      "pairDesktop": "Pair Desktop",
+      "howItWorks": "How it works",
+      "steps": {
+        "openOrca": {
+          "title": "Open Orca desktop",
+          "desc": "Go to Settings \u2192 Mobile and generate a pairing QR code."
+        },
+        "scanCode": {
+          "title": "Scan the code",
+          "desc": "Tap the button above to open the scanner. Point at the QR code on your screen."
+        },
+        "connected": {
+          "title": "You're connected",
+          "desc": "Your desktop will appear here. Everything is encrypted end-to-end."
+        }
+      }
+    }
+  },
+  "onboarding": {
+    "progressA11y": "Onboarding progress",
+    "a11y": {
+      "openSessionsInChatUi": "Open sessions in Chat UI",
+      "openSessionsInTerminal": "Open sessions in the terminal",
+      "enableAgentNotifications": "Enable agent notifications",
+      "skipNotifications": "Skip notifications for now"
+    }
+  },
+  "settings": {
+    "menu": {
+      "terminal": "Terminal",
+      "chatUi": "Chat UI",
+      "browser": "Browser",
+      "voice": "Voice",
+      "notifications": "Notifications",
+      "troubleshooting": "Troubleshooting",
+      "about": "About"
+    },
+    "frame": {
+      "back": "Back",
+      "heading": "Settings"
+    }
   }
 }

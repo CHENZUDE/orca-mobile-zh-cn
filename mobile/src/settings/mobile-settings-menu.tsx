@@ -3,6 +3,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { ChevronLeft, ChevronRight, type LucideIcon } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 
 export function MobileSettingsFrame({
@@ -14,18 +15,19 @@ export function MobileSettingsFrame({
 }) {
   const router = useRouter()
   const insets = useSafeAreaInsets()
+  const { t } = useTranslation()
   return (
     <View style={[styles.container, { paddingTop: insets.top + spacing.sm }]}>
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('common.back')}
           style={styles.backButton}
           onPress={onBack ?? (() => router.back())}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Settings</Text>
+        <Text style={styles.heading}>{t('settings.frame.heading')}</Text>
       </View>
       <ScrollView
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.lg }}
@@ -52,25 +54,32 @@ export function MobileSettingsSection({
   items: MobileSettingsMenuItem[]
   spaced?: boolean
 }) {
+  const { t } = useTranslation()
   return (
     <View style={[styles.section, spaced && styles.sectionSpacer]}>
-      {items.map(({ label, icon: Icon, onPress, external, disabled }, index) => (
+      {items.map(({ label, icon: Icon, onPress, external, disabled }, index) => {
+        // Why: label is an i18n key from MobileSettingsMenuItem; resolve at
+        // render so the en.json value is the source of truth and zh.json
+        // (M4) lands without a second refactor pass.
+        const text = t(label)
+        return (
         <View key={label}>
           {index > 0 && <View style={styles.separator} />}
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={label}
+            accessibilityLabel={text}
             accessibilityState={{ disabled: Boolean(disabled) }}
             disabled={disabled}
             style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
             onPress={onPress}
           >
             <Icon size={16} color={colors.textSecondary} />
-            <Text style={styles.rowLabel}>{label}</Text>
+            <Text style={styles.rowLabel}>{text}</Text>
             {!external && <ChevronRight size={16} color={colors.textMuted} />}
           </Pressable>
         </View>
-      ))}
+        )
+      })}
     </View>
   )
 }
