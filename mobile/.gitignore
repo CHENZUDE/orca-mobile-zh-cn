@@ -18,3 +18,7 @@ dist/
 web-build/
 
 .cache/typechecks/
+
+# audit-localization-candidates.mjs writes relative to its cwd; running it from
+# inside mobile/ would emit a sibling tree here. Keep that scratch out of VCS.
+/mobile/mobile/
