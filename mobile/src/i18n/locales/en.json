@@ -176,6 +176,43 @@
         "larger": "Larger (150%)",
         "largest": "Largest (200%)"
       }
+    },
+    "about": {
+      "tagline": "Open-source agent IDE for 100x builders",
+      "links": {
+        "websiteA11y": "Orca website",
+        "sourceA11y": "Orca source code",
+        "xA11y": "Orca on X"
+      },
+      "alerts": {
+        "openLink": "Could not open the link. Try again."
+      }
+    },
+    "browser": {
+      "group": {
+        "links": {
+          "heading": "LINKS",
+          "body": "Choose where HTTP(S) links tapped in terminal output open."
+        }
+      },
+      "linkModeRow": {
+        "label": "Open terminal links",
+        "a11y": "Open terminal links"
+      },
+      "linkMode": {
+        "orca-browser": {
+          "label": "Orca browser on desktop",
+          "subtitle": "Open in the streamed browser from your paired desktop."
+        },
+        "phone-browser": {
+          "label": "Phone browser",
+          "subtitle": "Open in Safari, Chrome, or another browser on this phone."
+        }
+      },
+      "errors": {
+        "load": "Could not load browser preferences. Try again.",
+        "save": "Could not save browser preferences. Try again."
+      }
     }
   },
   "host": {

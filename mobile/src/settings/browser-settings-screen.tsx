@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
@@ -11,23 +12,24 @@ import {
 } from '../storage/preferences'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 
-const LINK_MODE_OPTIONS: PickerOption<MobileTerminalLinkOpenMode>[] = [
-  {
-    value: 'orca-browser',
-    label: 'Orca browser on desktop',
-    subtitle: 'Open in the streamed browser from your paired desktop.'
-  },
-  {
-    value: 'phone-browser',
-    label: 'Phone browser',
-    subtitle: 'Open in Safari, Chrome, or another browser on this phone.'
-  }
+const LINK_MODE_DEFS: { value: MobileTerminalLinkOpenMode }[] = [
+  { value: 'orca-browser' },
+  { value: 'phone-browser' }
 ]
 
-function linkModeLabel(mode: MobileTerminalLinkOpenMode): string {
-  return (
-    LINK_MODE_OPTIONS.find((option) => option.value === mode)?.label ?? LINK_MODE_OPTIONS[0]!.label
-  )
+function buildLinkModeOptions(t: (k: string) => string): PickerOption<MobileTerminalLinkOpenMode>[] {
+  return LINK_MODE_DEFS.map((d) => ({
+    value: d.value,
+    label: t(`settings.browser.linkMode.${d.value}.label`),
+    subtitle: t(`settings.browser.linkMode.${d.value}.subtitle`)
+  }))
+}
+
+function linkModeLabel(
+  options: PickerOption<MobileTerminalLinkOpenMode>[],
+  mode: MobileTerminalLinkOpenMode
+): string {
+  return options.find((option) => option.value === mode)?.label ?? options[0]!.label
 }
 
 export default function BrowserSettingsScreen({
@@ -35,6 +37,8 @@ export default function BrowserSettingsScreen({
 }: {
   onBack?: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
+  const linkModeOptions = buildLinkModeOptions(t)
   const router = useRouter()
   const insets = useSafeAreaInsets()
   const [linkMode, setLinkMode] = useState<MobileTerminalLinkOpenMode>('orca-browser')
@@ -51,7 +55,7 @@ export default function BrowserSettingsScreen({
       },
       () => {
         if (active) {
-          setError('Could not load browser preferences. Try again.')
+          setError(t('settings.browser.errors.load'))
         }
       }
     )
@@ -65,7 +69,7 @@ export default function BrowserSettingsScreen({
     // Optimistic, as base was: the row shows the tapped mode before the write lands.
     setLinkMode(mode)
     void saveTerminalLinkOpenMode(mode).catch(() =>
-      setError('Could not save browser preferences. Try again.')
+      setError(t('settings.browser.errors.save'))
     )
   }, [])
 
@@ -74,19 +78,19 @@ export default function BrowserSettingsScreen({
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('common.back')}
           style={styles.backButton}
           onPress={onBack ?? (() => router.back())}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Browser</Text>
+        <Text style={styles.heading}>{t('settings.menu.browser')}</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <Text style={styles.groupHeading}>LINKS</Text>
+        <Text style={styles.groupHeading}>{t('settings.browser.group.links.heading')}</Text>
         <Text style={styles.groupDescription}>
-          Choose where HTTP(S) links tapped in terminal output open.
+          {t('settings.browser.group.links.body')}
         </Text>
         {error && (
           <Text accessibilityRole="alert" style={styles.groupDescription}>
@@ -96,14 +100,14 @@ export default function BrowserSettingsScreen({
         <View style={[styles.section, styles.sectionTopGap]}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Open terminal links"
+            accessibilityLabel={t('settings.browser.linkModeRow.a11y')}
             style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
             onPress={() => setPickerOpen(true)}
           >
             <Globe size={16} color={colors.textSecondary} />
             <View style={styles.rowContent}>
-              <Text style={styles.rowLabel}>Open terminal links</Text>
-              <Text style={styles.rowSublabel}>{linkModeLabel(linkMode)}</Text>
+              <Text style={styles.rowLabel}>{t('settings.browser.linkModeRow.label')}</Text>
+              <Text style={styles.rowSublabel}>{linkModeLabel(linkModeOptions, linkMode)}</Text>
             </View>
             <ChevronRight size={16} color={colors.textMuted} />
           </Pressable>
@@ -112,8 +116,8 @@ export default function BrowserSettingsScreen({
 
       <PickerModal<MobileTerminalLinkOpenMode>
         visible={pickerOpen}
-        title="Open terminal links"
-        options={LINK_MODE_OPTIONS}
+        title={t('settings.browser.linkModeRow.label')}
+        options={linkModeOptions}
         selected={linkMode}
         onSelect={selectLinkMode}
         onClose={() => setPickerOpen(false)}
