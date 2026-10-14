@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ChevronLeft, Copy, Check, Send } from 'lucide-react-native'
@@ -36,19 +37,20 @@ export function ConnectionDiagnosticsView({
   entries: readonly ConnectionLogEntry[]
   onBack: () => void
 }) {
+  const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   return (
     <View style={[styles.container, { paddingTop: insets.top + spacing.sm }]}>
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('common.back')}
           style={styles.backButton}
           onPress={onBack}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Network diagnostics</Text>
+        <Text style={styles.heading}>{t('diagnostics.connection.heading')}</Text>
       </View>
 
       {hostPicker}
@@ -56,8 +58,7 @@ export function ConnectionDiagnosticsView({
         <>
           <View style={styles.statusRow}>
             <Text style={styles.statusText}>
-              {state}
-              {reconnectAttempts > 0 ? ` · attempt ${reconnectAttempts}` : ''}
+              {state}{reconnectAttempts > 0 ? ` \u00b7 ${t('diagnostics.connection.attempt', { count: reconnectAttempts })}` : ''}
             </Text>
             <Pressable style={styles.copyButton} onPress={() => void copyDiagnostics()}>
               {copied ? (
@@ -65,19 +66,19 @@ export function ConnectionDiagnosticsView({
               ) : (
                 <Copy size={14} color={colors.textSecondary} />
               )}
-              <Text style={styles.copyButtonText}>{copied ? 'Copied' : 'Copy report'}</Text>
+              <Text style={styles.copyButtonText}>{copied ? t('diagnostics.connection.copied') : t('diagnostics.connection.copyReport')}</Text>
             </Pressable>
           </View>
           {diagnosis && (
             <View style={styles.diagnosisCard}>
               <Text style={styles.diagnosisHeading}>What this suggests</Text>
+            <Text style={styles.diagnosisHeading}>{t('diagnostics.connection.diagnosisHeading')}</Text>
               <Text style={styles.diagnosisText}>{diagnosis.likelyCause}</Text>
               <Text style={styles.diagnosisNext}>{diagnosis.nextStep}</Text>
               {diagnosis.reportability === 'orca-relay' && (
                 <>
                   <Text style={styles.privacyHint}>
-                    Sends a size-limited redacted report including host name, endpoint, versions,
-                    connection state, and events—never terminal contents or credentials.
+                    {t('diagnostics.connection.privacyHint')}
                   </Text>
                   <Pressable
                     style={styles.sendButton}
@@ -91,12 +92,12 @@ export function ConnectionDiagnosticsView({
                     )}
                     <Text style={styles.sendButtonText}>
                       {submissionState === 'sending'
-                        ? 'Sending…'
+                        ? t('diagnostics.connection.sending')
                         : submissionState === 'sent'
-                          ? 'Diagnostics sent'
+                          ? t('diagnostics.connection.sent')
                           : submissionState === 'failed'
-                            ? 'Retry sending'
-                            : 'Send diagnostics to Orca'}
+                            ? t('diagnostics.connection.retry')
+                            : t('diagnostics.connection.send')}
                     </Text>
                   </Pressable>
                 </>
@@ -107,12 +108,12 @@ export function ConnectionDiagnosticsView({
             <ConnectionLog entries={[...entries]} title={hostName} fillAvailableHeight />
           ) : (
             <Text style={styles.emptyText}>
-              No connection events yet. Events appear as the app dials this host.
+              {t('diagnostics.connection.noEvents')}
             </Text>
           )}
         </>
       ) : (
-        <Text style={styles.emptyText}>No paired hosts.</Text>
+        <Text style={styles.emptyText}>{t('diagnostics.connection.noHosts')}</Text>
       )}
     </View>
   )

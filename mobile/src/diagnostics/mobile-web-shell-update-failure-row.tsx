@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 import type { MobileWebShellUpdateFailure } from '../mobile-web-shell/mobile-web-shell-update-failure'
 import { processGenerationStore } from '../mobile-web-shell/process-generation-store'
@@ -13,13 +14,14 @@ type Line = { readonly hostId: string; readonly text: string }
 export function updateFailureLines(
   failures: readonly MobileWebShellUpdateFailure[],
   hosts: readonly { id: string; name: string }[],
-  now: number
+  now: number,
+  t: (k: string, opts?: Record<string, unknown>) => string
 ): Line[] {
   return hosts.flatMap((host) => {
     const newest = failures.findLast((failure) => failure.hostId === host.id)
     return newest === undefined
       ? []
-      : [{ hostId: host.id, text: formatUpdateFailure(newest, host.name, now) }]
+      : [{ hostId: host.id, text: formatUpdateFailure(newest, host.name, now, t) }]
   })
 }
 
@@ -31,6 +33,7 @@ export function updateFailureLines(
  * that can run the shell.
  */
 export function MobileWebShellUpdateFailureRow() {
+  const { t } = useTranslation()
   const [lines, setLines] = useState<readonly Line[]>([])
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export function MobileWebShellUpdateFailureRow() {
     void Promise.all([processGenerationStore().readUpdateFailures(), loadHosts()])
       .then(([failures, hosts]) => {
         if (!stale) {
-          setLines(updateFailureLines(failures, hosts, Date.now()))
+          setLines(updateFailureLines(failures, hosts, Date.now(), t))
         }
       })
       // Evidence, not a feature: an unreadable log or host list shows nothing rather than an error.
@@ -53,7 +56,7 @@ export function MobileWebShellUpdateFailureRow() {
   }
   return (
     <View testID="mobile-web-shell-update-failures">
-      <Text style={styles.sectionHeading}>Workspace updates</Text>
+      <Text style={styles.sectionHeading}>{t('diagnostics.shell.sectionHeading')}</Text>
       <View style={styles.section}>
         <View style={styles.accordionBody}>
           {lines.map((line) => (

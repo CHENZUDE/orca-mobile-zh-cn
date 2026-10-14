@@ -112,6 +112,34 @@
   "onboarding": {
     "progressA11y": "Onboarding progress",
     "stepProgress": "Step {{current}} of {{total}}",
+    "sessionView": {
+      "title": "How should sessions open?",
+      "body": "Choose whether supported agent sessions open in the terminal or Chat UI on this device. Press and hold a session tab to switch its view, or change the default later in Settings.",
+      "choice": {
+        "chat": "Use Chat UI",
+        "terminal": "Keep terminal"
+      }
+    },
+    "notifications": {
+      "title": "Don\u2019t miss when an agent needs you",
+      "body": "Get a notification on this phone when an agent finishes or is waiting \u2014 even if you aren\u2019t using the app.",
+      "disclosure": "Delivered through Orca\u2019s push service after your desktop has been idle for 3 minutes. Change this anytime in Settings.",
+      "preview": {
+        "now": "now",
+        "codexFinished": {
+          "title": "Codex finished",
+          "body": "Tests are passing."
+        },
+        "claudeNeedsInput": {
+          "title": "Claude needs input",
+          "body": "Waiting on you."
+        }
+      },
+      "choice": {
+        "enable": "Enable notifications",
+        "skip": "Not now"
+      }
+    },
     "errors": {
       "sessionChoice": "Your choice could not be saved. Try again.",
       "notifications": "Notification settings could not be updated. Try again."
@@ -320,6 +348,100 @@
       },
       "retry": {
         "a11y": "Retry clearing pairing credentials"
+      }
+    },
+    "diagnostics": {
+      "shell": {
+        "sectionHeading": "Workspace updates",
+        "justNow": "just now",
+        "ago": "{{ago}} ago",
+        "generationSuffix": " (generation {{generation}})",
+        "summary": "Last update from {{hostName}} failed {{when}}: {{reason}}{{offered}}. {{outcome}}",
+        "outcome": {
+          "fellBack": "Fell back to the saved version.",
+          "fellBackGeneration": "Fell back to the saved version (generation {{generation}}).",
+          "blocked": "Blocked the workspace.",
+          "blockedReason": "Blocked: {{reason}}.",
+          "nativeRoute": "Showed the native screen.",
+          "failed": "Showed the failure screen.",
+          "waiting": "Waited for the host."
+        },
+        "reason": {
+          "no-connection": "not connected to the host",
+          "connection-lost": "the connection dropped",
+          "host-refused": "the host refused the read",
+          "reply-unreadable": "the host sent a reply this app could not read",
+          "chunk-oversize": "a chunk was larger than the host allows",
+          "asset-overlong": "an asset was longer than the manifest declares",
+          "asset-no-progress": "an asset read made no progress",
+          "asset-short": "an asset ended short of its declared size",
+          "asset-checksum-mismatch": "asset checksum mismatch",
+          "build-changed-mid-fetch": "the host\u2019s build changed during the download",
+          "chunk-misrouted": "a chunk answered the wrong asset or offset",
+          "asset-entry-changed": "an asset no longer matched the manifest",
+          "range-undecodable": "a compressed read could not be decoded",
+          "fetch-stopped": "the download was stopped",
+          "cache-write-failed": "saving the download on this phone failed",
+          "unrecognised-error": "an unrecognised error"
+        },
+        "hostCode": {
+          "mobile_web_bundle_unavailable": "the host has no workspace bundle",
+          "mobile_web_bundle_build_changed": "the host\u2019s build changed during the download",
+          "mobile_web_bundle_asset_unknown": "the host did not recognise an asset",
+          "mobile_web_bundle_asset_changed": "an asset changed on the host",
+          "mobile_web_bundle_offset_invalid": "the host refused a read offset",
+          "mobile_web_bundle_read_limited": "the host limited concurrent reads"
+        },
+        "wall": {
+          "bundle-unavailable": "the host has no workspace bundle",
+          "bundle-shell-too-old": "this app is too old for the saved bundle",
+          "host-too-old-for-bundle": "the host is too old for the saved bundle",
+          "bundle-too-old-for-host": "the saved bundle is too old for the host"
+        }
+      },
+      "connection": {
+        "heading": "Network diagnostics",
+        "attempt": "attempt {{count}}",
+        "copyReport": "Copy report",
+        "copied": "Copied",
+        "diagnosisHeading": "What this suggests",
+        "privacyHint": "Sends a size-limited redacted report including host name, endpoint, versions, connection state, and events\u2014never terminal contents or credentials.",
+        "sending": "Sending\u2026",
+        "sent": "Diagnostics sent",
+        "retry": "Retry sending",
+        "send": "Send diagnostics to Orca",
+        "noEvents": "No connection events yet. Events appear as the app dials this host.",
+        "noHosts": "No paired hosts."
+      },
+      "troubleshoot": {
+        "running": "Running\u2026",
+        "runAgain": "Run again",
+        "run": "Run diagnostics",
+        "viewNetwork": "View network diagnostics",
+        "commonIssuesHeading": "Common issues",
+        "checks": {
+          "pairedHosts": {
+            "label": "Paired hosts",
+            "paired": "{{count}} paired",
+            "paired_other": "{{count}} paired",
+            "none": "None \u2014 scan a QR to pair",
+            "unreadable": "Could not read host data"
+          },
+          "internet": {
+            "label": "Internet",
+            "connected": "Connected",
+            "unexpected": "Unexpected response",
+            "disconnected": "No connection"
+          },
+          "hosts": {
+            "label": "Hosts",
+            "couldNotTest": "Could not test",
+            "reachable": "Reachable at {{endpoint}}"
+          },
+          "platform": {
+            "label": "Platform"
+          }
+        }
       }
     }
   },

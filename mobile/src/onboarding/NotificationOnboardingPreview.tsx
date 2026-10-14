@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native'
 import { OrcaLogo } from '../components/OrcaLogo'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { useReducedMotionEnabled } from './use-reduced-motion'
 
-const SAMPLE_NOTIFICATIONS = [
-  { title: 'Codex finished', body: 'Tests are passing.' },
-  { title: 'Claude needs input', body: 'Waiting on you.' }
-] as const
+const SAMPLE_KEYS = ['codexFinished', 'claudeNeedsInput'] as const
 
 const ENTER_MS = 676
 const EXIT_MS = 416
@@ -22,6 +20,7 @@ type Props = {
 
 /** Decorative banners; the surrounding copy is the accessible explanation. */
 export function NotificationOnboardingPreview({ active }: Props) {
+  const { t } = useTranslation()
   const reduceMotion = useReducedMotionEnabled()
   const first = useRef(new Animated.Value(0)).current
   const second = useRef(new Animated.Value(0)).current
@@ -76,16 +75,22 @@ export function NotificationOnboardingPreview({ active }: Props) {
       style={styles.stack}
     >
       <Animated.View style={bannerMotion(first)}>
-        <SampleBanner notification={SAMPLE_NOTIFICATIONS[0]} />
+        <SampleBanner t={t} sampleKey={SAMPLE_KEYS[0]} />
       </Animated.View>
       <Animated.View style={bannerMotion(second)}>
-        <SampleBanner notification={SAMPLE_NOTIFICATIONS[1]} />
+        <SampleBanner t={t} sampleKey={SAMPLE_KEYS[1]} />
       </Animated.View>
     </View>
   )
 }
 
-function SampleBanner({ notification }: { notification: (typeof SAMPLE_NOTIFICATIONS)[number] }) {
+function SampleBanner({
+  t,
+  sampleKey
+}: {
+  t: (k: string) => string
+  sampleKey: (typeof SAMPLE_KEYS)[number]
+}) {
   return (
     <View style={styles.card}>
       <View style={styles.appIcon}>
@@ -94,13 +99,13 @@ function SampleBanner({ notification }: { notification: (typeof SAMPLE_NOTIFICAT
       <View style={styles.cardCopy}>
         <View style={styles.cardMeta}>
           <Text style={styles.appName}>Orca</Text>
-          <Text style={styles.now}>now</Text>
+          <Text style={styles.now}>{t('onboarding.notifications.preview.now')}</Text>
         </View>
         <Text style={styles.cardTitle} numberOfLines={1}>
-          {notification.title}
+          {t(`onboarding.notifications.preview.${sampleKey}.title`)}
         </Text>
         <Text style={styles.cardBody} numberOfLines={1}>
-          {notification.body}
+          {t(`onboarding.notifications.preview.${sampleKey}.body`)}
         </Text>
       </View>
     </View>

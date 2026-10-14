@@ -1,4 +1,5 @@
 import { useCallback, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable, ScrollView, ActivityIndicator } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
@@ -51,6 +52,7 @@ export function TroubleshootView({
   /** Slot the route fills in a development build and in an OTA build; null in a native build. */
   developerRow?: ReactNode
 }) {
+  const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const toggleSection = useCallback(
@@ -62,13 +64,13 @@ export function TroubleshootView({
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t('common.back')}
           style={styles.backButton}
           onPress={onBack}
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>Troubleshooting</Text>
+        <Text style={styles.heading}>{t('settings.menu.troubleshooting')}</Text>
       </View>
 
       <ScrollView
@@ -93,10 +95,10 @@ export function TroubleshootView({
           )}
           <Text style={styles.diagnosticButtonLabel}>
             {diagnosticStatus === 'running'
-              ? 'Running…'
+              ? t('diagnostics.troubleshoot.running')
               : diagnosticStatus === 'done'
-                ? 'Run again'
-                : 'Run diagnostics'}
+                ? t('diagnostics.troubleshoot.runAgain')
+                : t('diagnostics.troubleshoot.run')}
           </Text>
         </Pressable>
 
@@ -109,6 +111,7 @@ export function TroubleshootView({
         >
           <ScrollText size={16} color={colors.textPrimary} />
           <Text style={styles.diagnosticButtonLabel}>View network diagnostics</Text>
+          <Text style={styles.diagnosticButtonLabel}>{t('diagnostics.troubleshoot.viewNetwork')}</Text>
         </Pressable>
 
         {developerRow}
@@ -132,7 +135,7 @@ export function TroubleshootView({
           </View>
         )}
 
-        <Text style={styles.sectionHeading}>Common issues</Text>
+        <Text style={styles.sectionHeading}>{t('diagnostics.troubleshoot.commonIssuesHeading')}</Text>
 
         <View style={styles.section}>
           {troubleshootCommonIssues.map((section, i) => (
