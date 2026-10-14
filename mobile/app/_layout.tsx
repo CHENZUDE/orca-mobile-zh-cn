@@ -1,4 +1,4 @@
-import { startAndroidForegroundPushPresentation } from '../src/notifications/android-foreground-push'
+﻿import { startAndroidForegroundPushPresentation } from '../src/notifications/android-foreground-push'
 import { registerPushDismissalTask } from '../src/notifications/push-background-dismissal'
 import { readNativeNotificationData } from '../src/notifications/native-notification-data'
 import { setNotificationViewingWorkspace } from '../src/notifications/notification-viewing-policy'
@@ -25,6 +25,8 @@ import { loadHostCatalog } from '../src/transport/host-store'
 import { extractPairingCodeFromUrl } from '../src/transport/pairing'
 import { recoverMobileRelayPairing } from '../src/transport/mobile-relay-pairing-recovery'
 import { appUpdateChecker } from '../src/app-update/app-update-runtime'
+import { I18nProvider } from '../src/i18n/I18nProvider'
+import { LanguageBootstrap } from '../src/i18n/LanguageBootstrap'
 
 // Why: keeps the native splash screen visible until the React tree is mounted
 // and ready to render. Without this the user sees a blank white/black frame
@@ -100,7 +102,7 @@ export default function RootLayout() {
     return () => sub.remove()
   }, [router])
 
-  // ─── Notification tap routing ───
+  // 鈹€鈹€鈹€ Notification tap routing 鈹€鈹€鈹€
   // Why: iOS delivers local notification taps through expo-notifications,
   // not Linking. Route both cold-start and warm-start responses to the host
   // and worktree that scheduled the notification.
@@ -186,10 +188,10 @@ export default function RootLayout() {
       sub.remove()
     }
   }, [openNotificationRoute])
-  // ─── End notification tap routing ───
+  // 鈹€鈹€鈹€ End notification tap routing 鈹€鈹€鈹€
 
   // Why: hide the native splash only once the navigation Stack has been laid
-  // out — this is the earliest moment the user will see actual app content.
+  // out 鈥?this is the earliest moment the user will see actual app content.
   // Previously the splash hid when a placeholder View rendered, leaving a
   // grey gap before the real screen appeared.
   const onNavigatorLayout = useCallback(async () => {
@@ -197,50 +199,54 @@ export default function RootLayout() {
   }, [])
 
   return (
-    <RpcClientProvider>
-      <View style={styles.root} onLayout={onNavigatorLayout}>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerStyle: { backgroundColor: colors.bgPanel },
-            headerTintColor: colors.textPrimary,
-            headerTitleStyle: { fontSize: 16, fontWeight: '600' },
-            contentStyle: { backgroundColor: colors.bgBase },
-            headerShadowVisible: false
-            // Why: deliberately no `orientation` screenOption. react-native-screens
-            // has no value that respects the device rotation lock — even 'default'
-            // calls setRequestedOrientation(UNSPECIFIED) at runtime, overriding the
-            // manifest. Leaving it unset lets the manifest's "fullUser" (set by the
-            // android-respect-rotation-lock config plugin) honor the auto-rotate lock.
-          }}
-        >
-          <Stack.Screen
-            name="index"
-            options={{
-              headerShown: false,
-              headerTitle: () => <OrcaLogo size={22} />
-            }}
-          />
-          <Stack.Screen name="pair-scan" options={{ headerShown: false }} />
-          <Stack.Screen name="pair" options={{ headerShown: false }} />
-          <Stack.Screen name="pair-confirm" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="mobile-onboarding"
-            options={{ headerShown: false, presentation: 'modal', gestureEnabled: false }}
-          />
-          <Stack.Screen name="settings" options={{ headerShown: false }} />
-          <Stack.Screen name="terminal-settings" options={{ headerShown: false }} />
-          <Stack.Screen name="native-chat-settings" options={{ headerShown: false }} />
-          <Stack.Screen name="browser-settings" options={{ headerShown: false }} />
-          <Stack.Screen name="voice-settings" options={{ headerShown: false }} />
-          <Stack.Screen name="notifications" options={{ headerShown: false }} />
-          <Stack.Screen name="troubleshoot" options={{ headerShown: false }} />
-          <Stack.Screen name="connection-log" options={{ headerShown: false }} />
-          <Stack.Screen name="about" options={{ headerShown: false }} />
-          <Stack.Screen name="h" options={{ headerShown: false }} />
-        </Stack>
-      </View>
-    </RpcClientProvider>
+    <I18nProvider>
+      <RpcClientProvider>
+        <LanguageBootstrap>
+          <View style={styles.root} onLayout={onNavigatorLayout}>
+            <StatusBar style="light" />
+            <Stack
+              screenOptions={{
+                headerStyle: { backgroundColor: colors.bgPanel },
+                headerTintColor: colors.textPrimary,
+                headerTitleStyle: { fontSize: 16, fontWeight: '600' },
+                contentStyle: { backgroundColor: colors.bgBase },
+                headerShadowVisible: false
+                // Why: deliberately no `orientation` screenOption. react-native-screens
+                // has no value that respects the device rotation lock — even 'default'
+                // calls setRequestedOrientation(UNSPECIFIED) at runtime, overriding the
+                // manifest. Leaving it unset lets the manifest's "fullUser" (set by the
+                // android-respect-rotation-lock config plugin) honor the auto-rotate lock.
+              }}
+            >
+              <Stack.Screen
+                name="index"
+                options={{
+                  headerShown: false,
+                  headerTitle: () => <OrcaLogo size={22} />
+                }}
+              />
+              <Stack.Screen name="pair-scan" options={{ headerShown: false }} />
+              <Stack.Screen name="pair" options={{ headerShown: false }} />
+              <Stack.Screen name="pair-confirm" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="mobile-onboarding"
+                options={{ headerShown: false, presentation: 'modal', gestureEnabled: false }}
+              />
+              <Stack.Screen name="settings" options={{ headerShown: false }} />
+              <Stack.Screen name="terminal-settings" options={{ headerShown: false }} />
+              <Stack.Screen name="native-chat-settings" options={{ headerShown: false }} />
+              <Stack.Screen name="browser-settings" options={{ headerShown: false }} />
+              <Stack.Screen name="voice-settings" options={{ headerShown: false }} />
+              <Stack.Screen name="notifications" options={{ headerShown: false }} />
+              <Stack.Screen name="troubleshoot" options={{ headerShown: false }} />
+              <Stack.Screen name="connection-log" options={{ headerShown: false }} />
+              <Stack.Screen name="about" options={{ headerShown: false }} />
+              <Stack.Screen name="h" options={{ headerShown: false }} />
+            </Stack>
+          </View>
+        </LanguageBootstrap>
+      </RpcClientProvider>
+    </I18nProvider>
   )
 }
 
