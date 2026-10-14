@@ -1,13 +1,14 @@
 import { ChevronRight, ListTodo } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { TaskProviderLogo } from '../components/TaskProviderLogo'
 import type { TaskProvider } from '../tasks/mobile-task-providers'
 import { colors, radii, spacing } from '../theme/mobile-theme'
 
-const TASK_PROVIDER_LABELS: Record<TaskProvider, string> = {
-  github: 'GitHub',
-  gitlab: 'GitLab',
-  linear: 'Linear'
+const TASK_PROVIDER_KEYS: Record<TaskProvider, string> = {
+  github: 'home.tasks.providers.github',
+  gitlab: 'home.tasks.providers.gitlab',
+  linear: 'home.tasks.providers.linear'
 }
 
 export function MobileHomeTasksCard(props: {
@@ -15,6 +16,10 @@ export function MobileHomeTasksCard(props: {
   providers: TaskProvider[]
   onOpen: (provider?: TaskProvider) => void
 }) {
+  const { t } = useTranslation()
+  const providerLabels = Object.fromEntries(
+    (Object.keys(TASK_PROVIDER_KEYS) as TaskProvider[]).map((p) => [p, t(TASK_PROVIDER_KEYS[p])])
+  ) as Record<TaskProvider, string>
   return (
     <Pressable
       disabled={!props.enabled}
@@ -29,25 +34,23 @@ export function MobileHomeTasksCard(props: {
         <ListTodo size={18} color={colors.textSecondary} />
       </View>
       <View style={styles.main}>
-        <Text style={styles.title}>Tasks</Text>
+        <Text style={styles.title}>{t('home.tasks.heading')}</Text>
         <Text style={styles.subtitle} numberOfLines={1}>
           {props.providers.length > 0
-            ? props.providers.map((provider) => TASK_PROVIDER_LABELS[provider]).join(' · ')
-            : 'No task sources connected'}
+            ? props.providers.map((provider) => providerLabels[provider]).join(' · ')
+            : t('home.tasks.empty')}
         </Text>
       </View>
       <View style={styles.trailing}>
         <View
           style={styles.providerRow}
-          accessibilityLabel={props.providers
-            .map((provider) => TASK_PROVIDER_LABELS[provider])
-            .join(', ')}
+          accessibilityLabel={props.providers.map((provider) => providerLabels[provider]).join(', ')}
         >
           {props.providers.map((provider) => (
             <Pressable
               key={provider}
               accessibilityRole="button"
-              accessibilityLabel={`Open ${TASK_PROVIDER_LABELS[provider]} tasks`}
+              accessibilityLabel={t('home.tasks.openProvider', { provider: providerLabels[provider] })}
               hitSlop={8}
               style={({ pressed }) => [
                 styles.providerButton,

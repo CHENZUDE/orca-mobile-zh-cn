@@ -1,21 +1,7 @@
 import { QrCode } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing } from '../theme/mobile-theme'
-
-const ONBOARDING_STEPS = [
-  {
-    title: 'Open Orca desktop',
-    desc: 'Go to Settings → Mobile and generate a pairing QR code.'
-  },
-  {
-    title: 'Scan the code',
-    desc: 'Tap the button above to open the scanner. Point at the QR code on your screen.'
-  },
-  {
-    title: "You're connected",
-    desc: 'Your desktop will appear here. Everything is encrypted end-to-end.'
-  }
-]
 
 export function MobileHomeEmptyState(props: {
   bottomInset: number
@@ -23,6 +9,24 @@ export function MobileHomeEmptyState(props: {
   isWideLayout: boolean
   onPairDesktop: () => void
 }) {
+  const { t } = useTranslation()
+  // Why: keep the i18n key list next to the renderer so a render iteration
+  // can't drift away from the catalog — adding a 4th step means adding a key
+  // and an entry here in the same edit.
+  const steps = [
+    {
+      title: t('home.emptyState.steps.openOrca.title'),
+      desc: t('home.emptyState.steps.openOrca.desc')
+    },
+    {
+      title: t('home.emptyState.steps.scanCode.title'),
+      desc: t('home.emptyState.steps.scanCode.desc')
+    },
+    {
+      title: t('home.emptyState.steps.connected.title'),
+      desc: t('home.emptyState.steps.connected.desc')
+    }
+  ]
   return (
     <View
       style={[
@@ -36,19 +40,18 @@ export function MobileHomeEmptyState(props: {
       ]}
     >
       <View style={styles.emptyHero}>
-        <Text style={styles.emptyTitle}>Connect your desktop</Text>
+        <Text style={styles.emptyTitle}>{t('home.emptyState.title')}</Text>
         <Text style={styles.emptyBody}>
-          Pair with Orca on your computer to check on your agents, jump into any terminal, and drive
-          work from your phone.
+          {t('home.emptyState.body')}
         </Text>
         <Pressable style={styles.primaryButton} onPress={props.onPairDesktop}>
           <QrCode size={17} color={colors.bgBase} />
-          <Text style={styles.primaryButtonText}>Pair Desktop</Text>
+          <Text style={styles.primaryButtonText}>{t('home.emptyState.pairDesktop')}</Text>
         </Pressable>
       </View>
       <View style={styles.stepsSection}>
-        <Text style={styles.sectionHeading}>How it works</Text>
-        {ONBOARDING_STEPS.map((step, index) => (
+        <Text style={styles.sectionHeading}>{t('home.emptyState.howItWorks')}</Text>
+        {steps.map((step, index) => (
           <View key={step.title} style={[styles.stepRow, index > 0 && styles.stepRowBorder]}>
             <View style={styles.stepNum}>
               <Text style={styles.stepNumText}>{index + 1}</Text>

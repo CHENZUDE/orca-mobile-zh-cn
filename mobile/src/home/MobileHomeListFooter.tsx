@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import type { AccountsSnapshot } from '../components/AccountUsage'
 import { MobileHomeQuickActions } from '../components/MobileHomeQuickActions'
 import type { TaskProvider } from '../tasks/mobile-task-providers'
@@ -21,15 +22,16 @@ export function MobileHomeListFooter(props: {
   onOpenTasks: (provider?: TaskProvider) => void
   onPairDesktop: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <View>
       {props.resumeCard ? (
         <>
-          <Text style={styles.sectionHeading}>Resume</Text>
+          <Text style={styles.sectionHeading}>{t('home.resume')}</Text>
           <MobileHomeResumeCard card={props.resumeCard} onOpen={props.onOpenResume} />
         </>
       ) : null}
-      <Text style={styles.sectionHeading}>Tasks</Text>
+      <Text style={styles.sectionHeading}>{t('home.tasksHeading')}</Text>
       <MobileHomeTasksCard
         enabled={props.primaryHost != null}
         providers={props.primaryTaskProviders}

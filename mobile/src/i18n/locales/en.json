@@ -58,10 +58,39 @@
     "tasksHeading": "Tasks",
     "resume": "Resume",
     "accountUsageHeading": "Account usage",
+    "accountUsage": {
+      "systemDefault": "System default"
+    },
+    "tasks": {
+      "heading": "Tasks",
+      "empty": "No task sources connected",
+      "openProvider": "Open {{provider}} tasks",
+      "providers": {
+        "github": "GitHub",
+        "gitlab": "GitLab",
+        "linear": "Linear"
+      }
+    },
+    "alerts": {
+      "checkPairing": {
+        "title": "Could not check pairing",
+        "body": "Please try again."
+      },
+      "removeHost": {
+        "title": "Could not remove host",
+        "body": "Please try again."
+      }
+    },
+    "confirmRemove": {
+      "title": "Remove Host",
+      "message": "Remove \"{{name}}\"? You can re-pair later.",
+      "confirm": "Remove"
+    },
     "emptyState": {
       "title": "Connect your desktop",
       "pairDesktop": "Pair Desktop",
       "howItWorks": "How it works",
+      "body": "Pair with Orca on your computer to check on your agents, jump into any terminal, and drive work from your phone.",
       "steps": {
         "openOrca": {
           "title": "Open Orca desktop",
