@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { MobileOnboardingPage } from './MobileOnboardingPage'
@@ -64,7 +65,7 @@ describe('MobileOnboardingPage', () => {
       }
     })
     await act(async () => {
-      renderer = create(
+      renderer = create(createElement(I18nProvider, null, 
         createElement(MobileOnboardingPage, {
           step,
           width: 390,
@@ -74,7 +75,7 @@ describe('MobileOnboardingPage', () => {
           onSessionChoice,
           onNotificationChoice
         })
-      )
+      ))
     })
     consoleError.mockRestore()
     return { onSessionChoice, onNotificationChoice }

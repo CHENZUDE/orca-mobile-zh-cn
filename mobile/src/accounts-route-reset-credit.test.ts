@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from './i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import AccountsScreen from '../app/h/[hostId]/accounts'
@@ -160,7 +161,7 @@ const RESET_SNAPSHOT = {
 async function renderAccountsRoute(): Promise<ReactTestRenderer> {
   let renderer: ReactTestRenderer | null = null
   await act(async () => {
-    renderer = create(createElement(AccountsScreen))
+    renderer = create(createElement(I18nProvider, null, createElement(AccountsScreen)))
     await Promise.resolve()
   })
   if (!renderer) {

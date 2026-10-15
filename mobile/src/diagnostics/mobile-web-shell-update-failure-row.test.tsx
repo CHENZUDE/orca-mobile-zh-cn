@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { MobileWebShellUpdateFailure } from '../mobile-web-shell/mobile-web-shell-update-failure'
@@ -48,7 +49,7 @@ function failure(overrides: Partial<MobileWebShellUpdateFailure>): MobileWebShel
 async function mountRow(): Promise<ReactTestRenderer> {
   const rendered: { tree: ReactTestRenderer | null } = { tree: null }
   await act(async () => {
-    rendered.tree = create(createElement(MobileWebShellUpdateFailureRow))
+    rendered.tree = create(createElement(I18nProvider, null, createElement(MobileWebShellUpdateFailureRow)))
   })
   if (rendered.tree === null) {
     throw new Error('the row did not mount')

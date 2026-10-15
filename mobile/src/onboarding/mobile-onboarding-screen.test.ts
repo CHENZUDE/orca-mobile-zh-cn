@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import MobileOnboardingScreen from '../../app/mobile-onboarding'
@@ -90,7 +91,7 @@ describe('MobileOnboardingScreen', () => {
       }
     })
     await act(async () => {
-      renderer = create(createElement(MobileOnboardingScreen))
+      renderer = create(createElement(I18nProvider, null, createElement(MobileOnboardingScreen)))
     })
     await layoutViewport(viewportWidth)
     consoleError.mockRestore()

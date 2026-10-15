@@ -338,7 +338,7 @@
         "upToDate": "Up to date",
         "failed": "Couldn\u2019t check",
         "never": "Never",
-        "lastChecked": "Last checked {{ago}} ago"
+        "lastChecked": "Last checked {{ago}}"
       }
     },
     "appearance": {

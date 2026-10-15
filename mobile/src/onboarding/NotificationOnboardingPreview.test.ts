@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { NotificationOnboardingPreview } from './NotificationOnboardingPreview'
@@ -67,7 +68,7 @@ describe('NotificationOnboardingPreview', () => {
       }
     })
     await act(async () => {
-      renderer = create(createElement(NotificationOnboardingPreview, { active }))
+      renderer = create(createElement(I18nProvider, null, createElement(NotificationOnboardingPreview, { active })))
     })
     consoleError.mockRestore()
   }

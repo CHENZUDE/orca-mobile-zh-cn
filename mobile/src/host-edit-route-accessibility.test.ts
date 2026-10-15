@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import EditHostScreen from '../app/h/[hostId]/edit'
+import { I18nProvider } from './i18n/I18nProvider'
 
 const dependencies = vi.hoisted(() => ({
   back: vi.fn(),
@@ -49,7 +50,11 @@ vi.mock('./transport/client-context', () => ({
 async function renderEditHostRoute(): Promise<ReactTestRenderer> {
   let renderer: ReactTestRenderer | null = null
   await act(async () => {
-    renderer = create(createElement(EditHostScreen))
+    // Why: EditHostScreen now calls t('host.edit.nameA11y' / 'addressA11y')
+    // for accessibility labels. Without the I18nProvider wrapper, t()
+    // returns the raw key, so any string assertion on the rendered
+    // label drifts away from the English text the test pinned.
+    renderer = create(createElement(I18nProvider, null, createElement(EditHostScreen)))
     await Promise.resolve()
   })
   if (!renderer) {

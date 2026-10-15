@@ -1,4 +1,5 @@
 import { createElement, useEffect } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import NotificationsScreen from './notification-settings-screen'
@@ -63,9 +64,9 @@ describe('shared settings screen state', () => {
       delete: vi.fn()
     } as VoiceSettingsOperations
     await act(async () => {
-      renderer = create(
+      renderer = create(createElement(I18nProvider, null, 
         createElement(VoiceSettingsScreen, { operations, focused: true, onBack: vi.fn() })
-      )
+      ))
     })
     const switchProps = () => renderer.root.findByProps({ testID: 'voice-enabled' }).props
     expect(switchProps().value).toBe(true)
@@ -94,9 +95,9 @@ describe('shared settings screen state', () => {
       delete: vi.fn()
     } as VoiceSettingsOperations
     await act(async () => {
-      renderer = create(
+      renderer = create(createElement(I18nProvider, null, 
         createElement(VoiceSettingsScreen, { operations, focused: true, onBack: vi.fn() })
-      )
+      ))
     })
     expect(JSON.stringify(renderer.toJSON())).not.toContain('Failed to load voice settings')
     expect(renderer.root.findAllByType('ActivityIndicator')).toHaveLength(1)
@@ -125,9 +126,9 @@ describe('shared settings screen state', () => {
     }
     const first = { ...shared } as VoiceSettingsOperations
     await act(async () => {
-      renderer = create(
+      renderer = create(createElement(I18nProvider, null, 
         createElement(VoiceSettingsScreen, { operations: first, focused: true, onBack: vi.fn() })
-      )
+      ))
     })
     const switchProps = () => renderer.root.findByProps({ testID: 'voice-enabled' }).props
     expect(switchProps().value).toBe(true)
@@ -136,7 +137,7 @@ describe('shared settings screen state', () => {
     const second = { ...shared } as VoiceSettingsOperations
     await act(async () => {
       renderer.update(
-        createElement(VoiceSettingsScreen, { operations: second, focused: true, onBack: vi.fn() })
+        createElement(I18nProvider, null, createElement(VoiceSettingsScreen, { operations: second, focused: true, onBack: vi.fn() }))
       )
     })
     expect(shared.load).toHaveBeenCalledTimes(2)
@@ -166,7 +167,7 @@ describe('shared settings screen state', () => {
       openSettings: vi.fn()
     }
     await act(async () => {
-      renderer = create(createElement(NotificationsScreen, { operations, onBack: vi.fn() }))
+      renderer = create(createElement(I18nProvider, null, createElement(NotificationsScreen, { operations, onBack: vi.fn() })))
     })
     await act(async () => {
       await renderer.root.findByProps({ testID: 'notification-enabled' }).props.onValueChange(true)
@@ -194,7 +195,7 @@ describe('shared settings screen state', () => {
       openSettings: vi.fn()
     }
     await act(async () => {
-      renderer = create(createElement(NotificationsScreen, { operations, onBack: vi.fn() }))
+      renderer = create(createElement(I18nProvider, null, createElement(NotificationsScreen, { operations, onBack: vi.fn() })))
     })
     const switchProps = () => renderer.root.findByProps({ testID: 'notification-enabled' }).props
     // Base gates only on a denied OS permission, so the control is live from first paint.

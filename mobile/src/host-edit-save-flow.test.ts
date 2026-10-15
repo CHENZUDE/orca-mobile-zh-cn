@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from './i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import EditHostScreen from '../app/h/[hostId]/edit'
@@ -59,7 +60,7 @@ const HOST_FIXTURE = {
 async function renderEditHostRoute(): Promise<ReactTestRenderer> {
   let renderer: ReactTestRenderer | null = null
   await act(async () => {
-    renderer = create(createElement(EditHostScreen))
+    renderer = create(createElement(I18nProvider, null, createElement(EditHostScreen)))
     await Promise.resolve()
   })
   if (!renderer) {

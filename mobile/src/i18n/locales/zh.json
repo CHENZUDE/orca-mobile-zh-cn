@@ -338,7 +338,7 @@
         "upToDate": "已是最新",
         "failed": "检查失败",
         "never": "从未检查",
-        "lastChecked": "上次检查 {{ago}}前"
+        "lastChecked": "上次检查 {{ago}}"
       }
     },
     "appearance": {

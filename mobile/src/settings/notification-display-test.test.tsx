@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { NotificationDisplayTest } from './notification-display-test'
@@ -25,7 +26,7 @@ afterEach(() => act(() => renderer?.unmount()))
 
 async function send() {
   await act(async () => {
-    renderer = create(createElement(NotificationDisplayTest, { onTroubleshoot: vi.fn() }))
+    renderer = create(createElement(I18nProvider, null, createElement(NotificationDisplayTest, { onTroubleshoot: vi.fn() })))
   })
   await act(async () => renderer.root.findAllByType('Pressable')[0].props.onPress())
 }

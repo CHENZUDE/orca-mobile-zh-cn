@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { AppUpdateSettingsRows, type AppUpdateCheckRowStatus } from './app-update-settings-rows'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 vi.mock('react-native', () => ({
   Pressable: 'Pressable',
@@ -28,16 +29,20 @@ describe('AppUpdateSettingsRows', () => {
     const onUpdate = vi.fn()
     const onCheck = vi.fn()
     act(() => {
+      // Why: AppUpdateSettingsRows calls t() for labels; without the
+      // provider the keys would surface and break every string assertion.
       renderer = create(
-        createElement(AppUpdateSettingsRows, {
-          installedVersion: '0.0.48',
-          available: opts.available ?? null,
-          lastCheckedAt: opts.lastCheckedAt ?? null,
-          now: NOW,
-          checkStatus: opts.checkStatus ?? 'idle',
-          onUpdate,
-          onCheck
-        })
+        createElement(I18nProvider, null,
+          createElement(AppUpdateSettingsRows, {
+            installedVersion: '0.0.48',
+            available: opts.available ?? null,
+            lastCheckedAt: opts.lastCheckedAt ?? null,
+            now: NOW,
+            checkStatus: opts.checkStatus ?? 'idle',
+            onUpdate,
+            onCheck
+          })
+        )
       )
     })
     const root = renderer!.root
@@ -62,7 +67,7 @@ describe('AppUpdateSettingsRows', () => {
       'Update to Orca 0.0.51',
       'Update',
       'Check for updates',
-      'Last checked 2h ago'
+      'Last checked 2h'
     ])
     act(() => pressables[0].props.onPress())
     expect(onUpdate).toHaveBeenCalledTimes(1)
@@ -85,6 +90,6 @@ describe('AppUpdateSettingsRows', () => {
     act(() => renderer?.unmount())
     expect(render({ checkStatus: 'up-to-date' }).texts.at(-1)).toBe('Up to date')
     act(() => renderer?.unmount())
-    expect(render({ checkStatus: 'failed' }).texts.at(-1)).toBe("Couldn't check")
+    expect(render({ checkStatus: 'failed' }).texts.at(-1)).toBe("Couldn’t check")
   })
 })
