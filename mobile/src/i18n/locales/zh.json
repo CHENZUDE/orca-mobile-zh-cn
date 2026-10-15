@@ -161,7 +161,8 @@
       "troubleshooting": "Troubleshooting",
       "about": "关于",
       "privacyPolicy": "隐私政策",
-      "support": "支持"
+      "support": "支持",
+      "language": "语言"
     },
     "frame": {
       "back": "返回",
@@ -338,6 +339,19 @@
         "failed": "检查失败",
         "never": "从未检查",
         "lastChecked": "上次检查 {{ago}}前"
+      }
+    },
+    "appearance": {
+      "language": {
+        "title": "语言",
+        "description": "选择 Orca 界面使用的语言。",
+        "system": "跟随系统",
+        "english": "English",
+        "chinese": "中文（简体）",
+        "korean": "한국어",
+        "japanese": "日本語",
+        "spanish": "Español",
+        "french": "Français"
       }
     },
     "pendingCredentials": {

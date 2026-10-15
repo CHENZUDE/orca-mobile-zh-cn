@@ -161,7 +161,8 @@
       "troubleshooting": "Troubleshooting",
       "about": "About",
       "privacyPolicy": "Privacy Policy",
-      "support": "Support"
+      "support": "Support",
+      "language": "Language"
     },
     "frame": {
       "back": "Back",
@@ -338,6 +339,19 @@
         "failed": "Couldn\u2019t check",
         "never": "Never",
         "lastChecked": "Last checked {{ago}} ago"
+      }
+    },
+    "appearance": {
+      "language": {
+        "title": "Language",
+        "description": "Choose the language used by the Orca interface.",
+        "system": "System",
+        "english": "English",
+        "chinese": "中文（简体）",
+        "korean": "한국어",
+        "japanese": "日本語",
+        "spanish": "Español",
+        "french": "Français"
       }
     },
     "pendingCredentials": {
