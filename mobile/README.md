@@ -143,6 +143,32 @@ cd ..
 pnpm typecheck:node
 ```
 
+
+## Internationalization (zh-CN)
+
+Mobile ships an i18next bundle keyed off `mobile/src/i18n/locales/en.json` as the source of truth.
+Translated catalogs land alongside (zh, es, fr, ja, ko). `pnpm lint` chains `oxlint` with two gates:
+
+- `verify-localization-catalog` checks every non-empty en leaf has a zh value, and that
+  `{{placeholder}}` sets match per leaf.
+- `verify-localization-coverage` re-runs the candidate audit and asserts the in-scope high-priority
+  screens (home, pairing, onboarding, settings, diagnostics, notifications, app) have zero untranslatable
+  JSX literals / placeholders / accessibility labels / menu strings.
+
+Brand strings (`Orca`, `onOrca.dev`, `stablyai/orca`), keyboard modifiers (`Cmd`, `Ctrl`, `Alt`, `Shift`),
+and i18n key tokens (`settings.*`, `common.*`, etc.) are allowlisted so the gate reflects translation
+work only. Medium-priority screens (`agent-history`, `browser`, `components`) are out of v1 and allowed
+to drift; the audit raw.json captures them for follow-up milestones.
+
+Run an individual gate:
+
+```bash
+cd mobile
+pnpm run verify:localization             # both gates
+pnpm run verify:localization:catalog     # parity only
+pnpm run verify:localization:coverage    # coverage only
+```
+
 `tsc --noEmit` reads `tsconfig.json`, which excludes test files so Metro never bundles them.
 `tsconfig.test.json` puts them back, and `pnpm run typecheck:tests` shows their errors in full.
 `check:tests-typecheck` is the gate over it: a ratchet against `tests-typecheck-baseline.txt`, the

@@ -1,11 +1,9 @@
-﻿#!/usr/bin/env node
-// Why: validate that every non-empty zh-CN catalog entry mirrors en.json's key tree
+﻿// Why: validate that every non-empty zh-CN catalog entry mirrors en.json's key tree
 // and that {{placeholders}} match 鈥?silent placeholder drift would render wrong text.
 import { readFile } from 'node:fs/promises';
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
-const here = dirname(fileURLToPath(import.meta.url));
+const here = import.meta.dirname;
 const root = resolve(here, '..', 'src', 'i18n', 'locales');
 
 function flatten(obj, out = {}, prefix = '') {
@@ -21,11 +19,15 @@ function flatten(obj, out = {}, prefix = '') {
 }
 
 function placeholders(s) {
-  if (typeof s !== 'string') return [];
+  if (typeof s !== 'string') {
+    return []
+  }
   const re = /\{\{([^}]+)\}\}/g;
   const set = new Set();
   let m;
-  while ((m = re.exec(s))) set.add(m[1]);
+  while ((m = re.exec(s))) {
+    set.add(m[1])
+  }
   return [...set];
 }
 
@@ -47,7 +49,9 @@ const zhFlat = flatten(zh);
 let missing = 0;
 let placeholderMismatch = 0;
 for (const key of Object.keys(enFlat)) {
-  if (enFlat[key] === '') continue;
+  if (enFlat[key] === '') {
+    continue
+  }
   if (!(key in zhFlat)) {
     console.error('MISSING zh: ' + key);
     missing++;
@@ -75,5 +79,7 @@ for (const key of Object.keys(zhFlat)) {
 }
 
 console.log('Checked ' + Object.keys(enFlat).length + ' en keys; missing=' + missing + ', placeholderMismatch=' + placeholderMismatch + ', extra=' + extra);
-if (missing || placeholderMismatch || extra) process.exit(1);
+if (missing || placeholderMismatch || extra) {
+  process.exit(1)
+}
 

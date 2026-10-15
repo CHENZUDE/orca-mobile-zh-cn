@@ -14,12 +14,15 @@
     "check:tests-typecheck": "node scripts/check-tests-typecheck-ratchet.mjs",
     "rpc:record": "tsx --conditions=orca-source scripts/rpc-recording.mts",
     "rpc:diff": "tsx --conditions=orca-source scripts/rpc-diff.mts",
-    "lint": "oxlint",
+    "lint": "oxlint && pnpm run verify:localization",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "mock-server": "npx tsx scripts/mock-server.ts",
     "repro:workspace-picker-lag": "npx tsx scripts/repro-workspace-picker-lag.ts",
-    "start:emulator": "node scripts/start-emulator.mjs"
+    "start:emulator": "node scripts/start-emulator.mjs",
+    "verify:localization": "node scripts/verify-localization.mjs",
+    "verify:localization:catalog": "node scripts/verify-localization-catalog.mjs",
+    "verify:localization:coverage": "node scripts/verify-localization-coverage.mjs"
   },
   "dependencies": {
     "@noble/hashes": "1.8.0",

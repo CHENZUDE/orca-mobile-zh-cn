@@ -54,7 +54,9 @@ const LOW_PRIORITY_MODULES = new Set(["test-support","__mocks__","fixtures","rpc
 
 function moduleFromPath(relativeFile) {
   const parts = relativeFile.split("/");
-  if (parts[0] === "mobile" && parts[1] === "app") return "app";
+  if (parts[0] === "mobile" && parts[1] === "app") {
+    return "app"
+  }
   if (parts[0] === "mobile" && parts[1] === "src") {
     // parts[2] is a module folder only when there is a parts[3] (i.e. it
     // nests a file inside it). bare files at mobile/src/<file> get the
@@ -65,8 +67,12 @@ function moduleFromPath(relativeFile) {
 }
 
 function priorityFor(module) {
-  if (LOW_PRIORITY_MODULES.has(module)) return "low";
-  if (HIGH_PRIORITY_MODULES.has(module)) return "high";
+  if (LOW_PRIORITY_MODULES.has(module)) {
+    return "low"
+  }
+  if (HIGH_PRIORITY_MODULES.has(module)) {
+    return "high"
+  }
   return "medium";
 }
 
@@ -76,7 +82,9 @@ async function walk(dir) {
   try { entries = await fs.readdir(dir, { withFileTypes: true }); } catch { return out; }
   for (const entry of entries) {
     if (entry.isDirectory()) {
-      if (SKIP_DIRS.has(entry.name)) continue;
+      if (SKIP_DIRS.has(entry.name)) {
+        continue
+      }
       out.push(...(await walk(path.join(dir, entry.name))));
     } else if (/\.(ts|tsx|js|jsx|mts|cts)$/.test(entry.name)) {
       out.push(path.join(dir, entry.name));
@@ -126,7 +134,9 @@ function escapeCell(text) {
 function toMarkdown(hits) {
   const byModule = new Map();
   for (const h of hits) {
-    if (!byModule.has(h.module)) byModule.set(h.module, []);
+    if (!byModule.has(h.module)) {
+      byModule.set(h.module, [])
+    }
     byModule.get(h.module).push(h);
   }
   const lines = [];
@@ -136,7 +146,9 @@ function toMarkdown(hits) {
   lines.push("Total hits: **" + hits.length + "** across **" + byModule.size + "** modules.");
   lines.push("");
   const totals = { high: 0, medium: 0, low: 0 };
-  for (const h of hits) totals[h.priority]++;
+  for (const h of hits) {
+    totals[h.priority]++
+  }
   lines.push("- High: " + totals.high);
   lines.push("- Medium: " + totals.medium);
   lines.push("- Low: " + totals.low);
