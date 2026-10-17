@@ -1436,5 +1436,12 @@
     "addOrRemove": "添加或移除审阅人",
     "couldNotLoadTapRefresh": "无法加载审阅人。请点击刷新重试。",
     "noneRequested": "尚未请求审阅人"
+  },
+  "setupHook": {
+    "newSetupScript": "新的安装脚本",
+    "setupScript": "安装脚本",
+    "runHooks": "运行脚本",
+    "alwaysTrustAndRun": "始终信任并运行",
+    "dontRun": "不运行"
   }
 }

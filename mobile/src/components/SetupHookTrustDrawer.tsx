@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Check } from 'lucide-react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
@@ -33,6 +34,8 @@ export function SetupHookTrustDrawer({
   onDontRun,
   onClose
 }: Props) {
+  const { t } = useTranslation()
+
   return (
     <BottomDrawer visible={visible && prompt != null} onClose={onClose}>
       {prompt ? (
@@ -51,7 +54,9 @@ export function SetupHookTrustDrawer({
 
           <View style={styles.trustScriptBox}>
             <Text style={styles.trustScriptLabel}>
-              {prompt.previouslyApproved ? 'New setup script' : 'Setup script'}
+              {prompt.previouslyApproved
+                ? t('setupHook.newSetupScript')
+                : t('setupHook.setupScript')}
             </Text>
             <Text style={styles.trustScriptText}>{prompt.scriptContent}</Text>
           </View>
@@ -59,16 +64,16 @@ export function SetupHookTrustDrawer({
           <View style={styles.trustActionGroup}>
             <Pressable style={styles.trustActionRow} disabled={busy} onPress={onRunOnce}>
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.trustActionText}>Run hooks</Text>
+              <Text style={styles.trustActionText}>{t('setupHook.runHooks')}</Text>
             </Pressable>
             <View style={styles.trustActionSeparator} />
             <Pressable style={styles.trustActionRow} disabled={busy} onPress={onAlwaysTrust}>
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.trustActionText}>Always trust and run</Text>
+              <Text style={styles.trustActionText}>{t('setupHook.alwaysTrustAndRun')}</Text>
             </Pressable>
             <View style={styles.trustActionSeparator} />
             <Pressable style={styles.trustActionRow} disabled={busy} onPress={onDontRun}>
-              <Text style={styles.trustActionText}>Don't run</Text>
+              <Text style={styles.trustActionText}>{t('setupHook.dontRun')}</Text>
             </Pressable>
           </View>
         </View>

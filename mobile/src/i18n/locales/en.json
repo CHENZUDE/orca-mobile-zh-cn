@@ -1436,5 +1436,12 @@
     "addOrRemove": "Add or remove reviewers",
     "couldNotLoadTapRefresh": "Could not load reviewers. Tap refresh to try again.",
     "noneRequested": "No reviewers requested"
+  },
+  "setupHook": {
+    "newSetupScript": "New setup script",
+    "setupScript": "Setup script",
+    "runHooks": "Run hooks",
+    "alwaysTrustAndRun": "Always trust and run",
+    "dontRun": "Don't run"
   }
 }
