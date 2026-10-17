@@ -652,5 +652,20 @@
     "scopeGlobal": "Global",
     "scopeProject": "Project",
     "add": "Add Quick Command"
+  },
+  "tasks": {
+    "comment": {
+      "addPlaceholder": "Add a comment",
+      "send": "Send comment",
+      "reply": "Reply",
+      "replyPlaceholder": "Reply",
+      "resolveThread": "Resolve thread",
+      "reopenThread": "Reopen thread",
+      "thread": "thread",
+      "comment": "comment",
+      "show": "Show",
+      "count": "{{count}} comments",
+      "resolvedBy": "Resolved {{kind}} by {{author}}"
+    }
   }
 }

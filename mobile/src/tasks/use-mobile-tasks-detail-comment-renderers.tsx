@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { TaskCreateActionsModel } from './use-mobile-tasks-task-create-actions'
 import {
   MobileMarkdown,
@@ -25,6 +26,8 @@ import {
 import { styles } from './mobile-tasks-legacy-styles'
 
 export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsModel) {
+
+  const { t } = useTranslation()
   const {
     actionItem,
     detailPayload,
@@ -49,7 +52,7 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
           style={[styles.input, styles.commentInput, styles.commentComposerInput]}
           value={args.value}
           onChangeText={args.onChangeText}
-          placeholder="Add a comment"
+          placeholder={t('tasks.comment.addPlaceholder')}
           placeholderTextColor={colors.textMuted}
           editable={!args.disabled}
           multiline
@@ -59,7 +62,7 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
         {hasText ? (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Send comment"
+            accessibilityLabel={t('tasks.comment.send')}
             style={({ pressed }) => [
               styles.commentComposerSend,
               pressed && !args.disabled && styles.commentComposerSendPressed,
@@ -111,7 +114,7 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
                   onPress={() => void toggleGitHubReviewThread(actionItem, comment)}
                 >
                   <Text style={styles.inlineSaveText}>
-                    {comment.isResolved ? 'Reopen thread' : 'Resolve thread'}
+                    {comment.isResolved ? t('tasks.comment.reopenThread') : t('tasks.comment.resolveThread')}
                   </Text>
                 </Pressable>
               ) : null}
@@ -124,7 +127,7 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
                     [String(comment.id)]: next
                   }))
                 }
-                placeholder="Reply"
+                placeholder={t('tasks.comment.replyPlaceholder')}
                 placeholderTextColor={colors.textMuted}
                 multiline
                 textAlignVertical="top"
@@ -134,7 +137,7 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
                 disabled={mutatingStatus || !(itemReplyDrafts[String(comment.id)] ?? '').trim()}
                 onPress={() => void replyToGitHubComment(actionItem, comment)}
               >
-                <Text style={styles.inlineSaveText}>Reply</Text>
+                <Text style={styles.inlineSaveText}>{t('tasks.comment.reply')}</Text>
               </Pressable>
             </>
           ) : null}
@@ -164,9 +167,9 @@ export function useMobileTasksDetailCommentRenderers(model: TaskCreateActionsMod
           }
         >
           <Text style={styles.resolvedCommentTitle} numberOfLines={1}>
-            Resolved {group.kind === 'thread' ? 'thread' : 'comment'} by {commentAuthor(root)}
+            {t('tasks.comment.resolvedBy', { kind: group.kind === 'thread' ? t('tasks.comment.thread') : t('tasks.comment.comment'), author: commentAuthor(root) })}
           </Text>
-          <Text style={styles.detailSectionMeta}>{count > 1 ? `${count} comments` : 'Show'}</Text>
+          <Text style={styles.detailSectionMeta}>{count > 1 ? t('tasks.comment.count', { count }) : t('tasks.comment.show')}</Text>
         </Pressable>
       )
     }
