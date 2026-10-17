@@ -658,7 +658,12 @@
     "scope": "Scope",
     "scopeGlobal": "Global",
     "scopeProject": "Project",
-    "add": "Add Quick Command"
+    "add": "Add Quick Command",
+    "searchPlaceholder": "Search quick commands...",
+    "noneYet": "No quick commands yet.",
+    "noMatches": "No matching quick commands.",
+    "thisProject": "This project",
+    "global": "Global"
   },
   "tasks": {
     "project": {

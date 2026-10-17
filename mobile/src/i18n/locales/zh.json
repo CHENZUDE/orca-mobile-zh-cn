@@ -658,7 +658,12 @@
     "scope": "作用范围",
     "scopeGlobal": "全局",
     "scopeProject": "项目",
-    "add": "添加快捷命令"
+    "add": "添加快捷命令",
+    "searchPlaceholder": "搜索快速命令…",
+    "noneYet": "还没有快速命令。",
+    "noMatches": "没有匹配的快速命令。",
+    "thisProject": "本项目",
+    "global": "全局"
   },
   "tasks": {
     "project": {

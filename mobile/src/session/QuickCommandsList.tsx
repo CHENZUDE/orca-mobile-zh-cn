@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable, TextInput, StyleSheet, ActivityIndicator } from 'react-native'
 import { Check, Plus, Search } from 'lucide-react-native'
 import { colors, spacing } from '../theme/mobile-theme'
@@ -46,6 +47,8 @@ export function QuickCommandsList({
   onDelete,
   onAdd
 }: ListProps) {
+  const { t } = useTranslation()
+
   const hasVisible = repoCommands.length + globalCommands.length > 0
   const addDisabled = disabled || !canAdd
   // Why: keep an active filter clearable if a delete or paired desktop edit
@@ -60,7 +63,7 @@ export function QuickCommandsList({
             style={styles.searchInput}
             value={query}
             onChangeText={onQueryChange}
-            placeholder="Search quick commands..."
+            placeholder={t('quickCommand.searchPlaceholder')}
             placeholderTextColor={colors.textMuted}
             autoCapitalize="none"
             autoCorrect={false}
@@ -78,16 +81,16 @@ export function QuickCommandsList({
       ) : null}
 
       {!loading && totalCount === 0 ? (
-        <Text style={styles.empty}>No quick commands yet.</Text>
+        <Text style={styles.empty}>{t('quickCommand.noneYet')}</Text>
       ) : null}
 
       {!loading && totalCount > 0 && !hasVisible ? (
-        <Text style={styles.empty}>No matching quick commands.</Text>
+        <Text style={styles.empty}>{t('quickCommand.noMatches')}</Text>
       ) : null}
 
       {repoCommands.length > 0 ? (
         <QuickCommandGroup
-          label="This project"
+          label={t('quickCommand.thisProject')}
           commands={repoCommands}
           onLaunch={onLaunch}
           onEdit={onEdit}
@@ -98,7 +101,7 @@ export function QuickCommandsList({
 
       {globalCommands.length > 0 ? (
         <QuickCommandGroup
-          label="Global"
+          label={t('quickCommand.global')}
           commands={globalCommands}
           onLaunch={onLaunch}
           onEdit={onEdit}
