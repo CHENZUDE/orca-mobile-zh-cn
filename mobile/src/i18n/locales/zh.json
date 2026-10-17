@@ -1720,5 +1720,17 @@
     "saveFailed": "保存备注失败",
     "deleteFailed": "删除备注失败",
     "copyFailed": "无法复制备注"
+  },
+  "accounts": {
+    "validation": {
+      "hostRateLimitTargetNamesWsl": "主机的速率限额目标不能指定 WSL 发行版",
+      "wslRateLimitTargetNeedsExactDistro": "WSL 速率限额目标必须填写完全一致的发行版",
+      "hostCodexAccountNamesWsl": "主机的 Codex 账号不能指定 WSL 发行版",
+      "wslCodexAccountNeedsExactDistro": "WSL 的 Codex 账号必须填写完全一致的发行版",
+      "claudeLimitsWrongProvider": "Claude 限额的 provider 身份不正确",
+      "codexLimitsWrongProvider": "Codex 限额的 provider 身份不正确",
+      "inactiveClaudeLimitsWrongProvider": "未激活 Claude 账号的限额 provider 身份不正确",
+      "inactiveCodexLimitsWrongProvider": "未激活 Codex 账号的限额 provider 身份不正确"
+    }
   }
 }

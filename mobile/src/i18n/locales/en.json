@@ -1720,5 +1720,17 @@
     "saveFailed": "Failed to save note",
     "deleteFailed": "Failed to delete note",
     "copyFailed": "Couldn't copy notes"
+  },
+  "accounts": {
+    "validation": {
+      "hostRateLimitTargetNamesWsl": "Host rate-limit targets cannot name a WSL distro",
+      "wslRateLimitTargetNeedsExactDistro": "WSL rate-limit targets require an exact distro",
+      "hostCodexAccountNamesWsl": "Host Codex accounts cannot name a WSL distro",
+      "wslCodexAccountNeedsExactDistro": "WSL Codex accounts require an exact distro",
+      "claudeLimitsWrongProvider": "Claude limits use the wrong provider identity",
+      "codexLimitsWrongProvider": "Codex limits use the wrong provider identity",
+      "inactiveClaudeLimitsWrongProvider": "Inactive Claude limits use the wrong provider identity",
+      "inactiveCodexLimitsWrongProvider": "Inactive Codex limits use the wrong provider identity"
+    }
   }
 }

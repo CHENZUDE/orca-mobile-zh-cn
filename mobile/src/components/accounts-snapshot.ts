@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { z } from 'zod'
 
 const TimestampSchema = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER)
@@ -82,7 +83,7 @@ export const RateLimitRuntimeTargetSchema = z
     if (target.runtime === 'host' && target.wslDistro !== null) {
       context.addIssue({
         code: 'custom',
-        message: 'Host rate-limit targets cannot name a WSL distro',
+        message: translate('accounts.validation.hostRateLimitTargetNamesWsl'),
         path: ['wslDistro']
       })
     }
@@ -93,7 +94,7 @@ export const RateLimitRuntimeTargetSchema = z
     ) {
       context.addIssue({
         code: 'custom',
-        message: 'WSL rate-limit targets require an exact distro',
+        message: translate('accounts.validation.wslRateLimitTargetNeedsExactDistro'),
         path: ['wslDistro']
       })
     }
@@ -138,7 +139,7 @@ const CodexAccountSummarySchema = z
     if (runtime === 'host' && account.wslDistro != null) {
       context.addIssue({
         code: 'custom',
-        message: 'Host Codex accounts cannot name a WSL distro',
+        message: translate('accounts.validation.hostCodexAccountNamesWsl'),
         path: ['wslDistro']
       })
     }
@@ -149,7 +150,7 @@ const CodexAccountSummarySchema = z
     ) {
       context.addIssue({
         code: 'custom',
-        message: 'WSL Codex accounts require an exact distro',
+        message: translate('accounts.validation.wslCodexAccountNeedsExactDistro'),
         path: ['wslDistro']
       })
     }
@@ -189,14 +190,14 @@ export const AccountsSnapshotSchema = z
     if (snapshot.rateLimits.claude && snapshot.rateLimits.claude.provider !== 'claude') {
       context.addIssue({
         code: 'custom',
-        message: 'Claude limits use the wrong provider identity',
+        message: translate('accounts.validation.claudeLimitsWrongProvider'),
         path: ['rateLimits', 'claude', 'provider']
       })
     }
     if (snapshot.rateLimits.codex && snapshot.rateLimits.codex.provider !== 'codex') {
       context.addIssue({
         code: 'custom',
-        message: 'Codex limits use the wrong provider identity',
+        message: translate('accounts.validation.codexLimitsWrongProvider'),
         path: ['rateLimits', 'codex', 'provider']
       })
     }
@@ -204,7 +205,7 @@ export const AccountsSnapshotSchema = z
       if (entry.rateLimits && entry.rateLimits.provider !== 'claude') {
         context.addIssue({
           code: 'custom',
-          message: 'Inactive Claude limits use the wrong provider identity',
+          message: translate('accounts.validation.inactiveClaudeLimitsWrongProvider'),
           path: ['rateLimits', 'inactiveClaudeAccounts', index, 'rateLimits', 'provider']
         })
       }
@@ -213,7 +214,7 @@ export const AccountsSnapshotSchema = z
       if (entry.rateLimits && entry.rateLimits.provider !== 'codex') {
         context.addIssue({
           code: 'custom',
-          message: 'Inactive Codex limits use the wrong provider identity',
+          message: translate('accounts.validation.inactiveCodexLimitsWrongProvider'),
           path: ['rateLimits', 'inactiveCodexAccounts', index, 'rateLimits', 'provider']
         })
       }
