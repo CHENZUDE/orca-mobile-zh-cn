@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -25,6 +26,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
     workspaceSparseDraftParsed,
     workspaceSparseSaving
   } = model
+  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && workspaceCreateDraft != null && workspaceSparseDraft != null}
@@ -39,12 +41,14 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
         <View>
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetTitle}>
-              {workspaceSparseDraft.mode === 'new' ? 'New Sparse Preset' : 'Edit Sparse Preset'}
+              {workspaceSparseDraft.mode === 'new'
+                ? t('tasks.sparse.newPreset')
+                : t('tasks.sparse.editPreset')}
             </Text>
           </View>
           <View style={styles.detailGroup}>
             <View style={styles.detailSection}>
-              <Text style={styles.detailSectionTitle}>Name</Text>
+              <Text style={styles.detailSectionTitle}>{t('common.nameLabel')}</Text>
               <TextInput
                 style={styles.input}
                 value={workspaceSparseDraft.name}
@@ -57,7 +61,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               />
             </View>
             <View style={styles.detailSection}>
-              <Text style={styles.detailSectionTitle}>Directories</Text>
+              <Text style={styles.detailSectionTitle}>{t('tasks.sparse.directories')}</Text>
               <TextInput
                 style={[styles.input, styles.bodyInput, styles.monoInput]}
                 value={workspaceSparseDraft.directoriesText}
@@ -75,8 +79,10 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
             <Text style={workspaceSparseDraftError ? styles.detailError : styles.detailMuted}>
               {workspaceSparseDraftError ??
                 (workspaceSparseDraftParsed?.directories.length === 1
-                  ? '1 directory'
-                  : `${workspaceSparseDraftParsed?.directories.length ?? 0} directories`)}
+                  ? t('tasks.sparse.oneDirectory')
+                  : t('tasks.sparse.directoryCount', {
+                      count: workspaceSparseDraftParsed?.directories.length ?? 0
+                    }))}
             </Text>
           </View>
           <View style={styles.drawerActionRow}>
@@ -85,7 +91,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               disabled={workspaceSparseSaving}
               onPress={() => setWorkspaceSparseDraft(null)}
             >
-              <Text style={styles.secondaryActionText}>Cancel</Text>
+              <Text style={styles.secondaryActionText}>{t('common.cancel')}</Text>
             </Pressable>
             <Pressable
               style={[
@@ -98,7 +104,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               {workspaceSparseSaving ? (
                 <ActivityIndicator size="small" color={colors.bgBase} />
               ) : null}
-              <Text style={styles.primaryActionText}>Save</Text>
+              <Text style={styles.primaryActionText}>{t('common.save')}</Text>
             </Pressable>
           </View>
         </View>
@@ -109,6 +115,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
 
 export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationModel) {
   const { createWorkspace, creatingKey, setSetupPrompt, setupPrompt, taskUiReady } = model
+  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && setupPrompt != null}
@@ -118,9 +125,9 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
       {setupPrompt ? (
         <View>
           <View style={styles.sheetHeader}>
-            <Text style={styles.sheetTitle}>Run Setup Script?</Text>
+            <Text style={styles.sheetTitle}>{t('tasks.trust.runSetupTitle')}</Text>
             <Text style={styles.sheetSubtitle}>
-              {setupPrompt.repoName} requires a setup choice before creating this workspace.
+              {t('tasks.trust.runSetupBody', { repo: setupPrompt.repoName })}
             </Text>
           </View>
 
@@ -151,7 +158,9 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
             >
               <Check size={16} color={colors.textPrimary} />
               <Text style={styles.actionText}>
-                {creatingKey === setupPrompt.item.key ? 'Creating...' : 'Run setup and create'}
+                {creatingKey === setupPrompt.item.key
+                  ? t('tasks.trust.creating')
+                  : t('tasks.trust.runSetupAndCreate')}
               </Text>
             </Pressable>
             <View style={styles.actionSeparator} />
@@ -173,7 +182,7 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
               }
             >
               <X size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>Skip setup and create</Text>
+              <Text style={styles.actionText}>{t('tasks.trust.skipSetupAndCreate')}</Text>
             </Pressable>
           </View>
         </View>
@@ -192,6 +201,7 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
     setOrcaYamlTrustPrompt,
     taskUiReady
   } = model
+  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && orcaYamlTrustPrompt != null}
@@ -203,19 +213,20 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetTitle}>
               {orcaYamlTrustPrompt.previouslyApproved
-                ? `${orcaYamlTrustPrompt.repoName}'s setup script changed`
-                : `Run setup from ${orcaYamlTrustPrompt.repoName}?`}
+                ? t('tasks.trust.scriptChanged', { repo: orcaYamlTrustPrompt.repoName })
+                : t('tasks.trust.runSetupFrom', { repo: orcaYamlTrustPrompt.repoName })}
             </Text>
             <Text style={styles.sheetSubtitle}>
-              This repository's orca.yaml runs on your machine before the workspace starts. Only run
-              it if you trust this repository.
+              {t('tasks.trust.scriptBody')}
             </Text>
           </View>
 
           <View style={styles.setupPromptBox}>
             <View style={styles.detailSectionHeader}>
               <Text style={styles.detailSectionTitle}>
-                {orcaYamlTrustPrompt.previouslyApproved ? 'New setup script' : 'Setup script'}
+                {orcaYamlTrustPrompt.previouslyApproved
+                  ? t('tasks.trust.newScript')
+                  : t('tasks.trust.setupScript')}
               </Text>
             </View>
             <Text style={styles.setupPromptCommand}>{orcaYamlTrustPrompt.scriptContent}</Text>
@@ -247,13 +258,13 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
                       orcaYamlTrustPrompt.contentHash
                     )
                   } catch (err) {
-                    setError(err instanceof Error ? err.message : 'Failed to trust setup script.')
+                    setError(err instanceof Error ? err.message : t('tasks.trust.failedToTrust'))
                   }
                 })()
               }
             >
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>Run hooks</Text>
+              <Text style={styles.actionText}>{t('tasks.trust.runHooks')}</Text>
             </Pressable>
             <View style={styles.actionSeparator} />
             <Pressable
@@ -281,13 +292,13 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
                       orcaYamlTrustPrompt.contentHash
                     )
                   } catch (err) {
-                    setError(err instanceof Error ? err.message : 'Failed to trust setup script.')
+                    setError(err instanceof Error ? err.message : t('tasks.trust.failedToTrust'))
                   }
                 })()
               }
             >
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>Always trust and run</Text>
+              <Text style={styles.actionText}>{t('tasks.trust.alwaysTrustAndRun')}</Text>
             </Pressable>
             <View style={styles.actionSeparator} />
             <Pressable
@@ -310,7 +321,7 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
               }}
             >
               <X size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>Don't run</Text>
+              <Text style={styles.actionText}>{t('tasks.trust.dontRun')}</Text>
             </Pressable>
           </View>
         </View>

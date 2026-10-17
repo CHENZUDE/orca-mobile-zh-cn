@@ -763,6 +763,29 @@
       "view": "Project View",
       "unsupportedLayout": "Orca doesn't support this GitHub Project layout yet.",
       "sortTitle": "Project Sort"
+    },
+    "sparse": {
+      "newPreset": "New Sparse Preset",
+      "editPreset": "Edit Sparse Preset",
+      "directories": "Directories",
+      "oneDirectory": "1 directory",
+      "directoryCount": "{{count}} directories"
+    },
+    "trust": {
+      "runSetupTitle": "Run Setup Script?",
+      "runSetupBody": "{{repo}} requires a setup choice before creating this workspace.",
+      "creating": "Creating...",
+      "runSetupAndCreate": "Run setup and create",
+      "skipSetupAndCreate": "Skip setup and create",
+      "scriptChanged": "{{repo}}'s setup script changed",
+      "runSetupFrom": "Run setup from {{repo}}?",
+      "scriptBody": "This repository's orca.yaml runs on your machine before the workspace starts. Only run it if you trust this repository.",
+      "newScript": "New setup script",
+      "setupScript": "Setup script",
+      "failedToTrust": "Failed to trust setup script.",
+      "runHooks": "Run hooks",
+      "alwaysTrustAndRun": "Always trust and run",
+      "dontRun": "Don't run"
     }
   }
 }

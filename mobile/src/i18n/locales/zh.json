@@ -763,6 +763,29 @@
       "view": "项目视图",
       "unsupportedLayout": "Orca 暂不支持该 GitHub 项目布局。",
       "sortTitle": "项目排序"
+    },
+    "sparse": {
+      "newPreset": "新建稀疏检出预设",
+      "editPreset": "编辑稀疏检出预设",
+      "directories": "目录",
+      "oneDirectory": "1 个目录",
+      "directoryCount": "{{count}} 个目录"
+    },
+    "trust": {
+      "runSetupTitle": "运行安装脚本？",
+      "runSetupBody": "创建工作区前，{{repo}} 需要先选择安装方式。",
+      "creating": "创建中...",
+      "runSetupAndCreate": "运行安装并创建",
+      "skipSetupAndCreate": "跳过安装并创建",
+      "scriptChanged": "{{repo}} 的安装脚本已变更",
+      "runSetupFrom": "要运行 {{repo}} 的安装脚本吗？",
+      "scriptBody": "该仓库的 orca.yaml 会在工作区启动前在你的机器上执行。只有信任该仓库时才运行它。",
+      "newScript": "新的安装脚本",
+      "setupScript": "安装脚本",
+      "failedToTrust": "信任安装脚本失败。",
+      "runHooks": "运行钩子",
+      "alwaysTrustAndRun": "始终信任并运行",
+      "dontRun": "不运行"
     }
   }
 }
