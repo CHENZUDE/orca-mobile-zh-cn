@@ -51,14 +51,14 @@ export function MobileSourceControlHeader({
           onPress={onBack}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel="Back to session"
+          accessibilityLabel={t('sourceControl.backToSession')}
         >
           <ChevronLeft size={22} color={colors.textSecondary} strokeWidth={2.2} />
         </Pressable>
       )}
       <View style={styles.titleBlock}>
         <Text style={styles.title} numberOfLines={1}>
-          Source Control
+          {t('sourceControl.title')}
         </Text>
         <Text style={styles.meta} numberOfLines={1}>
           {worktreeLabel}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, TextInput, Pressable } from 'react-native'
 import { MessageSquare, Plus, X } from 'lucide-react-native'
 import { MobileSyntaxSegments } from '../components/MobileSyntaxSegments'
@@ -33,6 +34,8 @@ export function DiffLineRow({
   onSubmitComment: (lineNumber: number) => void
   onDeleteComment: (commentId: string) => void
 }) {
+  const { t } = useTranslation()
+
   const commentLine = line.newLineNumber
   const isCommenting = commentLine !== undefined && activeCommentLine === commentLine
   const canComment = commentLine !== undefined
@@ -110,7 +113,7 @@ export function DiffLineRow({
             style={[styles.textInput, styles.diffCommentInput]}
             value={commentDraft}
             onChangeText={onDraftChange}
-            placeholder="Add review note"
+            placeholder={t('diffReview.addReviewNote')}
             placeholderTextColor={colors.textMuted}
             editable={!commentsBusy}
             multiline
@@ -137,7 +140,7 @@ export function DiffLineRow({
                 }
               }}
             >
-              <Text style={styles.diffCommentPrimaryText}>Save note</Text>
+              <Text style={styles.diffCommentPrimaryText}>{t('diffReview.saveNote')}</Text>
             </Pressable>
           </View>
         </View>

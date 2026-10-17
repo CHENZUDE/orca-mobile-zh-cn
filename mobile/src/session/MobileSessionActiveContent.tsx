@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Animated, View, Text, Pressable, ActivityIndicator } from 'react-native'
 import { saveTerminalTextScale } from '../storage/preferences'
 import { MobileBrowserPane } from '../browser/MobileBrowserPane'
@@ -14,6 +15,8 @@ export function MobileSessionActiveContent({
 }: {
   controller: MobileSessionController
 }) {
+  const { t } = useTranslation()
+
   const {
     worktreeId,
     insets,
@@ -87,7 +90,7 @@ export function MobileSessionActiveContent({
     </View>
   ) : showEmptyState ? (
     <View style={styles.emptyState}>
-      <Text style={styles.emptyText}>No tabs in this session</Text>
+      <Text style={styles.emptyText}>{t('session.noTabsInSession')}</Text>
       {createError ? <Text style={styles.createError}>{createError}</Text> : null}
       <View style={styles.emptyActions}>
         <Pressable
@@ -185,7 +188,7 @@ export function MobileSessionActiveContent({
       {isPendingTerminalRecoveryParked && (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Retry loading terminal"
+          accessibilityLabel={t('session.retryLoadingTerminal')}
           style={({ pressed }) => [styles.createButton, pressed && styles.newTerminalButtonPressed]}
           onPress={() => void retryPendingTerminalRecovery()}
         >

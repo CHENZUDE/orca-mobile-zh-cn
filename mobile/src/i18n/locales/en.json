@@ -977,7 +977,9 @@
       "merge": "Merge",
       "mergeRequest": "Merge Request",
       "mergePullRequest": "Merge Pull Request"
-    }
+    },
+    "subIssueDataUnavailable": "Sub-issue data is unavailable for your token.",
+    "mergeMethod": "Merge method"
   },
   "prChecks": {
     "noDetails": "No details available.",
@@ -1155,7 +1157,10 @@
     "header": {
       "openPrSidebar": "Open pull request sidebar",
       "openReviewActions": "Open review actions"
-    }
+    },
+    "truncatedForMobilePreview": "Diff truncated for mobile preview.",
+    "addReviewNote": "Add review note",
+    "saveNote": "Save note"
   },
   "hostScreen": {
     "sortBy": "Sort By",
@@ -1315,7 +1320,9 @@
       "typedTextSentToTerminal": "Typed text is sent directly to the active terminal",
       "typeACommand": "Type a command…",
       "sendCommand": "Send command"
-    }
+    },
+    "noTabsInSession": "No tabs in this session",
+    "retryLoadingTerminal": "Retry loading terminal"
   },
   "prSidebar": {
     "pullRequest": "Pull request",
@@ -1346,7 +1353,8 @@
     "closePullRequest": "Close pull request",
     "unlinkPullRequest": "Unlink pull request",
     "unlink": "Unlink",
-    "failedToUnlinkPullRequest": "Failed to unlink pull request."
+    "failedToUnlinkPullRequest": "Failed to unlink pull request.",
+    "retryLoadingPr": "Retry loading pull request"
   },
   "taskOptions": {
     "provider": {
@@ -1427,7 +1435,8 @@
     "switchBranch": "Switch Branch",
     "pullRequestCreated": "Pull Request Created",
     "openPrInBrowser": "Open it in your browser?",
-    "openPrInBrowserWithWarning": "Open it in your browser?\\n\\n{{warning}}"
+    "openPrInBrowserWithWarning": "Open it in your browser?\\n\\n{{warning}}",
+    "backToSession": "Back to session"
   },
   "nativeChat": {
     "visualUnavailable": "Visualization unavailable",
@@ -1478,7 +1487,10 @@
   },
   "htmlPreview": {
     "previewRendered": "Preview rendered HTML",
-    "viewSource": "View HTML source"
+    "viewSource": "View HTML source",
+    "previewRenderedHtml": "Preview rendered HTML",
+    "viewHtmlSource": "View HTML source",
+    "title": "HTML preview"
   },
   "agentState": {
     "monitoringBackgroundTasks": "Monitoring background tasks",
@@ -1523,5 +1535,41 @@
   "authFailedBanner": {
     "repair": "Re-pair",
     "repairNote": "Reconnect or remove this host from the Orca app."
+  },
+  "browserPane": {
+    "dialogTitle": "Browser Dialog",
+    "sendTextToBrowser": "Send text to browser"
+  },
+  "markdownPreview": {
+    "viewMarkdownSource": "View Markdown source",
+    "viewRenderedPreview": "View rendered Markdown preview"
+  },
+  "linkPr": {
+    "linkExisting": "Link existing pull request",
+    "numberOrUrl": "PR number or GitHub URL"
+  },
+  "nativeChatPermission": {
+    "needsAccessTo": "Needs access to:",
+    "needsNewerVersion": "This request needs a newer version of Orca."
+  },
+  "nativeChatQuestion": {
+    "submitSelectedOptions": "Submit selected options",
+    "sendReply": "Send reply"
+  },
+  "nativeChatToolRun": {
+    "showMore": "Show more",
+    "showLess": "Show less"
+  },
+  "fileReader": {
+    "copyReviewNotes": "Copy review notes",
+    "sendReviewNotesToAi": "Send review notes to AI"
+  },
+  "commitFailure": {
+    "title": "Commit failed",
+    "fixWithAi": "Fix commit failure with AI"
+  },
+  "prFileDiff": {
+    "noTextChanges": "No text changes found.",
+    "addReviewComment": "Add review comment"
   }
 }

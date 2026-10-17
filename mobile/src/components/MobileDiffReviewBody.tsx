@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native'
 import { RefreshCw } from 'lucide-react-native'
 import type { RefObject } from 'react'
@@ -40,6 +41,7 @@ export function MobileDiffReviewBody({
   onEditNote,
   onRetry
 }: Props) {
+  const { t } = useTranslation()
   if (screenState.kind === 'loading') {
     return <CenteredState text={translate('diffReview.body.loadingReview')} busy />
   }
@@ -101,7 +103,7 @@ export function MobileDiffReviewBody({
       }}
       ListFooterComponent={
         diffState.truncated ? (
-          <Text style={styles.truncatedText}>Diff truncated for mobile preview.</Text>
+          <Text style={styles.truncatedText}>{t('diffReview.truncatedForMobilePreview')}</Text>
         ) : null
       }
     />

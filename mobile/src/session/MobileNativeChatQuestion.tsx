@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useRef, useState } from 'react'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { ArrowUp, Check, CircleHelp } from 'lucide-react-native'
@@ -29,6 +30,7 @@ export function MobileNativeChatQuestion({
   onCancel,
   onCollapse
 }: Props): React.JSX.Element {
+  const { t } = useTranslation()
   const [selectedOptionIndexes, setSelectedOptionIndexes] = useState<number[]>([])
   const [freeText, setFreeText] = useState(() => question.freeTextInput?.initialValue ?? '')
   const [sending, setSending] = useState(false)
@@ -158,7 +160,7 @@ export function MobileNativeChatQuestion({
 
       {question.multiSelect && hasOptions ? (
         <Pressable
-          accessibilityLabel="Submit selected options"
+          accessibilityLabel={t('nativeChatQuestion.submitSelectedOptions')}
           style={({ pressed }) => [
             styles.submit,
             !canSubmitMulti && styles.submitDisabled,
@@ -191,7 +193,7 @@ export function MobileNativeChatQuestion({
             multiline={question.freeTextInput ? question.freeTextInput.multiline === true : true}
           />
           <Pressable
-            accessibilityLabel="Send reply"
+            accessibilityLabel={t('nativeChatQuestion.sendReply')}
             style={({ pressed }) => [
               styles.freeSend,
               !canSendFreeText && styles.freeSendDisabled,

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { MobileFileMediaPreview } from '../files/MobileFileMediaPreview'
 import type { MobileFilePreviewRpcSender } from '../files/mobile-file-preview-operations'
 import { useState, useEffect, useCallback, useMemo } from 'react'
@@ -50,6 +51,7 @@ export function FileReader({
   language?: string
   diffCommentActions?: DiffCommentActions
 }) {
+  const { t } = useTranslation()
   const syntaxLanguage = useMemo(
     () => resolveMobileSyntaxLanguage(relativePath || title, language),
     [language, relativePath, title]
@@ -218,7 +220,7 @@ export function FileReader({
                 ]}
                 disabled={!canCopyNotes}
                 onPress={() => void diffCommentActions.onCopyAll()}
-                accessibilityLabel="Copy review notes"
+                accessibilityLabel={t('fileReader.copyReviewNotes')}
               >
                 <Copy size={13} color={colors.textSecondary} strokeWidth={2.2} />
                 <Text style={styles.diffNotesActionText}>Copy</Text>
@@ -230,7 +232,7 @@ export function FileReader({
                 ]}
                 disabled={!canSendNotes}
                 onPress={diffCommentActions.onSendAll}
-                accessibilityLabel="Send review notes to AI"
+                accessibilityLabel={t('fileReader.sendReviewNotesToAi')}
               >
                 <Send size={13} color={colors.textSecondary} strokeWidth={2.2} />
                 <Text style={styles.diffNotesActionText}>Send</Text>

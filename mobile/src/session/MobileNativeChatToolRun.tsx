@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Animated, Pressable, Text, View } from 'react-native'
 import { ChevronDown, SquareChevronRight, SquareTerminal, Wrench } from 'lucide-react-native'
@@ -183,6 +184,7 @@ export function ToolRun({
   activeCall: ReturnType<typeof selectActiveToolCall>
   onOpenFile?: (relativePath: string) => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(defaultExpanded)
   const [visibleCount, setVisibleCount] = useState(TOOL_PAIR_REVEAL_PAGE)
   const pairs = useMemo(
@@ -261,7 +263,7 @@ export function ToolRun({
               onPress={() => setVisibleCount((count) => count + TOOL_PAIR_REVEAL_PAGE)}
               hitSlop={6}
             >
-              <Text style={styles.toolPreview}>Show more</Text>
+              <Text style={styles.toolPreview}>{t('nativeChatToolRun.showMore')}</Text>
             </Pressable>
           ) : null}
           {visiblePairs.length > TOOL_PAIR_REVEAL_PAGE ? (
@@ -272,7 +274,7 @@ export function ToolRun({
               onPress={() => setVisibleCount(TOOL_PAIR_REVEAL_PAGE)}
               hitSlop={6}
             >
-              <Text style={styles.toolPreview}>Show less</Text>
+              <Text style={styles.toolPreview}>{t('nativeChatToolRun.showLess')}</Text>
             </Pressable>
           ) : null}
         </View>

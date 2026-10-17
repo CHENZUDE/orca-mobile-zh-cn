@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   SafeAreaView,
@@ -78,6 +79,8 @@ import {
 import { renderMobileTasksItemDetailDrawer } from './mobile-tasks-item-detail-drawer'
 
 export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentationModel }) {
+  const { t } = useTranslation()
+
   const {
     error,
     githubMode,
@@ -172,7 +175,7 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
         <View style={styles.projectDataNotice}>
           <AlertTriangle size={15} color={colors.statusAmber} />
           <Text style={styles.projectDataNoticeText}>
-            Sub-issue data is unavailable for your token.
+            {t('tasks.subIssueDataUnavailable')}
           </Text>
         </View>
       ) : null}
@@ -270,7 +273,7 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
       />
       <ActionSheetModal
         visible={taskUiReady && mergeMethodTaskItem != null}
-        title="Merge method"
+        title={t('tasks.mergeMethod')}
         message={
           mergeMethodTaskItem?.provider === 'gitlab'
             ? translate('tasks.legacy.chooseHowMergeRequestMerged')

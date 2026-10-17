@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 import { Code, Pencil } from 'lucide-react-native'
@@ -25,6 +26,7 @@ export function MobileFileMarkdownPreview({
   byteLength,
   initialLine
 }: Props) {
+  const { t } = useTranslation()
   const [mode, setMode] = useState<'preview' | 'source'>(() => (initialLine ? 'source' : 'preview'))
   const [previousRelativePath, setPreviousRelativePath] = useState(relativePath)
   const [previousInitialLine, setPreviousInitialLine] = useState(initialLine)
@@ -46,7 +48,7 @@ export function MobileFileMarkdownPreview({
           onPress={() => setMode('source')}
           accessibilityRole="button"
           accessibilityState={{ selected: sourceSelected }}
-          accessibilityLabel="View Markdown source"
+          accessibilityLabel={t('markdownPreview.viewMarkdownSource')}
         >
           <Code
             size={15}
@@ -59,7 +61,7 @@ export function MobileFileMarkdownPreview({
           onPress={() => setMode('preview')}
           accessibilityRole="button"
           accessibilityState={{ selected: previewSelected }}
-          accessibilityLabel="View rendered Markdown preview"
+          accessibilityLabel={t('markdownPreview.viewRenderedPreview')}
         >
           <Pencil
             size={15}

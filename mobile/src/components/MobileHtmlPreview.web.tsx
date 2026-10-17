@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Code, Eye } from 'lucide-react-native'
@@ -69,6 +70,7 @@ export const MOBILE_HTML_PREVIEW_SEALED_SANDBOX = ''
  * frame's image despite the attribute, where Chromium sends none.
  */
 export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps) {
+  const { t } = useTranslation()
   const [mode, setMode] = useState<'preview' | 'source'>('preview')
   // The shell's answer for this session, asked once: the page mounts after `init` and a session's
   // grants do not change for the life of the document.
@@ -93,7 +95,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           // no `aria-selected` without the line below.
           accessibilityState={{ selected: mode === 'preview' }}
           aria-selected={mode === 'preview'}
-          accessibilityLabel="Preview rendered HTML"
+          accessibilityLabel={t('htmlPreview.previewRenderedHtml')}
         >
           <Eye size={13} color={colors.textSecondary} strokeWidth={2.2} />
           <Text style={styles.toggleText}>Preview</Text>
@@ -104,7 +106,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityRole="tab"
           accessibilityState={{ selected: mode === 'source' }}
           aria-selected={mode === 'source'}
-          accessibilityLabel="View HTML source"
+          accessibilityLabel={t('htmlPreview.viewHtmlSource')}
         >
           <Code size={13} color={colors.textSecondary} strokeWidth={2.2} />
           <Text style={styles.toggleText}>Source</Text>
@@ -126,10 +128,11 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
  * the browser parses it inside a frame that can run nothing.
  */
 function PreviewFrame({ html, linksOpen }: { html: string; linksOpen: boolean }) {
+  const { t } = useTranslation()
   return (
     <View style={styles.frame}>
       <iframe
-        title="HTML preview"
+        title={t('htmlPreview.title')}
         sandbox={linksOpen ? MOBILE_HTML_PREVIEW_SANDBOX : MOBILE_HTML_PREVIEW_SEALED_SANDBOX}
         srcDoc={html}
         style={IFRAME_STYLE}

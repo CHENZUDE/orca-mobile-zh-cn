@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronDown, ChevronRight, Sparkles } from 'lucide-react-native'
@@ -13,6 +14,8 @@ type Props = {
 }
 
 export function MobileCommitFailurePanel({ failure, action }: Props) {
+  const { t } = useTranslation()
+
   const [expanded, setExpanded] = useState(false)
   const Chevron = expanded ? ChevronDown : ChevronRight
   const detailsText = failure.error.trim()
@@ -21,7 +24,7 @@ export function MobileCommitFailurePanel({ failure, action }: Props) {
     <View style={styles.commitFailurePanel}>
       <View style={styles.commitFailureHeader}>
         <View style={styles.commitFailureTextBlock}>
-          <Text style={styles.commitFailureTitle}>Commit failed</Text>
+          <Text style={styles.commitFailureTitle}>{t('commitFailure.title')}</Text>
           <Text style={styles.commitFailureSummary} numberOfLines={2}>
             {action.summary ?? 'Commit failed.'}
           </Text>
@@ -36,7 +39,7 @@ export function MobileCommitFailurePanel({ failure, action }: Props) {
           onPress={() => void action.launch()}
           disabled={action.launching || action.availability !== 'available'}
           accessibilityRole="button"
-          accessibilityLabel="Fix commit failure with AI"
+          accessibilityLabel={t('commitFailure.fixWithAi')}
         >
           {action.launching ? (
             <ActivityIndicator color={colors.bgBase} />

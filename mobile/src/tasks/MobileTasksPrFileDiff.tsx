@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   type GitHubPrFileDiffLine,
   type ReactNode,
@@ -45,6 +46,7 @@ export function GitHubPrFileDiff({
   onCommentDraftChange: (key: string, value: string) => void
   onSubmitComment: (line: number) => void
 }): ReactNode {
+  const { t } = useTranslation()
   const diffPreview = useMemo(
     () =>
       buildGitHubPrFileDiffPreview(
@@ -62,7 +64,7 @@ export function GitHubPrFileDiff({
   const hiddenDiffLineCount = Math.max(0, diffPreview.totalLineCount - visibleDiffLines.length)
 
   if (diffPreview.totalLineCount === 0) {
-    return <Text style={styles.detailMuted}>No text changes found.</Text>
+    return <Text style={styles.detailMuted}>{t('prFileDiff.noTextChanges')}</Text>
   }
 
   return (
@@ -113,7 +115,7 @@ export function GitHubPrFileDiff({
                   style={[styles.input, styles.replyInput]}
                   value={commentDrafts[draftKey] ?? ''}
                   onChangeText={(next) => onCommentDraftChange(draftKey, next)}
-                  placeholder="Add review comment"
+                  placeholder={t('prFileDiff.addReviewComment')}
                   placeholderTextColor={colors.textMuted}
                   multiline
                   textAlignVertical="top"

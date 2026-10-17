@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useRef, useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { ShieldQuestion } from 'lucide-react-native'
@@ -98,6 +99,7 @@ function MobileNativeChatPermissionContext({
   permission: MobileChatPermission
   newerSubject: boolean
 }): React.JSX.Element | null {
+  const { t } = useTranslation()
   const neededPath = approvalBlockedPathToShow(permission)
   if (
     !permission.description &&
@@ -124,7 +126,7 @@ function MobileNativeChatPermissionContext({
       ) : null}
       {neededPath ? (
         <Text style={styles.detail}>
-          <Text style={styles.contextLabel}>Needs access to: </Text>
+          <Text style={styles.contextLabel}>{t('nativeChatPermission.needsAccessTo')}</Text>
           {neededPath}
         </Text>
       ) : null}
@@ -140,7 +142,7 @@ function MobileNativeChatPermissionContext({
       ) : null}
       {newerSubject ? (
         <Text testID="native-chat-approval-needs-newer-orca" style={styles.detail}>
-          This request needs a newer version of Orca.
+          {t('nativeChatPermission.needsNewerVersion')}
         </Text>
       ) : null}
     </ScrollView>

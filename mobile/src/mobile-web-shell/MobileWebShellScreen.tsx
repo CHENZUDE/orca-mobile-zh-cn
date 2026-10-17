@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState, type ReactNode } from 'react'
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation, useRouter } from 'expo-router'
@@ -83,6 +84,8 @@ function Failed({
   state: Extract<MobileWebShellSessionState, { kind: 'failed' }>
   onRetry: () => void
 }) {
+  const { t } = useTranslation()
+
   // No retry for the fence, and none for an unread status: a device whose WebView cannot be
   // isolated will not grow one on a tap, and a retry re-reads the same settled gate it already has.
   const retryable = state.reason !== 'isolation-unavailable' && state.reason !== 'status-unreadable'
@@ -97,7 +100,7 @@ function Failed({
           testID="mobile-web-shell-retry"
           onPress={onRetry}
         >
-          <Text style={styles.retryLabel}>Try again</Text>
+          <Text style={styles.retryLabel}>{t('common.tryAgain')}</Text>
         </Pressable>
       ) : null}
     </Centered>

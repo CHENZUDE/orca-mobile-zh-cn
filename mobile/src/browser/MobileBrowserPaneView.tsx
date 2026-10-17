@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { Dispatch, RefObject, SetStateAction } from 'react'
 import {
   ActivityIndicator,
@@ -84,6 +85,8 @@ type MobileBrowserPaneViewProps = {
  * exists to keep from happening.
  */
 export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
+  const { t } = useTranslation()
+
   const {
     addressFocused,
     addressValue,
@@ -259,7 +262,7 @@ export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
         {dialog ? (
           <View style={styles.dialogOverlay}>
             <View style={styles.dialogCard}>
-              <Text style={styles.dialogTitle}>Browser Dialog</Text>
+              <Text style={styles.dialogTitle}>{t('browserPane.dialogTitle')}</Text>
               <Text style={styles.dialogMessage}>{dialog.message}</Text>
               {/* The page is still blocked, so the buttons stay live and the card says why. */}
               {dialog.error ? <Text style={styles.dialogError}>{dialog.error}</Text> : null}
@@ -326,7 +329,7 @@ export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
             style={[styles.sendButton, (controlsDisabled || !keyboardValue) && styles.disabled]}
             disabled={controlsDisabled || !keyboardValue}
             onPress={() => void sendKeyboardText()}
-            accessibilityLabel="Send text to browser"
+            accessibilityLabel={t('browserPane.sendTextToBrowser')}
           >
             <ArrowUp size={18} color={buttonColor(!controlsDisabled && !!keyboardValue)} />
           </Pressable>

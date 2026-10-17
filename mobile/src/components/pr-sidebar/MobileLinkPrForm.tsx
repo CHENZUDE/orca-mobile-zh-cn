@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useState } from 'react'
 import { ActivityIndicator, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { colors, radii, spacing, typography } from '../../theme/mobile-theme'
@@ -18,6 +19,8 @@ type Props = {
 // it can sit inline inside the PR sidebar's ScrollView, mirroring the compose
 // form fix — a BottomDrawer overlay nested in a ScrollView gets clipped.
 export function MobileLinkPrForm({ client, worktreeId, onCancel, onLinked }: Props) {
+  const { t } = useTranslation()
+
   const [input, setInput] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -47,7 +50,7 @@ export function MobileLinkPrForm({ client, worktreeId, onCancel, onLinked }: Pro
   return (
     <View>
       <View style={styles.headingRow}>
-        <Text style={styles.heading}>Link existing pull request</Text>
+        <Text style={styles.heading}>{t('linkPr.linkExisting')}</Text>
         <Pressable
           onPress={onCancel}
           disabled={submitting}
@@ -58,7 +61,7 @@ export function MobileLinkPrForm({ client, worktreeId, onCancel, onLinked }: Pro
           <Text style={styles.cancelText}>Cancel</Text>
         </Pressable>
       </View>
-      <Text style={styles.label}>PR number or GitHub URL</Text>
+      <Text style={styles.label}>{t('linkPr.numberOrUrl')}</Text>
       <TextInput
         style={styles.input}
         value={input}

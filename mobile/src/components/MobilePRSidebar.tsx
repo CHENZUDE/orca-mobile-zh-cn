@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native'
 import { RotateCw } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
@@ -179,6 +180,8 @@ function PrSidebarContent({
   showOpenOnWeb: boolean
   botAuthorOverrides: ReadonlySet<string>
 }) {
+  const { t } = useTranslation()
+
   if (branch === 'loading') {
     return (
       <View style={styles.stateArea}>
@@ -188,7 +191,7 @@ function PrSidebarContent({
     )
   }
   if (branch === 'error') {
-    const message = state.kind === 'error' ? state.message : 'Something went wrong.'
+    const message = state.kind === 'error' ? state.message : t('common.somethingWentWrong')
     return (
       <View style={styles.stateArea}>
         <Text style={styles.stateText}>{message}</Text>
@@ -196,7 +199,7 @@ function PrSidebarContent({
           style={styles.retryButton}
           onPress={onRetry}
           accessibilityRole="button"
-          accessibilityLabel="Retry loading pull request"
+          accessibilityLabel={t('prSidebar.retryLoadingPr')}
         >
           <RotateCw size={14} color={colors.textPrimary} strokeWidth={2.2} />
           <Text style={styles.retryText}>Retry</Text>

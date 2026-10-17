@@ -977,7 +977,9 @@
       "merge": "合并",
       "mergeRequest": "合并请求",
       "mergePullRequest": "合并拥提请求"
-    }
+    },
+    "subIssueDataUnavailable": "当前令牌无法获取子任务数据。",
+    "mergeMethod": "合并方式"
   },
   "prChecks": {
     "noDetails": "暂无详细信息。",
@@ -1155,7 +1157,10 @@
     "header": {
       "openPrSidebar": "打开拥提请求侧栏",
       "openReviewActions": "打开审阅操作"
-    }
+    },
+    "truncatedForMobilePreview": "差异内容过长，已在移动端截断预览。",
+    "addReviewNote": "添加评审备注",
+    "saveNote": "保存备注"
   },
   "hostScreen": {
     "sortBy": "排序方式",
@@ -1315,7 +1320,9 @@
       "typedTextSentToTerminal": "输入的内容会直接发送到当前终端",
       "typeACommand": "输入命令…",
       "sendCommand": "发送命令"
-    }
+    },
+    "noTabsInSession": "此会话中没有标签页",
+    "retryLoadingTerminal": "重试加载终端"
   },
   "prSidebar": {
     "pullRequest": "拥提请求",
@@ -1346,7 +1353,8 @@
     "closePullRequest": "关闭拥提请求",
     "unlinkPullRequest": "取消关联拥提请求",
     "unlink": "取消关联",
-    "failedToUnlinkPullRequest": "取消关联拥提请求失败。"
+    "failedToUnlinkPullRequest": "取消关联拥提请求失败。",
+    "retryLoadingPr": "重试加载 Pull Request"
   },
   "taskOptions": {
     "provider": {
@@ -1421,13 +1429,14 @@
   "sourceControl": {
     "closeSourceControl": "关闭源代码管理",
     "refreshSourceControl": "刷新源代码管理",
-    "title": "源代码管理",
+    "title": "源码管理",
     "discardChange": "丢弃更改",
     "discardChangesMessage": "确定要丢彨 \"{{path}}\" 的更改吗？此操作无法撤销。",
     "switchBranch": "切换分支",
     "pullRequestCreated": "拥提请求已创建",
     "openPrInBrowser": "要在浏览器中打开吗？",
-    "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}"
+    "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}",
+    "backToSession": "返回会话"
   },
   "nativeChat": {
     "visualUnavailable": "无法显示可视化图表",
@@ -1478,7 +1487,10 @@
   },
   "htmlPreview": {
     "previewRendered": "预览渲染后的 HTML",
-    "viewSource": "查看 HTML 源代码"
+    "viewSource": "查看 HTML 源代码",
+    "previewRenderedHtml": "预览渲染后的 HTML",
+    "viewHtmlSource": "查看 HTML 源码",
+    "title": "HTML 预览"
   },
   "agentState": {
     "monitoringBackgroundTasks": "正在监视后台任务",
@@ -1523,5 +1535,41 @@
   "authFailedBanner": {
     "repair": "重新配对",
     "repairNote": "请在 Orca 桌面端应用中重新连接或移除此主机。"
+  },
+  "browserPane": {
+    "dialogTitle": "浏览器对话框",
+    "sendTextToBrowser": "向浏览器发送文本"
+  },
+  "markdownPreview": {
+    "viewMarkdownSource": "查看 Markdown 源码",
+    "viewRenderedPreview": "查看渲染后的 Markdown 预览"
+  },
+  "linkPr": {
+    "linkExisting": "关联已有 Pull Request",
+    "numberOrUrl": "PR 编号或 GitHub 链接"
+  },
+  "nativeChatPermission": {
+    "needsAccessTo": "需要访问：",
+    "needsNewerVersion": "此请求需要更新版本的 Orca。"
+  },
+  "nativeChatQuestion": {
+    "submitSelectedOptions": "提交所选选项",
+    "sendReply": "发送回复"
+  },
+  "nativeChatToolRun": {
+    "showMore": "展开更多",
+    "showLess": "收起"
+  },
+  "fileReader": {
+    "copyReviewNotes": "复制评审备注",
+    "sendReviewNotesToAi": "将评审备注发送给 AI"
+  },
+  "commitFailure": {
+    "title": "提交失败",
+    "fixWithAi": "让 AI 修复提交失败"
+  },
+  "prFileDiff": {
+    "noTextChanges": "没有发现文本改动。",
+    "addReviewComment": "添加评审评论"
   }
 }
