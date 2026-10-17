@@ -1471,7 +1471,8 @@
     "scrollToLatest": "Scroll to latest",
     "selectText": "Select text",
     "opensImageFullSize": "Opens the image full size",
-    "copyMessage": "Copy message"
+    "copyMessage": "Copy message",
+    "loadEarlierMessages": "Load earlier messages"
   },
   "prReviewers": {
     "title": "Reviewers",

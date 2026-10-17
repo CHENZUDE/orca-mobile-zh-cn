@@ -1471,7 +1471,8 @@
     "scrollToLatest": "滚动到最新",
     "selectText": "选择文本",
     "opensImageFullSize": "以全尺寸打开图片",
-    "copyMessage": "复制消息"
+    "copyMessage": "复制消息",
+    "loadEarlierMessages": "加载更早的消息"
   },
   "prReviewers": {
     "title": "审阅人",
