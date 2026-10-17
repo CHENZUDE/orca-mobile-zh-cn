@@ -1405,6 +1405,11 @@
   },
   "nativeChat": {
     "visualUnavailable": "Visualization unavailable",
-    "visualRetryHint": "Tries to load it again"
+    "visualRetryHint": "Tries to load it again",
+    "removeImage": "Remove image",
+    "attachImage": "Attach image",
+    "stopDictation": "Stop dictation",
+    "dictate": "Dictate",
+    "sendMessage": "Send message"
   }
 }

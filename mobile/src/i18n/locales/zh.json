@@ -1405,6 +1405,11 @@
   },
   "nativeChat": {
     "visualUnavailable": "无法显示可视化图表",
-    "visualRetryHint": "点击重试加载"
+    "visualRetryHint": "点击重试加载",
+    "removeImage": "移除图片",
+    "attachImage": "添加图片",
+    "stopDictation": "停止语音输入",
+    "dictate": "语音输入",
+    "sendMessage": "发送消息"
   }
 }
