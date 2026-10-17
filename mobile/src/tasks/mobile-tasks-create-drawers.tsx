@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -45,6 +46,7 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
     showCreateTask,
     taskUiReady
   } = model
+  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && showCreateTask}
@@ -56,18 +58,20 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
       <View style={styles.sheetHeader}>
         <View style={styles.sheetTitleRow}>
           <TaskProviderLogo provider={provider} size={16} color={colors.textPrimary} />
-          <Text style={styles.sheetTitle}>New {providerLabel} Issue</Text>
+          <Text style={styles.sheetTitle}>{t('tasks.create.newIssue', { provider: providerLabel })}</Text>
         </View>
         <Text style={styles.sheetSubtitle}>
           {provider === 'github' || provider === 'gitlab'
-            ? 'Create an issue in the selected repository.'
-            : 'Create an issue in the selected Linear team.'}
+            ? t('tasks.create.inRepository')
+            : t('tasks.create.inTeam')}
         </Text>
       </View>
 
       <View style={styles.createForm}>
         <Text style={styles.fieldLabel}>
-          {provider === 'github' || provider === 'gitlab' ? 'Repository' : 'Team'}
+          {provider === 'github' || provider === 'gitlab'
+            ? t('tasks.create.repository')
+            : t('tasks.create.team')}
         </Text>
         <Pressable
           style={styles.targetButton}
@@ -104,9 +108,9 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
         selectedCreateRepo &&
         hasGitHubIssueSourceChoice(selectedCreateGitHubSources) ? (
           <View style={styles.issueSourceBox}>
-            <Text style={styles.fieldLabel}>Issue source</Text>
+            <Text style={styles.fieldLabel}>{t('tasks.create.issueSource')}</Text>
             <Text style={styles.issueSourceHint} numberOfLines={2}>
-              File in{' '}
+              {t('tasks.create.fileIn')}{' '}
               {selectedCreateIssuePreference === 'origin'
                 ? issueSourceSlug(selectedCreateGitHubSources?.prs)
                 : issueSourceSlug(selectedCreateGitHubSources?.upstreamCandidate)}
@@ -136,7 +140,7 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
                         selected && styles.issueSourceSegmentTextActive
                       ]}
                     >
-                      {preference === 'upstream' ? 'Upstream' : 'Origin'}
+                      {preference === 'upstream' ? t('tasks.create.upstream') : t('tasks.create.origin')}
                     </Text>
                     <Text style={styles.issueSourceSlug} numberOfLines={1}>
                       {slug}
@@ -148,23 +152,23 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
           </View>
         ) : null}
 
-        <Text style={styles.fieldLabel}>Title</Text>
+        <Text style={styles.fieldLabel}>{t('tasks.create.title')}</Text>
         <TextInput
           style={styles.input}
           value={createTitle}
           onChangeText={setCreateTitle}
-          placeholder="Task title"
+          placeholder={t('tasks.create.titlePlaceholder')}
           placeholderTextColor={colors.textMuted}
           autoCapitalize="sentences"
           returnKeyType="next"
         />
 
-        <Text style={styles.fieldLabel}>Description</Text>
+        <Text style={styles.fieldLabel}>{t('tasks.detail.description')}</Text>
         <TextInput
           style={[styles.input, styles.bodyInput]}
           value={createBody}
           onChangeText={setCreateBody}
-          placeholder="Add context"
+          placeholder={t('tasks.create.contextPlaceholder')}
           placeholderTextColor={colors.textMuted}
           multiline
           textAlignVertical="top"
@@ -181,7 +185,7 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
           {creatingTask ? (
             <ActivityIndicator size="small" color={colors.bgBase} />
           ) : (
-            <Text style={styles.createButtonText}>Create Issue</Text>
+            <Text style={styles.createButtonText}>{t('tasks.create.createIssue')}</Text>
           )}
         </Pressable>
       </View>
@@ -201,10 +205,11 @@ export function renderMobileTasksCreateTargetPicker(model: ConnectionPresentatio
     showCreateTask,
     taskUiReady
   } = model
+  const { t } = useTranslation()
   return (
     <PickerModal
       visible={taskUiReady && showCreateTask && showCreateTargetPicker}
-      title={provider === 'linear' ? 'Linear Team' : 'Repository'}
+      title={provider === 'linear' ? t('tasks.create.linearTeam') : t('tasks.create.repository')}
       options={createTargetOptions}
       selected={
         provider === 'github' || provider === 'gitlab'
@@ -236,6 +241,7 @@ export function renderMobileTasksLinearConnectDrawer(model: ConnectionPresentati
     showLinearConnect,
     taskUiReady
   } = model
+  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && showLinearConnect}
@@ -248,14 +254,14 @@ export function renderMobileTasksLinearConnectDrawer(model: ConnectionPresentati
       <View style={styles.sheetHeader}>
         <View style={styles.sheetTitleRow}>
           <TaskProviderLogo provider="linear" size={16} color={colors.textPrimary} />
-          <Text style={styles.sheetTitle}>Connect Linear workspace</Text>
+          <Text style={styles.sheetTitle}>{t('tasks.create.connectLinear')}</Text>
         </View>
         <Text style={styles.sheetSubtitle}>
-          Paste a Personal API key to browse issues from that workspace.
+          {t('tasks.create.connectLinearBody')}
         </Text>
       </View>
       <View style={styles.createForm}>
-        <Text style={styles.fieldLabel}>Personal API key</Text>
+        <Text style={styles.fieldLabel}>{t('tasks.create.personalApiKey')}</Text>
         <TextInput
           style={styles.input}
           value={linearApiKeyDraft}
@@ -282,12 +288,12 @@ export function renderMobileTasksLinearConnectDrawer(model: ConnectionPresentati
           onPress={() => void Linking.openURL('https://linear.app/settings/account/security')}
         >
           <ExternalLink size={13} color={colors.textSecondary} />
-          <Text style={styles.inlineTextLinkText}>Linear Settings / Security / New API key</Text>
+          <Text style={styles.inlineTextLinkText}>{t('tasks.create.linearApiKeyLink')}</Text>
         </Pressable>
         <View style={styles.securityHintRow}>
           <Lock size={13} color={colors.textMuted} />
           <Text style={styles.securityHintText}>
-            Your key is encrypted via the host OS keychain and stored locally.
+            {t('tasks.create.linearKeySecurity')}
           </Text>
         </View>
         <Pressable
@@ -302,7 +308,7 @@ export function renderMobileTasksLinearConnectDrawer(model: ConnectionPresentati
           {linearConnectState === 'connecting' ? (
             <ActivityIndicator size="small" color={colors.bgBase} />
           ) : (
-            <Text style={styles.createButtonText}>Connect</Text>
+            <Text style={styles.createButtonText}>{t('tasks.create.connect')}</Text>
           )}
         </Pressable>
       </View>
@@ -319,10 +325,11 @@ export function renderMobileTasksWorkspaceCreateTargetPicker(model: ConnectionPr
     workspaceRepoPickerItem,
     workspaceRepos
   } = model
+  const { t } = useTranslation()
   return (
     <PickerModal
       visible={taskUiReady && workspaceRepoPickerItem != null}
-      title="Create Workspace In"
+      title={t('tasks.project.createWorkspaceIn')}
       options={workspaceRepoOptions}
       selected={workspaceRepos[0]?.id ?? ''}
       onSelect={(repoId) => {

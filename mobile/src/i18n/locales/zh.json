@@ -679,7 +679,8 @@
       "noType": "无类型",
       "loadingIssueTypes": "正在加载 issue 类型...",
       "noIssueTypesConfigured": "该仓库未配置 issue 类型。",
-      "clearType": "清除类型"
+      "clearType": "清除类型",
+      "createWorkspaceIn": "创建工作区于"
     },
     "comment": {
       "addPlaceholder": "添加评论",
@@ -788,6 +789,28 @@
       "runHooks": "运行钩子",
       "alwaysTrustAndRun": "始终信任并运行",
       "dontRun": "不运行"
+    },
+    "create": {
+      "newIssue": "新建 {{provider}} Issue",
+      "inRepository": "在所选仓库中创建 issue。",
+      "inTeam": "在所选 Linear 团队中创建 issue。",
+      "repository": "仓库",
+      "team": "团队",
+      "linearTeam": "Linear 团队",
+      "issueSource": "Issue 来源",
+      "fileIn": "提交到",
+      "upstream": "上游",
+      "origin": "源仓库",
+      "title": "标题",
+      "titlePlaceholder": "任务标题",
+      "contextPlaceholder": "补充背景",
+      "createIssue": "创建 Issue",
+      "connectLinear": "连接 Linear 工作区",
+      "connectLinearBody": "粘贴个人 API 密钥以浏览该工作区的 issue。",
+      "personalApiKey": "个人 API 密钥",
+      "linearApiKeyLink": "Linear 设置 / 安全 / 新建 API 密钥",
+      "linearKeySecurity": "你的密钥通过宿主机系统钥匙串加密，仅存储在本地。",
+      "connect": "连接"
     }
   }
 }

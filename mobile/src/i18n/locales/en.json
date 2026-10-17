@@ -679,7 +679,8 @@
       "noType": "No type",
       "loadingIssueTypes": "Loading issue types...",
       "noIssueTypesConfigured": "No issue types configured for this repository.",
-      "clearType": "Clear type"
+      "clearType": "Clear type",
+      "createWorkspaceIn": "Create Workspace In"
     },
     "comment": {
       "addPlaceholder": "Add a comment",
@@ -788,6 +789,28 @@
       "runHooks": "Run hooks",
       "alwaysTrustAndRun": "Always trust and run",
       "dontRun": "Don't run"
+    },
+    "create": {
+      "newIssue": "New {{provider}} Issue",
+      "inRepository": "Create an issue in the selected repository.",
+      "inTeam": "Create an issue in the selected Linear team.",
+      "repository": "Repository",
+      "team": "Team",
+      "linearTeam": "Linear Team",
+      "issueSource": "Issue source",
+      "fileIn": "File in",
+      "upstream": "Upstream",
+      "origin": "Origin",
+      "title": "Title",
+      "titlePlaceholder": "Task title",
+      "contextPlaceholder": "Add context",
+      "createIssue": "Create Issue",
+      "connectLinear": "Connect Linear workspace",
+      "connectLinearBody": "Paste a Personal API key to browse issues from that workspace.",
+      "personalApiKey": "Personal API key",
+      "linearApiKeyLink": "Linear Settings / Security / New API key",
+      "linearKeySecurity": "Your key is encrypted via the host OS keychain and stored locally.",
+      "connect": "Connect"
     }
   }
 }
