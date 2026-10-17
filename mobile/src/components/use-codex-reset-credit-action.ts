@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { Alert } from 'react-native'
 import * as ExpoCrypto from 'expo-crypto'
@@ -69,22 +70,22 @@ export function useCodexResetCreditAction({
         onSnapshot(result.snapshot)
         if ('status' in result) {
           const cleanupWarning = result.attemptJournalRetained
-            ? '\n\nThis phone could not clear the discarded retry record. Retrying it is safe, but the record must be cleared before a new reset can be confirmed for this account.'
+            ? translate('codexReset.journalRetainedDiscarded')
             : ''
           Alert.alert(
-            'Reset details changed',
-            `The account or reset offer changed before the host contacted Codex. Review the updated details, then confirm again.${cleanupWarning}`
+            translate('codexReset.detailsChangedTitle'),
+            translate('codexReset.detailsChangedBody', { cleanupWarning })
           )
           return
         }
         const copy = getCodexResetCreditOutcomeCopy(result.outcome)
         const cleanupWarning = result.attemptJournalRetained
-          ? '\n\nThe host confirmed this attempt, but this phone could not clear its retry record. A later retry will reuse the same safe operation ID.'
+          ? translate('codexReset.journalRetainedConfirmed')
           : ''
         Alert.alert(copy.title, `${copy.message}${cleanupWarning}`)
       } catch (error) {
         Alert.alert(
-          'Could not reset rate limits',
+          translate('codexReset.couldNotResetTitle'),
           error instanceof Error ? error.message : String(error)
         )
       } finally {
@@ -102,11 +103,14 @@ export function useCodexResetCreditAction({
     const confirmedScope = resetScope
     const confirmedLabel = describeScope(snapshot, confirmedScope)
     Alert.alert(
-      'Use a rate-limit reset?',
-      `This spends one earned reset for ${confirmedLabel} and immediately resets eligible rate-limit windows.`,
+      translate('codexReset.confirmTitle'),
+      translate('codexReset.confirmBody', { label: confirmedLabel }),
       [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Use reset', onPress: () => void consume(confirmedScope) }
+        { text: translate('common.cancel'), style: 'cancel' },
+        {
+          text: translate('codexReset.useResetButton'),
+          onPress: () => void consume(confirmedScope)
+        }
       ]
     )
   }, [accountMutationBusy, connected, consume, resetScope, resetting, snapshot, supported])

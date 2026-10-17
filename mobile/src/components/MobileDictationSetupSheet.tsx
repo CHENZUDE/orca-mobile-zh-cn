@@ -50,7 +50,7 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
       setError(null)
       return next.models.some(isModelInFlight)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load')
+      setError(err instanceof Error ? err.message : t('dictationSetup.failedToLoad'))
       return undefined
     }
   }, [client])
@@ -103,7 +103,7 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
         onReady?.()
       } catch (err) {
         triggerError()
-        setError(err instanceof Error ? err.message : 'Could not select model')
+        setError(err instanceof Error ? err.message : t('dictationSetup.couldNotSelectModel'))
       } finally {
         setBusy(null)
       }
@@ -120,7 +120,7 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
       try {
         setSetup(await setDictationConfig(client, { enabled }))
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Could not update')
+        setError(err instanceof Error ? err.message : t('dictationSetup.couldNotUpdate'))
       }
     },
     [client]

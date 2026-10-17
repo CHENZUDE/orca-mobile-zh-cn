@@ -614,7 +614,10 @@
     "setUpOnDesktop": "请在桌面端设置",
     "inUse": "使用中",
     "use": "使用",
-    "download": "下载"
+    "download": "下载",
+    "failedToLoad": "加载失败",
+    "couldNotSelectModel": "无法选择模型",
+    "couldNotUpdate": "无法更新"
   },
   "terminalShortcuts": {
     "group": {
@@ -1776,7 +1779,15 @@
       "nothingToResetMessage": "当前没有已耗尽的 Codex 速率限额窗口。",
       "noCreditTitle": "暂无可用重置",
       "noCreditMessage": "该账号没有可用的已获得重置次数。"
-    }
+    },
+    "journalRetainedDiscarded": "\\n\\n本机无法清除已丢弃的重试记录。重试是安全的，但在为本账号确认新的重置之前，必须先清除该记录。",
+    "journalRetainedConfirmed": "\\n\\n主机已确认本次尝试，但本机无法清除其重试记录。稍后重试将复用同一个安全的操作 ID。",
+    "detailsChangedTitle": "重置详情已变更",
+    "detailsChangedBody": "在主机联系 Codex 之前，账号或重置机会已发生变化。请查看更新后的详情，然后再次确认。{{cleanupWarning}}",
+    "couldNotResetTitle": "无法重置速率限额",
+    "confirmTitle": "要使用速率限额重置吗？",
+    "confirmBody": "这将消耗一次已获得的重置，用于{{label}}，并立即重置符合条件的速率限额窗口。",
+    "useResetButton": "使用重置"
   },
   "taskActions": {
     "failedToRerunChecks": "重新运行检查失败",

@@ -614,7 +614,10 @@
     "setUpOnDesktop": "Set up on desktop",
     "inUse": "In use",
     "use": "Use",
-    "download": "Download"
+    "download": "Download",
+    "failedToLoad": "Failed to load",
+    "couldNotSelectModel": "Could not select model",
+    "couldNotUpdate": "Could not update"
   },
   "terminalShortcuts": {
     "group": {
@@ -1776,7 +1779,15 @@
       "nothingToResetMessage": "No eligible Codex rate-limit window is exhausted.",
       "noCreditTitle": "No reset available",
       "noCreditMessage": "This account has no earned reset credits available."
-    }
+    },
+    "journalRetainedDiscarded": "\\n\\nThis phone could not clear the discarded retry record. Retrying it is safe, but the record must be cleared before a new reset can be confirmed for this account.",
+    "journalRetainedConfirmed": "\\n\\nThe host confirmed this attempt, but this phone could not clear its retry record. A later retry will reuse the same safe operation ID.",
+    "detailsChangedTitle": "Reset details changed",
+    "detailsChangedBody": "The account or reset offer changed before the host contacted Codex. Review the updated details, then confirm again.{{cleanupWarning}}",
+    "couldNotResetTitle": "Could not reset rate limits",
+    "confirmTitle": "Use a rate-limit reset?",
+    "confirmBody": "This spends one earned reset for {{label}} and immediately resets eligible rate-limit windows.",
+    "useResetButton": "Use reset"
   },
   "taskActions": {
     "failedToRerunChecks": "Failed to rerun checks",
