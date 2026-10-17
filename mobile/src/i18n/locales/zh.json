@@ -1427,7 +1427,9 @@
     "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。",
     "failedToRefreshPullRequest": "刷新 Pull Request 失败。",
     "failedToMergePullRequest": "合并 Pull Request 失败。",
-    "githubAccountNotConnected": "无权限，你的 GitHub 账号尚未连接。"
+    "githubAccountNotConnected": "无权限，你的 GitHub 账号尚未连接。",
+    "hostedReviewPanelUnavailable": "当前服务商不支持托管评审面板。",
+    "currentBranchUnavailable": "当前分支不可用。"
   },
   "taskOptions": {
     "provider": {
@@ -1716,14 +1718,17 @@
     "failedToLoadPeople": "加载人员失败"
   },
   "fileExplorer": {
-    "unavailableOnMobile": "移动端不可用"
+    "unavailableOnMobile": "移动端不可用",
+    "unableToLoadFiles": "无法加载文件"
   },
   "filePreview": {
     "waitingForDesktop": "等待桌面端...",
     "emptyFile": "空文件",
     "title": "文件预览",
     "unknownSize": "大小未知",
-    "unsavedEditsLost": "未保存的修改将会丢失。"
+    "unsavedEditsLost": "未保存的修改将会丢失。",
+    "changedOnDesktop": "文件已在桌面端更改，保存前请重新加载预览",
+    "unableToLoadMedia": "无法加载媒体"
   },
   "appUpdate": {
     "tapToUpdate": "点按以更新"
@@ -1737,7 +1742,10 @@
     "clearFilters": "清除筛选"
   },
   "webShell": {
-    "connectToDownloadLatest": "连接此主机以下载最新版本应用"
+    "connectToDownloadLatest": "连接此主机以下载最新版本应用",
+    "streamOpenFailed": "页面外壳无法保持此流打开",
+    "workspaceScreenUnavailable": "此主机不提供该工作区页面。",
+    "pageFrameNoBridgeHost": "Web 外壳：收到页面帧但没有桥接主机"
   },
   "agentWorking": {
     "label": "智能体正在工作"
@@ -1908,5 +1916,17 @@
   "activity": {
     "sourceControl": "源代码管理",
     "agentSessionHistory": "代理会话历史"
+  },
+  "navigation": {
+    "host": "主机",
+    "editHost": "编辑主机",
+    "accounts": "账号",
+    "tasks": "任务",
+    "terminal": "终端",
+    "sourceControl": "源代码管理",
+    "agentSessionHistory": "代理会话历史",
+    "changes": "更改",
+    "pullRequest": "Pull Request",
+    "workspace": "工作区"
   }
 }

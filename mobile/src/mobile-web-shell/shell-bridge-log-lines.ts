@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { BridgeHostDiagnostic } from './bridge-host-contract'
 import type { ShellLifecycleLine } from './shell-lifecycle-line-recorder'
 import { maskUserText } from './shell-log-path-masking'
@@ -27,7 +28,7 @@ export function frameWithoutHostLine(facts: {
   return {
     level: 'warn',
     code: 'web-shell-page',
-    message: 'Web shell: page frame with no bridge host',
+    message: translate('webShell.pageFrameNoBridgeHost'),
     detail: `client=${facts.clientReady ? 'ok' : 'null'} snapshot=${facts.snapshotReady ? 'ok' : 'null'}`
   }
 }

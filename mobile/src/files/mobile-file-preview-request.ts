@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { mobileFileMedia } from './mobile-file-media'
 import { classifyMobileArtifact } from '../session/mobile-artifact-kind'
 import type { RpcAcceptedResult } from '../transport/rpc-accepted-result'
@@ -275,7 +276,7 @@ async function verifyTerminalArtifactBaseContent(
       status: 'error',
       error: {
         status: 'error',
-        message: 'File changed on desktop. Reload preview before saving',
+        message: translate('filePreview.changedOnDesktop'),
         reconnect: false
       }
     }

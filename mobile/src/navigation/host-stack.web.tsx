@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState, type ReactNode } from '
 import { StyleSheet, View } from 'react-native'
 import { Navigator } from 'expo-router'
 import { colors } from '../theme/mobile-theme'
+import { useTranslation } from 'react-i18next'
 import { HOST_STACK_SCREENS, type HostStackAnimation } from './host-stack-screens'
 
 /**
@@ -12,10 +13,15 @@ import { HOST_STACK_SCREENS, type HostStackAnimation } from './host-stack-screen
  * `Navigator`, with a view that keeps a popped screen mounted until it has slid out.
  */
 export function HostStack({ animation }: { animation: HostStackAnimation }) {
+  const { t } = useTranslation()
   return (
     <Navigator>
-      {HOST_STACK_SCREENS.map(({ name, title }) => (
-        <Navigator.Screen key={name} name={name} options={{ title }} />
+      {HOST_STACK_SCREENS.map(({ name, title, titleKey }) => (
+        <Navigator.Screen
+          key={name}
+          name={name}
+          options={{ title: titleKey ? t(titleKey) : title }}
+        />
       ))}
       <HostStackView animation={animation} />
     </Navigator>

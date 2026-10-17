@@ -45,7 +45,9 @@ function MediaDownload({ media, client, title }: Props) {
           }
         } catch (error) {
           if (!controller.signal.aborted) {
-            setState({ error: error instanceof Error ? error.message : 'Unable to load media' })
+            setState({
+              error: error instanceof Error ? error.message : t('filePreview.unableToLoadMedia')
+            })
           }
         }
       })()

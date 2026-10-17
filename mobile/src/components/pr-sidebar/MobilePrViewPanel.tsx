@@ -1,3 +1,4 @@
+import { translate } from '../../i18n/i18n'
 import { StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { colors } from '../../theme/mobile-theme'
@@ -42,12 +43,12 @@ export function MobilePrViewPanelBody({
     : !isGithubRepo
       ? ({
           kind: 'blocked',
-          message: 'Hosted review panel unavailable for this provider.'
+          message: translate('prSidebar.hostedReviewPanelUnavailable')
         } as const)
       : branch === null
         ? ({
             kind: 'error',
-            message: 'Current branch unavailable.'
+            message: translate('prSidebar.currentBranchUnavailable')
           } as const)
         : controller.prSidebarState
 

@@ -5,6 +5,7 @@ import type {
   ForceReconnect,
   RpcClientContextValue
 } from '../transport/rpc-client-context-contract'
+import enCatalog from '../i18n/locales/en.json'
 
 /**
  * The panel's Retry while the host is unreachable, mounted under the page's own provider.
@@ -113,7 +114,7 @@ describe("the agent-history panel's Retry while the host is unreachable", () => 
   it('is absent on the page, where nothing can re-dial', async () => {
     const rendered = await mountPanel()
     expect(
-      rendered.root.findAll((node) => node.props.children === 'Waiting for host…')
+      rendered.root.findAll((node) => node.props.children === enCatalog.agentHistory.waitingForHost)
     ).not.toHaveLength(0)
     expect(retryControls(rendered)).toHaveLength(0)
   })

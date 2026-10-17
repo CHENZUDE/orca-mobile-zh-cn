@@ -1427,7 +1427,9 @@
     "branchNotReadyForReview": "This branch is not ready for a {{review}} yet.",
     "failedToRefreshPullRequest": "Failed to refresh pull request.",
     "failedToMergePullRequest": "Failed to merge pull request.",
-    "githubAccountNotConnected": "Not permitted - your GitHub account is not connected."
+    "githubAccountNotConnected": "Not permitted - your GitHub account is not connected.",
+    "hostedReviewPanelUnavailable": "Hosted review panel unavailable for this provider.",
+    "currentBranchUnavailable": "Current branch unavailable."
   },
   "taskOptions": {
     "provider": {
@@ -1716,14 +1718,17 @@
     "failedToLoadPeople": "Failed to load people"
   },
   "fileExplorer": {
-    "unavailableOnMobile": "Unavailable on mobile"
+    "unavailableOnMobile": "Unavailable on mobile",
+    "unableToLoadFiles": "Unable to load files"
   },
   "filePreview": {
     "waitingForDesktop": "Waiting for desktop...",
     "emptyFile": "Empty file",
     "title": "File preview",
     "unknownSize": "unknown size",
-    "unsavedEditsLost": "Unsaved edits will be lost."
+    "unsavedEditsLost": "Unsaved edits will be lost.",
+    "changedOnDesktop": "File changed on desktop. Reload preview before saving",
+    "unableToLoadMedia": "Unable to load media"
   },
   "appUpdate": {
     "tapToUpdate": "Tap to update"
@@ -1737,7 +1742,10 @@
     "clearFilters": "Clear filters"
   },
   "webShell": {
-    "connectToDownloadLatest": "Connect to this host to download the latest app"
+    "connectToDownloadLatest": "Connect to this host to download the latest app",
+    "streamOpenFailed": "the shell could not keep this stream open",
+    "workspaceScreenUnavailable": "This workspace screen is not available on this host.",
+    "pageFrameNoBridgeHost": "Web shell: page frame with no bridge host"
   },
   "agentWorking": {
     "label": "Agent is working"
@@ -1908,5 +1916,17 @@
   "activity": {
     "sourceControl": "Source Control",
     "agentSessionHistory": "Agent Session History"
+  },
+  "navigation": {
+    "host": "Host",
+    "editHost": "Edit host",
+    "accounts": "Accounts",
+    "tasks": "Tasks",
+    "terminal": "Terminal",
+    "sourceControl": "Source Control",
+    "agentSessionHistory": "Agent Session History",
+    "changes": "Changes",
+    "pullRequest": "Pull Request",
+    "workspace": "Workspace"
   }
 }

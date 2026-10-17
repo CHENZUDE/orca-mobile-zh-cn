@@ -1,3 +1,4 @@
+import { translate } from '../../i18n/i18n'
 import { utf8ByteLength } from './bridge-caps'
 import { BridgeReplyRefusedError } from './bridge-client-errors'
 import type { BridgeRpcClientDiagnostic } from './bridge-client-diagnostics'
@@ -24,7 +25,7 @@ export type BridgeInboundFramePort = {
 /** The shell's own words where it had any, the way the native client passes an RPC error message
  *  through to the listener it ends. */
 function describeStreamFailure(error: unknown): string {
-  return error instanceof Error ? error.message : 'the shell could not keep this stream open'
+  return error instanceof Error ? error.message : translate('webShell.streamOpenFailed')
 }
 
 /**

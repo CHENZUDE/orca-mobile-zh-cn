@@ -100,7 +100,9 @@ export function useMobileAgentHistoryState(params: MobileAgentHistoryStateParams
           // (connState flips re-run the load effect) instead of tearing it
           // down to a full-screen error, matching the host list screen.
           setScreenState((prev) =>
-            prev.kind === 'ready' ? prev : { kind: 'error', message: 'Waiting for host…' }
+            prev.kind === 'ready'
+              ? prev
+              : { kind: 'error', message: translate('agentHistory.waitingForHost') }
           )
         }
         return

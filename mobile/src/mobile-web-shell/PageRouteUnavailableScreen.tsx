@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { hostStackHostRoute } from '../navigation/host-stack-navigation'
 import { useRouteHandoff } from '../navigation/route-handoff'
@@ -28,7 +29,7 @@ import { colors, radii, spacing, typography } from '../theme/mobile-theme'
  */
 export function PageRouteUnavailableScreen({
   hostId,
-  message = 'This workspace screen is not available on this host.'
+  message = translate('webShell.workspaceScreenUnavailable')
 }: {
   hostId: string
   message?: string

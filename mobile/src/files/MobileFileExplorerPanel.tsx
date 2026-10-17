@@ -63,7 +63,6 @@ export function MobileFileExplorerPanel(props: {
   const worktreeLabel = getWorktreeLabel(name, worktreeId)
   const { t } = useTranslation()
 
-
   const loadDirectory = useCallback(
     async (relativePath: string) => {
       const scope = scopeRef.current
@@ -147,10 +146,10 @@ export function MobileFileExplorerPanel(props: {
               // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: this policy skips only a refusal, so an unaccepted reply is a failure envelope.
               (legacyReply as RpcFailure).error?.message ||
                 refusal?.message ||
-                'Unable to load files'
+                t('fileExplorer.unableToLoadFiles')
             )
           }
-          throw new Error(refusal?.message || 'Unable to load files')
+          throw new Error(refusal?.message || t('fileExplorer.unableToLoadFiles'))
         }
         if (
           !isCurrentDirectoryLoad(directoryLoadRevisionsRef.current, scopeRef.current, loadToken)
@@ -171,7 +170,7 @@ export function MobileFileExplorerPanel(props: {
         ) {
           return
         }
-        const message = err instanceof Error ? err.message : 'Unable to load files'
+        const message = err instanceof Error ? err.message : t('fileExplorer.unableToLoadFiles')
         if (rootLoad) {
           // Why: a failed background refresh keeps the cached tree browsable;
           // only a cold load surfaces the full-screen error.
