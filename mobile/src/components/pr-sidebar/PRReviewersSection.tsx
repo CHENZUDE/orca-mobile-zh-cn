@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { UserPlus, X } from 'lucide-react-native'
@@ -21,6 +22,8 @@ type Props = {
 // Requested reviewers + their latest review status, with a picker to request /
 // remove (optimistic add/remove via the actions hook).
 export function PRReviewersSection({ details, actions, client, worktreeId }: Props) {
+  const { t } = useTranslation()
+
   // details === null means phase 2 (work-item payload) is still in flight — same
   // signal Comments uses. Do not treat that as "no reviewers" or the section goes
   // blank while checks (phase 1) already paint. A synthetic placeholder means
@@ -61,23 +64,25 @@ export function PRReviewersSection({ details, actions, client, worktreeId }: Pro
       style={styles.iconButton}
       onPress={() => setPickerOpen(true)}
       accessibilityRole="button"
-      accessibilityLabel="Add or remove reviewers"
+      accessibilityLabel={t('prReviewers.addOrRemove')}
     >
       <UserPlus size={16} color={colors.textSecondary} strokeWidth={2.2} />
     </Pressable>
   )
 
   return (
-    <PRSection title="Reviewers" trailing={addButton}>
+    <PRSection title={t('prReviewers.title')} trailing={addButton}>
       {loadingDetails ? (
         <View style={styles.reviewersStatus}>
           <ActivityIndicator color={colors.textSecondary} />
           <Text style={styles.emptyText}>Loading reviewers…</Text>
         </View>
       ) : detailsFailed ? (
-        <Text style={styles.emptyText}>Could not load reviewers. Tap refresh to try again.</Text>
+        <Text style={styles.emptyText}>
+          {t('prReviewers.couldNotLoadTapRefresh')}
+        </Text>
       ) : rows.length === 0 ? (
-        <Text style={styles.emptyText}>No reviewers requested</Text>
+        <Text style={styles.emptyText}>{t('prReviewers.noneRequested')}</Text>
       ) : (
         rows.map((row) => {
           const busy = actions.isBusy({ kind: 'reviewer', login: row.login })

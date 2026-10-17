@@ -979,7 +979,10 @@
     "failedJobs": "失败的作业",
     "jobs": "作业",
     "showingFirstJobs": "仅显示前 100 个作业",
-    "unknown": "未知"
+    "unknown": "未知",
+    "rerunFailingChecks": "重新运行失败的检查",
+    "inspectOrFixWithAi": "查看详情，或启动 AI 修复。",
+    "fixFailingWithAi": "使用 AI 修复失败的检查"
   },
   "git": {
     "committedOnBranch": "分支上的提交",
@@ -1427,5 +1430,11 @@
       "showLess": "收起",
       "showMore": "展开"
     }
+  },
+  "prReviewers": {
+    "title": "审阅人",
+    "addOrRemove": "添加或移除审阅人",
+    "couldNotLoadTapRefresh": "无法加载审阅人。请点击刷新重试。",
+    "noneRequested": "尚未请求审阅人"
   }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { openExternalLink } from '../../platform/external-link'
@@ -60,6 +61,8 @@ export function PRChecksSection({
   actions,
   triage
 }: Props) {
+  const { t } = useTranslation()
+
   const sorted = sortPRChecks(checks)
   const summary = summarizePRChecks(checks)
   const rerunBusy = actions?.isBusy({ kind: 'rerun' }) ?? false
@@ -169,7 +172,7 @@ export function PRChecksSection({
               onPress={() => actions.rerunFailingChecks()}
               disabled={rerunBusy}
               accessibilityRole="button"
-              accessibilityLabel="Rerun failing checks"
+              accessibilityLabel={t('prChecks.rerunFailingChecks')}
             >
               {rerunBusy ? (
                 <ActivityIndicator color={colors.textSecondary} />
@@ -190,7 +193,7 @@ export function PRChecksSection({
               {summary.failed} failing check{summary.failed === 1 ? '' : 's'}
             </Text>
             <Text style={triageStyles.triageStripSubtitle} numberOfLines={1}>
-              Inspect details or start an AI fix pass.
+              {t('prChecks.inspectOrFixWithAi')}
             </Text>
           </View>
           <Pressable
@@ -198,7 +201,7 @@ export function PRChecksSection({
             onPress={triage.fixChecks}
             disabled={triage.isBusy || triage.availability !== 'available'}
             accessibilityRole="button"
-            accessibilityLabel="Fix failing checks with AI"
+            accessibilityLabel={t('prChecks.fixFailingWithAi')}
           >
             {triage.isBusy ? (
               <ActivityIndicator color={colors.textSecondary} />

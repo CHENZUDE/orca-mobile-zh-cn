@@ -979,7 +979,10 @@
     "failedJobs": "Failed jobs",
     "jobs": "Jobs",
     "showingFirstJobs": "Showing first 100 jobs",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "rerunFailingChecks": "Rerun failing checks",
+    "inspectOrFixWithAi": "Inspect details or start an AI fix pass.",
+    "fixFailingWithAi": "Fix failing checks with AI"
   },
   "git": {
     "committedOnBranch": "Committed on Branch",
@@ -1427,5 +1430,11 @@
       "showLess": "Show less",
       "showMore": "Show more"
     }
+  },
+  "prReviewers": {
+    "title": "Reviewers",
+    "addOrRemove": "Add or remove reviewers",
+    "couldNotLoadTapRefresh": "Could not load reviewers. Tap refresh to try again.",
+    "noneRequested": "No reviewers requested"
   }
 }
