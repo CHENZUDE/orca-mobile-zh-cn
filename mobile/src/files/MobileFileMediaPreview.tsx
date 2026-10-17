@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, Text, View } from 'react-native'
 import { colors } from '../theme/mobile-theme'
@@ -19,6 +20,8 @@ export function MobileFileMediaPreview(props: Props) {
 }
 
 function MediaDownload({ media, client, title }: Props) {
+  const { t } = useTranslation()
+
   const { worktreeId, relativePath, mimeType } = media
   const [state, setState] = useState<State>({ bytes: 0, total: 0 })
   const [attempt, setAttempt] = useState(0)
@@ -55,7 +58,7 @@ function MediaDownload({ media, client, title }: Props) {
   if (!client) {
     return (
       <View style={styles.state}>
-        <Text style={styles.stateText}>Waiting for desktop...</Text>
+        <Text style={styles.stateText}>{t('filePreview.waitingForDesktop')}</Text>
       </View>
     )
   }

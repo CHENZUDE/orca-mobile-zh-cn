@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import {
   AlertTriangle,
@@ -10,6 +11,7 @@ import {
 } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
 import { statusColor } from '../components/pr-sidebar/pr-sidebar-status-color'
+import { translate } from '../i18n/i18n'
 import { hubStyles } from './mobile-source-control-hub-styles'
 import type { MobilePrChipRollup, MobilePrChipSummary } from './mobile-pr-chip-summary'
 
@@ -22,6 +24,8 @@ type Props = {
 // Pull Request segment. Rendered only when the repo supports hosted review — the
 // parent gates on that, so this component always has something meaningful to show.
 export function MobileSourceControlPrChip({ summary, onPress }: Props) {
+  const { t } = useTranslation()
+
   return (
     <Pressable
       style={({ pressed }) => [hubStyles.chip, pressed && hubStyles.chipPressed]}
@@ -41,7 +45,7 @@ export function MobileSourceControlPrChip({ summary, onPress }: Props) {
         </>
       ) : summary.kind === 'none' ? (
         <>
-          <Text style={hubStyles.chipCreateText}>Create pull request</Text>
+          <Text style={hubStyles.chipCreateText}>{t('prChip.createPullRequest')}</Text>
           <View style={hubStyles.chipSpacer} />
           <ChevronRight size={16} color={colors.textMuted} strokeWidth={2.1} />
         </>
@@ -107,7 +111,7 @@ function chipAccessibilityLabel(summary: MobilePrChipSummary): string {
     case 'loading':
       return 'Loading pull request'
     case 'none':
-      return 'Create pull request'
+      return translate('prChip.createPullRequest')
     case 'unavailable':
       return `Pull request unavailable: ${summary.message}`
     case 'ready': {

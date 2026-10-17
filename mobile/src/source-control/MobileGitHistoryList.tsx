@@ -223,7 +223,7 @@ export const MobileGitHistoryList = memo(function MobileGitHistoryList({
   if (view.kind === 'empty') {
     return (
       <View style={styles.state}>
-        <Text style={styles.stateText}>No commits.</Text>
+        <Text style={styles.stateText}>{t('gitHistory.noCommits')}</Text>
       </View>
     )
   }

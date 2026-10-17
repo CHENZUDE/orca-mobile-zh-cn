@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useRef, useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Check } from 'lucide-react-native'
@@ -33,6 +34,8 @@ export function MobileNativeChatAsk({
   onCollapse
 }: Props): React.JSX.Element {
   const [index, setIndex] = useState(0)
+  const { t } = useTranslation()
+
   const [selections, setSelections] = useState<number[][]>(() => prompt.questions.map(() => []))
   const [otherText, setOtherText] = useState<string[]>(() => prompt.questions.map(() => ''))
   const [submitting, setSubmitting] = useState(false)
@@ -189,7 +192,7 @@ export function MobileNativeChatAsk({
             style={styles.input}
             value={otherText[index]}
             onChangeText={(v) => setOther(index, v)}
-            placeholder="Type your answer"
+            placeholder={t('nativeChatAsk.typeYourAnswer')}
             placeholderTextColor={colors.textMuted}
             multiline
             autoFocus

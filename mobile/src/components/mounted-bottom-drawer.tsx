@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { View, Pressable, useWindowDimensions, ScrollView, Keyboard, Modal } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -58,6 +59,8 @@ export function MountedBottomDrawer({
   zIndex = 1000
 }: MountedBottomDrawerProps) {
   const translateY = useSharedValue(0)
+  const { t } = useTranslation()
+
   const progress = useSharedValue(0)
   const keyboardOffset = useSharedValue(0)
   const scrollOffsetY = useSharedValue(0)
@@ -314,7 +317,7 @@ export function MountedBottomDrawer({
       <Animated.View
         style={styles.handleHitArea}
         accessibilityRole="button"
-        accessibilityLabel="Dismiss drawer"
+        accessibilityLabel={t('bottomDrawer.dismiss')}
       >
         <View style={styles.handle} />
       </Animated.View>

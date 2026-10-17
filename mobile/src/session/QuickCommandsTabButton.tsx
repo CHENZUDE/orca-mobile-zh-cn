@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, View } from 'react-native'
 import { SquareChevronRight } from 'lucide-react-native'
 
@@ -10,6 +11,8 @@ type Props = {
 }
 
 export function QuickCommandsTabButton({ disabled, onPress }: Props) {
+  const { t } = useTranslation()
+
   return (
     <>
       <View style={styles.tabActionDivider} />
@@ -21,7 +24,7 @@ export function QuickCommandsTabButton({ disabled, onPress }: Props) {
         ]}
         disabled={disabled}
         onPress={onPress}
-        accessibilityLabel="Quick commands"
+        accessibilityLabel={t('quickCommands.title')}
       >
         <SquareChevronRight size={16} color={colors.textSecondary} strokeWidth={2.2} />
       </Pressable>

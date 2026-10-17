@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, type StyleProp, type ViewStyle } from 'react-native'
 import { ImagePlus, Mic } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
@@ -42,6 +43,7 @@ export function MobileTerminalInputActions({
   onDictationPressOut,
   onDictationCancel
 }: MobileTerminalInputActionsProps) {
+  const { t } = useTranslation()
   const dictationActive = dictation.isStarting || dictation.isRecording
   return (
     <>
@@ -54,7 +56,7 @@ export function MobileTerminalInputActions({
         onLongPress={onAttachFile}
         delayLongPress={350}
         accessibilityLabel={isAttaching ? 'Sending image' : 'Attach a photo'}
-        accessibilityHint="Long press to attach a file instead"
+        accessibilityHint={t('terminal.longPressToAttach')}
       >
         {isAttaching ? (
           <ActivityIndicator size="small" color={colors.textSecondary} />

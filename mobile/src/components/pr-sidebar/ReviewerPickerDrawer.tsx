@@ -113,7 +113,7 @@ export function ReviewerPickerDrawer({
         </View>
       ) : ordered.length === 0 ? (
         <View style={styles.pickerStateArea}>
-          <Text style={styles.emptyText}>No matching people</Text>
+          <Text style={styles.emptyText}>{t('reviewerPicker.noMatchingPeople')}</Text>
         </View>
       ) : (
         <View style={styles.pickerList}>

@@ -1,8 +1,10 @@
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import { Pressable, Text, View, Linking, ExternalLink, colors } from './mobile-tasks-dependencies'
 import { styles } from './mobile-tasks-legacy-styles'
 
 export function renderMobileTasksGitHubViewControls(model: ConnectionPresentationModel) {
+
   const {
     activeGitHubProjectView,
     activeProjectLabel,
@@ -135,7 +137,7 @@ export function renderMobileTasksGitHubViewControls(model: ConnectionPresentatio
             {selectedGitHubProjectViewUrl ? (
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel="Open view in GitHub"
+                accessibilityLabel={translate('tasks.github.openViewInGithub')}
                 style={styles.segmentIconButton}
                 disabled={!taskUiReady}
                 onPress={() => {

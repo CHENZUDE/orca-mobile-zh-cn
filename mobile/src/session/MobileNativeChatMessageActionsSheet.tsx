@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -76,11 +77,13 @@ function SelectTextScreen({
   onClose: () => void
 }): React.JSX.Element {
   const insets = useSafeAreaInsets()
+  const { t } = useTranslation()
+
   return (
     <Modal visible animationType="slide" onRequestClose={onClose}>
       <View style={[styles.screen, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
         <View style={styles.header}>
-          <Text style={styles.title}>Select text</Text>
+          <Text style={styles.title}>{t('nativeChat.selectText')}</Text>
           <Pressable
             onPress={onClose}
             hitSlop={12}

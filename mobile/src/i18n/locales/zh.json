@@ -979,7 +979,12 @@
       "mergePullRequest": "合并拥提请求"
     },
     "subIssueDataUnavailable": "当前令牌无法获取子任务数据。",
-    "mergeMethod": "合并方式"
+    "mergeMethod": "合并方式",
+    "refreshDetails": "刷新详情",
+    "rendererUiPlaceholder": "渲染界面",
+    "github": {
+      "openViewInGithub": "在 GitHub 中打开视图"
+    }
   },
   "prChecks": {
     "noDetails": "暂无详细信息。",
@@ -1322,7 +1327,8 @@
       "sendCommand": "发送命令"
     },
     "noTabsInSession": "此会话中没有标签页",
-    "retryLoadingTerminal": "重试加载终端"
+    "retryLoadingTerminal": "重试加载终端",
+    "dismissWorkspaceCreationWarning": "关闭工作树创建警告"
   },
   "prSidebar": {
     "pullRequest": "拥提请求",
@@ -1461,7 +1467,11 @@
       "showsWholeMessage": "展开全部消息",
       "showLess": "收起",
       "showMore": "展开"
-    }
+    },
+    "scrollToLatest": "滚动到最新",
+    "selectText": "选择文本",
+    "opensImageFullSize": "以全尺寸打开图片",
+    "copyMessage": "复制消息"
   },
   "prReviewers": {
     "title": "审阅人",
@@ -1507,7 +1517,8 @@
     "checkingCompatibility": "正在检查主机兼容性"
   },
   "workspace": {
-    "sshConnection": "SSH 连接"
+    "sshConnection": "SSH 连接",
+    "runOn": "运行位置"
   },
   "hosts": {
     "backToHosts": "返回主机列表"
@@ -1571,5 +1582,56 @@
   "prFileDiff": {
     "noTextChanges": "没有发现文本改动。",
     "addReviewComment": "添加评审评论"
+  },
+  "bottomDrawer": {
+    "dismiss": "关闭抽屉"
+  },
+  "reviewerPicker": {
+    "noMatchingPeople": "没有匹配的成员"
+  },
+  "fileExplorer": {
+    "unavailableOnMobile": "移动端不可用"
+  },
+  "filePreview": {
+    "waitingForDesktop": "等待桌面端...",
+    "emptyFile": "空文件",
+    "title": "文件预览"
+  },
+  "appUpdate": {
+    "tapToUpdate": "点按以更新"
+  },
+  "hostWorkspaceList": {
+    "searchPlaceholder": "搜索工作树…",
+    "searchWorktrees": "搜索工作树",
+    "couldNotLoadWorkspaces": "无法从此主机加载工作树"
+  },
+  "workspaceOptions": {
+    "clearFilters": "清除筛选"
+  },
+  "webShell": {
+    "connectToDownloadLatest": "连接此主机以下载最新版本应用"
+  },
+  "agentWorking": {
+    "label": "智能体正在工作"
+  },
+  "markdownReader": {
+    "dismissKeyboard": "关闭键盘"
+  },
+  "nativeChatAsk": {
+    "typeYourAnswer": "输入你的回答"
+  },
+  "terminal": {
+    "longPressToAttach": "长按可改为附加文件",
+    "failedToLoad": "终端加载失败"
+  },
+  "quickCommands": {
+    "emptyHint": "保存终端命令或智能体提示词，以便快速调用。",
+    "title": "快捷命令"
+  },
+  "gitHistory": {
+    "noCommits": "没有提交记录。"
+  },
+  "prChip": {
+    "createPullRequest": "创建 Pull Request"
   }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
@@ -218,6 +219,8 @@ export function MobileNativeChatView({
   keyboardInset = 0
 }: Props): React.JSX.Element {
   const insets = useSafeAreaInsets()
+  const { t } = useTranslation()
+
   const [toolsExpanded, setToolsExpanded] = useState(false)
   // Lift the composer clear of the keyboard, plus the bottom safe-area so it
   // never sits under the home indicator / nav bar (mirrors the terminal dock).
@@ -395,7 +398,7 @@ export function MobileNativeChatView({
           {/* Jump-to-latest control. */}
           {showJumpToTail ? (
             <Pressable
-              accessibilityLabel="Scroll to latest"
+              accessibilityLabel={t('nativeChat.scrollToLatest')}
               style={[styles.fab, styles.fabBottom]}
               onPress={jumpToTail}
             >

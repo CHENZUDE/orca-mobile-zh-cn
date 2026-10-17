@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useState } from 'react'
 import { RefreshCw } from 'lucide-react-native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -78,9 +79,11 @@ export function TerminalWebViewEngineErrorOverlay({
   message,
   onReload
 }: TerminalWebViewEngineErrorOverlayProps) {
+  const { t } = useTranslation()
+
   return (
     <View style={styles.errorOverlay}>
-      <Text style={styles.errorTitle}>Terminal failed to load</Text>
+      <Text style={styles.errorTitle}>{t('terminal.failedToLoad')}</Text>
       <Text style={styles.errorDetail} numberOfLines={4}>
         {message}
       </Text>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { isAgentSessionProviderContextBoundary } from '../../../src/shared/agent-session-provider-context'
 import { MobileSelectableText as Text } from '../components/MobileSelectableText'
 import { memo, useCallback, useContext, useState } from 'react'
@@ -185,6 +186,7 @@ function MobileNativeChatMessageImpl({
   onToggleSubagentGroup?: (groupId: string) => void
 }): React.JSX.Element {
   // Another agent's message is set apart from the person's bubble, left-aligned and named.
+  const { t } = useTranslation()
   const attribution = agentMessageAttribution('Message from', message.from)
   const isUser = message.role === 'user' && attribution === null
   const isReasoning = message.role === 'reasoning'
@@ -326,7 +328,7 @@ function MobileNativeChatMessageImpl({
           <MobileSourceCopyButton
             key={message.id}
             text={copyText}
-            accessibilityLabel="Copy message"
+            accessibilityLabel={t('nativeChatMessage.copyMessage')}
           />
         ) : null}
       </View>

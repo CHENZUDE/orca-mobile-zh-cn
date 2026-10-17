@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useContext } from 'react'
 import { Image, Pressable, Text as NativeText } from 'react-native'
 import { MobileSelectableText as Text } from '../components/MobileSelectableText'
@@ -104,6 +105,7 @@ function ImageAttachment({
   fontScale: number
   onLongPress?: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const { openImage } = useContext(MobileNativeChatRowOverlaysContext)
   const uri = block.url ?? block.path
   const label = block.alt ?? 'Attached image'
@@ -120,7 +122,7 @@ function ImageAttachment({
       onLongPress={onLongPress}
       accessibilityRole="imagebutton"
       accessibilityLabel={label}
-      accessibilityHint="Opens the image full size"
+      accessibilityHint={t('nativeChat.opensImageFullSize')}
     >
       <Image source={{ uri }} style={styles.imageThumb} resizeMode="contain" />
     </Pressable>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, RefreshControl, SectionList, Text, View } from 'react-native'
 import { ChevronDown, ChevronRight, Pin } from 'lucide-react-native'
 import { AuthFailedBanner } from '../components/AuthFailedBanner'
@@ -16,6 +17,8 @@ import { hostScreenStyles as styles } from './host-screen-styles'
 import type { HostScreenController } from './use-host-screen-controller'
 
 export function HostWorkspaceList({ controller }: { controller: HostScreenController }) {
+  const { t } = useTranslation()
+
   const {
     actions,
     activeWorktreeScroll,
@@ -95,11 +98,11 @@ export function HostWorkspaceList({ controller }: { controller: HostScreenContro
           <MobileSearchField
             value={state.search}
             onChangeText={state.setSearch}
-            placeholder="Search worktrees…"
+            placeholder={t('hostWorkspaceList.searchPlaceholder')}
             autoFocus
             // Why: new key per open remounts the focus effect across rapid toggles so the keyboard reappears.
             focusKey={state.showSearch}
-            accessibilityLabel="Search worktrees"
+            accessibilityLabel={t('hostWorkspaceList.searchWorktrees')}
           />
         </View>
       )}

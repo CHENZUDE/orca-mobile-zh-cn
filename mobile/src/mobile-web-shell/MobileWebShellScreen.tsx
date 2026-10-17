@@ -85,7 +85,6 @@ function Failed({
   onRetry: () => void
 }) {
   const { t } = useTranslation()
-
   // No retry for the fence, and none for an unread status: a device whose WebView cannot be
   // isolated will not grow one on a tap, and a retry re-reads the same settled gate it already has.
   const retryable = state.reason !== 'isolation-unavailable' && state.reason !== 'status-unreadable'
@@ -164,6 +163,7 @@ export function MobileWebShellScreen({
   onRouteParamClear,
   runtime
 }: MobileWebShellScreenProps) {
+  const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const router = useRouter()
   const navigation = useNavigation()
@@ -358,7 +358,7 @@ export function MobileWebShellScreen({
     return (
       <Centered>
         <Text style={styles.waitingLabel} testID="mobile-web-shell-offline">
-          Connect to this host to download the latest app
+          {t('webShell.connectToDownloadLatest')}
         </Text>
       </Centered>
     )

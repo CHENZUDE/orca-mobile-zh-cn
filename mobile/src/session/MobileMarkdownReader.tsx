@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronDown, Keyboard as KeyboardIcon, RefreshCw } from 'lucide-react-native'
@@ -36,6 +37,8 @@ export function MobileMarkdownReader({
   keyboardLift
 }: Props) {
   const editorRef = useRef<MobileRichMarkdownEditorHandle>(null)
+  const { t } = useTranslation()
+
   // Native Keyboard events under-report the WebView editor's covered area, so prefer the larger WebView-measured inset.
   const [webviewKeyboardInset, setWebviewKeyboardInset] = useState(0)
   const effectiveKeyboardLift = Math.max(keyboardLift, webviewKeyboardInset)
@@ -110,7 +113,7 @@ export function MobileMarkdownReader({
                 onPress={() => editorRef.current?.dismissKeyboard()}
                 hitSlop={8}
                 accessibilityRole="button"
-                accessibilityLabel="Dismiss keyboard"
+                accessibilityLabel={t('markdownReader.dismissKeyboard')}
                 accessibilityHint="Hides the software keyboard and keeps the markdown editor open."
               >
                 <View style={styles.keyboardDismissGlyph}>

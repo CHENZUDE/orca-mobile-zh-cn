@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Image, Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { X } from 'lucide-react-native'
 import { useWindowSafeAreaInsets } from '../layout/side-safe-area'
@@ -14,6 +15,7 @@ export function MobileNativeChatImageViewer({
   label: string
   onClose: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const insets = useWindowSafeAreaInsets()
   return (
     <Modal visible animationType="fade" onRequestClose={onClose}>
@@ -36,7 +38,7 @@ export function MobileNativeChatImageViewer({
           onPress={onClose}
           hitSlop={12}
           accessibilityRole="button"
-          accessibilityLabel="Close image"
+          accessibilityLabel={t('nativeChatImageViewer.closeImage')}
         >
           <X size={22} color={colors.textPrimary} strokeWidth={2} />
         </Pressable>

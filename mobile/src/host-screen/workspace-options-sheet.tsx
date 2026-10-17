@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, type ReactNode } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { ChevronLeft } from 'lucide-react-native'
@@ -83,6 +84,8 @@ function WorkspaceOptionsContent({
   controller: HostScreenController
   pager: OptionPagerControls<WorkspaceViewOptionKey>
 }) {
+  const { t } = useTranslation()
+
   const { settings, state } = controller
   const hosts = useWorkspaceOptionHosts(controller)
   const sections = getShownWorkspaceViewSections({
@@ -137,7 +140,7 @@ function WorkspaceOptionsContent({
         </View>
         {controller.activeFilterCount > 0 && (
           <Pressable onPress={settings.clearFilters}>
-            <Text style={styles.clearFiltersText}>Clear filters</Text>
+            <Text style={styles.clearFiltersText}>{t('workspaceOptions.clearFilters')}</Text>
           </Pressable>
         )}
       </View>

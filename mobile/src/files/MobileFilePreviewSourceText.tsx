@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo, useRef } from 'react'
 import { ScrollView, Text } from 'react-native'
 import { MobileSyntaxSegments } from '../components/MobileSyntaxSegments'
@@ -20,6 +21,8 @@ export function MobileFilePreviewSourceText({
   initialLine?: number
 }) {
   const scrollRef = useRef<ScrollView>(null)
+  const { t } = useTranslation()
+
   const revealedRef = useRef(false)
   const syntax = useMemo(
     () => buildMobileFilePreviewSyntax(relativePath, content),
@@ -51,7 +54,7 @@ export function MobileFilePreviewSourceText({
       {truncated ? (
         <MobileFilePreviewTruncatedNote byteLength={byteLength ?? content.length} />
       ) : null}
-      <Text selectable style={styles.textPreview} accessibilityLabel="File preview">
+      <Text selectable style={styles.textPreview} accessibilityLabel={t('filePreview.title')}>
         <MobileSyntaxSegments segments={syntax.segments} />
       </Text>
     </ScrollView>

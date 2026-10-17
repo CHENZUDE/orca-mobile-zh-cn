@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useRef, useState } from 'react'
 import { Alert, View, Text, Pressable, StyleSheet } from 'react-native'
 import { ChevronLeft } from 'lucide-react-native'
@@ -39,6 +40,7 @@ export function QuickCommandsSheet({
   repoName,
   onLaunch
 }: Props) {
+  const { t } = useTranslation()
   const { commands, loading, ready, error, persist } = useQuickCommands({
     client,
     enabled: visible
@@ -173,7 +175,7 @@ export function QuickCommandsSheet({
       {view === 'editor' && draft ? (
         <View style={styles.editorDesc}>
           <Text style={styles.descText}>
-            Save terminal commands or agent prompts for quick access.
+            {t('quickCommands.emptyHint')}
           </Text>
         </View>
       ) : null}

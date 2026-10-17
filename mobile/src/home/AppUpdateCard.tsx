@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ArrowUpFromLine, X } from 'lucide-react-native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing } from '../theme/mobile-theme'
@@ -9,6 +10,8 @@ export function AppUpdateCard(props: {
   onDismiss: () => void
 }) {
   const title = `Orca ${props.version} is available`
+  const { t } = useTranslation()
+
   return (
     <View style={styles.card}>
       <Pressable
@@ -25,7 +28,7 @@ export function AppUpdateCard(props: {
             {title}
           </Text>
           <Text style={styles.subtitle} numberOfLines={1}>
-            Tap to update
+            {t('appUpdate.tapToUpdate')}
           </Text>
         </View>
       </Pressable>

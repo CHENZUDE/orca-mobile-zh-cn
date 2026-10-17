@@ -979,7 +979,12 @@
       "mergePullRequest": "Merge Pull Request"
     },
     "subIssueDataUnavailable": "Sub-issue data is unavailable for your token.",
-    "mergeMethod": "Merge method"
+    "mergeMethod": "Merge method",
+    "refreshDetails": "Refresh details",
+    "rendererUiPlaceholder": "Renderer UI",
+    "github": {
+      "openViewInGithub": "Open view in GitHub"
+    }
   },
   "prChecks": {
     "noDetails": "No details available.",
@@ -1322,7 +1327,8 @@
       "sendCommand": "Send command"
     },
     "noTabsInSession": "No tabs in this session",
-    "retryLoadingTerminal": "Retry loading terminal"
+    "retryLoadingTerminal": "Retry loading terminal",
+    "dismissWorkspaceCreationWarning": "Dismiss workspace creation warning"
   },
   "prSidebar": {
     "pullRequest": "Pull request",
@@ -1461,7 +1467,11 @@
       "showsWholeMessage": "Shows the whole message",
       "showLess": "Show less",
       "showMore": "Show more"
-    }
+    },
+    "scrollToLatest": "Scroll to latest",
+    "selectText": "Select text",
+    "opensImageFullSize": "Opens the image full size",
+    "copyMessage": "Copy message"
   },
   "prReviewers": {
     "title": "Reviewers",
@@ -1507,7 +1517,8 @@
     "checkingCompatibility": "Checking host compatibility"
   },
   "workspace": {
-    "sshConnection": "SSH Connection"
+    "sshConnection": "SSH Connection",
+    "runOn": "Run on"
   },
   "hosts": {
     "backToHosts": "Back to hosts"
@@ -1571,5 +1582,56 @@
   "prFileDiff": {
     "noTextChanges": "No text changes found.",
     "addReviewComment": "Add review comment"
+  },
+  "bottomDrawer": {
+    "dismiss": "Dismiss drawer"
+  },
+  "reviewerPicker": {
+    "noMatchingPeople": "No matching people"
+  },
+  "fileExplorer": {
+    "unavailableOnMobile": "Unavailable on mobile"
+  },
+  "filePreview": {
+    "waitingForDesktop": "Waiting for desktop...",
+    "emptyFile": "Empty file",
+    "title": "File preview"
+  },
+  "appUpdate": {
+    "tapToUpdate": "Tap to update"
+  },
+  "hostWorkspaceList": {
+    "searchPlaceholder": "Search worktrees…",
+    "searchWorktrees": "Search worktrees",
+    "couldNotLoadWorkspaces": "Could not load workspaces from this host"
+  },
+  "workspaceOptions": {
+    "clearFilters": "Clear filters"
+  },
+  "webShell": {
+    "connectToDownloadLatest": "Connect to this host to download the latest app"
+  },
+  "agentWorking": {
+    "label": "Agent is working"
+  },
+  "markdownReader": {
+    "dismissKeyboard": "Dismiss keyboard"
+  },
+  "nativeChatAsk": {
+    "typeYourAnswer": "Type your answer"
+  },
+  "terminal": {
+    "longPressToAttach": "Long press to attach a file instead",
+    "failedToLoad": "Terminal failed to load"
+  },
+  "quickCommands": {
+    "emptyHint": "Save terminal commands or agent prompts for quick access.",
+    "title": "Quick commands"
+  },
+  "gitHistory": {
+    "noCommits": "No commits."
+  },
+  "prChip": {
+    "createPullRequest": "Create pull request"
   }
 }

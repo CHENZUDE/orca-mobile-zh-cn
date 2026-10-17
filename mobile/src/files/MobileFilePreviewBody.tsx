@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { MobileFileMediaPreview } from './MobileFileMediaPreview'
 import type { MobileFilePreviewRpcSender } from './mobile-file-preview-operations'
 import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native'
@@ -28,6 +29,8 @@ type Props = {
 }
 
 export function MobileFilePreviewBody({ preview, ...options }: Props) {
+
+  const { t } = useTranslation()
   if (preview.status === 'loading') {
     return (
       <View style={styles.state}>
@@ -44,7 +47,7 @@ export function MobileFilePreviewBody({ preview, ...options }: Props) {
       <EditablePreviewSource {...options} />
     ) : (
       <View style={styles.state}>
-        <Text style={styles.stateText}>Empty file</Text>
+        <Text style={styles.stateText}>{t('filePreview.emptyFile')}</Text>
       </View>
     )
   }
@@ -125,6 +128,7 @@ function EditablePreviewSource(options: {
   lineColumn: MobileFilePreviewLineColumn | null
   onDraftChange: (content: string) => void
 }) {
+
   return (
     <MobileFilePreviewEditableSource
       title={options.title}

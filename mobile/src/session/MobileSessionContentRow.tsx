@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable } from 'react-native'
 import { AlertTriangle, X } from 'lucide-react-native'
 import { SessionDockColumn } from './SessionDockColumn'
@@ -9,6 +10,8 @@ import { MobileSessionActiveContent } from './MobileSessionActiveContent'
 import { MobileSessionCommandDock } from './MobileSessionCommandDock'
 
 export function MobileSessionContentRow({ controller }: { controller: MobileSessionController }) {
+  const { t } = useTranslation()
+
   const {
     hostId,
     worktreeId,
@@ -33,7 +36,7 @@ export function MobileSessionContentRow({ controller }: { controller: MobileSess
             <Pressable
               style={styles.createWarningDismiss}
               onPress={() => setCreateWarningState(dismissMobileSessionCreateWarningState)}
-              accessibilityLabel="Dismiss workspace creation warning"
+              accessibilityLabel={t('session.dismissWorkspaceCreationWarning')}
               hitSlop={8}
             >
               <X size={16} color={colors.textMuted} strokeWidth={2.2} />

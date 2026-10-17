@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { getRepoExecutionHostId } from '../../../src/shared/execution-host'
 import type { SmartModeAvailabilityInput } from '../tasks/mobile-smart-source-modes'
@@ -21,6 +22,7 @@ import type { NewWorktreeDrawerView } from './use-new-worktree-drawer-navigation
 type Composer = ReturnType<typeof useMobileComposerSource>
 
 export function NewWorktreeModalDrawers(props: {
+
   visible: boolean
   drawerView: NewWorktreeDrawerView
   client: Parameters<typeof SmartWorkspaceSourceDrawer>[0]['client']
@@ -46,6 +48,7 @@ export function NewWorktreeModalDrawers(props: {
   onSkipSetupTrust: () => void
   onCloseSetupTrust: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <>
       <SmartWorkspaceSourceDrawer
@@ -84,7 +87,7 @@ export function NewWorktreeModalDrawers(props: {
 
       <PickerListDrawer
         visible={props.visible && props.drawerView === 'runTarget'}
-        title="Run on"
+        title={t('workspace.runOn')}
         items={props.runTargetPickerItems}
         selectedId={props.selectedRepo ? getRepoExecutionHostId(props.selectedRepo) : ''}
         onSelect={(item) => props.onRepoChange(item.repo)}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { classifyMobileArtifact } from '../session/mobile-artifact-kind'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import {
@@ -81,6 +82,7 @@ function TreeRow(props: {
   onToggleDirectory: (relativePath: string) => void
 }) {
   const { item, expanded, onPreviewFile, onToggleDirectory } = props
+  const { t } = useTranslation()
   const isDirectory = item.kind === 'directory'
   const isExpanded = expanded.has(item.relativePath)
   const previewable =
@@ -137,7 +139,7 @@ function TreeRow(props: {
         <Text style={[styles.rowTitle, disabled && styles.rowTitleDisabled]} numberOfLines={1}>
           {item.name}
         </Text>
-        {disabled ? <Text style={styles.rowMeta}>Unavailable on mobile</Text> : null}
+        {disabled ? <Text style={styles.rowMeta}>{t('fileExplorer.unavailableOnMobile')}</Text> : null}
       </View>
     </Pressable>
   )

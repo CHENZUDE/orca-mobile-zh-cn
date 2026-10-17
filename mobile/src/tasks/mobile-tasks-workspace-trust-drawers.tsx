@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -26,7 +26,6 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
     workspaceSparseDraftParsed,
     workspaceSparseSaving
   } = model
-  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && workspaceCreateDraft != null && workspaceSparseDraft != null}
@@ -42,18 +41,18 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetTitle}>
               {workspaceSparseDraft.mode === 'new'
-                ? t('tasks.sparse.newPreset')
-                : t('tasks.sparse.editPreset')}
+                ? translate('tasks.sparse.newPreset')
+                : translate('tasks.sparse.editPreset')}
             </Text>
           </View>
           <View style={styles.detailGroup}>
             <View style={styles.detailSection}>
-              <Text style={styles.detailSectionTitle}>{t('common.nameLabel')}</Text>
+              <Text style={styles.detailSectionTitle}>{translate('common.nameLabel')}</Text>
               <TextInput
                 style={styles.input}
                 value={workspaceSparseDraft.name}
                 onChangeText={(name) => setWorkspaceSparseDraft({ ...workspaceSparseDraft, name })}
-                placeholder="Renderer UI"
+                placeholder={translate('tasks.rendererUiPlaceholder')}
                 placeholderTextColor={colors.textMuted}
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -61,7 +60,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               />
             </View>
             <View style={styles.detailSection}>
-              <Text style={styles.detailSectionTitle}>{t('tasks.sparse.directories')}</Text>
+              <Text style={styles.detailSectionTitle}>{translate('tasks.sparse.directories')}</Text>
               <TextInput
                 style={[styles.input, styles.bodyInput, styles.monoInput]}
                 value={workspaceSparseDraft.directoriesText}
@@ -79,8 +78,8 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
             <Text style={workspaceSparseDraftError ? styles.detailError : styles.detailMuted}>
               {workspaceSparseDraftError ??
                 (workspaceSparseDraftParsed?.directories.length === 1
-                  ? t('tasks.sparse.oneDirectory')
-                  : t('tasks.sparse.directoryCount', {
+                  ? translate('tasks.sparse.oneDirectory')
+                  : translate('tasks.sparse.directoryCount', {
                       count: workspaceSparseDraftParsed?.directories.length ?? 0
                     }))}
             </Text>
@@ -91,7 +90,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               disabled={workspaceSparseSaving}
               onPress={() => setWorkspaceSparseDraft(null)}
             >
-              <Text style={styles.secondaryActionText}>{t('common.cancel')}</Text>
+              <Text style={styles.secondaryActionText}>{translate('common.cancel')}</Text>
             </Pressable>
             <Pressable
               style={[
@@ -104,7 +103,7 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
               {workspaceSparseSaving ? (
                 <ActivityIndicator size="small" color={colors.bgBase} />
               ) : null}
-              <Text style={styles.primaryActionText}>{t('common.save')}</Text>
+              <Text style={styles.primaryActionText}>{translate('common.save')}</Text>
             </Pressable>
           </View>
         </View>
@@ -115,7 +114,6 @@ export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresenta
 
 export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationModel) {
   const { createWorkspace, creatingKey, setSetupPrompt, setupPrompt, taskUiReady } = model
-  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && setupPrompt != null}
@@ -125,9 +123,9 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
       {setupPrompt ? (
         <View>
           <View style={styles.sheetHeader}>
-            <Text style={styles.sheetTitle}>{t('tasks.trust.runSetupTitle')}</Text>
+            <Text style={styles.sheetTitle}>{translate('tasks.trust.runSetupTitle')}</Text>
             <Text style={styles.sheetSubtitle}>
-              {t('tasks.trust.runSetupBody', { repo: setupPrompt.repoName })}
+              {translate('tasks.trust.runSetupBody', { repo: setupPrompt.repoName })}
             </Text>
           </View>
 
@@ -159,8 +157,8 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
               <Check size={16} color={colors.textPrimary} />
               <Text style={styles.actionText}>
                 {creatingKey === setupPrompt.item.key
-                  ? t('tasks.trust.creating')
-                  : t('tasks.trust.runSetupAndCreate')}
+                  ? translate('tasks.trust.creating')
+                  : translate('tasks.trust.runSetupAndCreate')}
               </Text>
             </Pressable>
             <View style={styles.actionSeparator} />
@@ -182,7 +180,7 @@ export function renderMobileTasksSetupTrustDrawer(model: ConnectionPresentationM
               }
             >
               <X size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>{t('tasks.trust.skipSetupAndCreate')}</Text>
+              <Text style={styles.actionText}>{translate('tasks.trust.skipSetupAndCreate')}</Text>
             </Pressable>
           </View>
         </View>
@@ -201,7 +199,6 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
     setOrcaYamlTrustPrompt,
     taskUiReady
   } = model
-  const { t } = useTranslation()
   return (
     <BottomDrawer
       visible={taskUiReady && orcaYamlTrustPrompt != null}
@@ -213,11 +210,11 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetTitle}>
               {orcaYamlTrustPrompt.previouslyApproved
-                ? t('tasks.trust.scriptChanged', { repo: orcaYamlTrustPrompt.repoName })
-                : t('tasks.trust.runSetupFrom', { repo: orcaYamlTrustPrompt.repoName })}
+                ? translate('tasks.trust.scriptChanged', { repo: orcaYamlTrustPrompt.repoName })
+                : translate('tasks.trust.runSetupFrom', { repo: orcaYamlTrustPrompt.repoName })}
             </Text>
             <Text style={styles.sheetSubtitle}>
-              {t('tasks.trust.scriptBody')}
+              {translate('tasks.trust.scriptBody')}
             </Text>
           </View>
 
@@ -225,8 +222,8 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
             <View style={styles.detailSectionHeader}>
               <Text style={styles.detailSectionTitle}>
                 {orcaYamlTrustPrompt.previouslyApproved
-                  ? t('tasks.trust.newScript')
-                  : t('tasks.trust.setupScript')}
+                  ? translate('tasks.trust.newScript')
+                  : translate('tasks.trust.setupScript')}
               </Text>
             </View>
             <Text style={styles.setupPromptCommand}>{orcaYamlTrustPrompt.scriptContent}</Text>
@@ -258,13 +255,13 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
                       orcaYamlTrustPrompt.contentHash
                     )
                   } catch (err) {
-                    setError(err instanceof Error ? err.message : t('tasks.trust.failedToTrust'))
+                    setError(err instanceof Error ? err.message : translate('tasks.trust.failedToTrust'))
                   }
                 })()
               }
             >
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>{t('tasks.trust.runHooks')}</Text>
+              <Text style={styles.actionText}>{translate('tasks.trust.runHooks')}</Text>
             </Pressable>
             <View style={styles.actionSeparator} />
             <Pressable
@@ -292,13 +289,13 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
                       orcaYamlTrustPrompt.contentHash
                     )
                   } catch (err) {
-                    setError(err instanceof Error ? err.message : t('tasks.trust.failedToTrust'))
+                    setError(err instanceof Error ? err.message : translate('tasks.trust.failedToTrust'))
                   }
                 })()
               }
             >
               <Check size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>{t('tasks.trust.alwaysTrustAndRun')}</Text>
+              <Text style={styles.actionText}>{translate('tasks.trust.alwaysTrustAndRun')}</Text>
             </Pressable>
             <View style={styles.actionSeparator} />
             <Pressable
@@ -321,7 +318,7 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
               }}
             >
               <X size={16} color={colors.textPrimary} />
-              <Text style={styles.actionText}>{t('tasks.trust.dontRun')}</Text>
+              <Text style={styles.actionText}>{translate('tasks.trust.dontRun')}</Text>
             </Pressable>
           </View>
         </View>

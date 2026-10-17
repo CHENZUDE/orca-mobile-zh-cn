@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import { ArrowDown, ChevronsDownUp, ChevronsUpDown } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
@@ -20,6 +21,7 @@ export function MobileNativeChatFloatingControls({
   showJumpToTail: boolean
   onJumpToTail: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   return (
     <View pointerEvents="box-none" style={styles.floatingControls}>
       {bridgeWorking ? (
@@ -45,7 +47,7 @@ export function MobileNativeChatFloatingControls({
         </Pressable>
       ) : null}
       {showJumpToTail ? (
-        <Pressable accessibilityLabel="Scroll to latest" style={styles.fab} onPress={onJumpToTail}>
+        <Pressable accessibilityLabel={t('nativeChat.scrollToLatest')} style={styles.fab} onPress={onJumpToTail}>
           <ArrowDown size={18} color={colors.textPrimary} strokeWidth={2.2} />
         </Pressable>
       ) : null}

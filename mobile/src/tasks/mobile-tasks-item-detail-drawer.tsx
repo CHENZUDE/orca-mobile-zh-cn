@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -15,7 +15,6 @@ import { renderMobileTasksItemDetailContent } from './mobile-tasks-item-detail-c
 import { renderMobileTasksItemActions } from './mobile-tasks-item-actions'
 
 export function renderMobileTasksItemDetailDrawer(model: ConnectionPresentationModel) {
-  const { t } = useTranslation()
   const { actionItem, detailLoading, setActionItem, setDetailRefreshSeq, taskUiReady } = model
   return (
     <BottomDrawer visible={taskUiReady && actionItem != null} onClose={() => setActionItem(null)}>
@@ -34,7 +33,7 @@ export function renderMobileTasksItemDetailDrawer(model: ConnectionPresentationM
               <Pressable
                 style={styles.iconButton}
                 disabled={detailLoading}
-                accessibilityLabel="Refresh details"
+                accessibilityLabel={translate('tasks.refreshDetails')}
                 onPress={() => setDetailRefreshSeq((current) => current + 1)}
               >
                 <RefreshCw
@@ -44,7 +43,7 @@ export function renderMobileTasksItemDetailDrawer(model: ConnectionPresentationM
               </Pressable>
             </View>
             <Text style={styles.sheetSubtitle}>
-              {t(taskKindLabel(actionItem))} · {actionItem.subtitle}
+              {translate(taskKindLabel(actionItem))} · {actionItem.subtitle}
             </Text>
           </View>
 

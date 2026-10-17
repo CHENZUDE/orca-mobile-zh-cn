@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import {
@@ -11,6 +12,7 @@ export function HostWorkspaceListStates(
     activeFilterCount: number
   }
 ) {
+  const { t } = useTranslation()
   const state = selectHostWorkspaceListState(props)
   if (state === 'loading') {
     return (
@@ -22,7 +24,7 @@ export function HostWorkspaceListStates(
   if (state === 'catalog-error') {
     return (
       <View style={styles.centered}>
-        <Text style={styles.emptyText}>Could not load workspaces from this host</Text>
+        <Text style={styles.emptyText}>{t('hostWorkspaceList.couldNotLoadWorkspaces')}</Text>
         <Text style={styles.catalogErrorDetail}>
           {`worktree.ps failed (${props.catalogError}) — retrying automatically`}
         </Text>
