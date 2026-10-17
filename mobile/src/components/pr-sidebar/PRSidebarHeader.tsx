@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native'
 import { ArrowRight, ExternalLink, Pencil } from 'lucide-react-native'
@@ -115,6 +116,7 @@ function PRTitle({
   editable: boolean
   titleAction: MobilePrTitleAction
 }) {
+  const { t } = useTranslation()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(title)
 
@@ -154,7 +156,7 @@ function PRTitle({
             onPress={cancel}
             disabled={titleAction.saving}
             accessibilityRole="button"
-            accessibilityLabel="Cancel editing title"
+            accessibilityLabel={t('prComments.cancelEditingTitle')}
           >
             <Text style={composerStyles.cancelText}>Cancel</Text>
           </Pressable>
@@ -163,7 +165,7 @@ function PRTitle({
             onPress={() => void save()}
             disabled={titleAction.saving}
             accessibilityRole="button"
-            accessibilityLabel="Save title"
+            accessibilityLabel={t('prComments.saveTitle')}
           >
             {titleAction.saving ? (
               <ActivityIndicator size="small" color={colors.bgBase} />
@@ -182,7 +184,7 @@ function PRTitle({
       onPress={editable ? startEdit : undefined}
       disabled={!editable}
       accessibilityRole={editable ? 'button' : undefined}
-      accessibilityLabel={editable ? 'Edit pull request title' : undefined}
+      accessibilityLabel={editable ? t('prComments.editPullRequestTitle') : undefined}
     >
       <Text style={styles.prTitle}>{title}</Text>
       {editable ? (

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { WebView } from 'react-native-webview'
@@ -17,6 +18,7 @@ export type MobileHtmlPreviewProps = {
 // review surface.
 export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps) {
   const [mode, setMode] = useState<'preview' | 'source'>('preview')
+  const { t } = useTranslation()
 
   return (
     <View style={styles.container}>
@@ -32,7 +34,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           // no `aria-selected` without the line below.
           accessibilityState={{ selected: mode === 'preview' }}
           aria-selected={mode === 'preview'}
-          accessibilityLabel="Preview rendered HTML"
+          accessibilityLabel={t('htmlPreview.previewRendered')}
         >
           <Eye size={13} color={colors.textSecondary} strokeWidth={2.2} />
           <Text style={styles.toggleText}>Preview</Text>
@@ -43,7 +45,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityRole="tab"
           accessibilityState={{ selected: mode === 'source' }}
           aria-selected={mode === 'source'}
-          accessibilityLabel="View HTML source"
+          accessibilityLabel={t('htmlPreview.viewSource')}
         >
           <Code size={13} color={colors.textSecondary} strokeWidth={2.2} />
           <Text style={styles.toggleText}>Source</Text>

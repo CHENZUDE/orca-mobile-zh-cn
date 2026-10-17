@@ -649,7 +649,9 @@
     "workspaceNamePlaceholder": "工作区名称",
     "branchName": "分支名称",
     "derivedFromName": "根据名称自动生成",
-    "reuseBranch": "复用分支 “{{branch}}”"
+    "reuseBranch": "复用分支 “{{branch}}”",
+    "openSelectedSource": "打开已选来源",
+    "typeANameOrSearchSource": "输入名称或搜索来源"
   },
   "quickCommand": {
     "label": "名称",
@@ -1149,6 +1151,10 @@
       "selectAFileToReview": "请选择要审阅的文件。",
       "retryLoadingReview": "重试加载审阅",
       "diffTruncatedForMobile": "差异过长，手机端预览已截断。"
+    },
+    "header": {
+      "openPrSidebar": "打开拥提请求侧栏",
+      "openReviewActions": "打开审阅操作"
     }
   },
   "hostScreen": {
@@ -1222,7 +1228,10 @@
     "resolve": "标记已解决",
     "writeAReplyPlaceholder": "编写回复…",
     "deleteCommentConfirm": "确定删除评论吗？",
-    "permanentlyDeletesOnGithub": "这将永久删除 GitHub 上的该评论。"
+    "permanentlyDeletesOnGithub": "这将永久删除 GitHub 上的该评论。",
+    "cancelEditingTitle": "取消编辑标题",
+    "saveTitle": "保存标题",
+    "editPullRequestTitle": "编辑 Pull Request 标题"
   },
   "prConflicts": {
     "title": "冲突",
@@ -1449,14 +1458,16 @@
     "title": "审阅人",
     "addOrRemove": "添加或移除审阅人",
     "couldNotLoadTapRefresh": "无法加载审阅人。请点击刷新重试。",
-    "noneRequested": "尚未请求审阅人"
+    "noneRequested": "尚未请求审阅人",
+    "searchPeople": "搜索人员"
   },
   "setupHook": {
     "newSetupScript": "新的安装脚本",
     "setupScript": "安装脚本",
     "runHooks": "运行脚本",
     "alwaysTrustAndRun": "始终信任并运行",
-    "dontRun": "不运行"
+    "dontRun": "不运行",
+    "runSetupCommand": "运行安装命令"
   },
   "files": {
     "closeFiles": "关闭文件",
@@ -1464,5 +1475,17 @@
     "noFilesFound": "未找到文件",
     "backToFiles": "返回文件列表",
     "saveTerminalArtifact": "保存终端产物"
+  },
+  "htmlPreview": {
+    "previewRendered": "预览渲染后的 HTML",
+    "viewSource": "查看 HTML 源代码"
+  },
+  "agentState": {
+    "monitoringBackgroundTasks": "正在监控后台任务",
+    "noRecentUpdate": "最近没有更新"
+  },
+  "workspaceDetail": {
+    "noWorkspaceOpen": "还没有打开工作区",
+    "pickAWorkspace": "请从侧边栏选择一个工作区，其终端会显示在这里。"
   }
 }

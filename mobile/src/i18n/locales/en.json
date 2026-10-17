@@ -649,7 +649,9 @@
     "workspaceNamePlaceholder": "Workspace name",
     "branchName": "Branch name",
     "derivedFromName": "Derived from name",
-    "reuseBranch": "Reuse branch “{{branch}}”"
+    "reuseBranch": "Reuse branch “{{branch}}”",
+    "openSelectedSource": "Open selected source",
+    "typeANameOrSearchSource": "Type a name or search a source"
   },
   "quickCommand": {
     "label": "Label",
@@ -1149,6 +1151,10 @@
       "selectAFileToReview": "Select a file to review.",
       "retryLoadingReview": "Retry loading review",
       "diffTruncatedForMobile": "Diff truncated for mobile preview."
+    },
+    "header": {
+      "openPrSidebar": "Open pull request sidebar",
+      "openReviewActions": "Open review actions"
     }
   },
   "hostScreen": {
@@ -1222,7 +1228,10 @@
     "resolve": "Resolve",
     "writeAReplyPlaceholder": "Write a reply…",
     "deleteCommentConfirm": "Delete comment?",
-    "permanentlyDeletesOnGithub": "This permanently deletes the comment on GitHub."
+    "permanentlyDeletesOnGithub": "This permanently deletes the comment on GitHub.",
+    "cancelEditingTitle": "Cancel editing title",
+    "saveTitle": "Save title",
+    "editPullRequestTitle": "Edit pull request title"
   },
   "prConflicts": {
     "title": "Conflicts",
@@ -1449,14 +1458,16 @@
     "title": "Reviewers",
     "addOrRemove": "Add or remove reviewers",
     "couldNotLoadTapRefresh": "Could not load reviewers. Tap refresh to try again.",
-    "noneRequested": "No reviewers requested"
+    "noneRequested": "No reviewers requested",
+    "searchPeople": "Search people"
   },
   "setupHook": {
     "newSetupScript": "New setup script",
     "setupScript": "Setup script",
     "runHooks": "Run hooks",
     "alwaysTrustAndRun": "Always trust and run",
-    "dontRun": "Don't run"
+    "dontRun": "Don't run",
+    "runSetupCommand": "Run setup command"
   },
   "files": {
     "closeFiles": "Close files",
@@ -1464,5 +1475,17 @@
     "noFilesFound": "No files found",
     "backToFiles": "Back to files",
     "saveTerminalArtifact": "Save terminal artifact"
+  },
+  "htmlPreview": {
+    "previewRendered": "Preview rendered HTML",
+    "viewSource": "View HTML source"
+  },
+  "agentState": {
+    "monitoringBackgroundTasks": "Monitoring background tasks",
+    "noRecentUpdate": "No recent update"
+  },
+  "workspaceDetail": {
+    "noWorkspaceOpen": "No workspace open",
+    "pickAWorkspace": "Pick a workspace from the sidebar to open its terminal here."
   }
 }

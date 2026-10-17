@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { ChevronLeft, ListChecks, MoreHorizontal } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
@@ -35,6 +36,7 @@ export function MobileDiffReviewHeader({
   onOpenPRSidebar,
   onSelectFilter
 }: Props) {
+  const { t } = useTranslation()
   // The dedicated PR icon appears on any GitHub repo in narrow/overlay mode; in wide
   // mode the sidebar is docked, so it is hidden (not disabled).
   const showPRTrigger = shouldShowTrigger({
@@ -66,7 +68,7 @@ export function MobileDiffReviewHeader({
             style={({ pressed }) => [styles.iconButton, pressed && styles.iconButtonPressed]}
             onPress={onOpenPRSidebar}
             accessibilityRole="button"
-            accessibilityLabel="Open pull request sidebar"
+            accessibilityLabel={t('diffReview.header.openPrSidebar')}
           >
             <ListChecks size={19} color={colors.textPrimary} strokeWidth={2.2} />
           </Pressable>
@@ -75,7 +77,7 @@ export function MobileDiffReviewHeader({
           style={({ pressed }) => [styles.iconButton, pressed && styles.iconButtonPressed]}
           onPress={onOpenActions}
           accessibilityRole="button"
-          accessibilityLabel="Open review actions"
+          accessibilityLabel={t('diffReview.header.openReviewActions')}
         >
           <MoreHorizontal size={19} color={colors.textPrimary} strokeWidth={2.2} />
         </Pressable>

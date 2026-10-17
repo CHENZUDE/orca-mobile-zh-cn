@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import {
   CircleDot,
@@ -51,6 +52,7 @@ export function SmartWorkspaceSourceField({
   onBeforeOpen,
   onOpenDrawer
 }: Props) {
+  const { t } = useTranslation()
   const selection = composer.smartNameSelection
 
   function openDrawer(): void {
@@ -75,7 +77,7 @@ export function SmartWorkspaceSourceField({
           {selection.url ? (
             <Pressable
               accessibilityRole="link"
-              accessibilityLabel="Open selected source"
+              accessibilityLabel={t('smartSource.openSelectedSource')}
               hitSlop={6}
               onPress={() => {
                 if (selection.url) {
@@ -100,7 +102,7 @@ export function SmartWorkspaceSourceField({
           onChangeText={composer.setName}
           onFocus={openDrawer}
           editable={!disabled && interactive}
-          placeholder="Type a name or search a source"
+          placeholder={t('smartSource.typeANameOrSearchSource')}
           placeholderTextColor={colors.textMuted}
           autoCapitalize="none"
           autoCorrect={false}
