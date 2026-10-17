@@ -951,7 +951,11 @@
     "missingResumeId": "该会话缺少恢复 ID。",
     "unableHostPlatform": "无法确定主机平台。",
     "sessionQueued": "智能体会话已入队。",
-    "failedToResume": "恢复会话失败。"
+    "failedToResume": "恢复会话失败。",
+    "currentWorktree": "当前工作区",
+    "resumeA11y": "恢复智能体会话",
+    "messageCount_one": "{{count}} 条消息",
+    "messageCount_other": "{{count}} 条消息"
   },
   "diffReview": {
     "reviewed": "已审阅",

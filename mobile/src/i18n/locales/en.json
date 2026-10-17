@@ -951,7 +951,11 @@
     "missingResumeId": "This session is missing a resume id.",
     "unableHostPlatform": "Unable to determine host platform.",
     "sessionQueued": "Agent session queued.",
-    "failedToResume": "Failed to resume session."
+    "failedToResume": "Failed to resume session.",
+    "messageCount_one": "{{count}} message",
+    "messageCount_other": "{{count}} messages",
+    "currentWorktree": "current worktree",
+    "resumeA11y": "Resume agent session"
   },
   "diffReview": {
     "reviewed": "Reviewed",

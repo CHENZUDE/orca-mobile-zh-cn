@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useMemo, useState } from 'react'
 import { ActivityIndicator, Pressable, RefreshControl, SectionList, Text, View } from 'react-native'
 import { Play } from 'lucide-react-native'
@@ -104,6 +105,7 @@ function AgentHistoryCardRow({
   onResume?: (session: AiVaultSession) => void | Promise<void>
   onPress: () => void
 }) {
+  const { t } = useTranslation()
   const previewTurns = useMemo(
     () => (expanded && session ? recentSessionConversationTurns(session, PREVIEW_TURN_LIMIT) : []),
     [expanded, session]
@@ -129,11 +131,11 @@ function AgentHistoryCardRow({
       <View style={styles.cardMetaRow}>
         <Text style={styles.cardMetaText}>{card.agentLabel}</Text>
         <Text style={styles.cardMetaText}>
-          {card.messageCount} {card.messageCount === 1 ? 'message' : 'messages'}
+          {t('agentHistory.messageCount', { count: card.messageCount })}
         </Text>
         {showCurrentWorktreeBadge && card.isCurrentWorktree ? (
           <View style={styles.currentBadge}>
-            <Text style={styles.currentBadgeText}>current worktree</Text>
+            <Text style={styles.currentBadgeText}>{t('agentHistory.currentWorktree')}</Text>
           </View>
         ) : null}
         {session && onResume ? (
@@ -152,7 +154,7 @@ function AgentHistoryCardRow({
             disabled={resumeActionState?.disabled}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Resume agent session"
+            accessibilityLabel={t('agentHistory.resumeA11y')}
           >
             {resumeActionState?.loading ? (
               <ActivityIndicator size="small" color={colors.textPrimary} />
