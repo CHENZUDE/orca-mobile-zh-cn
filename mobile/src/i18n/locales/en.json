@@ -1247,7 +1247,10 @@
     "note": "Note",
     "notePlaceholder": "Write a note",
     "connectTarget": "Connect target",
-    "createWorktree": "Create worktree"
+    "createWorktree": "Create worktree",
+    "selectAProject": "Select a project",
+    "runOn": "Run on",
+    "selectARunTarget": "Select a run target"
   },
   "session": {
     "header": {

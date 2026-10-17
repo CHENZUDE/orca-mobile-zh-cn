@@ -1247,7 +1247,10 @@
     "note": "备注",
     "notePlaceholder": "写点备注",
     "connectTarget": "连接目标",
-    "createWorktree": "创建工作区"
+    "createWorktree": "创建工作区",
+    "selectAProject": "选择项目",
+    "runOn": "运行位置",
+    "selectARunTarget": "选择运行位置"
   },
   "session": {
     "header": {

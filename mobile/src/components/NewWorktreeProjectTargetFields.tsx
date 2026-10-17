@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable, StyleSheet, Platform } from 'react-native'
 import { ChevronDown } from 'lucide-react-native'
 import { HostKindIcon } from './HostKindIcon'
@@ -18,24 +19,32 @@ export function NewWorktreeProjectTargetFields({
   onOpenProject: () => void
   onOpenRunTarget: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <>
       <View style={styles.field}>
         <Text style={styles.label}>Project</Text>
+
         <Pressable style={styles.fieldButton} onPress={onOpenProject}>
           {projectBadgeColor ? (
             <View style={[styles.projectDot, { backgroundColor: projectBadgeColor }]} />
           ) : null}
-          <SelectionCopy selection={project} placeholder="Select a project" />
+          <SelectionCopy
+            selection={project}
+            placeholder={t('newWorktree.selectAProject')}
+          />
           <ChevronDown size={14} color={colors.textMuted} />
         </Pressable>
       </View>
 
       <View style={styles.field}>
-        <Text style={styles.label}>Run on</Text>
+        <Text style={styles.label}>{t('newWorktree.runOn')}</Text>
         <Pressable style={styles.fieldButton} onPress={onOpenRunTarget}>
           <HostKindIcon hostId={runTarget?.hostId} size={14} />
-          <SelectionCopy selection={runTarget} placeholder="Select a run target" />
+          <SelectionCopy
+            selection={runTarget}
+            placeholder={t('newWorktree.selectARunTarget')}
+          />
           <ChevronDown size={14} color={colors.textMuted} />
         </Pressable>
       </View>
