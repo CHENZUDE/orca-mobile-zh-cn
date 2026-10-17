@@ -1410,6 +1410,22 @@
     "attachImage": "Attach image",
     "stopDictation": "Stop dictation",
     "dictate": "Dictate",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "queued": {
+      "resumeSending": "Resume sending the queued messages",
+      "resume": "Resume",
+      "sendAgain": "Send this message again",
+      "submitWithoutInterrupting": "Submit without interrupting the model",
+      "sendThisMessage": "Send this message",
+      "steer": "Steer",
+      "send": "Send",
+      "deleteThisMessage": "Delete this queued message",
+      "moreActions": "More actions",
+      "editMessage": "Edit message",
+      "showsLess": "Shows less of the message",
+      "showsWholeMessage": "Shows the whole message",
+      "showLess": "Show less",
+      "showMore": "Show more"
+    }
   }
 }

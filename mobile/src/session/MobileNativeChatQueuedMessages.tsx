@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import {
@@ -49,6 +50,8 @@ export function MobileNativeChatQueuedMessages({
   onResume,
   steerHeld = false
 }: MobileNativeChatQueuedMessagesProps): React.JSX.Element | null {
+  const { t } = useTranslation()
+
   // One in-flight action per card; a second tap must not double-consume. The ref
   // closes the same-frame double tap the disabled state cannot.
   const [busyIds, setBusyIds] = useState<ReadonlySet<string>>(() => new Set())
@@ -91,7 +94,7 @@ export function MobileNativeChatQueuedMessages({
             <Pressable
               accessibilityRole="button"
               accessibilityState={{ disabled: resuming }}
-              accessibilityLabel="Resume sending the queued messages"
+              accessibilityLabel={t('nativeChat.queued.resumeSending')}
               style={({ pressed }) => [
                 styles.textAction,
                 pressed && styles.pressed,
@@ -101,7 +104,7 @@ export function MobileNativeChatQueuedMessages({
               onPress={() => void run(RESUME_KEY, onResume && (() => onResume()))}
             >
               <Play size={12} color={colors.textPrimary} strokeWidth={2} />
-              <Text style={styles.actionLabel}>Resume</Text>
+              <Text style={styles.actionLabel}>{t('nativeChat.queued.resume')}</Text>
             </Pressable>
           </View>
         ) : null}
@@ -146,10 +149,10 @@ export function MobileNativeChatQueuedMessages({
                   accessibilityState={{ disabled: busy || steerHeld }}
                   accessibilityLabel={
                     returned
-                      ? 'Send this message again'
+                      ? t('nativeChat.queued.sendAgain')
                       : steers
-                        ? 'Submit without interrupting the model'
-                        : 'Send this message'
+                        ? t('nativeChat.queued.submitWithoutInterrupting')
+                        : t('nativeChat.queued.sendThisMessage')
                   }
                   style={({ pressed }) => [
                     styles.textAction,
@@ -164,13 +167,15 @@ export function MobileNativeChatQueuedMessages({
                   ) : (
                     <Send size={12} color={colors.textPrimary} strokeWidth={2} />
                   )}
-                  <Text style={styles.actionLabel}>{steers ? 'Steer' : 'Send'}</Text>
+                  <Text style={styles.actionLabel}>
+                    {steers ? t('nativeChat.queued.steer') : t('nativeChat.queued.send')}
+                  </Text>
                 </Pressable>
               )}
               <Pressable
                 accessibilityRole="button"
                 accessibilityState={{ disabled: busy }}
-                accessibilityLabel="Delete this queued message"
+                accessibilityLabel={t('nativeChat.queued.deleteThisMessage')}
                 style={({ pressed }) => [
                   styles.iconAction,
                   pressed && styles.pressed,
@@ -186,7 +191,7 @@ export function MobileNativeChatQueuedMessages({
                 <Pressable
                   accessibilityRole="button"
                   accessibilityState={{ disabled: busy }}
-                  accessibilityLabel="More actions"
+                  accessibilityLabel={t('nativeChat.queued.moreActions')}
                   style={({ pressed }) => [
                     styles.iconAction,
                     pressed && styles.pressed,
@@ -207,7 +212,7 @@ export function MobileNativeChatQueuedMessages({
         title={menuCard?.text}
         actions={[
           {
-            label: 'Edit message',
+            label: t('nativeChat.queued.editMessage'),
             icon: Pencil,
             // Runs once the sheet's Modal is gone, so the composer Edit fills can take focus.
             closeBeforePress: true,
@@ -228,6 +233,8 @@ export function MobileNativeChatQueuedMessages({
  *  never read, and Steer or Delete must not be a blind choice. Opened, a long one scrolls in a
  *  capped box. */
 function MobileQueuedCardText({ text }: { text: string }): React.JSX.Element {
+  const { t } = useTranslation()
+
   const [expanded, setExpanded] = useState(false)
   const [clipped, setClipped] = useState(false)
   // The whole text laid out unseen at the card's width: more than two lines is what clips.
@@ -257,13 +264,17 @@ function MobileQueuedCardText({ text }: { text: string }): React.JSX.Element {
       testID="queued-card-text"
       accessibilityRole="button"
       accessibilityState={{ expanded }}
-      accessibilityHint={expanded ? 'Shows less of the message' : 'Shows the whole message'}
+      accessibilityHint={
+        expanded ? t('nativeChat.queued.showsLess') : t('nativeChat.queued.showsWholeMessage')
+      }
       onPress={() => setExpanded(!expanded)}
     >
       <Text style={styles.body} numberOfLines={expanded ? undefined : 2}>
         {text}
       </Text>
-      <Text style={styles.caption}>{expanded ? 'Show less' : 'Show more'}</Text>
+      <Text style={styles.caption}>
+        {expanded ? t('nativeChat.queued.showLess') : t('nativeChat.queued.showMore')}
+      </Text>
     </Pressable>
   )
   // The press sits inside the scroll, so a drag scrolls and only a tap folds it.

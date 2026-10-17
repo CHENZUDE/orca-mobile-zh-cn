@@ -1410,6 +1410,22 @@
     "attachImage": "添加图片",
     "stopDictation": "停止语音输入",
     "dictate": "语音输入",
-    "sendMessage": "发送消息"
+    "sendMessage": "发送消息",
+    "queued": {
+      "resumeSending": "继续发送排队中的消息",
+      "resume": "继续",
+      "sendAgain": "再次发送该消息",
+      "submitWithoutInterrupting": "提交但不打断模型",
+      "sendThisMessage": "发送该消息",
+      "steer": "发送",
+      "send": "发送",
+      "deleteThisMessage": "删除该排队消息",
+      "moreActions": "更多操作",
+      "editMessage": "编辑消息",
+      "showsLess": "收起部分消息",
+      "showsWholeMessage": "展开全部消息",
+      "showLess": "收起",
+      "showMore": "展开"
+    }
   }
 }
