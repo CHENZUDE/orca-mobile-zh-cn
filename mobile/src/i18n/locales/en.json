@@ -921,5 +921,27 @@
       "unstage": "Unstage {{path}}",
       "discard": "Discard {{path}}"
     }
+  },
+  "agentHistory": {
+    "title": "Agent Session History",
+    "refreshA11y": "Refresh agent sessions",
+    "unavailableTitle": "Agent Session History Unavailable",
+    "unavailableBody": "Update Orca on this host to browse agent session history.",
+    "unableToLoad": "Unable to Load",
+    "searchPlaceholder": "Search sessions, repo:, path:",
+    "noSessions": "No agent sessions",
+    "noMatches": "No sessions match your search.",
+    "noPastSessions": "No past agent sessions in this scope.",
+    "transcriptsSkipped": "{{count}} {{kind}} skipped",
+    "transcript": "transcript",
+    "transcripts": "transcripts",
+    "scopeWorkspace": "Workspace",
+    "scopeProject": "Project",
+    "scopeAll": "All",
+    "waitingForHost": "Waiting for host...",
+    "missingResumeId": "This session is missing a resume id.",
+    "unableHostPlatform": "Unable to determine host platform.",
+    "sessionQueued": "Agent session queued.",
+    "failedToResume": "Failed to resume session."
   }
 }

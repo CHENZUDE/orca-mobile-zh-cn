@@ -921,5 +921,27 @@
       "unstage": "取消暂存 {{path}}",
       "discard": "丢弃 {{path}}"
     }
+  },
+  "agentHistory": {
+    "title": "智能体会话历史",
+    "refreshA11y": "刷新智能体会话",
+    "unavailableTitle": "无法使用智能体会话历史",
+    "unavailableBody": "请更新该主机上的 Orca 以浏览智能体会话历史。",
+    "unableToLoad": "加载失败",
+    "searchPlaceholder": "搜索会话、repo:、path:",
+    "noSessions": "没有智能体会话",
+    "noMatches": "没有会话匹配你的搜索。",
+    "noPastSessions": "该范围内没有历史智能体会话。",
+    "transcriptsSkipped": "已跳过 {{count}} 份{{kind}}",
+    "transcript": "记录",
+    "transcripts": "记录",
+    "scopeWorkspace": "工作区",
+    "scopeProject": "项目",
+    "scopeAll": "全部",
+    "waitingForHost": "正在等待主机...",
+    "missingResumeId": "该会话缺少恢复 ID。",
+    "unableHostPlatform": "无法确定主机平台。",
+    "sessionQueued": "智能体会话已入队。",
+    "failedToResume": "恢复会话失败。"
   }
 }
