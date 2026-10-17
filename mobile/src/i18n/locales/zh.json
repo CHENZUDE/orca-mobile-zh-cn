@@ -1005,5 +1005,20 @@
     "showMore": "再显示 {{count}} 条",
     "showMoreOfTotal": "再显示 {{count}} 条，共 {{total}} 条",
     "commentAction": "评论"
+  },
+  "prConflicts": {
+    "title": "冲突",
+    "commitsBehind_one": "落后 {{count}} 个提交（基线提交：",
+    "commitsBehind_other": "落后 {{count}} 个提交（基线提交：",
+    "detailsUnavailable": "无法获取冲突文件详情",
+    "refreshing": "正在刷新冲突详情…",
+    "localMergeClean": "GitHub 报告存在冲突，但本地 Git 未能复现。请刷新 PR 或推送该分支以重新计算可合并性。",
+    "mustResolve": "该分支存在必须解决的冲突",
+    "runFromWorktree": "在此工作区中运行",
+    "copyCommands": "复制命令",
+    "copyFailed": "复制文本失败",
+    "copyCommandsA11y": "复制可合并性刷新命令",
+    "conflictingFiles": "冲突文件",
+    "resolveWithAi": "用 AI 解决冲突"
   }
 }
