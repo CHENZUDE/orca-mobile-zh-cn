@@ -3,6 +3,15 @@
     "name": "Orca"
   },
   "common": {
+    "back": "返回",
+    "save": "保存",
+    "cancel": "取消",
+    "retry": "重试",
+    "loading": "加载中…",
+    "on": "开",
+    "off": "关",
+    "nameLabel": "名称",
+    "addressLabel": "地址",
     "none": "无"
   },
   "pairing": {

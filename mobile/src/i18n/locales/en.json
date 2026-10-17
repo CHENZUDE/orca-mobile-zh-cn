@@ -3,6 +3,15 @@
     "name": "Orca"
   },
   "common": {
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "loading": "Loading…",
+    "on": "On",
+    "off": "Off",
+    "nameLabel": "Name",
+    "addressLabel": "Address",
     "none": "None"
   },
   "pairing": {
