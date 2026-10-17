@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { Plus, QrCode } from 'lucide-react-native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
@@ -66,9 +67,12 @@ export function MobileHomeQuickActions(props: Props) {
     }
   }
 
+  const { t } = useTranslation()
   return (
     <>
-      <Text style={styles.sectionHeading}>Quick Actions</Text>
+      <Text style={styles.sectionHeading}>{t('home.quickActions')}</Text>
+  const { t } = useTranslation()
+
       <View style={styles.quickActions}>
         <Pressable
           accessibilityRole="button"
@@ -78,7 +82,7 @@ export function MobileHomeQuickActions(props: Props) {
           <View style={styles.quickActionIcon}>
             <QrCode size={16} color={colors.textSecondary} />
           </View>
-          <Text style={styles.quickActionLabel}>Pair Desktop</Text>
+          <Text style={styles.quickActionLabel}>{t('home.pairDesktop')}</Text>
         </Pressable>
         <Pressable
           accessibilityRole="button"
@@ -94,12 +98,12 @@ export function MobileHomeQuickActions(props: Props) {
           <View style={styles.quickActionIcon}>
             <Plus size={16} color={colors.textSecondary} />
           </View>
-          <Text style={styles.quickActionLabel}>New Workspace</Text>
+          <Text style={styles.quickActionLabel}>{t('home.newWorkspace')}</Text>
         </Pressable>
       </View>
       <PickerModal
         visible={hostPickerVisible}
-        title="Create Workspace On"
+        title={t('home.createWorkspaceOn')}
         options={hostPickerOptions(props.connectedHosts)}
         selected=""
         onSelect={handleHostSelect}

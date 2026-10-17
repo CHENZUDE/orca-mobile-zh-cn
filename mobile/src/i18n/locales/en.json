@@ -115,7 +115,11 @@
           "desc": "Your desktop will appear here. Everything is encrypted end-to-end."
         }
       }
-    }
+    },
+    "quickActions": "Quick Actions",
+    "pairDesktop": "Pair Desktop",
+    "newWorkspace": "New Workspace",
+    "createWorkspaceOn": "Create Workspace On"
   },
   "onboarding": {
     "progressA11y": "Onboarding progress",

@@ -115,7 +115,11 @@
           "desc": "桌面将显示在这里,全程端到端加密。"
         }
       }
-    }
+    },
+    "quickActions": "快捷操作",
+    "pairDesktop": "配对电脑",
+    "newWorkspace": "新建工作区",
+    "createWorkspaceOn": "选择创建工作区的主机"
   },
   "onboarding": {
     "progressA11y": "引导进度",
