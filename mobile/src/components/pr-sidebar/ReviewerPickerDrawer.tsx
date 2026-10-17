@@ -63,7 +63,7 @@ export function ReviewerPickerDrawer({
       })
       .catch(() => {
         if (!cancelled) {
-          setLoad({ status: 'error', message: 'Failed to load people' })
+          setLoad({ status: 'error', message: t('reviewerPicker.failedToLoadPeople') })
         }
       })
     return () => {

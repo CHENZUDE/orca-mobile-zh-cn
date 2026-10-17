@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Alert, Platform, Pressable, StyleSheet, Text } from 'react-native'
 import { Check, Copy } from 'lucide-react-native'
@@ -15,6 +16,7 @@ export function MobileSourceCopyButton({
   accessibilityLabel: string
   partial?: boolean
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const clipboard = useClipboardWriter()
   const [feedback, setFeedback] = useState<CopyFeedback | null>(null)
   const latestAttempt = useRef<{ sourceVersion: number } | null>(null)
@@ -73,8 +75,8 @@ export function MobileSourceCopyButton({
         showFeedback({ status: 'failed' }, attempt)
       } else {
         Alert.alert(
-          'Copy failed',
-          error instanceof Error ? error.message : 'The clipboard rejected the text.'
+          t('common.copyFailed'),
+          error instanceof Error ? error.message : t('common.clipboardRejectedText')
         )
       }
       return
@@ -87,14 +89,14 @@ export function MobileSourceCopyButton({
   const copied = feedback?.status === 'copied' && feedback.text === text
   const failed = feedback?.status === 'failed'
   const label = failed
-    ? 'Failed'
+    ? t('common.failed')
     : copied
       ? partial
-        ? 'Copied loaded'
-        : 'Copied'
+        ? t('common.copiedLoaded')
+        : t('common.copied')
       : partial
-        ? 'Copy loaded'
-        : 'Copy'
+        ? t('common.copyLoaded')
+        : t('common.copy')
   const Icon = copied ? Check : Copy
   const iconColor = failed ? colors.statusRed : copied ? colors.statusGreen : colors.textMuted
   return (
@@ -102,10 +104,10 @@ export function MobileSourceCopyButton({
       style={({ pressed }) => [styles.button, partial && styles.partial, pressed && styles.pressed]}
       hitSlop={10}
       accessibilityRole="button"
-      accessibilityLabel={failed ? "Couldn't copy" : accessibilityLabel}
+      accessibilityLabel={failed ? t('common.couldNotCopy') : accessibilityLabel}
       accessibilityLiveRegion={failed ? 'polite' : undefined}
-      accessibilityValue={{ text: failed ? "Couldn't copy" : copied ? label : undefined }}
-      aria-valuetext={failed ? "Couldn't copy" : copied ? label : undefined}
+      accessibilityValue={{ text: failed ? t('common.couldNotCopy') : copied ? label : undefined }}
+      aria-valuetext={failed ? t('common.couldNotCopy') : copied ? label : undefined}
       accessibilityState={{ disabled: text.length === 0 }}
       disabled={text.length === 0}
       onPress={() => void copy()}

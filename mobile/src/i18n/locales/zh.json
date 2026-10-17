@@ -1,6 +1,9 @@
 {
   "app": {
-    "name": "Orca"
+    "name": "Orca",
+    "notifications": {
+      "nativeDescription": "即使应用已关闭，也能收到代理提醒。消息通过 Orca 推送服务以及 Apple 或 Google 发送。"
+    }
   },
   "common": {
     "back": "返回",
@@ -18,7 +21,15 @@
     "refresh": "刷新",
     "file": "文件",
     "open": "打开",
-    "remove": "移除"
+    "remove": "移除",
+    "copyFailed": "复制失败",
+    "clipboardRejectedText": "剪贴板拒绝了该文本。",
+    "failed": "失败",
+    "copiedLoaded": "已复制已加载部分",
+    "copied": "已复制",
+    "copyLoaded": "复制已加载部分",
+    "copy": "复制",
+    "couldNotCopy": "无法复制"
   },
   "pairing": {
     "missingCode": "缺少配对码",
@@ -654,7 +665,14 @@
     "derivedFromName": "根据名称自动生成",
     "reuseBranch": "复用分支 “{{branch}}”",
     "openSelectedSource": "打开已选来源",
-    "typeANameOrSearchSource": "输入名称或搜索来源"
+    "typeANameOrSearchSource": "输入名称或搜索来源",
+    "useName": "使用“{{name}}”",
+    "nameThisWorkspace": "为此工作区命名",
+    "createBranch": "创建分支“{{name}}”",
+    "newBranch": "新分支",
+    "prNumber": "PR #{{number}}",
+    "mrNumber": "MR !{{number}}",
+    "issueNumber": "问题 #{{number}}"
   },
   "quickCommand": {
     "label": "名称",
@@ -1002,7 +1020,8 @@
     "unknown": "未知",
     "rerunFailingChecks": "重新运行失败的检查",
     "inspectOrFixWithAi": "查看详情，或启动 AI 修复。",
-    "fixFailingWithAi": "使用 AI 修复失败的检查"
+    "fixFailingWithAi": "使用 AI 修复失败的检查",
+    "failedToLoadDetails": "加载检查详情失败"
   },
   "git": {
     "committedOnBranch": "分支上的提交",
@@ -1407,7 +1426,8 @@
     "createProviderReview": "创建{{review}}",
     "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。",
     "failedToRefreshPullRequest": "刷新 Pull Request 失败。",
-    "failedToMergePullRequest": "合并 Pull Request 失败。"
+    "failedToMergePullRequest": "合并 Pull Request 失败。",
+    "githubAccountNotConnected": "无权限，你的 GitHub 账号尚未连接。"
   },
   "taskOptions": {
     "provider": {
@@ -1621,7 +1641,11 @@
     "failedToConnectSshRepo": "连接 SSH 仓库失败。"
   },
   "hosts": {
-    "backToHosts": "返回主机列表"
+    "backToHosts": "返回主机列表",
+    "edit": {
+      "failedToLoadHost": "加载主机失败。",
+      "failedToSaveHost": "保存主机失败。"
+    }
   },
   "voiceModels": {
     "inUse": "使用中"
@@ -1649,7 +1673,8 @@
   },
   "browserPane": {
     "dialogTitle": "浏览器对话框",
-    "sendTextToBrowser": "向浏览器发送文本"
+    "sendTextToBrowser": "向浏览器发送文本",
+    "typeOnPage": "在页面中输入…"
   },
   "markdownPreview": {
     "viewMarkdownSource": "查看 Markdown 源码",
@@ -1687,7 +1712,8 @@
     "dismiss": "关闭抽屉"
   },
   "reviewerPicker": {
-    "noMatchingPeople": "没有匹配的成员"
+    "noMatchingPeople": "没有匹配的成员",
+    "failedToLoadPeople": "加载人员失败"
   },
   "fileExplorer": {
     "unavailableOnMobile": "移动端不可用"
@@ -1756,7 +1782,14 @@
     "cantReachDesktop": "无法连接到桌面端",
     "relayIdentityEndpointCoexist": "中继标识与端点必须同时提供",
     "relayHostIdentityMismatch": "中继主机标识不匹配",
-    "expectedOneRelayEndpoint": "已配置中继元数据时应恰好提供一个端点"
+    "expectedOneRelayEndpoint": "已配置中继元数据时应恰好提供一个端点",
+    "hostClientOpenFailed": "主机客户端打开失败",
+    "hostClientRecovered": "主机客户端已恢复",
+    "assetsExceedContractTotal": "资源大小总和超过契约总量",
+    "buildIdMustMatchAssets": "buildId 必须是资源列表的内容哈希",
+    "unauthorizedPairingMayBeRevoked": "未授权，配对可能已被撤销",
+    "rpcResultNotObject": "不是非空对象",
+    "rpcReplyOpenedNoStream": "回复未打开任何流"
   },
   "workspaceView": {
     "syncedAcrossDevices": "已在你的设备间同步",
@@ -1871,5 +1904,9 @@
     "failedToSearchBranches": "搜索分支失败。",
     "failedToSaveSparsePreset": "保存稀疏检出预设失败。",
     "failedToReadSshState": "读取 SSH 连接状态失败。"
+  },
+  "activity": {
+    "sourceControl": "源代码管理",
+    "agentSessionHistory": "代理会话历史"
   }
 }

@@ -4,6 +4,7 @@ import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Alert } from 'react-native'
 import { RpcClientProvider } from '../transport/client-context.web'
+import { I18nProvider } from '../i18n/I18nProvider'
 import {
   createFakeBridgePortPair,
   type BridgePortPair
@@ -71,9 +72,15 @@ describe('source Copy feedback in the paired web page', () => {
   async function render(text = '# Held source', partial = false) {
     await act(async () => {
       root?.render(
-        <RpcClientProvider client={pair.client}>
-          <MobileSourceCopyButton text={text} partial={partial} accessibilityLabel="Copy source" />
-        </RpcClientProvider>
+        <I18nProvider>
+          <RpcClientProvider client={pair.client}>
+            <MobileSourceCopyButton
+              text={text}
+              partial={partial}
+              accessibilityLabel="Copy source"
+            />
+          </RpcClientProvider>
+        </I18nProvider>
       )
     })
   }

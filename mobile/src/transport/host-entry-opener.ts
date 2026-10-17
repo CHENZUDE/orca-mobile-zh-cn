@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { attachPushRegistration } from '../notifications/push-registration'
 import { recordHostDescriptorFromStatus } from './host-descriptor-recorder'
 import { startRuntimeStatusProbe } from './runtime-status-probe'
@@ -73,7 +74,7 @@ export async function openHostClientEntry(
       ts: Date.now(),
       level: 'error',
       code: 'host-open-failed',
-      message: 'Host client open failed',
+      message: translate('connectionHealth.hostClientOpenFailed'),
       detail: `${category}; retry ${retry.nextDelayMs}ms (failure ${retry.failureCount})`
     })
   }
@@ -184,7 +185,7 @@ export async function openHostClientEntry(
         id: `host-open-recovered-${ticket.generation}-${Date.now()}`,
         ts: Date.now(),
         level: 'success',
-        message: 'Host client recovered',
+        message: translate('connectionHealth.hostClientRecovered'),
         detail: `after ${priorFailureCount} failed open${priorFailureCount === 1 ? '' : 's'}`
       })
     }

@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { GitBranch } from 'lucide-react-native'
 import type { ActionSheetAction } from '../components/ActionSheetModal'
 import { colors } from '../theme/mobile-theme'
@@ -29,7 +30,7 @@ export function buildWorktreeNavigationActions(args: Args): ActionSheetAction[] 
   const executionHost = args.executionHost
   const actions: ActionSheetAction[] = [
     {
-      label: 'Source Control',
+      label: translate('activity.sourceControl'),
       icon: GitBranch,
       onPress: () => {
         const params = new URLSearchParams({ name: args.worktreeName, origin: 'host' })
@@ -45,7 +46,7 @@ export function buildWorktreeNavigationActions(args: Args): ActionSheetAction[] 
   ]
   if (args.hostCapabilities.includes(MOBILE_AI_VAULT_CAPABILITY)) {
     actions.push({
-      label: 'Agent Session History',
+      label: translate('activity.agentSessionHistory'),
       renderIcon: () =>
         MobileAgentSessionHistoryIcon({ size: 16, color: colors.textSecondary, strokeWidth: 2 }),
       onPress: () => {

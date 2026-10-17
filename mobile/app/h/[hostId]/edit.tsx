@@ -59,7 +59,7 @@ export default function EditHostScreen() {
       setAddress(displayHostEndpoint(found.endpoint))
       setLoadError(null)
     } catch (err) {
-      setLoadError(err instanceof Error ? err.message : 'Failed to load host.')
+      setLoadError(err instanceof Error ? err.message : t('hosts.edit.failedToLoadHost'))
       setHost(null)
     }
   }, [hostId])
@@ -112,7 +112,7 @@ export default function EditHostScreen() {
         ...(nextEndpoint !== undefined ? { endpoint: nextEndpoint } : {})
       })
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Failed to save host.')
+      setSaveError(err instanceof Error ? err.message : t('hosts.edit.failedToSaveHost'))
       setSaveError(err instanceof Error ? err.message : t('host.edit.saveError'))
       savingRef.current = false
       setSaving(false)

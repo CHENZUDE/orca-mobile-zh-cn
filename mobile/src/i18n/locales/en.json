@@ -1,6 +1,9 @@
 {
   "app": {
-    "name": "Orca"
+    "name": "Orca",
+    "notifications": {
+      "nativeDescription": "Get agent alerts even when the app is closed. Delivered through Orca’s push service and Apple or Google."
+    }
   },
   "common": {
     "back": "Back",
@@ -18,7 +21,15 @@
     "refresh": "Refresh",
     "file": "File",
     "open": "Open",
-    "remove": "Remove"
+    "remove": "Remove",
+    "copyFailed": "Copy failed",
+    "clipboardRejectedText": "The clipboard rejected the text.",
+    "failed": "Failed",
+    "copiedLoaded": "Copied loaded",
+    "copied": "Copied",
+    "copyLoaded": "Copy loaded",
+    "copy": "Copy",
+    "couldNotCopy": "Couldn't copy"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -654,7 +665,14 @@
     "derivedFromName": "Derived from name",
     "reuseBranch": "Reuse branch “{{branch}}”",
     "openSelectedSource": "Open selected source",
-    "typeANameOrSearchSource": "Type a name or search a source"
+    "typeANameOrSearchSource": "Type a name or search a source",
+    "useName": "Use \"{{name}}\"",
+    "nameThisWorkspace": "Name this workspace",
+    "createBranch": "Create branch \"{{name}}\"",
+    "newBranch": "New branch",
+    "prNumber": "PR #{{number}}",
+    "mrNumber": "MR !{{number}}",
+    "issueNumber": "Issue #{{number}}"
   },
   "quickCommand": {
     "label": "Label",
@@ -1002,7 +1020,8 @@
     "unknown": "unknown",
     "rerunFailingChecks": "Rerun failing checks",
     "inspectOrFixWithAi": "Inspect details or start an AI fix pass.",
-    "fixFailingWithAi": "Fix failing checks with AI"
+    "fixFailingWithAi": "Fix failing checks with AI",
+    "failedToLoadDetails": "Failed to load check details"
   },
   "git": {
     "committedOnBranch": "Committed on Branch",
@@ -1407,7 +1426,8 @@
     "createProviderReview": "Create {{review}}",
     "branchNotReadyForReview": "This branch is not ready for a {{review}} yet.",
     "failedToRefreshPullRequest": "Failed to refresh pull request.",
-    "failedToMergePullRequest": "Failed to merge pull request."
+    "failedToMergePullRequest": "Failed to merge pull request.",
+    "githubAccountNotConnected": "Not permitted - your GitHub account is not connected."
   },
   "taskOptions": {
     "provider": {
@@ -1621,7 +1641,11 @@
     "failedToConnectSshRepo": "Failed to connect to SSH repository."
   },
   "hosts": {
-    "backToHosts": "Back to hosts"
+    "backToHosts": "Back to hosts",
+    "edit": {
+      "failedToLoadHost": "Failed to load host.",
+      "failedToSaveHost": "Failed to save host."
+    }
   },
   "voiceModels": {
     "inUse": "In use"
@@ -1649,7 +1673,8 @@
   },
   "browserPane": {
     "dialogTitle": "Browser Dialog",
-    "sendTextToBrowser": "Send text to browser"
+    "sendTextToBrowser": "Send text to browser",
+    "typeOnPage": "Type on page…"
   },
   "markdownPreview": {
     "viewMarkdownSource": "View Markdown source",
@@ -1687,7 +1712,8 @@
     "dismiss": "Dismiss drawer"
   },
   "reviewerPicker": {
-    "noMatchingPeople": "No matching people"
+    "noMatchingPeople": "No matching people",
+    "failedToLoadPeople": "Failed to load people"
   },
   "fileExplorer": {
     "unavailableOnMobile": "Unavailable on mobile"
@@ -1756,7 +1782,14 @@
     "cantReachDesktop": "Can't reach desktop",
     "relayIdentityEndpointCoexist": "Relay identity and endpoint must coexist",
     "relayHostIdentityMismatch": "Relay host identity mismatch",
-    "expectedOneRelayEndpoint": "Expected exactly one endpoint for configured relay metadata"
+    "expectedOneRelayEndpoint": "Expected exactly one endpoint for configured relay metadata",
+    "hostClientOpenFailed": "Host client open failed",
+    "hostClientRecovered": "Host client recovered",
+    "assetsExceedContractTotal": "assets sum to more than the contract total",
+    "buildIdMustMatchAssets": "buildId must be the content hash of the asset list",
+    "unauthorizedPairingMayBeRevoked": "Unauthorized - pairing may be revoked",
+    "rpcResultNotObject": "not a non-null object",
+    "rpcReplyOpenedNoStream": "reply opened no stream"
   },
   "workspaceView": {
     "syncedAcrossDevices": "Synced across your devices",
@@ -1871,5 +1904,9 @@
     "failedToSearchBranches": "Failed to search branches.",
     "failedToSaveSparsePreset": "Failed to save sparse preset.",
     "failedToReadSshState": "Failed to read SSH connection state."
+  },
+  "activity": {
+    "sourceControl": "Source Control",
+    "agentSessionHistory": "Agent Session History"
   }
 }

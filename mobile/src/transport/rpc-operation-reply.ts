@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { RpcResponse } from './types'
 import type {
   AnyRpcOperation,
@@ -23,13 +24,13 @@ function admitPayload(operation: AnyRpcOperation, response: RpcResponse): Admitt
     case 'object-result-or-null': {
       const object = rpcObjectResultOrNull(response)
       return object === null
-        ? { admitted: false, issues: [{ path: 'result', message: 'not a non-null object' }] }
+        ? { admitted: false, issues: [{ path: 'result', message: translate('connectionHealth.rpcResultNotObject') }] }
         : { admitted: true, value: object }
     }
     case 'streaming-opener':
       return isStreamingOpenerReply(response)
         ? { admitted: true, value: response }
-        : { admitted: false, issues: [{ path: 'streaming', message: 'reply opened no stream' }] }
+        : { admitted: false, issues: [{ path: 'streaming', message: translate('connectionHealth.rpcReplyOpenedNoStream') }] }
     default:
       // Reuses the policy rather than reading `.result` again; a success never throws here.
       return { admitted: true, value: requireRpcResultOrThrowCodedError(response) }

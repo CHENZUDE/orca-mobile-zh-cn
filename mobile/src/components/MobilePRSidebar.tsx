@@ -212,9 +212,7 @@ function PrSidebarContent({
     // mutation-time block (actions.blocked) routes here even from a ready state.
     const message =
       actions.blocked ??
-      (state.kind === 'blocked'
-        ? state.message
-        : 'Not permitted — your GitHub account is not connected.')
+      (state.kind === 'blocked' ? state.message : t('prSidebar.githubAccountNotConnected'))
     return (
       <View style={styles.stateArea}>
         <Text style={styles.blockedText}>{message}</Text>

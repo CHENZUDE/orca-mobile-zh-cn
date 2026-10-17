@@ -318,7 +318,7 @@ export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
             style={styles.keyboardInput}
             value={keyboardValue}
             onChangeText={setKeyboardValue}
-            placeholder="Type on page…"
+            placeholder={t('browserPane.typeOnPage')}
             placeholderTextColor={colors.textMuted}
             autoCapitalize="none"
             autoCorrect={false}

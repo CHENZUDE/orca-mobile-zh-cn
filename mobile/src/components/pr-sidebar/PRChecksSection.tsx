@@ -91,7 +91,7 @@ export function PRChecksSection({
         // spinning forever — fall back to an error detail.
         entry = {
           status: 'error',
-          message: err instanceof Error ? err.message : 'Failed to load check details'
+          message: err instanceof Error ? err.message : t('prChecks.failedToLoadDetails')
         }
       }
       setDetailCache((prev) => ({ ...prev, [key]: entry }))

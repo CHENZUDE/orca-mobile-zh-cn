@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { z } from 'zod'
 import {
   MOBILE_WEB_BUNDLE_CHUNK_BYTES,
@@ -95,7 +96,7 @@ export const MobileWebBundleManifestReadSchema = z
       context.addIssue({
         code: 'custom',
         path: ['assets'],
-        message: 'assets sum to more than the contract total'
+        message: translate('connectionHealth.assetsExceedContractTotal')
       })
       return
     }
@@ -108,7 +109,7 @@ export const MobileWebBundleManifestReadSchema = z
       context.addIssue({
         code: 'custom',
         path: ['buildId'],
-        message: 'buildId must be the content hash of the asset list'
+        message: translate('connectionHealth.buildIdMustMatchAssets')
       })
     }
   })

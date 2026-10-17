@@ -20,6 +20,7 @@ export function MobileNativeChatMessageActionsSheet({
   message,
   onClose
 }: Props): React.JSX.Element {
+  const { t } = useTranslation()
   const clipboard = useClipboardWriter()
   const [sheetVisible, setSheetVisible] = useState(true)
   const [selecting, setSelecting] = useState(false)
@@ -41,20 +42,20 @@ export function MobileNativeChatMessageActionsSheet({
           onClose={closeSheet}
           actions={[
             {
-              label: 'Copy message',
+              label: t('nativeChat.copyMessage'),
               icon: Copy,
               disabled: text.length === 0,
               onPress: () => {
                 void clipboard.writeText(text).catch((error: unknown) => {
                   Alert.alert(
-                    'Copy failed',
-                    error instanceof Error ? error.message : 'The clipboard rejected the text.'
+                    t('common.copyFailed'),
+                    error instanceof Error ? error.message : t('common.clipboardRejectedText')
                   )
                 })
               }
             },
             {
-              label: 'Select text',
+              label: t('nativeChat.selectText'),
               icon: TextSelect,
               disabled: text.length === 0,
               onPress: () => {
@@ -87,7 +88,7 @@ function SelectTextScreen({
           <Pressable
             onPress={onClose}
             hitSlop={12}
-            accessibilityLabel="Close"
+            accessibilityLabel={t('common.cancel')}
             accessibilityRole="button"
             style={styles.close}
           >
