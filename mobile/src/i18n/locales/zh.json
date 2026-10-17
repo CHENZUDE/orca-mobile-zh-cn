@@ -655,6 +655,19 @@
     "add": "添加快捷命令"
   },
   "tasks": {
+    "comment": {
+      "addPlaceholder": "添加评论",
+      "send": "发送评论",
+      "reply": "回复",
+      "replyPlaceholder": "回复",
+      "resolveThread": "解决会话",
+      "reopenThread": "重新打开会话",
+      "thread": "会话",
+      "comment": "评论",
+      "show": "展开",
+      "count": "{{count}} 条评论",
+      "resolvedBy": "{{author}} 已解决该{{kind}}"
+    },
     "detail": {
       "type": "类型",
       "status": "状态",
