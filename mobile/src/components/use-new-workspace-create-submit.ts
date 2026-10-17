@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { settingsRead } from '../transport/settings-read-operations'
 import { useRef, useState, type Dispatch, type SetStateAction } from 'react'
 import type { PersistedTrustedOrcaHooks } from '../../../src/shared/orca-yaml-hook-types'
@@ -108,7 +109,7 @@ export function useNewWorkspaceCreateSubmit(args: {
           pickPreferredNewWorktreeAgent(latestRuntimeSettings, args.detectedAgentIds)
         )
         args.setAgentOverridden(false)
-        args.setError('Selected agent is disabled. Choose an enabled agent before creating.')
+        args.setError(translate('newWorktree.agentDisabledBeforeCreate'))
         return
       }
 
@@ -126,7 +127,7 @@ export function useNewWorkspaceCreateSubmit(args: {
           setupDecision = options.setupOverride
         } else if (args.setupRunPolicy === 'ask') {
           if (!args.setupDecisionChoice) {
-            args.setError('Choose whether to run the setup script.')
+            args.setError(translate('newWorktree.chooseSetupScript'))
             return
           }
           setupDecision = args.setupDecisionChoice
@@ -186,7 +187,9 @@ export function useNewWorkspaceCreateSubmit(args: {
       args.onClose()
       args.onCreated(result.worktreeId, result.name, result.warning)
     } catch (error) {
-      args.setError(error instanceof Error ? error.message : 'Failed to create workspace')
+      args.setError(
+        error instanceof Error ? error.message : translate('newWorktree.failedToCreate')
+      )
     } finally {
       createInFlightRef.current = false
       setCreating(false)
@@ -218,7 +221,9 @@ export function useNewWorkspaceCreateSubmit(args: {
       args.transitionDrawer('form')
       await create({ setupOverride: 'run', approvedSetupContentHash: approvedHash })
     } catch (error) {
-      args.setError(error instanceof Error ? error.message : 'Failed to trust setup script.')
+      args.setError(
+        error instanceof Error ? error.message : translate('setupHook.failedToTrustSetupScript')
+      )
     } finally {
       setupTrustActionInFlightRef.current = false
       if (!createInFlightRef.current) {

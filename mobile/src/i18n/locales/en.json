@@ -1269,7 +1269,10 @@
     "createWorktree": "Create worktree",
     "selectAProject": "Select a project",
     "runOn": "Run on",
-    "selectARunTarget": "Select a run target"
+    "selectARunTarget": "Select a run target",
+    "agentDisabledBeforeCreate": "Selected agent is disabled. Choose an enabled agent before creating.",
+    "chooseSetupScript": "Choose whether to run the setup script.",
+    "failedToCreate": "Failed to create workspace"
   },
   "session": {
     "header": {
@@ -1378,7 +1381,12 @@
     "unlinkPullRequest": "Unlink pull request",
     "unlink": "Unlink",
     "failedToUnlinkPullRequest": "Failed to unlink pull request.",
-    "retryLoadingPr": "Retry loading pull request"
+    "retryLoadingPr": "Retry loading pull request",
+    "reviewStatusUnavailable": "Review status unavailable",
+    "checkingReviewStatus": "Checking review status…",
+    "reviewCreationUnavailable": "Review creation unavailable for this provider",
+    "createProviderReview": "Create {{review}}",
+    "branchNotReadyForReview": "This branch is not ready for a {{review}} yet."
   },
   "taskOptions": {
     "provider": {
@@ -1533,7 +1541,8 @@
     "runHooks": "Run hooks",
     "alwaysTrustAndRun": "Always trust and run",
     "dontRun": "Don't run",
-    "runSetupCommand": "Run setup command"
+    "runSetupCommand": "Run setup command",
+    "failedToTrustSetupScript": "Failed to trust setup script."
   },
   "files": {
     "closeFiles": "Close files",

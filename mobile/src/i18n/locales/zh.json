@@ -1269,7 +1269,10 @@
     "createWorktree": "创建工作区",
     "selectAProject": "选择项目",
     "runOn": "运行位置",
-    "selectARunTarget": "选择运行位置"
+    "selectARunTarget": "选择运行位置",
+    "agentDisabledBeforeCreate": "所选代理已被禁用，创建前请选择已启用的代理。",
+    "chooseSetupScript": "请选择是否运行安装脚本。",
+    "failedToCreate": "创建工作区失败"
   },
   "session": {
     "header": {
@@ -1378,7 +1381,12 @@
     "unlinkPullRequest": "取消关联拥提请求",
     "unlink": "取消关联",
     "failedToUnlinkPullRequest": "取消关联拥提请求失败。",
-    "retryLoadingPr": "重试加载 Pull Request"
+    "retryLoadingPr": "重试加载 Pull Request",
+    "reviewStatusUnavailable": "无法获取评审状态",
+    "checkingReviewStatus": "正在检查评审状态…",
+    "reviewCreationUnavailable": "当前服务商不支持创建评审",
+    "createProviderReview": "创建{{review}}",
+    "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。"
   },
   "taskOptions": {
     "provider": {
@@ -1533,7 +1541,8 @@
     "runHooks": "运行脚本",
     "alwaysTrustAndRun": "始终信任并运行",
     "dontRun": "不运行",
-    "runSetupCommand": "运行安装命令"
+    "runSetupCommand": "运行安装命令",
+    "failedToTrustSetupScript": "信任安装脚本失败。"
   },
   "files": {
     "closeFiles": "关闭文件",
