@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useState } from 'react'
 import { Image, Platform, Pressable, Text, View } from 'react-native'
 import { openExternalLink } from '../../platform/external-link'
@@ -75,6 +76,7 @@ export const PRCommentCard = memo(function PRCommentCard({
   actions?: PRCommentCardActions
   now: number
 }) {
+  const { t } = useTranslation()
   const [replyOpen, setReplyOpen] = useState(false)
   const [editOpen, setEditOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -138,7 +140,7 @@ export const PRCommentCard = memo(function PRCommentCard({
         ) : null}
         {comment.isResolved ? (
           <View style={styles.resolvedChip}>
-            <Text style={styles.resolvedChipText}>resolved</Text>
+            <Text style={styles.resolvedChipText}>{t('prComments.resolved')}</Text>
           </View>
         ) : null}
         {comment.url ? (
@@ -147,7 +149,7 @@ export const PRCommentCard = memo(function PRCommentCard({
             onPress={() => openExternalLink(comment.url)}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Open comment on GitHub"
+            accessibilityLabel={t('prComments.openOnGithub')}
           >
             <ExternalLink size={14} color={colors.textSecondary} strokeWidth={2.2} />
           </Pressable>
@@ -156,8 +158,8 @@ export const PRCommentCard = memo(function PRCommentCard({
       {editOpen && actions ? (
         <View style={styles.composer}>
           <PRCommentComposer
-            placeholder="Edit comment…"
-            submitLabel="Save"
+            placeholder={t('prComments.editCommentPlaceholder')}
+            submitLabel={t('common.save')}
             submitting={editBusy}
             initialBody={comment.body}
             onSubmit={submitEdit}
@@ -179,10 +181,10 @@ export const PRCommentCard = memo(function PRCommentCard({
             disabled={replyBusy}
             hitSlop={6}
             accessibilityRole="button"
-            accessibilityLabel="Reply to comment"
+            accessibilityLabel={t('prComments.replyToComment')}
           >
             <CornerDownRight size={13} color={colors.textSecondary} strokeWidth={2.2} />
-            <Text style={styles.actionButtonText}>Reply</Text>
+            <Text style={styles.actionButtonText}>{t('prComments.reply')}</Text>
           </Pressable>
           {canMutate ? (
             <Pressable
@@ -195,10 +197,10 @@ export const PRCommentCard = memo(function PRCommentCard({
               disabled={editBusy}
               hitSlop={6}
               accessibilityRole="button"
-              accessibilityLabel="Edit comment"
+              accessibilityLabel={t('prComments.editComment')}
             >
               <Pencil size={13} color={colors.textSecondary} strokeWidth={2.2} />
-              <Text style={styles.actionButtonText}>Edit</Text>
+              <Text style={styles.actionButtonText}>{t('prComments.edit')}</Text>
             </Pressable>
           ) : null}
           {canMutate ? (
@@ -208,10 +210,12 @@ export const PRCommentCard = memo(function PRCommentCard({
               disabled={deleteBusy}
               hitSlop={6}
               accessibilityRole="button"
-              accessibilityLabel="Delete comment"
+              accessibilityLabel={t('prComments.deleteComment')}
             >
               <Trash2 size={13} color={colors.textSecondary} strokeWidth={2.2} />
-              <Text style={styles.actionButtonText}>{deleteBusy ? '…' : 'Delete'}</Text>
+              <Text style={styles.actionButtonText}>
+                {deleteBusy ? t('prComments.busy') : t('common.delete')}
+              </Text>
             </Pressable>
           ) : null}
           {canResolve ? (
@@ -221,7 +225,11 @@ export const PRCommentCard = memo(function PRCommentCard({
               disabled={resolveBusy}
               hitSlop={6}
               accessibilityRole="button"
-              accessibilityLabel={comment.isResolved ? 'Unresolve thread' : 'Resolve thread'}
+              accessibilityLabel={
+                comment.isResolved
+                  ? t('prComments.unresolveThread')
+                  : t('prComments.resolveThread')
+              }
             >
               {comment.isResolved ? (
                 <Undo2 size={13} color={colors.textSecondary} strokeWidth={2.2} />
@@ -229,7 +237,11 @@ export const PRCommentCard = memo(function PRCommentCard({
                 <Check size={13} color={colors.textSecondary} strokeWidth={2.2} />
               )}
               <Text style={styles.actionButtonText}>
-                {resolveBusy ? '…' : comment.isResolved ? 'Unresolve' : 'Resolve'}
+                {resolveBusy
+                  ? t('prComments.busy')
+                  : comment.isResolved
+                    ? t('prComments.unresolve')
+                    : t('prComments.resolve')}
               </Text>
             </Pressable>
           ) : null}
@@ -238,8 +250,8 @@ export const PRCommentCard = memo(function PRCommentCard({
       {replyOpen && !editOpen && actions ? (
         <View style={styles.composer}>
           <PRCommentComposer
-            placeholder="Write a reply…"
-            submitLabel="Reply"
+            placeholder={t('prComments.writeAReplyPlaceholder')}
+            submitLabel={t('prComments.reply')}
             submitting={replyBusy}
             onSubmit={submitReply}
             onCancel={() => setReplyOpen(false)}
@@ -250,9 +262,9 @@ export const PRCommentCard = memo(function PRCommentCard({
       {actions ? (
         <ConfirmModal
           visible={confirmDelete}
-          title="Delete comment?"
-          message="This permanently deletes the comment on GitHub."
-          confirmLabel="Delete"
+          title={t('prComments.deleteCommentConfirm')}
+          message={t('prComments.permanentlyDeletesOnGithub')}
+          confirmLabel={t('common.delete')}
           destructive
           onConfirm={() => void actions.deleteComment(comment.id)}
           onCancel={() => setConfirmDelete(false)}
