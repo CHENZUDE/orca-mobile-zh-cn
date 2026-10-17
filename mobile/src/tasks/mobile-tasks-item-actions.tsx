@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -20,6 +21,19 @@ import {
   isGitHubPrMergeBlocked
 } from './mobile-tasks-legacy-foundation'
 
+// Composes "verb kind" from the two i18n keys the pure helper returns, separated by '|'.
+function LocalizedTaskStatusLabel({ value }: { value: string }): React.JSX.Element | null {
+  const { t } = useTranslation()
+  if (!value) {
+    return null
+  }
+  const [verbKey, kindKey] = value.split('|')
+  if (!verbKey || !kindKey) {
+    return null
+  }
+  return <>{`${t(verbKey)} ${t(kindKey)}`}</>
+}
+
 export function renderMobileTasksItemActions(model: ConnectionPresentationModel) {
   const {
     actionItem,
@@ -35,6 +49,7 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
     setWorkspaceRepoPickerItem,
     workspaceRepos
   } = model
+  const { t } = useTranslation()
   if (!actionItem) {
     return null
   }
@@ -53,7 +68,9 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
       >
         <Plus size={16} color={colors.textPrimary} />
         <Text style={styles.actionText}>
-          {creatingKey === actionItem.key ? 'Creating...' : 'Create Workspace'}
+          {creatingKey === actionItem.key
+            ? t('tasks.trust.creating')
+            : t('tasks.project.createWorkspace')}
         </Text>
       </Pressable>
 
@@ -63,7 +80,7 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
         onPress={() => void Linking.openURL(actionItem.source.url)}
       >
         <ExternalLink size={16} color={colors.textPrimary} />
-        <Text style={styles.actionText}>{taskExternalOpenLabel(actionItem)}</Text>
+        <Text style={styles.actionText}>{t(taskExternalOpenLabel(actionItem))}</Text>
       </Pressable>
 
       {actionItem.provider === 'linear' ? (
@@ -77,7 +94,9 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
           >
             <Copy size={16} color={colors.textPrimary} />
             <Text style={styles.actionText}>
-              {copiedLinkKey === `linear-url:${actionItem.key}` ? 'Copied' : 'Copy Linear link'}
+              {copiedLinkKey === `linear-url:${actionItem.key}`
+                ? t('tasks.project.copied')
+                : t('tasks.itemActions.copyLinearLink')}
             </Text>
           </Pressable>
         </>
@@ -92,7 +111,9 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
           >
             <Copy size={16} color={colors.textPrimary} />
             <Text style={styles.actionText}>
-              {copiedLinkKey === `task:${actionItem.key}` ? 'Copied' : 'Copy GitHub link'}
+              {copiedLinkKey === `task:${actionItem.key}`
+                ? t('tasks.project.copied')
+                : t('tasks.project.copyGithubLink')}
             </Text>
           </Pressable>
         </>
@@ -118,7 +139,9 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
             ) : (
               <X size={16} color={colors.textPrimary} />
             )}
-            <Text style={styles.actionText}>{taskStatusActionLabel(actionItem)}</Text>
+            <Text style={styles.actionText}>
+              <LocalizedTaskStatusLabel value={taskStatusActionLabel(actionItem)} />
+            </Text>
           </Pressable>
         </>
       ) : null}
@@ -136,10 +159,12 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
             }
           >
             <GitBranch size={16} color={colors.textPrimary} />
-            <Text style={styles.actionText}>Merge pull request</Text>
+            <Text style={styles.actionText}>{t('tasks.project.mergePullRequest')}</Text>
           </Pressable>
           {isGitHubPrMergeBlocked(actionItem) ? (
-            <Text style={styles.emptyInlineText}>GitHub reports merge conflicts.</Text>
+            <Text style={styles.emptyInlineText}>
+              {t('tasks.itemActions.mergeConflicts')}
+            </Text>
           ) : null}
         </>
       ) : null}
@@ -166,7 +191,9 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
             ) : (
               <X size={16} color={colors.textPrimary} />
             )}
-            <Text style={styles.actionText}>{taskStatusActionLabel(actionItem)}</Text>
+            <Text style={styles.actionText}>
+              <LocalizedTaskStatusLabel value={taskStatusActionLabel(actionItem)} />
+            </Text>
           </Pressable>
         </>
       ) : null}
@@ -184,7 +211,7 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
             }
           >
             <GitBranch size={16} color={colors.textPrimary} />
-            <Text style={styles.actionText}>Merge merge request</Text>
+            <Text style={styles.actionText}>{t('tasks.itemActions.mergeMergeRequest')}</Text>
           </Pressable>
         </>
       ) : null}
@@ -200,7 +227,7 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
             }}
           >
             <GitBranch size={16} color={colors.textPrimary} />
-            <Text style={styles.actionText}>Change status</Text>
+            <Text style={styles.actionText}>{t('tasks.filters.changeStatus')}</Text>
           </Pressable>
         </>
       ) : null}

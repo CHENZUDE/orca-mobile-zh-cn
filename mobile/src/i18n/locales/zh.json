@@ -906,6 +906,18 @@
     },
     "linearList": {
       "changeStatusFrom": "将状态从“{{state}}”改为其他"
+    },
+    "itemActions": {
+      "kindMergeRequest": "合并请求",
+      "kindGitlabTodo": "待办",
+      "kindLinearTicket": "Linear 工单",
+      "openInGitlab": "在 GitLab 中打开",
+      "openInLinear": "在 Linear 中打开",
+      "reopen": "重新打开",
+      "close": "关闭",
+      "copyLinearLink": "复制 Linear 链接",
+      "mergeConflicts": "GitHub 报告存在合并冲突。",
+      "mergeMergeRequest": "合并合并请求"
     }
   },
   "prChecks": {

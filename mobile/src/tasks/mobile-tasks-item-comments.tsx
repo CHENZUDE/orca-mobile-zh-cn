@@ -6,37 +6,39 @@ import type { TaskItem } from './mobile-tasks-project-workspace-types'
 import type { DetailComment } from './mobile-tasks-provider-detail-types'
 import { styles } from './mobile-tasks-legacy-styles'
 
+// Why: returns i18n keys so the .tsx caller localizes them; this module is a pure helper.
 export function taskKindLabel(item: TaskItem): string {
   if (item.provider === 'github') {
-    return item.source.type === 'pr' ? 'Pull request' : 'Issue'
+    return item.source.type === 'pr' ? 'tasks.project.typePullRequest' : 'tasks.project.typeIssue'
   }
   if (item.provider === 'gitlab') {
-    return item.source.type === 'mr' ? 'Merge request' : 'Issue'
+    return item.source.type === 'mr'
+      ? 'tasks.itemActions.kindMergeRequest'
+      : 'tasks.project.typeIssue'
   }
   if (item.provider === 'gitlabTodo') {
-    return `${gitLabTodoTargetLabel(item.source)} todo`
+    return 'tasks.itemActions.kindGitlabTodo'
   }
-  return 'Linear ticket'
+  return 'tasks.itemActions.kindLinearTicket'
 }
 
 export function taskExternalOpenLabel(item: TaskItem): string {
   if (item.provider === 'github') {
-    return 'Open in GitHub'
+    return 'tasks.project.openInGitHub'
   }
   if (item.provider === 'gitlab' || item.provider === 'gitlabTodo') {
-    return 'Open in GitLab'
+    return 'tasks.itemActions.openInGitlab'
   }
-  return 'Open in Linear'
+  return 'tasks.itemActions.openInLinear'
 }
 
 export function taskStatusActionLabel(item: TaskItem): string {
-  const verb =
-    item.provider === 'github' || item.provider === 'gitlab'
-      ? item.source.state === 'closed'
-        ? 'Reopen'
-        : 'Close'
-      : ''
-  return verb ? `${verb} ${taskKindLabel(item).toLowerCase()}` : ''
+  if (item.provider !== 'github' && item.provider !== 'gitlab') {
+    return ''
+  }
+  const verbKey = item.source.state === 'closed' ? 'tasks.itemActions.reopen' : 'tasks.itemActions.close'
+  // Why: the caller composes "verb kind" so both halves translate in the reader language.
+  return `${verbKey}|${taskKindLabel(item)}`
 }
 
 export function isGitHubPrMergeBlocked(item: Extract<TaskItem, { provider: 'github' }>): boolean {

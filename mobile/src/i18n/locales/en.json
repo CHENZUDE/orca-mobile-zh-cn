@@ -906,6 +906,18 @@
     },
     "linearList": {
       "changeStatusFrom": "Change status from {{state}}"
+    },
+    "itemActions": {
+      "kindMergeRequest": "Merge request",
+      "kindGitlabTodo": "To-do",
+      "kindLinearTicket": "Linear ticket",
+      "openInGitlab": "Open in GitLab",
+      "openInLinear": "Open in Linear",
+      "reopen": "Reopen",
+      "close": "Close",
+      "copyLinearLink": "Copy Linear link",
+      "mergeConflicts": "GitHub reports merge conflicts.",
+      "mergeMergeRequest": "Merge merge request"
     }
   },
   "prChecks": {

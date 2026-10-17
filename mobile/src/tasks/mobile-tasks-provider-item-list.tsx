@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -30,6 +31,7 @@ import {
 } from './mobile-tasks-legacy-foundation'
 
 export function renderMobileTasksProviderItemList(model: ConnectionPresentationModel) {
+  const { t } = useTranslation()
   const {
     displayedEntries,
     emptyLabel,
@@ -190,7 +192,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
               <View style={styles.metaRow}>
                 <View style={[styles.repoDot, { backgroundColor: repo.color }]} />
                 <Text style={styles.subtitle} numberOfLines={1}>
-                  {taskKindLabel(item)} · {item.subtitle}
+                  {t(taskKindLabel(item))} · {item.subtitle}
                 </Text>
               </View>
               {branchSummary ? (

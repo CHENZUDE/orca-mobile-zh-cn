@@ -66,7 +66,7 @@ export function renderMobileTasksItemDetailContent(model: ConnectionPresentation
       <View style={styles.detailMetaGrid}>
         <View style={styles.detailMetaItem}>
           <Text style={styles.detailMetaLabel}>{t('tasks.detail.type')}</Text>
-          <Text style={styles.detailMetaValue}>{taskKindLabel(actionItem)}</Text>
+          <Text style={styles.detailMetaValue}>{t(taskKindLabel(actionItem))}</Text>
         </View>
         <View style={styles.detailMetaItem}>
           <Text style={styles.detailMetaLabel}>{t('tasks.detail.status')}</Text>

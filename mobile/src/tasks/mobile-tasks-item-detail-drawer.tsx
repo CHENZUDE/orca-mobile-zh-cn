@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -14,6 +15,7 @@ import { renderMobileTasksItemDetailContent } from './mobile-tasks-item-detail-c
 import { renderMobileTasksItemActions } from './mobile-tasks-item-actions'
 
 export function renderMobileTasksItemDetailDrawer(model: ConnectionPresentationModel) {
+  const { t } = useTranslation()
   const { actionItem, detailLoading, setActionItem, setDetailRefreshSeq, taskUiReady } = model
   return (
     <BottomDrawer visible={taskUiReady && actionItem != null} onClose={() => setActionItem(null)}>
@@ -42,7 +44,7 @@ export function renderMobileTasksItemDetailDrawer(model: ConnectionPresentationM
               </Pressable>
             </View>
             <Text style={styles.sheetSubtitle}>
-              {taskKindLabel(actionItem)} · {actionItem.subtitle}
+              {t(taskKindLabel(actionItem))} · {actionItem.subtitle}
             </Text>
           </View>
 
