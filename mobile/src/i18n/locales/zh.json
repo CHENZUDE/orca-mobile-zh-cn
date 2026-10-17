@@ -1855,6 +1855,21 @@
     "failedToDeleteComment": "删除评论失败",
     "failedToResolveThread": "标记线程为已解决失败",
     "failedToReopenThread": "重新打开线程失败",
-    "failedToEditComment": "编辑评论失败"
+    "failedToEditComment": "编辑评论失败",
+    "failedToUpdateGitLabItem": "更新 GitLab 条目失败",
+    "failedToUpdateGitHubIssue": "更新 GitHub 问题失败",
+    "failedToUpdateGitHubPullRequest": "更新 GitHub Pull Request 失败",
+    "failedToCreateGitHubIssue": "创建 GitHub 问题失败",
+    "failedToCreateGitLabIssue": "创建 GitLab 问题失败",
+    "failedToCreateLinearIssue": "创建 Linear 问题失败",
+    "failedToCreateTask": "创建任务失败",
+    "failedToUpdateIssueSource": "更新问题来源失败",
+    "failedToLoadGitHubTasks": "加载 GitHub 任务失败",
+    "failedToLoadGitLabTasks": "加载 GitLab 任务失败",
+    "failedToLoadTasks": "加载任务失败",
+    "failedToLoadSparsePresets": "加载稀疏检出预设失败。",
+    "failedToSearchBranches": "搜索分支失败。",
+    "failedToSaveSparsePreset": "保存稀疏检出预设失败。",
+    "failedToReadSshState": "读取 SSH 连接状态失败。"
   }
 }

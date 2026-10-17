@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ProviderLoadActionsModel } from './use-mobile-tasks-provider-load-actions'
 import { isHostedTaskRepo, useCallback, useEffect, useRef } from './mobile-tasks-dependencies'
 import {
@@ -117,7 +118,7 @@ export function useMobileTasksTaskListLoading(model: ProviderLoadActionsModel) {
             setGithubSourceErrors(page.sourceErrors)
             setGithubSourceFallbacks(page.sourceFallbacks)
             if (page.failedCount === queriedRepos.length) {
-              throw new Error('Failed to load GitHub tasks')
+              throw new Error(translate('taskActions.failedToLoadGitHubTasks'))
             }
             setGithubPages([page.items])
             setGithubCurrentPage(0)
@@ -182,7 +183,10 @@ export function useMobileTasksTaskListLoading(model: ProviderLoadActionsModel) {
                 console.warn(`[mobile tasks] failed to fetch ${provider} work items`, repo.id, err)
                 return {
                   items: [] as TaskItem[],
-                  error: err instanceof Error ? err.message : 'Failed to load GitLab tasks'
+                  error:
+                    err instanceof Error
+                      ? err.message
+                      : translate('taskActions.failedToLoadGitLabTasks')
                 }
               }
             }
@@ -193,7 +197,8 @@ export function useMobileTasksTaskListLoading(model: ProviderLoadActionsModel) {
           const failedCount = results.filter((result) => result.error).length
           if (failedCount === queriedRepos.length) {
             throw new Error(
-              results.find((result) => result.error)?.error ?? 'Failed to load GitLab tasks'
+              results.find((result) => result.error)?.error ??
+                translate('taskActions.failedToLoadGitLabTasks')
             )
           }
           setItems(
@@ -242,7 +247,7 @@ export function useMobileTasksTaskListLoading(model: ProviderLoadActionsModel) {
         }
         setItems([])
         resetGitHubItemsState()
-        setError(err instanceof Error ? err.message : 'Failed to load tasks')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToLoadTasks'))
       } finally {
         if (isCurrent()) {
           setLoading(false)

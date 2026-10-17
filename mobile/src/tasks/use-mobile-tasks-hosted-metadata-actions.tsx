@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { GitlabGithubStatusActionsModel } from './use-mobile-tasks-gitlab-github-status-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import type { TaskItem } from './mobile-tasks-legacy-foundation'
@@ -52,7 +53,7 @@ export function useMobileTasksHostedMetadataActions(model: GitlabGithubStatusAct
         )
         const result = githubPullRequestUpdate.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to update GitHub pull request')
+          throw new Error(result.error ?? translate('taskActions.failedToUpdateGitHubPullRequest'))
         }
         if (nextTitle !== undefined) {
           setActionItem((current) =>
@@ -83,7 +84,11 @@ export function useMobileTasksHostedMetadataActions(model: GitlabGithubStatusAct
         }
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update GitHub pull request')
+        setError(
+          err instanceof Error
+            ? err.message
+            : translate('taskActions.failedToUpdateGitHubPullRequest')
+        )
       } finally {
         setMutatingStatus(false)
       }
@@ -143,7 +148,7 @@ export function useMobileTasksHostedMetadataActions(model: GitlabGithubStatusAct
                 )
               )
         if (updated.ok === false) {
-          throw new Error(updated.error ?? 'Failed to update GitLab item')
+          throw new Error(updated.error ?? translate('taskActions.failedToUpdateGitLabItem'))
         }
         const nextLabels = [
           ...new Set([
@@ -215,7 +220,9 @@ export function useMobileTasksHostedMetadataActions(model: GitlabGithubStatusAct
         }
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update GitLab item')
+        setError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateGitLabItem')
+        )
       } finally {
         setMutatingStatus(false)
       }

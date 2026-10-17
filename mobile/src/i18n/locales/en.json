@@ -1855,6 +1855,21 @@
     "failedToDeleteComment": "Failed to delete comment",
     "failedToResolveThread": "Failed to resolve thread",
     "failedToReopenThread": "Failed to reopen thread",
-    "failedToEditComment": "Failed to edit comment"
+    "failedToEditComment": "Failed to edit comment",
+    "failedToUpdateGitLabItem": "Failed to update GitLab item",
+    "failedToUpdateGitHubIssue": "Failed to update GitHub issue",
+    "failedToUpdateGitHubPullRequest": "Failed to update GitHub pull request",
+    "failedToCreateGitHubIssue": "Failed to create GitHub issue",
+    "failedToCreateGitLabIssue": "Failed to create GitLab issue",
+    "failedToCreateLinearIssue": "Failed to create Linear issue",
+    "failedToCreateTask": "Failed to create task",
+    "failedToUpdateIssueSource": "Failed to update issue source",
+    "failedToLoadGitHubTasks": "Failed to load GitHub tasks",
+    "failedToLoadGitLabTasks": "Failed to load GitLab tasks",
+    "failedToLoadTasks": "Failed to load tasks",
+    "failedToLoadSparsePresets": "Failed to load sparse presets.",
+    "failedToSearchBranches": "Failed to search branches.",
+    "failedToSaveSparsePreset": "Failed to save sparse preset.",
+    "failedToReadSshState": "Failed to read SSH connection state."
   }
 }

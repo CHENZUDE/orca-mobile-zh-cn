@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { LinearItemActionsModel } from './use-mobile-tasks-linear-item-actions'
 import { colors, useCallback } from './mobile-tasks-dependencies'
 import {
@@ -75,7 +76,12 @@ export function useMobileTasksTaskCreateActions(model: LinearItemActionsModel) {
               )
         if (created.ok === false) {
           throw new Error(
-            created.error ?? `Failed to create ${provider === 'github' ? 'GitHub' : 'GitLab'} issue`
+            created.error ??
+              translate(
+                provider === 'github'
+                  ? 'taskActions.failedToCreateGitHubIssue'
+                  : 'taskActions.failedToCreateGitLabIssue'
+              )
           )
         }
         if (typeof created.number === 'number') {
@@ -123,7 +129,7 @@ export function useMobileTasksTaskCreateActions(model: LinearItemActionsModel) {
         })
         const result = linearIssueCreate.interpret(reply)
         if (result.ok === false || !result.id || !result.identifier) {
-          throw new Error(result.error ?? 'Failed to create Linear issue')
+          throw new Error(result.error ?? translate('taskActions.failedToCreateLinearIssue'))
         }
         setActionItem(
           createLinearTask({
@@ -147,7 +153,7 @@ export function useMobileTasksTaskCreateActions(model: LinearItemActionsModel) {
       setCreateBody('')
       await loadTasks({ silent: true })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create task')
+      setError(err instanceof Error ? err.message : translate('taskActions.failedToCreateTask'))
     } finally {
       setCreatingTask(false)
     }
@@ -187,7 +193,9 @@ export function useMobileTasksTaskCreateActions(model: LinearItemActionsModel) {
         await repoListReload().catch(() => {})
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update issue source')
+        setError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateIssueSource')
+        )
       }
     },
     [client, loadTasks, repoListReload, taskUiReady]

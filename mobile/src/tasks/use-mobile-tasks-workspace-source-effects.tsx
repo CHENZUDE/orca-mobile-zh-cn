@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { WorkspaceCreateProjectionModel } from './use-mobile-tasks-workspace-create-projection'
 import { type SparsePreset, useEffect } from './mobile-tasks-dependencies'
 import {
@@ -68,7 +69,7 @@ export function useMobileTasksWorkspaceSourceEffects(model: WorkspaceCreateProje
           setWorkspaceSparsePresetsLoaded(false)
           setWorkspaceSparsePresetId(null)
           setWorkspaceSparsePresetsError(
-            err instanceof Error ? err.message : 'Failed to load sparse presets.'
+            err instanceof Error ? err.message : translate('taskActions.failedToLoadSparsePresets')
           )
         }
       })
@@ -133,7 +134,7 @@ export function useMobileTasksWorkspaceSourceEffects(model: WorkspaceCreateProje
         if (!stale) {
           setWorkspaceBaseBranchResults([])
           setWorkspaceBaseBranchError(
-            err instanceof Error ? err.message : 'Failed to search branches.'
+            err instanceof Error ? err.message : translate('taskActions.failedToSearchBranches')
           )
         }
       })

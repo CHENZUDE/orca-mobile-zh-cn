@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ListAndDetailEffectsModel } from './use-mobile-tasks-list-and-detail-effects'
 import { useEffect } from './mobile-tasks-dependencies'
 import {
@@ -55,7 +56,9 @@ export function useMobileTasksItemDetailMetadataEffects(model: ListAndDetailEffe
         })
         .catch((err) => {
           if (!stale) {
-            setItemLabelsError(err instanceof Error ? err.message : 'Failed to load labels')
+            setItemLabelsError(
+              err instanceof Error ? err.message : translate('taskActions.failedToLoadLabels')
+            )
           }
         })
         .finally(() => {
@@ -83,7 +86,7 @@ export function useMobileTasksItemDetailMetadataEffects(model: ListAndDetailEffe
       .catch((err) => {
         if (!stale) {
           setItemAssignableUsersError(
-            err instanceof Error ? err.message : 'Failed to load assignees'
+            err instanceof Error ? err.message : translate('taskActions.failedToLoadAssignees')
           )
         }
       })

@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { WorkspaceSourceEffectsModel } from './use-mobile-tasks-workspace-source-effects'
 import { type SparsePreset, useCallback, useEffect } from './mobile-tasks-dependencies'
 import { sortSparsePresetsByName } from './mobile-tasks-legacy-foundation'
@@ -87,7 +88,7 @@ export function useMobileTasksWorkspaceSparseActions(model: WorkspaceSourceEffec
       // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the schema requires the preset's `id`, `name` and `directories` — everything the drawer sorts, lowercases or joins — and types the rest; `repoId`, `createdAt` and `updatedAt` are declared non-optional by SparsePreset but absent from the recorded preset, so defaulting them here would put numbers in the drawer's state the host never sent.
       const saved = repoSparsePresetSaveRun.interpret(reply) as SparsePreset | undefined
       if (!saved) {
-        throw new Error('Failed to save sparse preset.')
+        throw new Error(translate('taskActions.failedToSaveSparsePreset'))
       }
       setWorkspaceSparsePresets((current) => {
         const withoutSaved = current.filter((preset) => preset.id !== saved.id)
@@ -100,7 +101,7 @@ export function useMobileTasksWorkspaceSparseActions(model: WorkspaceSourceEffec
       setWorkspaceSparseDraft(null)
     } catch (err) {
       setWorkspaceSparsePresetsError(
-        err instanceof Error ? err.message : 'Failed to save sparse preset.'
+        err instanceof Error ? err.message : translate('taskActions.failedToSaveSparsePreset')
       )
     } finally {
       setWorkspaceSparseSaving(false)
@@ -145,7 +146,8 @@ export function useMobileTasksWorkspaceSparseActions(model: WorkspaceSourceEffec
           setWorkspaceSshState({
             targetId: workspaceCreateTargetConnectionId,
             status: 'error',
-            error: err instanceof Error ? err.message : 'Failed to read SSH connection state.',
+            error:
+              err instanceof Error ? err.message : translate('taskActions.failedToReadSshState'),
             reconnectAttempt: 0
           })
         }
