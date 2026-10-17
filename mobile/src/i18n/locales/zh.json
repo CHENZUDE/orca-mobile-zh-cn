@@ -736,6 +736,33 @@
       "markViewed": "标记为已读",
       "binaryFile": "二进制文件。",
       "fileContentsUnavailable": "无法获取文件内容。"
+    },
+    "githubProjects": {
+      "title": "GitHub 项目",
+      "subtitle": "为任务页选择一个项目视图。",
+      "searchPlaceholder": "搜索项目",
+      "addByUrlPlaceholder": "按 URL 或 owner/编号 添加",
+      "adding": "添加中...",
+      "add": "添加",
+      "couldNotLoadFrom": "无法从 {{owner}} 加载项目。",
+      "someOrgsFailed": "部分组织加载失败（{{count}} 个）。",
+      "useAddByUrl": "请使用“按 URL 添加”访问缺失的项目。",
+      "orgsLabel": "组织",
+      "failedToLoad": "加载项目失败",
+      "noneLoaded": "尚未加载项目",
+      "tapToRetry": "点按重试。",
+      "pinned": "已置顶",
+      "recent": "最近",
+      "remove": "移除",
+      "pin": "置顶",
+      "browseAllLoading": "浏览全部（加载中...）",
+      "browseAll": "浏览全部",
+      "noMatching": "没有匹配的项目。",
+      "noMore": "没有更多项目。",
+      "chooseView": "选择项目视图",
+      "view": "项目视图",
+      "unsupportedLayout": "Orca 暂不支持该 GitHub 项目布局。",
+      "sortTitle": "项目排序"
     }
   }
 }

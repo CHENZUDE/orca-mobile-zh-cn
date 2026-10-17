@@ -736,6 +736,33 @@
       "markViewed": "Mark viewed",
       "binaryFile": "Binary file.",
       "fileContentsUnavailable": "File contents unavailable."
+    },
+    "githubProjects": {
+      "title": "GitHub Projects",
+      "subtitle": "Choose a project view for the Tasks page.",
+      "searchPlaceholder": "Search projects",
+      "addByUrlPlaceholder": "Add by URL or owner/number",
+      "adding": "Adding...",
+      "add": "Add",
+      "couldNotLoadFrom": "Couldn't load projects from {{owner}}.",
+      "someOrgsFailed": "Some organizations didn't load ({{count}}).",
+      "useAddByUrl": "Use Add by URL to reach missing projects.",
+      "orgsLabel": "orgs",
+      "failedToLoad": "Failed to load projects",
+      "noneLoaded": "No projects loaded",
+      "tapToRetry": "Tap to retry.",
+      "pinned": "Pinned",
+      "recent": "Recent",
+      "remove": "Remove",
+      "pin": "Pin",
+      "browseAllLoading": "Browse all (loading...)",
+      "browseAll": "Browse all",
+      "noMatching": "No matching projects.",
+      "noMore": "No more projects.",
+      "chooseView": "Choose Project View",
+      "view": "Project View",
+      "unsupportedLayout": "Orca doesn't support this GitHub Project layout yet.",
+      "sortTitle": "Project Sort"
     }
   }
 }
