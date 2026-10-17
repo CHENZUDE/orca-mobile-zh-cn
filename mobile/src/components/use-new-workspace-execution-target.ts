@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useEffect, useState } from 'react'
 import type { RpcClient } from '../transport/rpc-client'
 import {
@@ -71,7 +72,7 @@ export function useNewWorkspaceExecutionTarget(args: {
             fallbackSshState(
               connectionId,
               'error',
-              error instanceof Error ? error.message : 'Failed to read SSH connection state.'
+              error instanceof Error ? error.message : translate('workspace.failedToReadSshState')
             )
           )
         }
@@ -129,7 +130,7 @@ export function useNewWorkspaceExecutionTarget(args: {
         fallbackSshState(
           connectionId,
           'error',
-          error instanceof Error ? error.message : 'Failed to connect to SSH repository.'
+          error instanceof Error ? error.message : translate('workspace.failedToConnectSshRepo')
         )
       )
     } finally {

@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useRef, useState, type MutableRefObject } from 'react'
 import { useWorkspaceRouteHandoff } from '../navigation/workspace-route-handoff'
 import type { RpcClient } from '../transport/rpc-client'
@@ -155,7 +156,8 @@ export function useMobileSourceControlOpeners(params: Params) {
             sourceFileDiffOpenRun.interpret(diffReply)
           }
         } catch (error) {
-          throw new Error(refusedRpcMessageOrFallback(error, 'Unable to open diff'))
+          throw new Error(refusedRpcMessageOrFallback(error, translate('sourceControl.unableToOpenDiff')))
+
         }
         if (!mountedRef.current) {
           return
@@ -192,7 +194,7 @@ export function useMobileSourceControlOpeners(params: Params) {
           return
         }
         triggerError()
-        setActionError(err instanceof Error ? err.message : 'Unable to open diff')
+        setActionError(err instanceof Error ? err.message : translate('sourceControl.unableToOpenDiff'))
       } finally {
         if (openingPathRef.current === entry.path) {
           openingPathRef.current = null
@@ -266,7 +268,8 @@ export function useMobileSourceControlOpeners(params: Params) {
         try {
           result = gitBranchDiffRead.interpret(reply)
         } catch (error) {
-          throw new Error(refusedRpcMessageOrFallback(error, 'Unable to load committed diff'))
+          throw new Error(
+            refusedRpcMessageOrFallback(error, translate('sourceControl.unableToLoadCommittedDiff')) )
         }
         if (result.kind !== 'text') {
           throw new Error('Binary branch diff preview unavailable on mobile')
@@ -292,7 +295,7 @@ export function useMobileSourceControlOpeners(params: Params) {
         setBranchDiffPreview({
           kind: 'error',
           entry,
-          message: err instanceof Error ? err.message : 'Unable to load committed diff'
+          message: err instanceof Error ? err.message : translate('sourceControl.unableToLoadCommittedDiff')
         })
       } finally {
         if (openingBranchPathRef.current === entry.path) {

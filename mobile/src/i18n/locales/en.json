@@ -1087,7 +1087,8 @@
     "messageCount_one": "{{count}} message",
     "messageCount_other": "{{count}} messages",
     "currentWorktree": "current worktree",
-    "resumeA11y": "Resume agent session"
+    "resumeA11y": "Resume agent session",
+    "unableToReachHost": "Unable to reach host"
   },
   "diffReview": {
     "reviewed": "Reviewed",
@@ -1516,7 +1517,13 @@
     "commitPush": "Commit & Push",
     "commitSync": "Commit & Sync",
     "pushCreatePr": "Push & Create PR",
-    "rebaseOntoBase": "Rebase onto base"
+    "rebaseOntoBase": "Rebase onto base",
+    "unableToResolveBaseBranch": "Unable to resolve the base branch for comparison.",
+    "unableToLoadCommittedChanges": "Unable to load committed changes",
+    "updateDesktopToUse": "Update Orca desktop to use Source Control on mobile.",
+    "unableToLoad": "Unable to load source control",
+    "unableToOpenDiff": "Unable to open diff",
+    "unableToLoadCommittedDiff": "Unable to load committed diff"
   },
   "nativeChat": {
     "visualUnavailable": "Visualization unavailable",
@@ -1609,7 +1616,9 @@
   },
   "workspace": {
     "sshConnection": "SSH Connection",
-    "runOn": "Run on"
+    "runOn": "Run on",
+    "failedToReadSshState": "Failed to read SSH connection state.",
+    "failedToConnectSshRepo": "Failed to connect to SSH repository."
   },
   "hosts": {
     "backToHosts": "Back to hosts"
@@ -1744,7 +1753,10 @@
     "hostOfflineDetail": "Check it's awake, Orca is running, and you're signed in",
     "cantConnectViaRelay": "Can't connect via Relay",
     "connectingViaRelay": "Connecting via Relay…",
-    "cantReachDesktop": "Can't reach desktop"
+    "cantReachDesktop": "Can't reach desktop",
+    "relayIdentityEndpointCoexist": "Relay identity and endpoint must coexist",
+    "relayHostIdentityMismatch": "Relay host identity mismatch",
+    "expectedOneRelayEndpoint": "Expected exactly one endpoint for configured relay metadata"
   },
   "workspaceView": {
     "syncedAcrossDevices": "Synced across your devices",
@@ -1804,7 +1816,9 @@
     "couldNotResetTitle": "Could not reset rate limits",
     "confirmTitle": "Use a rate-limit reset?",
     "confirmBody": "This spends one earned reset for {{label}} and immediately resets eligible rate-limit windows.",
-    "useResetButton": "Use reset"
+    "useResetButton": "Use reset",
+    "hostScopeNamesWsl": "Host reset scopes cannot name a WSL distro",
+    "wslScopeNeedsExactDistro": "WSL reset scopes require an exact distro"
   },
   "taskActions": {
     "failedToRerunChecks": "Failed to rerun checks",

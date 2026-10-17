@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { RpcOperationSender } from '../transport/rpc-operation-sender'
 import type { RequestCurrency } from '../transport/generation-scoped-request-owner'
 import { refusedRpcMessageOrFallback } from '../transport/rpc-refusal-message'
@@ -37,7 +38,7 @@ export async function readBranchCompareOutcome(
       return null
     }
     if (!baseRef) {
-      return { kind: 'failed', message: 'Unable to resolve the base branch for comparison.' }
+      return { kind: 'failed', message: translate('sourceControl.unableToResolveBaseBranch') }
     }
     const reply = await gitBranchCompareRead.request(client, {
       worktree: `id:${worktreeId}`,
@@ -53,13 +54,17 @@ export async function readBranchCompareOutcome(
     } catch (error) {
       return {
         kind: 'failed',
-        message: refusedRpcMessageOrFallback(error, 'Unable to load committed changes')
+        message: refusedRpcMessageOrFallback(
+          error,
+          translate('sourceControl.unableToLoadCommittedChanges')
+        )
       }
     }
   } catch (err) {
     return {
       kind: 'failed',
-      message: err instanceof Error ? err.message : 'Unable to load committed changes'
+      message:
+        err instanceof Error ? err.message : translate('sourceControl.unableToLoadCommittedChanges')
     }
   }
 }

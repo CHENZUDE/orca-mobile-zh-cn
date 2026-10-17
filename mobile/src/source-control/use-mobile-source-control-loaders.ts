@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useEffect, useRef, useState, type MutableRefObject } from 'react'
 import { View } from 'react-native'
 import type { RpcClient } from '../transport/rpc-client'
@@ -197,7 +198,7 @@ export function useMobileSourceControlLoaders(params: Params): MobileSourceContr
             if (isMobileGitUnavailableReply(reply)) {
               setScreenState({
                 kind: 'unavailable',
-                message: 'Update Orca desktop to use Source Control on mobile.'
+                message: translate('sourceControl.updateDesktopToUse')
               })
               return false
             }
@@ -211,13 +212,14 @@ export function useMobileSourceControlLoaders(params: Params): MobileSourceContr
               }
               continue
             }
-            throw new Error(refusal.message || 'Unable to load source control')
+            throw new Error(refusal.message || translate('sourceControl.unableToLoad'))
           }
         } catch (err) {
           if (!isCurrentLoad()) {
             return false
           }
-          const message = err instanceof Error ? err.message : 'Unable to load source control'
+          const message =
+            err instanceof Error ? err.message : translate('sourceControl.unableToLoad')
           setScreenState((prev) => {
             // Why: git mutations can succeed while the immediate status refresh
             // races a desktop abort; keep the last good screen instead of flashing

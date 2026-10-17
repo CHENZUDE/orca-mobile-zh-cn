@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { sha256 } from '@noble/hashes/sha256'
 import { z } from 'zod'
+import { translate } from '../i18n/i18n'
 import type { CodexResetCreditExpectedScope } from '../../../src/shared/codex-reset-credit-scope'
 
 const STORAGE_PREFIX = 'orca:codex-reset-credit-attempt:v1:'
@@ -23,7 +24,7 @@ export const CodexResetCreditExpectedScopeSchema = z
     if (scope.target.runtime === 'host' && scope.target.wslDistro !== null) {
       context.addIssue({
         code: 'custom',
-        message: 'Host reset scopes cannot name a WSL distro',
+        message: translate('codexReset.hostScopeNamesWsl'),
         path: ['target', 'wslDistro']
       })
     }
@@ -33,7 +34,7 @@ export const CodexResetCreditExpectedScopeSchema = z
     ) {
       context.addIssue({
         code: 'custom',
-        message: 'WSL reset scopes require an exact distro',
+        message: translate('codexReset.wslScopeNeedsExactDistro'),
         path: ['target', 'wslDistro']
       })
     }

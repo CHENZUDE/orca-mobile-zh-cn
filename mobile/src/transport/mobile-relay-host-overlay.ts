@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { z } from 'zod'
 import {
   MobileRelayEndpointSchema,
@@ -31,14 +32,17 @@ export const MobileRelayHostOverlaySchema = z
   .strict()
   .superRefine((overlay, context) => {
     if ((overlay.relayHostId === undefined) !== (overlay.relay === undefined)) {
-      context.addIssue({ code: 'custom', message: 'Relay identity and endpoint must coexist' })
+      context.addIssue({
+        code: 'custom',
+        message: translate('connectionHealth.relayIdentityEndpointCoexist')
+      })
       return
     }
     if (overlay.relay && overlay.relay.relayHostId !== overlay.relayHostId) {
       context.addIssue({
         code: 'custom',
         path: ['relayHostId'],
-        message: 'Relay host identity mismatch'
+        message: translate('connectionHealth.relayHostIdentityMismatch')
       })
     }
     const relayEndpointCount = overlay.endpoints.filter(({ kind }) => kind === 'relay').length
@@ -46,7 +50,7 @@ export const MobileRelayHostOverlaySchema = z
       context.addIssue({
         code: 'custom',
         path: ['endpoints'],
-        message: 'Expected exactly one endpoint for configured relay metadata'
+        message: translate('connectionHealth.expectedOneRelayEndpoint')
       })
     }
   })

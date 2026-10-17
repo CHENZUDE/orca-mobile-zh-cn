@@ -1087,7 +1087,8 @@
     "currentWorktree": "当前工作区",
     "resumeA11y": "恢复智能体会话",
     "messageCount_one": "{{count}} 条消息",
-    "messageCount_other": "{{count}} 条消息"
+    "messageCount_other": "{{count}} 条消息",
+    "unableToReachHost": "无法连接主机"
   },
   "diffReview": {
     "reviewed": "已审阅",
@@ -1516,7 +1517,13 @@
     "commitPush": "提交并推送",
     "commitSync": "提交并同步",
     "pushCreatePr": "推送并创建 PR",
-    "rebaseOntoBase": "变基到基线"
+    "rebaseOntoBase": "变基到基线",
+    "unableToResolveBaseBranch": "无法确定用于比较的基础分支。",
+    "unableToLoadCommittedChanges": "无法加载已提交的更改",
+    "updateDesktopToUse": "请更新 Orca 桌面端，才能在手机上使用源代码管理。",
+    "unableToLoad": "无法加载源代码管理",
+    "unableToOpenDiff": "无法打开差异",
+    "unableToLoadCommittedDiff": "无法加载已提交的差异"
   },
   "nativeChat": {
     "visualUnavailable": "无法显示可视化图表",
@@ -1609,7 +1616,9 @@
   },
   "workspace": {
     "sshConnection": "SSH 连接",
-    "runOn": "运行位置"
+    "runOn": "运行位置",
+    "failedToReadSshState": "读取 SSH 连接状态失败。",
+    "failedToConnectSshRepo": "连接 SSH 仓库失败。"
   },
   "hosts": {
     "backToHosts": "返回主机列表"
@@ -1744,7 +1753,10 @@
     "hostOfflineDetail": "请检查设备是否唤醒、Orca 是否运行、以及是否已登录",
     "cantConnectViaRelay": "无法通过中继连接",
     "connectingViaRelay": "正在通过中继连接…",
-    "cantReachDesktop": "无法连接到桌面端"
+    "cantReachDesktop": "无法连接到桌面端",
+    "relayIdentityEndpointCoexist": "中继标识与端点必须同时提供",
+    "relayHostIdentityMismatch": "中继主机标识不匹配",
+    "expectedOneRelayEndpoint": "已配置中继元数据时应恰好提供一个端点"
   },
   "workspaceView": {
     "syncedAcrossDevices": "已在你的设备间同步",
@@ -1804,7 +1816,9 @@
     "couldNotResetTitle": "无法重置速率限额",
     "confirmTitle": "要使用速率限额重置吗？",
     "confirmBody": "这将消耗一次已获得的重置，用于{{label}}，并立即重置符合条件的速率限额窗口。",
-    "useResetButton": "使用重置"
+    "useResetButton": "使用重置",
+    "hostScopeNamesWsl": "主机的重置范围不能指定 WSL 发行版",
+    "wslScopeNeedsExactDistro": "WSL 的重置范围必须填写完全一致的发行版"
   },
   "taskActions": {
     "failedToRerunChecks": "重新运行检查失败",

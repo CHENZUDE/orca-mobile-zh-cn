@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useForceReconnect } from '../transport/client-context'
 import { useWorkspaceClient } from '../transport/use-workspace-client'
@@ -115,7 +116,7 @@ export function useMobileAgentHistoryState(params: MobileAgentHistoryStateParams
         }
         const status = interpretOrThrowRefusalMessage(
           () => agentHistoryHostStatusRead.interpret(statusReply),
-          'Unable to reach host'
+          translate('agentHistory.unableToReachHost')
         )
         setHostStatusProbe({ hostId, client, generation: clientGeneration, result: status })
         if (!status.capabilities?.includes(MOBILE_AI_VAULT_CAPABILITY)) {
@@ -145,7 +146,7 @@ export function useMobileAgentHistoryState(params: MobileAgentHistoryStateParams
         }
         const result = interpretOrThrowRefusalMessage(
           () => agentHistorySessionScan.interpret(reply),
-          'Unable to load agent sessions'
+          translate('agentHistory.unableToLoad')
         )
         setScreenState({
           kind: 'ready',
@@ -158,7 +159,7 @@ export function useMobileAgentHistoryState(params: MobileAgentHistoryStateParams
         if (!isCurrent()) {
           return
         }
-        const message = err instanceof Error ? err.message : 'Unable to load agent sessions'
+        const message = err instanceof Error ? err.message : translate('agentHistory.unableToLoad')
         setHostStatusProbe(null)
         setScreenState({ kind: 'error', message })
       }

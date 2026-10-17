@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type {
   MobileGitBranchChangeEntry,
   MobileGitBranchCompareReply,
@@ -12,7 +13,7 @@ export type MobileGitBranchCompareResult = MobileGitBranchCompareReply
 export type MobileBranchCompareSection<
   TEntry extends MobileGitBranchChangeEntry = MobileGitBranchChangeEntry
 > = {
-  title: 'Committed on Branch'
+  title: string
   data: TEntry[]
 }
 
@@ -28,7 +29,7 @@ export function buildMobileBranchCompareSection<TEntry extends MobileGitBranchCh
     data.sort((a, b) => collator.compare(a.path, b.path))
   }
   return {
-    title: 'Committed on Branch',
+    title: translate('git.committedOnBranch'),
     data
   }
 }
