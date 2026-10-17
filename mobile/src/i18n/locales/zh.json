@@ -715,7 +715,9 @@
       "subIssueTitlePlaceholder": "子任务标题",
       "addSubIssue": "添加子任务",
       "discussion": "讨论",
-      "noComments": "暂无评论。"
+      "noComments": "暂无评论。",
+      "saveDescription": "保存描述",
+      "noDescription": "暂无描述。"
     },
     "review": {
       "reviewers": "审查人",

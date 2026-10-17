@@ -715,7 +715,9 @@
       "subIssueTitlePlaceholder": "Sub-issue title",
       "addSubIssue": "Add sub-issue",
       "discussion": "Discussion",
-      "noComments": "No comments."
+      "noComments": "No comments.",
+      "saveDescription": "Save description",
+      "noDescription": "No description."
     },
     "review": {
       "reviewers": "Reviewers",

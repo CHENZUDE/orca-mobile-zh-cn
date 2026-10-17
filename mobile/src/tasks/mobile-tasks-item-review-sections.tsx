@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   SHOW_MOBILE_DETAIL_METADATA_EDITORS,
@@ -30,6 +31,7 @@ export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationMod
     updateGitHubPullRequestMetadata,
     updateGitLabIssueMetadata
   } = model
+  const { t } = useTranslation()
   if (!actionItem || !detailPayload) {
     return null
   }
@@ -45,7 +47,7 @@ export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationMod
         style={[styles.input, styles.bodyInput]}
         value={itemBodyDraft}
         onChangeText={setItemBodyDraft}
-        placeholder="Description"
+        placeholder={t('tasks.detail.description')}
         placeholderTextColor={colors.textMuted}
         multiline
         textAlignVertical="top"
@@ -76,14 +78,14 @@ export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationMod
           }
         }}
       >
-        <Text style={styles.inlineSaveText}>Save description</Text>
+        <Text style={styles.inlineSaveText}>{t('tasks.detail.saveDescription')}</Text>
       </Pressable>
-      <MobileMarkdown content={itemBodyDraft} fallback="No description." />
+      <MobileMarkdown content={itemBodyDraft} fallback={t('tasks.detail.noDescription')} />
     </>
   ) : (
     <MobileMarkdown
       content={detailPayload.provider === 'linear' ? detailPayload.description : detailPayload.body}
-      fallback="No description."
+      fallback={t('tasks.detail.noDescription')}
     />
   )
 }
@@ -101,6 +103,7 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
     requestGitHubReviewers,
     setItemReviewersDraft
   } = model
+  const { t } = useTranslation()
   if (!actionItem || !detailPayload) {
     return null
   }
@@ -109,14 +112,14 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
     actionItem.source.type === 'pr' ? (
     <View style={styles.detailSection}>
       <View style={styles.detailSectionHeader}>
-        <Text style={styles.detailSectionTitle}>Reviewers</Text>
+        <Text style={styles.detailSectionTitle}>{t('tasks.review.reviewers')}</Text>
         {detailPayload.provider === 'github' ? (
           <Text style={styles.detailSectionMeta}>{getGitHubReviewSummary(detailPayload)}</Text>
         ) : null}
       </View>
       {detailPayload.provider === 'github' ? (
         getGitHubReviewerRows(detailPayload).length === 0 ? (
-          <Text style={styles.detailMuted}>No reviewers requested.</Text>
+          <Text style={styles.detailMuted}>{t('tasks.review.noReviewersRequested')}</Text>
         ) : (
           getGitHubReviewerRows(detailPayload).map((reviewer) => (
             <View key={reviewer.login} style={styles.reviewerRow}>
@@ -143,12 +146,12 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
       {itemAssignableUsersLoading ? (
         <View style={styles.detailLoadingInline}>
           <ActivityIndicator size="small" color={colors.textSecondary} />
-          <Text style={styles.detailMuted}>Loading reviewers...</Text>
+          <Text style={styles.detailMuted}>{t('tasks.review.loadingReviewers')}</Text>
         </View>
       ) : itemAssignableUsersError ? (
         <Text style={styles.detailError}>{itemAssignableUsersError}</Text>
       ) : itemReviewerCandidates.length === 0 ? (
-        <Text style={styles.detailMuted}>No reviewer suggestions found.</Text>
+        <Text style={styles.detailMuted}>{t('tasks.review.noReviewerSuggestions')}</Text>
       ) : (
         <View style={styles.chipRow}>
           {itemReviewerCandidates.map((user) => {
@@ -173,7 +176,7 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
         style={styles.input}
         value={itemReviewersDraft}
         onChangeText={setItemReviewersDraft}
-        placeholder="Request reviewers"
+        placeholder={t('tasks.review.requestReviewersPlaceholder')}
         placeholderTextColor={colors.textMuted}
         autoCapitalize="none"
       />
@@ -182,7 +185,7 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
         disabled={mutatingStatus || splitReviewerList(itemReviewersDraft).length === 0}
         onPress={() => void requestGitHubReviewers(actionItem)}
       >
-        <Text style={styles.inlineSaveText}>Request review</Text>
+        <Text style={styles.inlineSaveText}>{t('tasks.review.requestReview')}</Text>
       </Pressable>
     </View>
   ) : null
@@ -202,6 +205,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
     toggleGitHubFileExpansion,
     toggleGitHubFileViewed
   } = model
+  const { t } = useTranslation()
   if (!actionItem || !detailPayload) {
     return null
   }
@@ -209,7 +213,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
     detailPayload.provider === 'github' &&
     detailPayload.files.length > 0 ? (
     <View style={styles.detailSection}>
-      <Text style={styles.detailSectionTitle}>Changed files</Text>
+      <Text style={styles.detailSectionTitle}>{t('tasks.review.changedFiles')}</Text>
       {detailPayload.files.map((file) =>
         actionItem.provider === 'github' && actionItem.source.type === 'pr' ? (
           <View key={file.path} style={styles.fileCard}>
@@ -225,7 +229,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
                   : ''}
               </Text>
               <Text style={styles.detailSectionMeta}>
-                {expandedPrFilePath === file.path ? 'Hide' : 'View'}
+                {expandedPrFilePath === file.path ? t('tasks.review.hide') : t('tasks.review.view')}
               </Text>
             </Pressable>
             <Pressable
@@ -234,7 +238,9 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
               onPress={() => void toggleGitHubFileViewed(actionItem, file)}
             >
               <Text style={styles.inlineSaveText}>
-                {file.viewerViewedState === 'VIEWED' ? 'Mark unviewed' : 'Mark viewed'}
+                {file.viewerViewedState === 'VIEWED'
+              ? t('tasks.review.markUnviewed')
+              : t('tasks.review.markViewed')}
               </Text>
             </Pressable>
             {expandedPrFilePath === file.path ? (
@@ -243,7 +249,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
                   <ActivityIndicator size="small" color={colors.textSecondary} />
                 ) : prFileContents[file.path]?.originalIsBinary ||
                   prFileContents[file.path]?.modifiedIsBinary ? (
-                  <Text style={styles.detailMuted}>Binary file.</Text>
+                  <Text style={styles.detailMuted}>{t('tasks.review.binaryFile')}</Text>
                 ) : prFileContents[file.path] ? (
                   <GitHubPrFileDiff
                     filePath={file.path}
@@ -261,7 +267,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
                     }
                   />
                 ) : (
-                  <Text style={styles.detailMuted}>File contents unavailable.</Text>
+                  <Text style={styles.detailMuted}>{t('tasks.review.fileContentsUnavailable')}</Text>
                 )}
               </View>
             ) : null}
