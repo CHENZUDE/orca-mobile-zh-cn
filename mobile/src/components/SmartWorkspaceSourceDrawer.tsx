@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ActivityIndicator,
@@ -10,6 +11,8 @@ import {
 } from 'react-native'
 import type { RpcClient } from '../transport/rpc-client'
 import type { SmartWorkspaceSourceRow as SourceRow } from '../../../src/shared/new-workspace/smart-workspace-source-results'
+import type { JiraSite, JiraSiteSelection } from '../../../src/shared/jira-types'
+import { isBlockingJiraUrlIntent } from '../../../src/shared/new-workspace/smart-workspace-source-results'
 import {
   MR_STATE_FILTER_OPTIONS,
   resolveAvailableSmartModes,
@@ -43,12 +46,17 @@ type Props = {
   repoId: string | null
   repos: readonly PasteRepoCandidate[]
   linearWorkspaceId?: string | null
+  jiraSiteId?: JiraSiteSelection | null
+  jiraSites?: readonly JiraSite[]
   sshReady: boolean
   onRepoChange: (repoId: string) => void
   onClose: () => void
 }
 
+const NO_JIRA_SITES: readonly JiraSite[] = []
+
 export function SmartWorkspaceSourceDrawer({
+
   visible,
   client,
   composer,
@@ -56,10 +64,13 @@ export function SmartWorkspaceSourceDrawer({
   repoId,
   repos,
   linearWorkspaceId,
+  jiraSiteId,
+  jiraSites = NO_JIRA_SITES,
   sshReady,
   onRepoChange,
   onClose
 }: Props) {
+  const { t } = useTranslation()
   const availableModes = useMemo(() => resolveAvailableSmartModes(availability), [availability])
   const [mode, setMode] = useState<SmartNameMode>(() => resolveDefaultSmartMode(availability))
   const [mrStateFilter, setMrStateFilter] = useState<MrStateFilter>('opened')
@@ -100,9 +111,14 @@ export function SmartWorkspaceSourceDrawer({
   // Snap the chosen mode back into the available set if availability changes.
   const effectiveMode = availableModes.includes(mode) ? mode : (availableModes[0] ?? 'text')
 
-  // Linear searches without a repo; every other provider/branch search needs a
-  // connected repo-backed target.
-  const searchEnabled = visible && (effectiveMode === 'linear' || sshReady)
+  // A pasted Jira URL resolves to one issue without touching the repo, so it must
+  // stay reachable from Smart mode even when the repo is not connected.
+  const jiraUrlIntent =
+    availability.jiraAvailable && isBlockingJiraUrlIntent(effectiveMode, composer.name)
+  // Linear and Jira search without a repo; every other provider/branch search
+  // needs a connected repo-backed target.
+  const searchEnabled =
+    visible && (effectiveMode === 'linear' || effectiveMode === 'jira' || jiraUrlIntent || sshReady)
 
   const {
     rows,
@@ -121,8 +137,11 @@ export function SmartWorkspaceSourceDrawer({
     githubAvailable: availability.githubAvailable,
     gitlabAvailable: availability.gitlabAvailable,
     linearAvailable: availability.linearAvailable,
+    jiraAvailable: availability.jiraAvailable,
     mrStateFilter,
     linearWorkspaceId,
+    jiraSiteId,
+    jiraSites,
     repos
   })
 
@@ -145,6 +164,9 @@ export function SmartWorkspaceSourceDrawer({
         break
       case 'linear':
         composer.handleSmartLinearIssueSelect(row.issue)
+        break
+      case 'jira':
+        composer.handleSmartJiraIssueSelect(row.issue)
         break
     }
     onClose()
@@ -196,9 +218,9 @@ export function SmartWorkspaceSourceDrawer({
           top; dock must stay a non-flex sibling so FlatList cannot clip it. */}
       <View style={styles.root}>
         <View style={styles.header}>
-          <Text style={styles.title}>Name or &apos;Create From&apos;</Text>
+          <Text style={styles.title}>{t('smartSource.title')}</Text>
           <Pressable onPress={onClose} hitSlop={8}>
-            <Text style={styles.done}>Done</Text>
+            <Text style={styles.done}>{t('smartSource.done')}</Text>
           </Pressable>
         </View>
 
@@ -206,30 +228,35 @@ export function SmartWorkspaceSourceDrawer({
           {crossRepoPrompt ? (
             <View style={styles.crossRepo}>
               <Text style={styles.crossRepoText}>
-                This item lives in {crossRepoPrompt.link.slug.owner}/
-                {crossRepoPrompt.link.slug.repo}.
+                {t('smartSource.crossRepo.item', {
+                  repo: `${crossRepoPrompt.link.slug.owner}/${crossRepoPrompt.link.slug.repo}`
+                })}
               </Text>
               <View style={styles.crossRepoActions}>
                 <Pressable style={styles.crossRepoDismiss} onPress={dismissCrossRepoPrompt}>
-                  <Text style={styles.crossRepoDismissText}>Cancel</Text>
+                  <Text style={styles.crossRepoDismissText}>{t('smartSource.crossRepo.cancel')}</Text>
                 </Pressable>
                 <Pressable
                   style={styles.crossRepoSwitch}
                   onPress={() => void handleAcceptCrossRepo()}
                 >
                   <Text style={styles.crossRepoSwitchText}>
-                    Switch to {crossRepoPrompt.matchingRepo.displayName}
+                    {t('smartSource.crossRepo.switch', { name: crossRepoPrompt.matchingRepo.displayName })}
                   </Text>
                 </Pressable>
               </View>
             </View>
           ) : null}
 
-          {!sshReady && effectiveMode !== 'text' && effectiveMode !== 'linear' ? (
-            <Text style={styles.notice}>Connect the repository to search sources.</Text>
+          {!sshReady &&
+          effectiveMode !== 'text' &&
+          effectiveMode !== 'linear' &&
+          effectiveMode !== 'jira' &&
+          !jiraUrlIntent ? (
+            <Text style={styles.notice}>{t('smartSource.notice.connectRepo')}</Text>
           ) : needsGitHubRemote ? (
             <Text style={styles.notice}>
-              This SSH repo needs a GitHub remote to list issues and PRs.
+              {t('smartSource.notice.needsGitHubRemote')}
             </Text>
           ) : error ? (
             <Text style={styles.errorNotice}>{error}</Text>
@@ -249,9 +276,9 @@ export function SmartWorkspaceSourceDrawer({
                   <ActivityIndicator size="small" color={colors.textSecondary} />
                 </View>
               ) : showEmpty ? (
-                <Text style={styles.empty}>{emptyHint || 'No results found.'}</Text>
+                <Text style={styles.empty}>{emptyHint || t('smartSource.empty.noResults')}</Text>
               ) : rows.length === 0 && effectiveMode === 'text' ? (
-                <Text style={styles.empty}>Type a workspace name in the field below.</Text>
+                <Text style={styles.empty}>{t('smartSource.empty.typeName')}</Text>
               ) : null
             }
             renderItem={({ item }) => (
@@ -304,7 +331,7 @@ export function SmartWorkspaceSourceDrawer({
             style={styles.search}
             value={composer.name}
             onChangeText={composer.setName}
-            placeholder="Type a name or search a source"
+            placeholder={t('smartSource.searchPlaceholder')}
             placeholderTextColor={colors.textMuted}
             autoCapitalize="none"
             autoCorrect={false}

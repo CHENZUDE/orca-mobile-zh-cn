@@ -70,7 +70,8 @@
       "providers": {
         "github": "GitHub",
         "gitlab": "GitLab",
-        "linear": "Linear"
+        "linear": "Linear",
+        "jira": "Jira"
       }
     },
     "alerts": {
@@ -560,5 +561,74 @@
       "preview": "将连接到 {{endpoint}}",
       "saveError": "保存主机失败。"
     }
+  },
+  "customKey": {
+    "title": {
+      "chooseType": "添加快捷键",
+      "shortcutCombo": "快捷键组合",
+      "pickKey": "选择按键",
+      "textMacro": "文本宏"
+    },
+    "type": {
+      "shortcutCombo": "快捷键组合",
+      "textMacro": "文本宏"
+    },
+    "manageShortcuts": "管理快捷键",
+    "section": {
+      "modifiers": "修饰键",
+      "key": "按键"
+    },
+    "keyPlaceholder": "C",
+    "moreKeys": "更多按键 — Tab、方向键、F1–F12…",
+    "field": {
+      "label": "标签",
+      "labelPlaceholder": "例如 Build",
+      "command": "命令",
+      "commandPlaceholder": "例如 pnpm build",
+      "pressEnter": "按回车"
+    }
+  },
+  "dictationSetup": {
+    "heading": "设置语音听写",
+    "subtitle": "在这里下载模型并在桌面端开启听写。",
+    "enabled": "已开启听写",
+    "recommended": "推荐",
+    "openaiApi": "OpenAI API",
+    "extracting": " · 解压中…",
+    "apiKeySet": "已设置 API 密钥",
+    "setUpOnDesktop": "请在桌面端设置",
+    "inUse": "使用中",
+    "use": "使用",
+    "download": "下载"
+  },
+  "terminalShortcuts": {
+    "group": {
+      "shortcutBar": "快捷键栏",
+      "custom": "自定义快捷键"
+    },
+    "shortcutBarDescription": "切换按键可显示或隐藏，按住手柄拖动可排列终端快捷键栏上的顺序。",
+    "resetDefaults": "恢复默认",
+    "resetDefaultsDescription": "按原始顺序显示所有内置快捷键",
+    "empty": "尚未定义自定义快捷键。",
+    "add": "添加自定义快捷键…",
+    "addDescription": "创建组合键或文本宏"
+  },
+  "smartSource": {
+    "title": "名称或“创建自”",
+    "done": "完成",
+    "crossRepo": {
+      "item": "该项目位于 {{repo}}。",
+      "cancel": "取消",
+      "switch": "切换到 {{name}}"
+    },
+    "notice": {
+      "connectRepo": "请连接仓库以搜索来源。",
+      "needsGitHubRemote": "此 SSH 仓库需要 GitHub 远程仓库才能列出 issue 和 PR。"
+    },
+    "empty": {
+      "noResults": "未找到结果。",
+      "typeName": "在下方字段中输入工作区名称。"
+    },
+    "searchPlaceholder": "输入名称或搜索来源"
   }
 }

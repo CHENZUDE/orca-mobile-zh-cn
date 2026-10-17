@@ -70,7 +70,8 @@
       "providers": {
         "github": "GitHub",
         "gitlab": "GitLab",
-        "linear": "Linear"
+        "linear": "Linear",
+        "jira": "Jira"
       }
     },
     "alerts": {
@@ -96,7 +97,7 @@
       "steps": {
         "openOrca": {
           "title": "Open Orca desktop",
-          "desc": "Go to Settings \u2192 Mobile and generate a pairing QR code."
+          "desc": "Go to Settings → Mobile and generate a pairing QR code."
         },
         "scanCode": {
           "title": "Scan the code",
@@ -121,9 +122,9 @@
       }
     },
     "notifications": {
-      "title": "Don\u2019t miss when an agent needs you",
-      "body": "Get a notification on this phone when an agent finishes or is waiting \u2014 even if you aren\u2019t using the app.",
-      "disclosure": "Delivered through Orca\u2019s push service after your desktop has been idle for 3 minutes. Change this anytime in Settings.",
+      "title": "Don’t miss when an agent needs you",
+      "body": "Get a notification on this phone when an agent finishes or is waiting — even if you aren’t using the app.",
+      "disclosure": "Delivered through Orca’s push service after your desktop has been idle for 3 minutes. Change this anytime in Settings.",
       "preview": {
         "now": "now",
         "codexFinished": {
@@ -173,15 +174,15 @@
       "group": {
         "leaveApp": {
           "heading": "WHEN YOU LEAVE THE APP",
-          "body": "While you\u2019re using a terminal on your phone, Orca shrinks it to fit your screen. When you close the app or switch away, this controls whether it stays at phone size (so interactive CLI tools don\u2019t reflow) or resizes back to your desktop. You can always use Restore on the desktop banner to resize manually."
+          "body": "While you’re using a terminal on your phone, Orca shrinks it to fit your screen. When you close the app or switch away, this controls whether it stays at phone size (so interactive CLI tools don’t reflow) or resizes back to your desktop. You can always use Restore on the desktop banner to resize manually."
         },
         "textSize": {
           "heading": "TEXT SIZE",
-          "body": "Scale the terminal text. Smaller sizes fit more columns with side margins; larger sizes show fewer columns \u2014 drag sideways to pan. You can also pinch to zoom in the terminal itself, which updates this setting. Per-device display only; doesn\u2019t change the desktop terminal."
+          "body": "Scale the terminal text. Smaller sizes fit more columns with side margins; larger sizes show fewer columns — drag sideways to pan. You can also pinch to zoom in the terminal itself, which updates this setting. Per-device display only; doesn’t change the desktop terminal."
         },
         "keyboard": {
           "heading": "KEYBOARD INPUT",
-          "body": "Enable phone-style autocomplete, autocorrect, and spelling suggestions in the terminal command bar. Off by default so the keyboard never rewrites commands, flags, or paths. Direct keyboard input (when keys go straight to the terminal) always sends raw keystrokes, so suggestions don\u2019t apply there."
+          "body": "Enable phone-style autocomplete, autocorrect, and spelling suggestions in the terminal command bar. Off by default so the keyboard never rewrites commands, flags, or paths. Direct keyboard input (when keys go straight to the terminal) always sends raw keystrokes, so suggestions don’t apply there."
         }
       },
       "textSizeRow": {
@@ -297,10 +298,10 @@
       },
       "displayTest": {
         "prompt": "Having trouble receiving alerts?",
-        "detail": "Send a test through Orca\u2019s push service.",
+        "detail": "Send a test through Orca’s push service.",
         "send": "Send test notification",
-        "sending": "Sending\u2026",
-        "success": "Accepted by Orca\u2019s push service. Check for the notification.",
+        "sending": "Sending…",
+        "success": "Accepted by Orca’s push service. Check for the notification.",
         "errors": {
           "loadHosts": "Could not load paired desktops.",
           "noHost": "Pair a desktop and try again.",
@@ -309,7 +310,7 @@
           "unreachable": "Could not reach the desktop. Try again.",
           "notRegistered": "Reconnect to register this phone for notifications.",
           "rateLimited": "Too many notifications. Try again later.",
-          "sendFailed": "Could not send through Orca\u2019s push service. Try again.",
+          "sendFailed": "Could not send through Orca’s push service. Try again.",
           "generic": "Could not send push test."
         }
       }
@@ -334,9 +335,9 @@
       "check": {
         "label": "Check for updates",
         "a11y": "Check for updates, {{value}}",
-        "checking": "Checking\u2026",
+        "checking": "Checking…",
         "upToDate": "Up to date",
-        "failed": "Couldn\u2019t check",
+        "failed": "Couldn’t check",
         "never": "Never",
         "lastChecked": "Last checked {{ago}}"
       }
@@ -357,10 +358,10 @@
     "pendingCredentials": {
       "title": "Pairing credential cleanup",
       "body": {
-        "failed": "Cleanup still couldn\u2019t be confirmed. Try again later.",
-        "pending_one": "Couldn\u2019t confirm cleanup for {{count}} credential on this device.",
-        "pending_other": "Couldn\u2019t confirm cleanup for {{count}} credentials on this device.",
-        "unreadable": "Couldn\u2019t check cleanup status on this device. Retry to be safe."
+        "failed": "Cleanup still couldn’t be confirmed. Try again later.",
+        "pending_one": "Couldn’t confirm cleanup for {{count}} credential on this device.",
+        "pending_other": "Couldn’t confirm cleanup for {{count}} credentials on this device.",
+        "unreadable": "Couldn’t check cleanup status on this device. Retry to be safe."
       },
       "retry": {
         "a11y": "Retry clearing pairing credentials"
@@ -392,7 +393,7 @@
           "asset-no-progress": "an asset read made no progress",
           "asset-short": "an asset ended short of its declared size",
           "asset-checksum-mismatch": "asset checksum mismatch",
-          "build-changed-mid-fetch": "the host\u2019s build changed during the download",
+          "build-changed-mid-fetch": "the host’s build changed during the download",
           "chunk-misrouted": "a chunk answered the wrong asset or offset",
           "asset-entry-changed": "an asset no longer matched the manifest",
           "range-undecodable": "a compressed read could not be decoded",
@@ -402,7 +403,7 @@
         },
         "hostCode": {
           "mobile_web_bundle_unavailable": "the host has no workspace bundle",
-          "mobile_web_bundle_build_changed": "the host\u2019s build changed during the download",
+          "mobile_web_bundle_build_changed": "the host’s build changed during the download",
           "mobile_web_bundle_asset_unknown": "the host did not recognise an asset",
           "mobile_web_bundle_asset_changed": "an asset changed on the host",
           "mobile_web_bundle_offset_invalid": "the host refused a read offset",
@@ -421,8 +422,8 @@
         "copyReport": "Copy report",
         "copied": "Copied",
         "diagnosisHeading": "What this suggests",
-        "privacyHint": "Sends a size-limited redacted report including host name, endpoint, versions, connection state, and events\u2014never terminal contents or credentials.",
-        "sending": "Sending\u2026",
+        "privacyHint": "Sends a size-limited redacted report including host name, endpoint, versions, connection state, and events—never terminal contents or credentials.",
+        "sending": "Sending…",
         "sent": "Diagnostics sent",
         "retry": "Retry sending",
         "send": "Send diagnostics to Orca",
@@ -430,7 +431,7 @@
         "noHosts": "No paired hosts."
       },
       "troubleshoot": {
-        "running": "Running\u2026",
+        "running": "Running…",
         "runAgain": "Run again",
         "run": "Run diagnostics",
         "viewNetwork": "View network diagnostics",
@@ -454,17 +455,17 @@
           "firewall": {
             "title": "Firewall Blocking Port 6768",
             "steps": {
-              "macos": "macOS: System Settings \u2192 Network \u2192 Firewall \u2014 allow Orca.",
-              "windows": "Windows: Defender Firewall \u2192 Allow app \u2014 enable Orca for Private networks.",
+              "macos": "macOS: System Settings → Network → Firewall — allow Orca.",
+              "windows": "Windows: Defender Firewall → Allow app — enable Orca for Private networks.",
               "linux": "Linux: sudo ufw allow 6768",
-              "corporate": "Corporate/school networks may block P2P \u2014 try a personal hotspot."
+              "corporate": "Corporate/school networks may block P2P — try a personal hotspot."
             }
           },
           "desktop": {
             "title": "Desktop App Not Running",
             "steps": {
               "mustRun": "Orca must be open on your desktop to accept connections.",
-              "restart": "Try restarting Orca \u2014 the companion server starts on launch.",
+              "restart": "Try restarting Orca — the companion server starts on launch.",
               "repair": "After an update, you may need to re-pair via QR code."
             }
           },
@@ -479,17 +480,17 @@
           "tailscale": {
             "title": "Tailscale Host Unreachable",
             "steps": {
-              "keepOn": "Host addresses like 100.x.x.x or *.ts.net connect through Tailscale \u2014 keep it ON.",
+              "keepOn": "Host addresses like 100.x.x.x or *.ts.net connect through Tailscale — keep it ON.",
               "toggle": "iOS/Android can silently wedge the tunnel: toggle Tailscale off and back on in the Tailscale app.",
               "awake": "Check the desktop is awake and shows as connected in your tailnet.",
-              "update": "Update the Tailscale app \u2014 recent releases fix reconnect bugs."
+              "update": "Update the Tailscale app — recent releases fix reconnect bugs."
             }
           },
           "vpn": {
             "title": "Other VPN Interference",
             "steps": {
               "remote": "Non-Tailscale VPNs can route local traffic through a remote server.",
-              "splitTunnel": "Disable that VPN or enable split tunneling / \u201cAllow LAN\u201d."
+              "splitTunnel": "Disable that VPN or enable split tunneling / “Allow LAN”."
             }
           }
         },
@@ -498,7 +499,7 @@
             "label": "Paired hosts",
             "paired": "{{count}} paired",
             "paired_other": "{{count}} paired",
-            "none": "None \u2014 scan a QR to pair",
+            "none": "None — scan a QR to pair",
             "unreadable": "Could not read host data"
           },
           "internet": {
@@ -522,17 +523,17 @@
   "host": {
     "accounts": {
       "heading": "Accounts",
-      "connecting": "Connecting to {{name}}\u2026",
-      "loading": "Loading accounts\u2026",
+      "connecting": "Connecting to {{name}}…",
+      "loading": "Loading accounts…",
       "providers": {
         "claude": "Claude",
         "codex": "Codex"
       },
       "systemDefault": {
         "title": "System default",
-        "subtitle": "Use the agent\u2019s own login"
+        "subtitle": "Use the agent’s own login"
       },
-      "footer": "Add or re-authenticate accounts from desktop Settings \u2192 Accounts.",
+      "footer": "Add or re-authenticate accounts from desktop Settings → Accounts.",
       "errors": {
         "invalidSnapshot": "Invalid accounts snapshot from host",
         "hostNotFound": "Host not found"
@@ -555,10 +556,79 @@
       "addressA11y": "Address",
       "namePlaceholder": "Host name",
       "addressPlaceholder": "192.168.1.10:6768",
-      "help": "Change the display name or connection address. Leave the name empty to use the name the desktop reports. Address edits only switch where this phone connects \u2014 they do not re-pair. Use this when the same desktop is reachable at a different IP (for example home LAN vs Tailscale).",
+      "help": "Change the display name or connection address. Leave the name empty to use the name the desktop reports. Address edits only switch where this phone connects — they do not re-pair. Use this when the same desktop is reachable at a different IP (for example home LAN vs Tailscale).",
       "hint": "Accepts IP, host:port, or ws:// / wss://. Missing port defaults to the current port (or 6768).",
       "preview": "Connects to {{endpoint}}",
       "saveError": "Failed to save host."
     }
+  },
+  "customKey": {
+    "title": {
+      "chooseType": "Add Shortcut",
+      "shortcutCombo": "Shortcut Combo",
+      "pickKey": "Pick a key",
+      "textMacro": "Text Macro"
+    },
+    "type": {
+      "shortcutCombo": "Shortcut Combo",
+      "textMacro": "Text Macro"
+    },
+    "manageShortcuts": "Manage Shortcuts",
+    "section": {
+      "modifiers": "Modifiers",
+      "key": "Key"
+    },
+    "keyPlaceholder": "C",
+    "moreKeys": "More keys — Tab, arrows, F1–F12…",
+    "field": {
+      "label": "Label",
+      "labelPlaceholder": "e.g. Build",
+      "command": "Command",
+      "commandPlaceholder": "e.g. pnpm build",
+      "pressEnter": "Press Enter"
+    }
+  },
+  "dictationSetup": {
+    "heading": "Set up voice dictation",
+    "subtitle": "Download a model and enable dictation on your desktop — all from here.",
+    "enabled": "Dictation enabled",
+    "recommended": "Recommended",
+    "openaiApi": "OpenAI API",
+    "extracting": " · extracting…",
+    "apiKeySet": "API key set",
+    "setUpOnDesktop": "Set up on desktop",
+    "inUse": "In use",
+    "use": "Use",
+    "download": "Download"
+  },
+  "terminalShortcuts": {
+    "group": {
+      "shortcutBar": "SHORTCUT BAR",
+      "custom": "CUSTOM SHORTCUTS"
+    },
+    "shortcutBarDescription": "Toggle keys to show or hide them, and hold the grip to drag a key into the order you want on the terminal shortcut bar.",
+    "resetDefaults": "Reset Defaults",
+    "resetDefaultsDescription": "Show every built-in shortcut key in the original order",
+    "empty": "No custom shortcuts defined yet.",
+    "add": "Add Custom Shortcut…",
+    "addDescription": "Create key combo or text macro"
+  },
+  "smartSource": {
+    "title": "Name or 'Create From'",
+    "done": "Done",
+    "crossRepo": {
+      "item": "This item lives in {{repo}}.",
+      "cancel": "Cancel",
+      "switch": "Switch to {{name}}"
+    },
+    "notice": {
+      "connectRepo": "Connect the repository to search sources.",
+      "needsGitHubRemote": "This SSH repo needs a GitHub remote to list issues and PRs."
+    },
+    "empty": {
+      "noResults": "No results found.",
+      "typeName": "Type a workspace name in the field below."
+    },
+    "searchPlaceholder": "Type a name or search a source"
   }
 }
