@@ -1207,6 +1207,21 @@
       "enterUrlOrBlankForNewTab": "输入网址，或留空以新建标签页。",
       "shortcut": "快捷键",
       "removeCustomShortcut": "要移除这个自定义快捷键吗？"
+    },
+    "commandDock": {
+      "dismissKeyboard": "隐藏键盘",
+      "dismissKeyboardHint": "隐藏软键盘，并保持当前终端会话打开。",
+      "switchToDesktopMode": "切换到桌面模式",
+      "switchToPhoneMode": "切换到手机模式",
+      "switchToBufferedCommandInput": "切换到缓存命令输入",
+      "switchToLiveTerminalInput": "切换到实时终端输入",
+      "pasteFromClipboard": "从剪贴板粘贴",
+      "paste": "粘贴",
+      "addCustomShortcut": "添加自定义快捷键",
+      "showKeyboardForLiveInput": "显示键盘以实时输入终端",
+      "typedTextSentToTerminal": "输入的内容会直接发送到当前终端",
+      "typeACommand": "输入命令…",
+      "sendCommand": "发送命令"
     }
   }
 }

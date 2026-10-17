@@ -1207,6 +1207,21 @@
       "enterUrlOrBlankForNewTab": "Enter a URL, or leave blank for a new tab.",
       "shortcut": "Shortcut",
       "removeCustomShortcut": "Remove this custom shortcut?"
+    },
+    "commandDock": {
+      "dismissKeyboard": "Dismiss keyboard",
+      "dismissKeyboardHint": "Hides the software keyboard and keeps the current terminal session open.",
+      "switchToDesktopMode": "Switch to desktop mode",
+      "switchToPhoneMode": "Switch to phone mode",
+      "switchToBufferedCommandInput": "Switch to buffered command input",
+      "switchToLiveTerminalInput": "Switch to live terminal input",
+      "pasteFromClipboard": "Paste from clipboard",
+      "paste": "Paste",
+      "addCustomShortcut": "Add custom shortcut",
+      "showKeyboardForLiveInput": "Show keyboard for live terminal input",
+      "typedTextSentToTerminal": "Typed text is sent directly to the active terminal",
+      "typeACommand": "Type a command…",
+      "sendCommand": "Send command"
     }
   }
 }

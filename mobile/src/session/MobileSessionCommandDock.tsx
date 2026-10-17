@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, ScrollView, TextInput, Pressable } from 'react-native'
 import { hostOs } from '../platform/host-os'
 import {
@@ -69,6 +70,8 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
     keyboardLift
   } = controller
   const accessoryBarKeepsKeyboard = useKeyboardPersistingTaps('always')
+  const { t } = useTranslation()
+
   return (
     !activeMarkdownTab &&
     !activeFileTab &&
@@ -92,8 +95,10 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               onPress={dismissSoftwareKeyboard}
               hitSlop={8}
               accessibilityRole="button"
-              accessibilityLabel="Dismiss keyboard"
-              accessibilityHint="Hides the software keyboard and keeps the current terminal session open."
+              accessibilityLabel={t('session.commandDock.dismissKeyboard')}
+              accessibilityHint={t(
+                'session.commandDock.dismissKeyboardHint'
+              )}
             >
               <View style={styles.keyboardDismissGlyph}>
                 <KeyboardIcon size={15} color={colors.textSecondary} strokeWidth={2} />
@@ -128,8 +133,8 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               }}
               accessibilityLabel={
                 isTerminalPhoneDisplayMode(activeHandle, terminalModes)
-                  ? 'Switch to desktop mode'
-                  : 'Switch to phone mode'
+                  ? t('session.commandDock.switchToDesktopMode')
+                  : t('session.commandDock.switchToPhoneMode')
               }
             >
               {isTerminalPhoneDisplayMode(activeHandle, terminalModes) ? (
@@ -150,8 +155,8 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               onPress={toggleLiveInput}
               accessibilityLabel={
                 liveInputEnabled
-                  ? 'Switch to buffered command input'
-                  : 'Switch to live terminal input'
+                  ? t('session.commandDock.switchToBufferedCommandInput')
+                  : t('session.commandDock.switchToLiveTerminalInput')
               }
             >
               <ChevronsRight
@@ -174,12 +179,12 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
                 ]}
                 disabled={!canSend}
                 onPress={() => void handlePaste()}
-                accessibilityLabel="Paste from clipboard"
+                accessibilityLabel={t('session.commandDock.pasteFromClipboard')}
               >
                 <Text
                   style={[styles.accessoryKeyText, !canSend && styles.accessoryKeyTextDisabled]}
                 >
-                  Paste
+                  {t('session.commandDock.paste')}
                 </Text>
               </Pressable>
             )}
@@ -249,7 +254,7 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
             <Pressable
               style={({ pressed }) => [styles.accessoryKey, pressed && styles.accessoryKeyPressed]}
               onPress={() => setShowCustomKeyModal(true)}
-              accessibilityLabel="Add custom shortcut"
+              accessibilityLabel={t('session.commandDock.addCustomShortcut')}
             >
               <Plus size={14} color={colors.textSecondary} strokeWidth={2.2} />
             </Pressable>
@@ -268,8 +273,8 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               disabled={!canSend}
               onPress={focusLiveInput}
               accessibilityRole="button"
-              accessibilityLabel="Show keyboard for live terminal input"
-              accessibilityHint="Typed text is sent directly to the active terminal"
+              accessibilityLabel={t('session.commandDock.showKeyboardForLiveInput')}
+              accessibilityHint={t('session.commandDock.typedTextSentToTerminal')}
             >
               <KeyboardIcon size={16} color={colors.textSecondary} strokeWidth={2} />
               <MobileTerminalLiveInputStatus
@@ -331,7 +336,7 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               value={bufferedTerminalDraftState.input}
               // Why: iOS kills active dictation/IME if JS writes a value differing from native text; store raw, normalize at send.
               onChangeText={bufferedTerminalDraftState.setInput}
-              placeholder="Type a command…"
+              placeholder={t('session.commandDock.typeACommand')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="none"
               autoCorrect={autocompleteEnabled}
@@ -365,7 +370,7 @@ export function MobileSessionCommandDock({ controller }: { controller: MobileSes
               style={[styles.sendButton, !canSend && styles.sendButtonDisabled]}
               disabled={!canSend}
               onPress={() => void handleSend()}
-              accessibilityLabel="Send command"
+              accessibilityLabel={t('session.commandDock.sendCommand')}
             >
               <ArrowUp size={18} color={colors.textSecondary} strokeWidth={2.5} />
             </Pressable>
