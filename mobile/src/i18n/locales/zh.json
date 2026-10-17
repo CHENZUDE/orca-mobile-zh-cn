@@ -1237,6 +1237,22 @@
     "linkAnExistingPullRequest": "关联已有的拥提请求",
     "linkAnExistingPr": "关联已有的 PR",
     "checkOutBranchBeforeCreatingPr": "请先切换到某个分支再创建拥提请求。",
-    "failedToCreatePullRequest": "创建拥提请求失败。"
+    "failedToCreatePullRequest": "创建拥提请求失败。",
+    "mergePullRequestConfirm": "确定合并拥提请求吗？",
+    "mergeIntoBaseBranch": "这将把 #{{number}} 合并到目标分支。",
+    "merge": "合并",
+    "closePullRequestConfirm": "确定关闭拥提请求吗？",
+    "willBeClosedWithoutMerging": "#{{number}} 将被关闭，不作合并。",
+    "close": "关闭",
+    "reopenPullRequestConfirm": "确定重新打开拥提请求吗？",
+    "willBeReopened": "#{{number}} 将被重新打开。",
+    "reopen": "重新打开",
+    "mergePullRequest": "合并拥提请求",
+    "autoMergeWhenReady": "就绪自动合并",
+    "toggleAutoMerge": "开关自动合并",
+    "closePullRequest": "关闭拥提请求",
+    "unlinkPullRequest": "取消关联拥提请求",
+    "unlink": "取消关联",
+    "failedToUnlinkPullRequest": "取消关联拥提请求失败。"
   }
 }

@@ -1237,6 +1237,22 @@
     "linkAnExistingPullRequest": "Link an existing pull request",
     "linkAnExistingPr": "Link an existing PR",
     "checkOutBranchBeforeCreatingPr": "Check out a branch before creating a pull request.",
-    "failedToCreatePullRequest": "Failed to create pull request."
+    "failedToCreatePullRequest": "Failed to create pull request.",
+    "mergePullRequestConfirm": "Merge pull request?",
+    "mergeIntoBaseBranch": "This will merge #{{number}} into its base branch.",
+    "merge": "Merge",
+    "closePullRequestConfirm": "Close pull request?",
+    "willBeClosedWithoutMerging": "#{{number}} will be closed without merging.",
+    "close": "Close",
+    "reopenPullRequestConfirm": "Reopen pull request?",
+    "willBeReopened": "#{{number}} will be reopened.",
+    "reopen": "Reopen",
+    "mergePullRequest": "Merge pull request",
+    "autoMergeWhenReady": "Auto-merge when ready",
+    "toggleAutoMerge": "Toggle auto-merge",
+    "closePullRequest": "Close pull request",
+    "unlinkPullRequest": "Unlink pull request",
+    "unlink": "Unlink",
+    "failedToUnlinkPullRequest": "Failed to unlink pull request."
   }
 }
