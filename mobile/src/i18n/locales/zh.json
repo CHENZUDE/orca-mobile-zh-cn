@@ -630,5 +630,27 @@
       "typeName": "在下方字段中输入工作区名称。"
     },
     "searchPlaceholder": "输入名称或搜索来源"
+  },
+  "quickCommand": {
+    "label": "名称",
+    "labelPlaceholder": "启动开发服务器",
+    "action": {
+      "title": "动作",
+      "terminal": "终端命令",
+      "agent": "智能体提示词"
+    },
+    "agent": "智能体",
+    "chooseAgent": "选择智能体",
+    "prompt": "提示词",
+    "commandText": "命令内容",
+    "promptPlaceholder": "让智能体调研此工作区",
+    "supportsHint": "支持技能、文件路径和内置命令。",
+    "advanced": "高级",
+    "appendEnter": "追加回车",
+    "appendEnterDesc": "立即提交，而不是只插入文本。",
+    "scope": "作用范围",
+    "scopeGlobal": "全局",
+    "scopeProject": "项目",
+    "add": "添加快捷命令"
   }
 }

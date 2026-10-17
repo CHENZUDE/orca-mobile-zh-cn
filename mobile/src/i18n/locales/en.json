@@ -630,5 +630,27 @@
       "typeName": "Type a workspace name in the field below."
     },
     "searchPlaceholder": "Type a name or search a source"
+  },
+  "quickCommand": {
+    "label": "Label",
+    "labelPlaceholder": "Start dev server",
+    "action": {
+      "title": "Action",
+      "terminal": "Terminal Command",
+      "agent": "Agent Prompt"
+    },
+    "agent": "Agent",
+    "chooseAgent": "Choose agent",
+    "prompt": "Prompt",
+    "commandText": "Command Text",
+    "promptPlaceholder": "Ask the agent to investigate this workspace",
+    "supportsHint": "Supports skills, file paths, and built-in commands.",
+    "advanced": "Advanced",
+    "appendEnter": "Append Enter",
+    "appendEnterDesc": "Submit immediately instead of only inserting text.",
+    "scope": "Scope",
+    "scopeGlobal": "Global",
+    "scopeProject": "Project",
+    "add": "Add Quick Command"
   }
 }
