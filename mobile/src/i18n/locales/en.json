@@ -820,6 +820,24 @@
       "loadingAssignees": "Loading assignees...",
       "noAssignableUsers": "No assignable users found for this repository.",
       "saveTitle": "Save title"
+    },
+    "workspace": {
+      "selectRepository": "Select a repository",
+      "sshConnection": "SSH Connection",
+      "remoteRepository": "Remote repository",
+      "connecting": "Connecting...",
+      "nameLabel": "Workspace Name",
+      "optional": "Optional",
+      "agent": "Agent",
+      "connectRepoFirst": "Connect repository first",
+      "detectingAgents": "Detecting agents...",
+      "advanced": "Advanced",
+      "startFrom": "Start from",
+      "defaultBranch": "Default branch",
+      "createFrom": "Create from {{branch}}",
+      "addRepoForLinear": "Add a Git repository before creating a Linear workspace.",
+      "repoNotFound": "Repository not found.",
+      "connectRepository": "Connect Repository"
     }
   }
 }

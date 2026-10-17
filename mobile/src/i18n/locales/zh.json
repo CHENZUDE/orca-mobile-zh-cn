@@ -820,6 +820,24 @@
       "loadingAssignees": "正在加载负责人...",
       "noAssignableUsers": "该仓库找不到可指派的用户。",
       "saveTitle": "保存标题"
+    },
+    "workspace": {
+      "selectRepository": "选择仓库",
+      "sshConnection": "SSH 连接",
+      "remoteRepository": "远程仓库",
+      "connecting": "连接中...",
+      "nameLabel": "工作区名称",
+      "optional": "可选",
+      "agent": "智能体",
+      "connectRepoFirst": "请先连接仓库",
+      "detectingAgents": "正在检测智能体...",
+      "advanced": "高级",
+      "startFrom": "起始分支",
+      "defaultBranch": "默认分支",
+      "createFrom": "从 {{branch}} 创建",
+      "addRepoForLinear": "创建 Linear 工作区前请先添加 Git 仓库。",
+      "repoNotFound": "未找到仓库。",
+      "connectRepository": "连接仓库"
     }
   }
 }
