@@ -716,6 +716,26 @@
       "addSubIssue": "Add sub-issue",
       "discussion": "Discussion",
       "noComments": "No comments."
+    },
+    "review": {
+      "reviewers": "Reviewers",
+      "noReviewersRequested": "No reviewers requested.",
+      "loadingReviewers": "Loading reviewers...",
+      "noReviewerSuggestions": "No reviewer suggestions found.",
+      "requestReviewersPlaceholder": "Request reviewers",
+      "requestReview": "Request review",
+      "checks": "Checks",
+      "refresh": "Refresh",
+      "rerunFailed": "Rerun failed",
+      "rerunAll": "Rerun all",
+      "noChecksFound": "No checks found.",
+      "changedFiles": "Changed files",
+      "hide": "Hide",
+      "view": "View",
+      "markUnviewed": "Mark unviewed",
+      "markViewed": "Mark viewed",
+      "binaryFile": "Binary file.",
+      "fileContentsUnavailable": "File contents unavailable."
     }
   }
 }

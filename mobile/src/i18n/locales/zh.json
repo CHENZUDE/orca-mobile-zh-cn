@@ -716,6 +716,26 @@
       "addSubIssue": "添加子任务",
       "discussion": "讨论",
       "noComments": "暂无评论。"
+    },
+    "review": {
+      "reviewers": "审查人",
+      "noReviewersRequested": "未请求审查人。",
+      "loadingReviewers": "正在加载审查人...",
+      "noReviewerSuggestions": "未找到审查人建议。",
+      "requestReviewersPlaceholder": "请求审查人",
+      "requestReview": "请求审查",
+      "checks": "检查",
+      "refresh": "刷新",
+      "rerunFailed": "重跑失败项",
+      "rerunAll": "全部重跑",
+      "noChecksFound": "未找到检查。",
+      "changedFiles": "变更文件",
+      "hide": "收起",
+      "view": "展开",
+      "markUnviewed": "标记为未读",
+      "markViewed": "标记为已读",
+      "binaryFile": "二进制文件。",
+      "fileContentsUnavailable": "无法获取文件内容。"
     }
   }
 }
