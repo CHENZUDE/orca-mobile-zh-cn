@@ -838,6 +838,26 @@
       "addRepoForLinear": "Add a Git repository before creating a Linear workspace.",
       "repoNotFound": "Repository not found.",
       "connectRepository": "Connect Repository"
+    },
+    "filters": {
+      "projectFields": "Project Fields",
+      "projectFieldsSubtitle": "Choose which Project fields appear on item cards.",
+      "noExtraFields": "This view has no extra fields to show.",
+      "shownOnCards": "Shown on cards",
+      "hiddenFromCards": "Hidden from cards",
+      "gitlabView": "GitLab View",
+      "gitlabFilter": "GitLab Filter",
+      "linearFilter": "Linear Filter",
+      "linearWorkspace": "Linear Workspace",
+      "failedToSwitchWorkspace": "Failed to switch workspace",
+      "linearTeams": "Linear Teams",
+      "linearTeamsSubtitle": "Choose which teams appear in Tasks.",
+      "allTeams": "All teams",
+      "teamCount": "{{count}} teams",
+      "changeStatus": "Change Status",
+      "linearIssue": "Linear issue",
+      "loadingStates": "Loading states...",
+      "noStates": "No states available"
     }
   }
 }

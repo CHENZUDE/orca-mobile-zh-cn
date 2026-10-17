@@ -838,6 +838,26 @@
       "addRepoForLinear": "创建 Linear 工作区前请先添加 Git 仓库。",
       "repoNotFound": "未找到仓库。",
       "connectRepository": "连接仓库"
+    },
+    "filters": {
+      "projectFields": "项目字段",
+      "projectFieldsSubtitle": "选择在条目卡片上显示哪些项目字段。",
+      "noExtraFields": "该视图没有额外字段可显示。",
+      "shownOnCards": "在卡片上显示",
+      "hiddenFromCards": "在卡片上隐藏",
+      "gitlabView": "GitLab 视图",
+      "gitlabFilter": "GitLab 筛选",
+      "linearFilter": "Linear 筛选",
+      "linearWorkspace": "Linear 工作区",
+      "failedToSwitchWorkspace": "切换工作区失败",
+      "linearTeams": "Linear 团队",
+      "linearTeamsSubtitle": "选择在任务中显示哪些团队。",
+      "allTeams": "全部团队",
+      "teamCount": "{{count}} 个团队",
+      "changeStatus": "修改状态",
+      "linearIssue": "Linear issue",
+      "loadingStates": "正在加载状态...",
+      "noStates": "没有可用状态"
     }
   }
 }
