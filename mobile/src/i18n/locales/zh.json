@@ -1773,6 +1773,8 @@
     "failedToCopyLink": "复制链接失败",
     "failedToCopyText": "复制文本失败",
     "failedToRequestReviewers": "请求评审人失败",
-    "failedToRefreshChecks": "刷新检查结果失败"
+    "failedToRefreshChecks": "刷新检查结果失败",
+    "failedToMergePullRequest": "合并 Pull Request 失败",
+    "failedToUpdateStatus": "更新状态失败"
   }
 }

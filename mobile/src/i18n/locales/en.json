@@ -1773,6 +1773,8 @@
     "failedToCopyLink": "Failed to copy link",
     "failedToCopyText": "Failed to copy text",
     "failedToRequestReviewers": "Failed to request reviewers",
-    "failedToRefreshChecks": "Failed to refresh checks"
+    "failedToRefreshChecks": "Failed to refresh checks",
+    "failedToMergePullRequest": "Failed to merge pull request",
+    "failedToUpdateStatus": "Failed to update status"
   }
 }

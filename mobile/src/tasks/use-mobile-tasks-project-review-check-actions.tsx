@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ProjectMetadataActionsModel } from './use-mobile-tasks-project-metadata-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -53,7 +54,7 @@ export function useMobileTasksProjectReviewCheckActions(model: ProjectMetadataAc
         )
         const result = githubReviewerRequest.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to request reviewers')
+          throw new Error(result.error ?? translate('taskActions.failedToRequestReviewers'))
         }
         const nextReviewRequests = (() => {
           const byLogin = new Map<string, GitHubAssignableUser>()
@@ -86,7 +87,7 @@ export function useMobileTasksProjectReviewCheckActions(model: ProjectMetadataAc
           setProjectReviewersDraft('')
         }
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to request reviewers')
+        setProjectRowDetailError(err instanceof Error ? err.message : translate('taskActions.failedToRequestReviewers'))
       } finally {
         setProjectMutating(false)
       }
@@ -134,7 +135,7 @@ export function useMobileTasksProjectReviewCheckActions(model: ProjectMetadataAc
           current?.provider === 'github' ? { ...current, checks } : current
         )
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to refresh checks')
+        setProjectRowDetailError(err instanceof Error ? err.message : translate('taskActions.failedToRefreshChecks'))
       } finally {
         setProjectMutating(false)
       }
@@ -170,11 +171,11 @@ export function useMobileTasksProjectReviewCheckActions(model: ProjectMetadataAc
         )
         const result = githubPullRequestChecksRerun.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to rerun checks')
+          throw new Error(result.error ?? translate('taskActions.failedToRerunChecks'))
         }
         setProjectRowDetailRefreshSeq((current) => current + 1)
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to rerun checks')
+        setProjectRowDetailError(err instanceof Error ? err.message : translate('taskActions.failedToRerunChecks'))
       } finally {
         setProjectMutating(false)
       }
@@ -224,7 +225,7 @@ export function useMobileTasksProjectReviewCheckActions(model: ProjectMetadataAc
         )
       } catch (err) {
         setProjectRowDetailError(
-          err instanceof Error ? err.message : 'Failed to update viewed state'
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateViewedState')
         )
       } finally {
         setProjectMutating(false)

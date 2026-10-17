@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ProjectReviewCheckActionsModel } from './use-mobile-tasks-project-review-check-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -85,7 +86,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         setPrFileContents((current) => ({ ...current, [file.path]: contents }))
       } catch (err) {
         setProjectRowDetailError(
-          err instanceof Error ? err.message : 'Failed to load file contents'
+          err instanceof Error ? err.message : translate('taskActions.failedToLoadFileContents')
         )
       } finally {
         setPrFileLoadingPath(null)
@@ -140,7 +141,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         )
         const result = githubReviewCommentWrite.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to add review comment')
+          throw new Error(result.error ?? translate('taskActions.failedToAddReviewComment'))
         }
         const comment: DetailComment = result.comment ?? {
           id: `local-${Date.now()}`,
@@ -162,7 +163,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         )
       } catch (err) {
         setProjectRowDetailError(
-          err instanceof Error ? err.message : 'Failed to add review comment'
+          err instanceof Error ? err.message : translate('taskActions.failedToAddReviewComment')
         )
       } finally {
         setProjectMutating(false)
@@ -208,7 +209,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         )
         const result = githubPullRequestMerge.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to merge pull request')
+          throw new Error(result.error ?? translate('taskActions.failedToMergePullRequest'))
         }
         setProjectRowItem((current) =>
           current?.id === row.id
@@ -229,7 +230,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         )
       } catch (err) {
         setProjectRowDetailError(
-          err instanceof Error ? err.message : 'Failed to merge pull request'
+          err instanceof Error ? err.message : translate('taskActions.failedToMergePullRequest')
         )
       } finally {
         setProjectMutating(false)
@@ -271,7 +272,7 @@ export function useMobileTasksProjectFileMergeActions(model: ProjectReviewCheckA
         setActionItem(null)
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update status')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToUpdateStatus'))
       } finally {
         setMutatingStatus(false)
       }
