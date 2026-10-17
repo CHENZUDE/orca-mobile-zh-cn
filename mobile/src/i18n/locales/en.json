@@ -840,7 +840,17 @@
       "createFrom": "Create from {{branch}}",
       "addRepoForLinear": "Add a Git repository before creating a Linear workspace.",
       "repoNotFound": "Repository not found.",
-      "connectRepository": "Connect Repository"
+      "connectRepository": "Connect Repository",
+      "pickBranch": "Pick an existing branch or ref.",
+      "searchBranches": "Search branches",
+      "useConfiguredBase": "Use this repository's configured base",
+      "noBranchesMatch": "No branches match.",
+      "branchName": "Branch name: {{name}}",
+      "sparseCheckout": "Sparse Checkout",
+      "fullCheckout": "Full checkout",
+      "useWholeRepo": "Use the whole repository",
+      "editPresetA11y": "Edit {{name}}",
+      "newPreset": "New preset"
     },
     "filters": {
       "projectFields": "Project Fields",

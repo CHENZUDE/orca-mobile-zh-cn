@@ -840,7 +840,17 @@
       "createFrom": "从 {{branch}} 创建",
       "addRepoForLinear": "创建 Linear 工作区前请先添加 Git 仓库。",
       "repoNotFound": "未找到仓库。",
-      "connectRepository": "连接仓库"
+      "connectRepository": "连接仓库",
+      "pickBranch": "选择一个已有分支或引用。",
+      "searchBranches": "搜索分支",
+      "useConfiguredBase": "使用该仓库配置的基线",
+      "noBranchesMatch": "没有匹配的分支。",
+      "branchName": "分支名：{{name}}",
+      "sparseCheckout": "稀疏检出",
+      "fullCheckout": "完整检出",
+      "useWholeRepo": "检出整个仓库",
+      "editPresetA11y": "编辑 {{name}}",
+      "newPreset": "新建预设"
     },
     "filters": {
       "projectFields": "项目字段",
