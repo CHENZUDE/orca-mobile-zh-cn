@@ -655,6 +655,32 @@
     "add": "添加快捷命令"
   },
   "tasks": {
+    "project": {
+      "repoNotInOrca": "仓库不在 Orca 中",
+      "repoNotInOrcaBody": "{{repo}} 尚未添加到 Orca。请先在桌面端添加该仓库，然后刷新移动端任务。",
+      "openInGitHub": "在 GitHub 中打开",
+      "copied": "已复制",
+      "copyRepository": "复制仓库",
+      "copyGithubLink": "复制 GitHub 链接",
+      "createWorkspace": "创建工作区",
+      "createWorkspaceOnlyFrom": "只能从 GitHub issue 和 PR 创建工作区。",
+      "reopenItem": "重新打开条目",
+      "closeItem": "关闭条目",
+      "mergePullRequest": "合并 PR",
+      "mergeRequiresRepo": "合并需要该仓库已加入 Orca。",
+      "projectItem": "GitHub 项目 · {{repo}}",
+      "typeLabel": "类型",
+      "statusLabel": "状态",
+      "typePullRequest": "拉取请求",
+      "typeIssue": "Issue",
+      "typeDraftIssue": "草稿 issue",
+      "typeProjectItem": "项目条目",
+      "issueTypeSection": "Issue 类型",
+      "noType": "无类型",
+      "loadingIssueTypes": "正在加载 issue 类型...",
+      "noIssueTypesConfigured": "该仓库未配置 issue 类型。",
+      "clearType": "清除类型"
+    },
     "comment": {
       "addPlaceholder": "添加评论",
       "send": "发送评论",

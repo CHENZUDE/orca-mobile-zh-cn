@@ -655,6 +655,32 @@
     "add": "Add Quick Command"
   },
   "tasks": {
+    "project": {
+      "repoNotInOrca": "Repository not in Orca",
+      "repoNotInOrcaBody": "{{repo}} is not added to Orca. Add this repository from the desktop app, then refresh mobile Tasks.",
+      "openInGitHub": "Open in GitHub",
+      "copied": "Copied",
+      "copyRepository": "Copy repository",
+      "copyGithubLink": "Copy GitHub link",
+      "createWorkspace": "Create Workspace",
+      "createWorkspaceOnlyFrom": "Workspaces can only be created from GitHub issues and pull requests.",
+      "reopenItem": "Reopen item",
+      "closeItem": "Close item",
+      "mergePullRequest": "Merge pull request",
+      "mergeRequiresRepo": "Merge requires this repository in Orca.",
+      "projectItem": "GitHub Project · {{repo}}",
+      "typeLabel": "Type",
+      "statusLabel": "Status",
+      "typePullRequest": "Pull request",
+      "typeIssue": "Issue",
+      "typeDraftIssue": "Draft issue",
+      "typeProjectItem": "Project item",
+      "issueTypeSection": "Issue type",
+      "noType": "No type",
+      "loadingIssueTypes": "Loading issue types...",
+      "noIssueTypesConfigured": "No issue types configured for this repository.",
+      "clearType": "Clear type"
+    },
     "comment": {
       "addPlaceholder": "Add a comment",
       "send": "Send comment",
