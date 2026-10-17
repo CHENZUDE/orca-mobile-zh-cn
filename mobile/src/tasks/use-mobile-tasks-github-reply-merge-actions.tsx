@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { GithubCheckFileActionsModel } from './use-mobile-tasks-github-check-file-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -89,7 +90,7 @@ export function useMobileTasksGithubReplyMergeActions(model: GithubCheckFileActi
               )
             )
         if (replyResult.ok === false) {
-          throw new Error(replyResult.error ?? 'Failed to reply')
+          throw new Error(replyResult.error ?? translate('taskActions.failedToReply'))
         }
         const reply: DetailComment = replyResult.comment ?? {
           id: `local-${Date.now()}`,
@@ -111,7 +112,7 @@ export function useMobileTasksGithubReplyMergeActions(model: GithubCheckFileActi
             : current
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to reply')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToReply'))
       } finally {
         setMutatingStatus(false)
       }
@@ -166,12 +167,12 @@ export function useMobileTasksGithubReplyMergeActions(model: GithubCheckFileActi
                 )
               )
         if (merged.ok === false) {
-          throw new Error(merged.error ?? 'Failed to merge')
+          throw new Error(merged.error ?? translate('taskActions.failedToMerge'))
         }
         setActionItem(null)
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to merge')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToMerge'))
       } finally {
         setMutatingStatus(false)
       }
@@ -223,7 +224,9 @@ export function useMobileTasksGithubReplyMergeActions(model: GithubCheckFileActi
         })
         await loadTasks({ silent: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update Linear issue')
+        setError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateLinearIssue')
+        )
       } finally {
         setMutatingStatus(false)
       }

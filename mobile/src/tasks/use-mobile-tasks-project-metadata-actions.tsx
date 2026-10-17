@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ProjectThreadReplyActionsModel } from './use-mobile-tasks-project-thread-reply-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -61,7 +62,9 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
         )
         const result = githubProjectIssueUpdate.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error?.message ?? 'Failed to update GitHub item')
+          throw new Error(
+            result.error?.message ?? translate('taskActions.failedToUpdateGitHubItem')
+          )
         }
         const applyContentUpdate = (candidate: GitHubProjectRow): GitHubProjectRow => {
           const labels = new Map(candidate.content.labels.map((label) => [label.name, label]))
@@ -130,7 +133,9 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
             : current
         )
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to update item')
+        setProjectRowDetailError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateItem')
+        )
       } finally {
         setProjectMutating(false)
       }
@@ -180,7 +185,9 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
               )
         const result = written
         if (result.ok === false) {
-          throw new Error(result.error?.message ?? 'Failed to update project field')
+          throw new Error(
+            result.error?.message ?? translate('taskActions.failedToUpdateProjectField')
+          )
         }
         const patchRow = (candidate: GitHubProjectRow): GitHubProjectRow => {
           const fieldValuesByFieldId = { ...candidate.fieldValuesByFieldId }
@@ -209,7 +216,7 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
         }
       } catch (err) {
         setProjectRowDetailError(
-          err instanceof Error ? err.message : 'Failed to update project field'
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateProjectField')
         )
       } finally {
         setProjectMutating(false)
@@ -243,7 +250,7 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
         )
         const result = githubProjectIssueTypeUpdate.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error?.message ?? 'Failed to update issue type')
+          throw new Error(result.error?.message ?? translate('taskActions.failedToUpdateIssueType'))
         }
         const patchRow = (candidate: GitHubProjectRow): GitHubProjectRow => ({
           ...candidate,
@@ -263,7 +270,9 @@ export function useMobileTasksProjectMetadataActions(model: ProjectThreadReplyAc
             : table
         )
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to update issue type')
+        setProjectRowDetailError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateIssueType')
+        )
       } finally {
         setProjectMutating(false)
       }

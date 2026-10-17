@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ProjectDetailLoadingModel } from './use-mobile-tasks-project-detail-loading'
 import { useEffect } from './mobile-tasks-dependencies'
 import { type GitHubIssueType, splitRepositorySlug } from './mobile-tasks-legacy-foundation'
@@ -50,13 +51,15 @@ export function useMobileTasksProjectMetadataLoading(model: ProjectDetailLoading
         }
         const result = githubProjectLabelListRead.interpret(response)
         if (!result.ok) {
-          throw new Error(result.error?.message ?? 'Failed to load labels')
+          throw new Error(result.error?.message ?? translate('taskActions.failedToLoadLabels'))
         }
         setProjectAvailableLabels(result.labels ?? [])
       })
       .catch((err) => {
         if (!stale) {
-          setProjectLabelsError(err instanceof Error ? err.message : 'Failed to load labels')
+          setProjectLabelsError(
+            err instanceof Error ? err.message : translate('taskActions.failedToLoadLabels')
+          )
         }
       })
       .finally(() => {
@@ -100,14 +103,14 @@ export function useMobileTasksProjectMetadataLoading(model: ProjectDetailLoading
         }
         const result = githubProjectAssignableUserListRead.interpret(response)
         if (!result.ok) {
-          throw new Error(result.error?.message ?? 'Failed to load assignees')
+          throw new Error(result.error?.message ?? translate('taskActions.failedToLoadAssignees'))
         }
         setProjectAssignableUsers(result.users ?? [])
       })
       .catch((err) => {
         if (!stale) {
           setProjectAssignableUsersError(
-            err instanceof Error ? err.message : 'Failed to load assignees'
+            err instanceof Error ? err.message : translate('taskActions.failedToLoadAssignees')
           )
         }
       })
@@ -153,7 +156,7 @@ export function useMobileTasksProjectMetadataLoading(model: ProjectDetailLoading
         }
         const result = githubProjectIssueTypeListRead.interpret(response)
         if (!result.ok) {
-          throw new Error(result.error?.message ?? 'Failed to load issue types')
+          throw new Error(result.error?.message ?? translate('taskActions.failedToLoadIssueTypes'))
         }
         // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the schema requires the `id` the issue-type write sends and types `name`; `color` and `description` are declared non-nullable by GitHubIssueType but absent from the recorded reply, so requiring them would drop a row main renders.
         setProjectIssueTypes((result.types ?? []) as GitHubIssueType[])
@@ -161,7 +164,7 @@ export function useMobileTasksProjectMetadataLoading(model: ProjectDetailLoading
       .catch((err) => {
         if (!stale) {
           setProjectIssueTypesError(
-            err instanceof Error ? err.message : 'Failed to load issue types'
+            err instanceof Error ? err.message : translate('taskActions.failedToLoadIssueTypes')
           )
         }
       })

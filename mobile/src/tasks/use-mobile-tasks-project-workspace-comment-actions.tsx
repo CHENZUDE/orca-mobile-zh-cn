@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { WorkspaceCreateActionsModel } from './use-mobile-tasks-workspace-create-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -140,7 +141,9 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
               )
         const result = updated
         if (result.ok === false) {
-          throw new Error(result.error?.message ?? 'Failed to update GitHub item')
+          throw new Error(
+            result.error?.message ?? translate('taskActions.failedToUpdateGitHubItem')
+          )
         }
         setProjectRowItem((current) => {
           if (!current || current.id !== row.id) {
@@ -186,7 +189,9 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
           )
         }
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to update item')
+        setProjectRowDetailError(
+          err instanceof Error ? err.message : translate('taskActions.failedToUpdateItem')
+        )
       } finally {
         setProjectMutating(false)
       }
@@ -219,7 +224,7 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
         )
         const result = githubProjectCommentWrite.interpret(reply)
         if (!result.ok) {
-          throw new Error(result.error?.message ?? 'Failed to add comment')
+          throw new Error(result.error?.message ?? translate('taskActions.failedToAddComment'))
         }
         setProjectCommentDraft('')
         if (result.comment) {
@@ -231,7 +236,9 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
           )
         }
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to add comment')
+        setProjectRowDetailError(
+          err instanceof Error ? err.message : translate('taskActions.failedToAddComment')
+        )
       } finally {
         setProjectMutating(false)
       }
@@ -270,7 +277,7 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
           throw new Error(
             typeof result.error === 'string'
               ? result.error
-              : (result.error?.message ?? 'Failed to edit comment')
+              : (result.error?.message ?? translate('taskActions.failedToEditComment'))
           )
         }
         setProjectRowDetail((current) =>
@@ -286,7 +293,9 @@ export function useMobileTasksProjectWorkspaceCommentActions(model: WorkspaceCre
         setProjectEditingCommentId(null)
         setProjectEditingCommentDraft('')
       } catch (err) {
-        setProjectRowDetailError(err instanceof Error ? err.message : 'Failed to edit comment')
+        setProjectRowDetailError(
+          err instanceof Error ? err.message : translate('taskActions.failedToEditComment')
+        )
       } finally {
         setProjectMutating(false)
       }

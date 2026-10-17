@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { TaskPaginationActionsModel } from './use-mobile-tasks-task-pagination-actions'
 import {
   type GitHubProjectPartialFailure,
@@ -137,7 +138,9 @@ export function useMobileTasksProjectLoadingActions(model: TaskPaginationActions
         )
       } catch (err) {
         setGithubProjectTable(null)
-        setGithubProjectError(err instanceof Error ? err.message : 'Failed to load project view')
+        setGithubProjectError(
+          err instanceof Error ? err.message : translate('taskActions.failedToLoadProjectView')
+        )
       } finally {
         setGithubProjectLoading(false)
       }
@@ -224,7 +227,9 @@ export function useMobileTasksProjectLoadingActions(model: TaskPaginationActions
         }
         commitGitHubProjectView(project, selectedView.id)
       } catch (err) {
-        setGithubProjectError(err instanceof Error ? err.message : 'Failed to select project')
+        setGithubProjectError(
+          err instanceof Error ? err.message : translate('taskActions.failedToSelectProject')
+        )
       } finally {
         setGithubProjectLoading(false)
       }
@@ -273,7 +278,9 @@ export function useMobileTasksProjectLoadingActions(model: TaskPaginationActions
         { viewNumber: result.viewNumber }
       )
     } catch (err) {
-      setGithubProjectPasteError(err instanceof Error ? err.message : 'Failed to add project.')
+      setGithubProjectPasteError(
+        err instanceof Error ? err.message : translate('taskActions.failedToAddProject')
+      )
     } finally {
       setGithubProjectPasteBusy(false)
     }
