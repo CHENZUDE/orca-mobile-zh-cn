@@ -18,7 +18,7 @@ import {
 } from 'lucide-react-native'
 import type { AgentChildRowModel } from '../../../src/shared/agent-child-row-model'
 import type { AgentSessionBackgroundTask } from '../../../src/shared/agent-session-wire'
-import { sayBackgroundTaskEnglish as say } from '../../../src/shared/background-task-copy'
+import { useBackgroundTaskSay } from '../shared/use-background-task-say'
 import {
   backgroundTasksHeaderContent,
   backgroundTasksHeaderText,
@@ -84,6 +84,7 @@ function TaskRow({
   stopping: Stopping
   onStop: (taskId: string) => void
 }): React.JSX.Element {
+  const say = useBackgroundTaskSay()
   const { lead, trail } = mobileAgentChildRowText(row, now)
   const meta = backgroundTaskRowMeta(row, hostNow)
   const stopId = backgroundTaskRowStopId(row, supportsTaskStop)
@@ -151,6 +152,7 @@ function MobileNativeChatBackgroundTasksImpl({
   tasks: MobileStructuredBackgroundTasks
 }): React.JSX.Element | null {
   const { view, rowContext } = tasks
+  const say = useBackgroundTaskSay()
   const [expanded, setExpanded] = useState(false)
   // Before the first layout, the window less the strip's own margins, so it opens in its final form.
   const [narrow, setNarrow] = useState(
