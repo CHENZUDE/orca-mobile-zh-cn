@@ -918,6 +918,18 @@
       "copyLinearLink": "Copy Linear link",
       "mergeConflicts": "GitHub reports merge conflicts.",
       "mergeMergeRequest": "Merge merge request"
+    },
+    "projectFields": {
+      "enterNumber": "Enter a valid number.",
+      "enterDate": "Enter a date as YYYY-MM-DD.",
+      "noIterations": "No iterations available.",
+      "completed": "Completed",
+      "currentAndUpcoming": "Current & upcoming",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "Number",
+      "textPlaceholder": "Text",
+      "saveField": "Save field",
+      "clearField": "Clear field"
     }
   },
   "prChecks": {

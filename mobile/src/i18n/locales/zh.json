@@ -918,6 +918,18 @@
       "copyLinearLink": "复制 Linear 链接",
       "mergeConflicts": "GitHub 报告存在合并冲突。",
       "mergeMergeRequest": "合并合并请求"
+    },
+    "projectFields": {
+      "enterNumber": "请输入有效的数字。",
+      "enterDate": "请按 YYYY-MM-DD 格式输入日期。",
+      "noIterations": "没有可用的迭代。",
+      "completed": "已完成",
+      "currentAndUpcoming": "当前及后续",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "数字",
+      "textPlaceholder": "文本",
+      "saveField": "保存字段",
+      "clearField": "清除字段"
     }
   },
   "prChecks": {
