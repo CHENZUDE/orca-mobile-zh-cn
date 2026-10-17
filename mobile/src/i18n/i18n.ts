@@ -54,3 +54,9 @@ void i18n
       useSuspense: false
     }
   })
+
+// Why: plain helper modules (not React components) still need localized copy;
+// they read the live instance instead of subscribing to re-renders.
+export function translate(key: string, options?: Record<string, unknown>): string {
+  return i18n.t(key, options)
+}

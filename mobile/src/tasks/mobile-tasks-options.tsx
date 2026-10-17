@@ -29,6 +29,7 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
     value: 'github',
     label: 'GitHub',
     subtitle: 'Issues and pull requests',
+    subtitleKey: 'taskOptions.provider.githubSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
         provider="github"
@@ -41,6 +42,7 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
     value: 'gitlab',
     label: 'GitLab',
     subtitle: 'Issues and merge requests',
+    subtitleKey: 'taskOptions.provider.gitlabSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
         provider="gitlab"
@@ -53,6 +55,7 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
     value: 'linear',
     label: 'Linear',
     subtitle: 'Assigned and team issues',
+    subtitleKey: 'taskOptions.provider.linearSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
         provider="linear"
@@ -64,22 +67,72 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
 ]
 
 export const GITLAB_FILTER_OPTIONS: PickerOption<GitLabFilter>[] = [
-  { value: 'opened', label: 'Open', subtitle: 'Open issues and merge requests' },
-  { value: 'merged', label: 'Merged', subtitle: 'Merged merge requests' },
-  { value: 'closed', label: 'Closed', subtitle: 'Closed issues and merge requests' },
-  { value: 'all', label: 'All', subtitle: 'Any GitLab state' }
+  {
+    value: 'opened',
+    label: 'Open',
+    subtitle: 'Open issues and merge requests',
+    subtitleKey: 'taskOptions.gitlabFilter.openSubtitle'
+  },
+  {
+    value: 'merged',
+    label: 'Merged',
+    subtitle: 'Merged merge requests',
+    subtitleKey: 'taskOptions.gitlabFilter.mergedSubtitle'
+  },
+  {
+    value: 'closed',
+    label: 'Closed',
+    subtitle: 'Closed issues and merge requests',
+    subtitleKey: 'taskOptions.gitlabFilter.closedSubtitle'
+  },
+  {
+    value: 'all',
+    label: 'All',
+    subtitle: 'Any GitLab state',
+    subtitleKey: 'taskOptions.gitlabFilter.allSubtitle'
+  }
 ]
 
 export const LINEAR_FILTER_OPTIONS: PickerOption<LinearFilter>[] = [
-  { value: 'all', label: 'All', subtitle: 'Open issues across connected workspaces' },
-  { value: 'assigned', label: 'My Issues', subtitle: 'Issues assigned to you' },
-  { value: 'created', label: 'Created', subtitle: 'Issues created by you' },
-  { value: 'completed', label: 'Completed', subtitle: 'Recently completed issues' }
+  {
+    value: 'all',
+    label: 'All',
+    subtitle: 'Open issues across connected workspaces',
+    subtitleKey: 'taskOptions.linearFilter.allSubtitle'
+  },
+  {
+    value: 'assigned',
+    label: 'My Issues',
+    subtitle: 'Issues assigned to you',
+    subtitleKey: 'taskOptions.linearFilter.assignedSubtitle'
+  },
+  {
+    value: 'created',
+    label: 'Created',
+    subtitle: 'Issues created by you',
+    subtitleKey: 'taskOptions.linearFilter.createdSubtitle'
+  },
+  {
+    value: 'completed',
+    label: 'Completed',
+    subtitle: 'Recently completed issues',
+    subtitleKey: 'taskOptions.linearFilter.completedSubtitle'
+  }
 ]
 
 export const LINEAR_VIEW_OPTIONS: PickerOption<LinearViewMode>[] = [
-  { value: 'list', label: 'List', subtitle: 'Compact issue rows' },
-  { value: 'board', label: 'Board', subtitle: 'Grouped columns' }
+  {
+    value: 'list',
+    label: 'List',
+    subtitle: 'Compact issue rows',
+    subtitleKey: 'taskOptions.linearView.listSubtitle'
+  },
+  {
+    value: 'board',
+    label: 'Board',
+    subtitle: 'Grouped columns',
+    subtitleKey: 'taskOptions.linearView.boardSubtitle'
+  }
 ]
 
 export function taskWorkspaceFallback(item: ActionableTaskItem): string {
@@ -111,26 +164,26 @@ export const COMMENT_REACTION_EMOJI: Record<string, string> = {
 }
 
 export const LINEAR_GROUP_OPTIONS: PickerOption<LinearGroupBy>[] = [
-  { value: 'none', label: 'No grouping' },
-  { value: 'status', label: 'Status' },
-  { value: 'assignee', label: 'Assignee' },
-  { value: 'priority', label: 'Priority' },
-  { value: 'team', label: 'Team' }
+  { value: 'none', label: 'No grouping', labelKey: 'taskOptions.linearGroup.none' },
+  { value: 'status', label: 'Status', labelKey: 'taskOptions.linearGroup.status' },
+  { value: 'assignee', label: 'Assignee', labelKey: 'taskOptions.linearGroup.assignee' },
+  { value: 'priority', label: 'Priority', labelKey: 'taskOptions.linearGroup.priority' },
+  { value: 'team', label: 'Team', labelKey: 'taskOptions.linearGroup.team' }
 ]
 
 export const LINEAR_ORDER_OPTIONS: PickerOption<LinearOrderBy>[] = [
-  { value: 'priority', label: 'Priority' },
-  { value: 'updated', label: 'Updated' },
-  { value: 'identifier', label: 'Identifier' }
+  { value: 'priority', label: 'Priority', labelKey: 'taskOptions.linearOrder.priority' },
+  { value: 'updated', label: 'Updated', labelKey: 'taskOptions.linearOrder.updated' },
+  { value: 'identifier', label: 'Identifier', labelKey: 'taskOptions.linearOrder.identifier' }
 ]
 
 export const LINEAR_DISPLAY_OPTIONS: PickerOption<LinearDisplayProperty>[] = [
-  { value: 'state', label: 'Status' },
-  { value: 'priority', label: 'Priority' },
-  { value: 'assignee', label: 'Assignee' },
-  { value: 'team', label: 'Team' },
-  { value: 'labels', label: 'Labels' },
-  { value: 'updated', label: 'Updated' }
+  { value: 'state', label: 'Status', labelKey: 'taskOptions.linearDisplay.state' },
+  { value: 'priority', label: 'Priority', labelKey: 'taskOptions.linearDisplay.priority' },
+  { value: 'assignee', label: 'Assignee', labelKey: 'taskOptions.linearDisplay.assignee' },
+  { value: 'team', label: 'Team', labelKey: 'taskOptions.linearDisplay.team' },
+  { value: 'labels', label: 'Labels', labelKey: 'taskOptions.linearDisplay.labels' },
+  { value: 'updated', label: 'Updated', labelKey: 'taskOptions.linearDisplay.updated' }
 ]
 
 export const DEFAULT_LINEAR_DISPLAY_PROPERTIES: LinearDisplayProperty[] = [
@@ -143,33 +196,89 @@ export const DEFAULT_LINEAR_DISPLAY_PROPERTIES: LinearDisplayProperty[] = [
 ]
 
 export const GITHUB_KIND_OPTIONS: PickerOption<GitHubMode>[] = [
-  { value: 'issues', label: 'Issues', subtitle: 'GitHub issues' },
-  { value: 'prs', label: 'PRs', subtitle: 'GitHub pull requests' },
-  { value: 'project', label: 'Projects', subtitle: 'GitHub Projects views' }
+  {
+    value: 'issues',
+    label: 'Issues',
+    subtitle: 'GitHub issues',
+    subtitleKey: 'taskOptions.githubKind.issuesSubtitle'
+  },
+  {
+    value: 'prs',
+    label: 'PRs',
+    subtitle: 'GitHub pull requests',
+    subtitleKey: 'taskOptions.githubKind.prsSubtitle'
+  },
+  {
+    value: 'project',
+    label: 'Projects',
+    subtitle: 'GitHub Projects views',
+    subtitleKey: 'taskOptions.githubKind.projectSubtitle'
+  }
 ]
 
 export const ISSUE_PRESETS: PickerOption<GitHubPreset>[] = [
-  { value: 'issues', label: 'Open', subtitle: 'Open GitHub issues' },
-  { value: 'my-issues', label: 'Assigned to me', subtitle: 'Open issues assigned to you' }
+  {
+    value: 'issues',
+    label: 'Open',
+    subtitle: 'Open GitHub issues',
+    subtitleKey: 'taskOptions.issuePresets.openSubtitle'
+  },
+  {
+    value: 'my-issues',
+    label: 'Assigned to me',
+    subtitle: 'Open issues assigned to you',
+    subtitleKey: 'taskOptions.issuePresets.assignedSubtitle'
+  }
 ]
 
 export const PR_PRESETS: PickerOption<GitHubPreset>[] = [
-  { value: 'prs', label: 'Open', subtitle: 'Open pull requests' },
-  { value: 'my-prs', label: 'Mine', subtitle: 'Pull requests authored by you' },
-  { value: 'review', label: 'Needs review', subtitle: 'Review requests assigned to you' }
+  {
+    value: 'prs',
+    label: 'Open',
+    subtitle: 'Open pull requests',
+    subtitleKey: 'taskOptions.prPresets.openSubtitle'
+  },
+  {
+    value: 'my-prs',
+    label: 'Mine',
+    subtitle: 'Pull requests authored by you',
+    subtitleKey: 'taskOptions.prPresets.mineSubtitle'
+  },
+  {
+    value: 'review',
+    label: 'Needs review',
+    subtitle: 'Review requests assigned to you',
+    subtitleKey: 'taskOptions.prPresets.reviewSubtitle'
+  }
 ]
 
 export const GITLAB_VIEW_OPTIONS: PickerOption<GitLabView>[] = [
-  { value: 'project', label: 'Project MRs', subtitle: 'Merge requests and issues by repository' },
-  { value: 'todos', label: 'My Todos', subtitle: 'Pending GitLab todos' }
+  {
+    value: 'project',
+    label: 'Project MRs',
+    subtitle: 'Merge requests and issues by repository',
+    subtitleKey: 'taskOptions.gitlabView.projectSubtitle'
+  },
+  {
+    value: 'todos',
+    label: 'My Todos',
+    subtitle: 'Pending GitLab todos',
+    subtitleKey: 'taskOptions.gitlabView.todosSubtitle'
+  }
 ]
 
 export const SORT_OPTIONS: PickerOption<TaskSort>[] = [
-  { value: 'updated', label: 'Updated', subtitle: 'Newest activity first' },
+  {
+    value: 'updated',
+    label: 'Updated',
+    subtitle: 'Newest activity first',
+    subtitleKey: 'taskOptions.sort.updatedSubtitle'
+  },
   {
     value: 'repository',
     label: 'Repository',
-    subtitle: 'Group by repository, then newest activity'
+    subtitle: 'Group by repository, then newest activity',
+    subtitleKey: 'taskOptions.sort.repositorySubtitle'
   }
 ]
 

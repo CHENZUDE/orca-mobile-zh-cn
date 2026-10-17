@@ -1270,5 +1270,75 @@
     "unlinkPullRequest": "取消关联拥提请求",
     "unlink": "取消关联",
     "failedToUnlinkPullRequest": "取消关联拥提请求失败。"
+  },
+  "taskOptions": {
+    "provider": {
+      "githubSubtitle": "Issues 和拥提请求",
+      "gitlabSubtitle": "Issues 和合并请求",
+      "linearSubtitle": "分配给你的和团队的 Issues"
+    },
+    "gitlabFilter": {
+      "openSubtitle": "开启的 Issues 和合并请求",
+      "mergedSubtitle": "已合并的合并请求",
+      "closedSubtitle": "已关闭的 Issues 和合并请求",
+      "allSubtitle": "任何 GitLab 状态"
+    },
+    "linearFilter": {
+      "allSubtitle": "已连接工作区中开启的 Issues",
+      "assignedSubtitle": "分配给你的 Issues",
+      "createdSubtitle": "你创建的 Issues",
+      "completedSubtitle": "最近完成的 Issues"
+    },
+    "linearView": {
+      "title": "Linear 视图",
+      "listSubtitle": "紧凑的 Issue 列表",
+      "boardSubtitle": "分组列表"
+    },
+    "linearGroup": {
+      "title": "Linear Issue 分组",
+      "none": "不分组",
+      "status": "状态",
+      "assignee": "负责人",
+      "priority": "优先级",
+      "team": "团队"
+    },
+    "linearOrder": {
+      "title": "Linear Issue 排序",
+      "priority": "优先级",
+      "updated": "更新时间",
+      "identifier": "编号"
+    },
+    "linearDisplay": {
+      "title": "显示属性",
+      "state": "状态",
+      "priority": "优先级",
+      "assignee": "负责人",
+      "team": "团队",
+      "labels": "标签",
+      "updated": "更新时间"
+    },
+    "githubKind": {
+      "issuesSubtitle": "GitHub Issues",
+      "prsSubtitle": "GitHub 拥提请求",
+      "projectSubtitle": "GitHub Projects 视图"
+    },
+    "issuePresets": {
+      "openSubtitle": "开启的 GitHub Issues",
+      "assignedSubtitle": "分配给你的开启 Issues"
+    },
+    "prPresets": {
+      "openSubtitle": "开启的拥提请求",
+      "mineSubtitle": "你创建的拥提请求",
+      "reviewSubtitle": "分配给你的审阅请求"
+    },
+    "gitlabView": {
+      "projectSubtitle": "按仓库划分的合并请求和 Issues",
+      "todosSubtitle": "待处理的 GitLab 待办"
+    },
+    "sort": {
+      "title": "任务排序",
+      "updatedSubtitle": "最新活动优先",
+      "repositorySubtitle": "先按仓库，再按最新活动"
+    }
   }
 }

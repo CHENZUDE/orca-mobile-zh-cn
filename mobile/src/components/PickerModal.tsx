@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import { Check } from 'lucide-react-native'
 import { colors, spacing, typography } from '../theme/mobile-theme'
+import { useTranslation } from 'react-i18next'
 import { BottomDrawer } from './BottomDrawer'
 
 export type PickerOption<T extends string = string> = {
@@ -10,11 +11,16 @@ export type PickerOption<T extends string = string> = {
   subtitle?: string
   disabled?: boolean
   renderIcon?: (selected: boolean) => ReactNode
+  // Why: static option tables live in plain .ts modules, so they carry i18n keys
+  // instead of resolved text and the picker resolves them at render time.
+  labelKey?: string
+  subtitleKey?: string
 }
 
 type Props<T extends string = string> = {
   visible: boolean
   title: string
+  titleKey?: string
   subtitle?: string
   options: PickerOption<T>[]
   selected: T
@@ -33,6 +39,7 @@ type PickerModalContentProps<T extends string = string> = Pick<
 export function PickerModal<T extends string = string>({
   visible,
   title,
+  titleKey,
   subtitle,
   options,
   selected,
@@ -42,10 +49,12 @@ export function PickerModal<T extends string = string>({
   onAfterClose,
   zIndex
 }: Props<T>) {
+  const { t } = useTranslation()
+  const resolvedTitle = titleKey ? t(titleKey) : title
   return (
     <BottomDrawer visible={visible} onClose={onClose} onAfterClose={onAfterClose} zIndex={zIndex}>
       <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{resolvedTitle}</Text>
         {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
       </View>
 
@@ -67,6 +76,8 @@ function PickerModalContent<T extends string = string>({
   onLongSelect,
   onClose
 }: PickerModalContentProps<T>) {
+  const { t } = useTranslation()
+  const resolve = (fallback: string, key?: string) => (key ? t(key) : fallback)
   // Why: closed BottomDrawer instances return null, so keeping option rows in
   // this child avoids rebuilding hidden picker contents on every parent render.
   return (
@@ -110,9 +121,13 @@ function PickerModalContent<T extends string = string>({
               ) : null}
               <View style={styles.rowContent}>
                 <Text style={[styles.rowLabel, isSelected && styles.rowLabelSelected]}>
-                  {opt.label}
+                  {resolve(opt.label, opt.labelKey)}
                 </Text>
-                {opt.subtitle ? <Text style={styles.rowSubtitle}>{opt.subtitle}</Text> : null}
+                {opt.subtitle || opt.subtitleKey ? (
+                  <Text style={styles.rowSubtitle}>
+                    {resolve(opt.subtitle ?? '', opt.subtitleKey)}
+                  </Text>
+                ) : null}
               </View>
               {isSelected && <Check size={16} color={colors.textPrimary} />}
             </Pressable>

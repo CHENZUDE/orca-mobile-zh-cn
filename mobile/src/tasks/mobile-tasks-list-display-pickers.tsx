@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -25,10 +26,11 @@ export function renderMobileTasksLinearViewPicker(model: ConnectionPresentationM
     showLinearViewPicker,
     taskUiReady
   } = model
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showLinearViewPicker}
-      title="Linear View"
+      title={t('taskOptions.linearView.title')}
       options={LINEAR_VIEW_OPTIONS}
       selected={linearViewMode}
       onSelect={setLinearViewMode}
@@ -45,10 +47,11 @@ export function renderMobileTasksLinearGroupPicker(model: ConnectionPresentation
     showLinearGroupPicker,
     taskUiReady
   } = model
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showLinearGroupPicker}
-      title="Group Linear Issues"
+      title={t('taskOptions.linearGroup.title')}
       options={LINEAR_GROUP_OPTIONS}
       selected={linearGroupBy}
       onSelect={setLinearGroupBy}
@@ -65,10 +68,11 @@ export function renderMobileTasksLinearOrderPicker(model: ConnectionPresentation
     showLinearOrderPicker,
     taskUiReady
   } = model
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showLinearOrderPicker}
-      title="Order Linear Issues"
+      title={t('taskOptions.linearOrder.title')}
       options={LINEAR_ORDER_OPTIONS}
       selected={linearOrderBy}
       onSelect={setLinearOrderBy}
@@ -86,13 +90,14 @@ export function renderMobileTasksLinearDisplayPicker(model: ConnectionPresentati
     showLinearDisplayPicker,
     taskUiReady
   } = model
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showLinearDisplayPicker}
       onClose={() => setShowLinearDisplayPicker(false)}
     >
       <View style={styles.sheetHeader}>
-        <Text style={styles.sheetTitle}>Display Properties</Text>
+        <Text style={styles.sheetTitle}>{t('taskOptions.linearDisplay.title')}</Text>
       </View>
       <View style={styles.repoPickerGroup}>
         {LINEAR_DISPLAY_OPTIONS.map((property, index) => {
@@ -132,10 +137,11 @@ export function renderMobileTasksLinearDisplayPicker(model: ConnectionPresentati
 
 export function renderMobileTasksSortPicker(model: ConnectionPresentationModel) {
   const { setShowSortPicker, setTaskSort, showSortPicker, taskSort, taskUiReady } = model
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showSortPicker}
-      title="Sort Tasks"
+      title={t('taskOptions.sort.title')}
       options={SORT_OPTIONS}
       selected={taskSort}
       onSelect={setTaskSort}

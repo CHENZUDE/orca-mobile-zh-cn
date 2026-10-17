@@ -1270,5 +1270,75 @@
     "unlinkPullRequest": "Unlink pull request",
     "unlink": "Unlink",
     "failedToUnlinkPullRequest": "Failed to unlink pull request."
+  },
+  "taskOptions": {
+    "provider": {
+      "githubSubtitle": "Issues and pull requests",
+      "gitlabSubtitle": "Issues and merge requests",
+      "linearSubtitle": "Assigned and team issues"
+    },
+    "gitlabFilter": {
+      "openSubtitle": "Open issues and merge requests",
+      "mergedSubtitle": "Merged merge requests",
+      "closedSubtitle": "Closed issues and merge requests",
+      "allSubtitle": "Any GitLab state"
+    },
+    "linearFilter": {
+      "allSubtitle": "Open issues across connected workspaces",
+      "assignedSubtitle": "Issues assigned to you",
+      "createdSubtitle": "Issues created by you",
+      "completedSubtitle": "Recently completed issues"
+    },
+    "linearView": {
+      "title": "Linear View",
+      "listSubtitle": "Compact issue rows",
+      "boardSubtitle": "Grouped columns"
+    },
+    "linearGroup": {
+      "title": "Group Linear Issues",
+      "none": "No grouping",
+      "status": "Status",
+      "assignee": "Assignee",
+      "priority": "Priority",
+      "team": "Team"
+    },
+    "linearOrder": {
+      "title": "Order Linear Issues",
+      "priority": "Priority",
+      "updated": "Updated",
+      "identifier": "Identifier"
+    },
+    "linearDisplay": {
+      "title": "Display Properties",
+      "state": "Status",
+      "priority": "Priority",
+      "assignee": "Assignee",
+      "team": "Team",
+      "labels": "Labels",
+      "updated": "Updated"
+    },
+    "githubKind": {
+      "issuesSubtitle": "GitHub issues",
+      "prsSubtitle": "GitHub pull requests",
+      "projectSubtitle": "GitHub Projects views"
+    },
+    "issuePresets": {
+      "openSubtitle": "Open GitHub issues",
+      "assignedSubtitle": "Open issues assigned to you"
+    },
+    "prPresets": {
+      "openSubtitle": "Open pull requests",
+      "mineSubtitle": "Pull requests authored by you",
+      "reviewSubtitle": "Review requests assigned to you"
+    },
+    "gitlabView": {
+      "projectSubtitle": "Merge requests and issues by repository",
+      "todosSubtitle": "Pending GitLab todos"
+    },
+    "sort": {
+      "title": "Sort Tasks",
+      "updatedSubtitle": "Newest activity first",
+      "repositorySubtitle": "Group by repository, then newest activity"
+    }
   }
 }
