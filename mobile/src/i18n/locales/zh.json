@@ -582,7 +582,9 @@
     },
     "type": {
       "shortcutCombo": "快捷键组合",
-      "textMacro": "文本宏"
+      "textMacro": "文本宏",
+      "shortcutComboHint": "组合 Ctrl、Alt 和 Shift 按键",
+      "textMacroHint": "发送自定义文本命令"
     },
     "manageShortcuts": "管理快捷键",
     "section": {
@@ -597,7 +599,9 @@
       "command": "命令",
       "commandPlaceholder": "例如 pnpm build",
       "pressEnter": "按回车"
-    }
+    },
+    "manageShortcutsHint": "显示、隐藏或重排快捷键",
+    "addShortcut": "添加快捷键"
   },
   "dictationSetup": {
     "heading": "设置语音听写",

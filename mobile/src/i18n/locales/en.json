@@ -582,7 +582,9 @@
     },
     "type": {
       "shortcutCombo": "Shortcut Combo",
-      "textMacro": "Text Macro"
+      "textMacro": "Text Macro",
+      "shortcutComboHint": "Build Ctrl, Alt, and Shift key chords",
+      "textMacroHint": "Send custom text command"
     },
     "manageShortcuts": "Manage Shortcuts",
     "section": {
@@ -597,7 +599,9 @@
       "command": "Command",
       "commandPlaceholder": "e.g. pnpm build",
       "pressEnter": "Press Enter"
-    }
+    },
+    "manageShortcutsHint": "Show, hide, or reorder shortcut keys",
+    "addShortcut": "Add Shortcut"
   },
   "dictationSetup": {
     "heading": "Set up voice dictation",

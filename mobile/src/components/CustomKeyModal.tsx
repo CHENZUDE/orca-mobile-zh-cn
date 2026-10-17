@@ -234,7 +234,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
             onPress={() => setStep('shortcut-combo')}
           >
             <Text style={styles.rowLabel}>{t('customKey.type.shortcutCombo')}</Text>
-            <Text style={styles.rowHint}>Build Ctrl, Alt, and Shift key chords</Text>
+            <Text style={styles.rowHint}>{t('customKey.type.shortcutComboHint')}</Text>
           </Pressable>
           <View style={styles.separator} />
           <Pressable
@@ -242,7 +242,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
             onPress={() => setStep('text-macro')}
           >
             <Text style={styles.rowLabel}>{t('customKey.type.textMacro')}</Text>
-            <Text style={styles.rowHint}>Send custom text command</Text>
+            <Text style={styles.rowHint}>{t('customKey.type.textMacroHint')}</Text>
           </Pressable>
           {onManageShortcuts ? (
             <>
@@ -252,7 +252,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
                 onPress={onManageShortcuts}
               >
                 <Text style={styles.rowLabel}>{t('customKey.manageShortcuts')}</Text>
-                <Text style={styles.rowHint}>Show, hide, or reorder shortcut keys</Text>
+                <Text style={styles.rowHint}>{t('customKey.manageShortcutsHint')}</Text>
               </Pressable>
             </>
           ) : null}
@@ -421,7 +421,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
               <Text
                 style={[styles.saveButtonText, !macroText.trim() && styles.saveButtonTextDisabled]}
               >
-                Add Shortcut
+                {t('customKey.addShortcut')}
               </Text>
             </Pressable>
           </View>
