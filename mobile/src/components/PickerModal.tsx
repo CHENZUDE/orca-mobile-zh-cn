@@ -22,6 +22,7 @@ type Props<T extends string = string> = {
   title: string
   titleKey?: string
   subtitle?: string
+  subtitleKey?: string
   options: PickerOption<T>[]
   selected: T
   onSelect: (value: T) => void
@@ -41,6 +42,7 @@ export function PickerModal<T extends string = string>({
   title,
   titleKey,
   subtitle,
+  subtitleKey,
   options,
   selected,
   onSelect,
@@ -51,11 +53,12 @@ export function PickerModal<T extends string = string>({
 }: Props<T>) {
   const { t } = useTranslation()
   const resolvedTitle = titleKey ? t(titleKey) : title
+  const resolvedSubtitle = subtitleKey ? t(subtitleKey) : subtitle
   return (
     <BottomDrawer visible={visible} onClose={onClose} onAfterClose={onAfterClose} zIndex={zIndex}>
       <View style={styles.header}>
         <Text style={styles.title}>{resolvedTitle}</Text>
-        {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+        {resolvedSubtitle ? <Text style={styles.subtitle}>{resolvedSubtitle}</Text> : null}
       </View>
 
       <PickerModalContent

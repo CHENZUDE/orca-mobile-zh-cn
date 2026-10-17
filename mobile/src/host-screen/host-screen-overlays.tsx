@@ -15,7 +15,7 @@ import { hostNewWorktreeSessionRoute } from '../host-route-action-state'
 import {
   WORKSPACE_GROUP_OPTIONS as GROUP_OPTIONS,
   WORKSPACE_SORT_OPTIONS as SORT_OPTIONS,
-  WORKSPACE_VIEW_SHARED_NOTE
+  WORKSPACE_VIEW_SHARED_NOTE_KEY
 } from '../worktree/workspace-list-picker-options'
 import { isWorktreePinned } from '../worktree/workspace-list-sections'
 import { hostScreenStyles as styles } from './host-screen-styles'
@@ -49,7 +49,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
       <PickerModal
         visible={state.showSortPicker}
         title={t('hostScreen.sortBy')}
-        subtitle={WORKSPACE_VIEW_SHARED_NOTE}
+        subtitleKey={WORKSPACE_VIEW_SHARED_NOTE_KEY}
         options={SORT_OPTIONS}
         selected={state.sortMode}
         onSelect={settings.handleSortChange}
@@ -59,7 +59,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
       <PickerModal
         visible={state.showGroupPicker}
         title={t('hostScreen.groupBy')}
-        subtitle={WORKSPACE_VIEW_SHARED_NOTE}
+        subtitleKey={WORKSPACE_VIEW_SHARED_NOTE_KEY}
         options={GROUP_OPTIONS}
         selected={state.groupMode}
         onSelect={settings.handleGroupChange}
@@ -70,7 +70,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
         <View style={styles.filterModalHeader}>
           <View style={styles.filterModalHeading}>
             <Text style={styles.filterModalTitle}>{t('hostScreen.filter')}</Text>
-            <Text style={styles.filterModalSubtitle}>{WORKSPACE_VIEW_SHARED_NOTE}</Text>
+            <Text style={styles.filterModalSubtitle}>{t(WORKSPACE_VIEW_SHARED_NOTE_KEY)}</Text>
           </View>
           {settings.activeFilterCount > 0 && (
             <Pressable onPress={settings.clearFilters}>

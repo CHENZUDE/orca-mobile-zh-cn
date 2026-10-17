@@ -1328,7 +1328,15 @@
     },
     "noTabsInSession": "No tabs in this session",
     "retryLoadingTerminal": "Retry loading terminal",
-    "dismissWorkspaceCreationWarning": "Dismiss workspace creation warning"
+    "dismissWorkspaceCreationWarning": "Dismiss workspace creation warning",
+    "create": {
+      "markdownFailed": "Failed to create markdown note",
+      "desktopUpdateRequiredForBrowser": "Desktop update required for mobile browser streaming",
+      "enterValidUrl": "Enter a valid URL",
+      "browserFailed": "Failed to create browser",
+      "browserNotReady": "Browser page is not available yet.",
+      "browserCommandFailed": "Browser command failed"
+    }
   },
   "prSidebar": {
     "pullRequest": "Pull request",
@@ -1466,7 +1474,11 @@
     "pullRequestCreated": "Pull Request Created",
     "openPrInBrowser": "Open it in your browser?",
     "openPrInBrowserWithWarning": "Open it in your browser?\\n\\n{{warning}}",
-    "backToSession": "Back to session"
+    "backToSession": "Back to session",
+    "commitPush": "Commit & Push",
+    "commitSync": "Commit & Sync",
+    "pushCreatePr": "Push & Create PR",
+    "rebaseOntoBase": "Rebase onto base"
   },
   "nativeChat": {
     "visualUnavailable": "Visualization unavailable",
@@ -1679,5 +1691,19 @@
     "cantConnectViaRelay": "Can't connect via Relay",
     "connectingViaRelay": "Connecting via Relay…",
     "cantReachDesktop": "Can't reach desktop"
+  },
+  "workspaceView": {
+    "syncedAcrossDevices": "Synced across your devices",
+    "sort": {
+      "smartSubtitle": "Agents that need attention, then recent activity",
+      "nameLabel": "Name",
+      "nameSubtitle": "Alphabetical by name",
+      "recentLabel": "Recent",
+      "recentSubtitle": "Most recent output first",
+      "repoLabel": "Repo",
+      "repoSubtitle": "Repository, then workspace name",
+      "manualLabel": "Manual",
+      "manualSubtitle": "Desktop drag order"
+    }
   }
 }

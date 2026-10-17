@@ -1328,7 +1328,15 @@
     },
     "noTabsInSession": "此会话中没有标签页",
     "retryLoadingTerminal": "重试加载终端",
-    "dismissWorkspaceCreationWarning": "关闭工作树创建警告"
+    "dismissWorkspaceCreationWarning": "关闭工作树创建警告",
+    "create": {
+      "markdownFailed": "创建 Markdown 笔记失败",
+      "desktopUpdateRequiredForBrowser": "移动端浏览器串流需要更新桌面端",
+      "enterValidUrl": "请输入有效的网址",
+      "browserFailed": "创建浏览器失败",
+      "browserNotReady": "浏览器页面暂不可用。",
+      "browserCommandFailed": "浏览器命令执行失败"
+    }
   },
   "prSidebar": {
     "pullRequest": "拥提请求",
@@ -1466,7 +1474,11 @@
     "pullRequestCreated": "拥提请求已创建",
     "openPrInBrowser": "要在浏览器中打开吗？",
     "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}",
-    "backToSession": "返回会话"
+    "backToSession": "返回会话",
+    "commitPush": "提交并推送",
+    "commitSync": "提交并同步",
+    "pushCreatePr": "推送并创建 PR",
+    "rebaseOntoBase": "变基到基线"
   },
   "nativeChat": {
     "visualUnavailable": "无法显示可视化图表",
@@ -1679,5 +1691,19 @@
     "cantConnectViaRelay": "无法通过中继连接",
     "connectingViaRelay": "正在通过中继连接…",
     "cantReachDesktop": "无法连接到桌面端"
+  },
+  "workspaceView": {
+    "syncedAcrossDevices": "已在你的设备间同步",
+    "sort": {
+      "smartSubtitle": "需要关注的智能体优先，然后按最近活动",
+      "nameLabel": "名称",
+      "nameSubtitle": "按名称字母排序",
+      "recentLabel": "最近",
+      "recentSubtitle": "最近输出优先",
+      "repoLabel": "仓库",
+      "repoSubtitle": "先按仓库，再按工作树名称",
+      "manualLabel": "手动",
+      "manualSubtitle": "桌面端拖拽顺序"
+    }
   }
 }

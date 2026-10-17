@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { MobileGitUpstreamStatus } from './mobile-git-status'
 
 // Icon identifier resolved to a lucide component by the screen. Kept as a string
@@ -92,7 +93,7 @@ export function buildMobileSourceControlActions(
       onPress: handlers.commit
     },
     {
-      label: 'Commit & Push',
+      label: translate('sourceControl.commitPush'),
       iconKey: 'push',
       disabled: busy || !!commitHint || !upstreamKnown || !hasUpstream,
       hint: commitHint ?? remoteHint,
@@ -101,7 +102,7 @@ export function buildMobileSourceControlActions(
       onPress: handlers.commitPush
     },
     {
-      label: 'Commit & Sync',
+      label: translate('sourceControl.commitSync'),
       iconKey: 'sync',
       disabled: busy || !!commitHint || !upstreamKnown || !hasUpstream || behind === 0,
       hint:
@@ -134,7 +135,7 @@ export function buildMobileSourceControlActions(
       onPress: handlers.createPr
     },
     {
-      label: 'Push & Create PR',
+      label: translate('sourceControl.pushCreatePr'),
       iconKey: 'pr',
       disabled: busy || !upstreamKnown || !hasUpstream || ahead === 0 || !args.prAvailable,
       hint: prHint ?? (!hasUpstream ? remoteHint : undefined),
@@ -202,7 +203,7 @@ export function buildMobileSourceControlActions(
       onPress: handlers.fastForward
     },
     {
-      label: 'Rebase onto base',
+      label: translate('sourceControl.rebaseOntoBase'),
       iconKey: 'branch',
       disabled: busy,
       loading: args.busyAction === 'rebase',

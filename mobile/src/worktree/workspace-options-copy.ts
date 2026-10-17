@@ -19,4 +19,4 @@ export function workspaceOptionsAccessibilityLabel(activeFilterCount: number): s
 }
 
 // Why: the host may be headless, so the note can't promise a desktop sidebar.
-export const WORKSPACE_VIEW_SHARED_NOTE = 'Synced across your devices'
+export const WORKSPACE_VIEW_SHARED_NOTE_KEY = 'workspaceView.syncedAcrossDevices'

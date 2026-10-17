@@ -18,7 +18,7 @@ import {
 import { getHostContextLabel } from '../../../src/shared/worktree/host-context-labels'
 import {
   WORKSPACE_OPTIONS_TITLE,
-  WORKSPACE_VIEW_SHARED_NOTE
+  WORKSPACE_VIEW_SHARED_NOTE_KEY
 } from '../worktree/workspace-options-copy'
 import { resolveWorktreeHostId } from '../worktree/worktree-host-context-labels'
 import { withServerHosts } from '../worktree/server-workspaces'
@@ -136,7 +136,7 @@ function WorkspaceOptionsContent({
       <View style={styles.filterModalHeader}>
         <View style={styles.filterModalHeading}>
           <Text style={styles.filterModalTitle}>{WORKSPACE_OPTIONS_TITLE}</Text>
-          <Text style={styles.filterModalSubtitle}>{WORKSPACE_VIEW_SHARED_NOTE}</Text>
+          <Text style={styles.filterModalSubtitle}>{t(WORKSPACE_VIEW_SHARED_NOTE_KEY)}</Text>
         </View>
         {controller.activeFilterCount > 0 && (
           <Pressable onPress={settings.clearFilters}>
