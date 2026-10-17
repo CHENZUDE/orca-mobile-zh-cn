@@ -1100,6 +1100,23 @@
       "reviewComplete": "审阅完成",
       "stageReviewed": "暂存已审阅",
       "sendNotesToAgent": "将备注发送给 Agent"
+    },
+    "body": {
+      "loadingReview": "正在加载审阅…",
+      "reviewUnavailable": "无法开始审阅",
+      "unableToLoadReview": "无法加载审阅",
+      "noReviewableChanges": "没有可审阅的更改",
+      "tryDifferentReviewFilter": "请尝试其他审阅筛选条件。",
+      "loadingDiff": "正在加载差异…",
+      "binaryDiff": "二进制差异",
+      "diffTooLarge": "差异过大",
+      "deletedFile": "文件已删除",
+      "diffUnavailable": "无法查看差异",
+      "cannotRenderAsText": "该文件无法以文本方式在手机上显示。",
+      "tooLargeForPreview": "该差异过大，无法在手机上预览。",
+      "deletedFileHint": "该文件已删除。可添加文件备注或标记为已审阅。",
+      "selectAFileToReview": "请选择要审阅的文件。",
+      "retryLoadingReview": "重试加载审阅"
     }
   },
   "hostScreen": {

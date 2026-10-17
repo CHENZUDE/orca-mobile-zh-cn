@@ -1100,6 +1100,23 @@
       "reviewComplete": "审阅完成",
       "stageReviewed": "暂存已审阅",
       "sendNotesToAgent": "将备注发送给 Agent"
+    },
+    "body": {
+      "loadingReview": "Loading review...",
+      "reviewUnavailable": "Review Unavailable",
+      "unableToLoadReview": "Unable to Load Review",
+      "noReviewableChanges": "No Reviewable Changes",
+      "tryDifferentReviewFilter": "Try a different review filter.",
+      "loadingDiff": "Loading diff...",
+      "binaryDiff": "Binary Diff",
+      "diffTooLarge": "Diff Too Large",
+      "deletedFile": "Deleted File",
+      "diffUnavailable": "Diff Unavailable",
+      "cannotRenderAsText": "This file cannot be rendered as text on mobile.",
+      "tooLargeForPreview": "This diff is too large for the mobile preview.",
+      "deletedFileHint": "This file was deleted. Add a file note or mark it reviewed.",
+      "selectAFileToReview": "Select a file to review.",
+      "retryLoadingReview": "Retry loading review"
     }
   },
   "hostScreen": {
