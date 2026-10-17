@@ -1091,5 +1091,15 @@
     "copyCommandsA11y": "复制可合并性刷新命令",
     "conflictingFiles": "冲突文件",
     "resolveWithAi": "用 AI 解决冲突"
+  },
+  "newWorktree": {
+    "title": "创建工作区",
+    "noProjects": "未找到项目",
+    "nameOrCreateFrom": "名称或“创建来源”",
+    "connectTargetFirst": "请先连接目标",
+    "note": "备注",
+    "notePlaceholder": "写点备注",
+    "connectTarget": "连接目标",
+    "createWorktree": "创建工作区"
   }
 }

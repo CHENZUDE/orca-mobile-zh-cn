@@ -1091,5 +1091,15 @@
     "copyCommandsA11y": "Copy mergeability refresh commands",
     "conflictingFiles": "Conflicting files",
     "resolveWithAi": "Resolve conflicts with AI"
+  },
+  "newWorktree": {
+    "title": "Create worktree",
+    "noProjects": "No projects found",
+    "nameOrCreateFrom": "Name or 'Create From'",
+    "connectTargetFirst": "Connect target first",
+    "note": "Note",
+    "notePlaceholder": "Write a note",
+    "connectTarget": "Connect target",
+    "createWorktree": "Create worktree"
   }
 }

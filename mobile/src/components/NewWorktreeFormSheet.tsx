@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native'
 import { ChevronDown, ChevronUp } from 'lucide-react-native'
 import type { WorkspaceCreateSetupDecision } from '../tasks/workspace-create-params'
@@ -56,10 +57,11 @@ export function NewWorktreeFormSheet(props: {
   onRunSetupChange: (run: boolean) => void
   onCreate: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <BottomDrawer visible={props.visible} interactive={props.interactive} onClose={props.onClose}>
       <View style={styles.header}>
-        <Text style={styles.title}>Create worktree</Text>
+        <Text style={styles.title}>{t('newWorktree.title')}</Text>
       </View>
 
       {props.loading ? (
@@ -68,7 +70,7 @@ export function NewWorktreeFormSheet(props: {
         </View>
       ) : !props.hasRepos ? (
         <View style={styles.loadingContainer}>
-          <Text style={styles.emptyText}>No projects found</Text>
+          <Text style={styles.emptyText}>{t('newWorktree.noProjects')}</Text>
         </View>
       ) : (
         <>
@@ -82,7 +84,11 @@ export function NewWorktreeFormSheet(props: {
 
           <SmartWorkspaceSourceField
             composer={props.composer}
-            label={props.selectedRepoIsGit ? "Name or 'Create From'" : 'Workspace name'}
+            label={
+              props.selectedRepoIsGit
+                ? t('newWorktree.nameOrCreateFrom')
+                : t('tasks.workspace.nameLabel')
+            }
             disabled={props.sshGate.requiresConnection}
             interactive={props.interactive}
             onOpenExternalUrl={props.onOpenExternalUrl}
@@ -103,7 +109,7 @@ export function NewWorktreeFormSheet(props: {
           ) : null}
 
           <View style={styles.field}>
-            <Text style={styles.label}>Agent</Text>
+            <Text style={styles.label}>{t('tasks.workspace.agent')}</Text>
             <Pressable
               style={[styles.fieldButton, props.sshGate.requiresConnection && styles.disabled]}
               disabled={props.sshGate.requiresConnection}
@@ -112,7 +118,7 @@ export function NewWorktreeFormSheet(props: {
               <MobileAgentIcon agentId={props.selectedAgent.id} size={16} />
               <Text style={styles.fieldButtonText} numberOfLines={1}>
                 {props.sshGate.requiresConnection
-                  ? 'Connect target first'
+                  ? t('newWorktree.connectTargetFirst')
                   : props.selectedAgent.label}
               </Text>
               <ChevronDown size={14} color={colors.textMuted} />
@@ -123,7 +129,7 @@ export function NewWorktreeFormSheet(props: {
             style={styles.advancedToggle}
             onPress={() => props.onShowAdvancedChange(!props.showAdvanced)}
           >
-            <Text style={styles.advancedText}>Advanced</Text>
+            <Text style={styles.advancedText}>{t('tasks.workspace.advanced')}</Text>
             {props.showAdvanced ? (
               <ChevronUp size={14} color={colors.textSecondary} />
             ) : (
@@ -138,12 +144,12 @@ export function NewWorktreeFormSheet(props: {
                 selectedRepoIsGit={props.selectedRepoIsGit}
               />
               <View style={styles.field}>
-                <Text style={styles.label}>Note</Text>
+                <Text style={styles.label}>{t('newWorktree.note')}</Text>
                 <TextInput
                   style={styles.input}
                   value={props.note}
                   onChangeText={props.onNoteChange}
-                  placeholder="Write a note"
+                  placeholder={t('newWorktree.notePlaceholder')}
                   placeholderTextColor={colors.textMuted}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -174,7 +180,9 @@ export function NewWorktreeFormSheet(props: {
                 <ActivityIndicator size="small" color={colors.bgBase} />
               ) : (
                 <Text style={styles.createText}>
-                  {props.sshGate.requiresConnection ? 'Connect target' : 'Create worktree'}
+                  {props.sshGate.requiresConnection
+                    ? t('newWorktree.connectTarget')
+                    : t('newWorktree.createWorktree')}
                 </Text>
               )}
             </Pressable>
