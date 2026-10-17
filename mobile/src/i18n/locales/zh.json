@@ -951,6 +951,21 @@
       "textPlaceholder": "文本",
       "saveField": "保存字段",
       "clearField": "清除字段"
+    },
+    "list": {
+      "updateOrcaDesktop": "请更新电脑端 Orca",
+      "needsNewerDesktopRuntime": "手机端任务视图需要更新版本的电脑端运行时。",
+      "connectLinearAccount": "连接你的 Linear 账号",
+      "browseAssignedLinearIssues": "直接在任务中浏览并开始处理分配给你的 Linear Issues。",
+      "connectLinear": "连接 Linear"
+    },
+    "legacy": {
+      "mergeMethod": "合并方式",
+      "chooseHowPullRequestMerged": "选择该拥提请求的合并方式。",
+      "chooseHowMergeRequestMerged": "选择该合并请求的合并方式。",
+      "merge": "合并",
+      "mergeRequest": "合并请求",
+      "mergePullRequest": "合并拥提请求"
     }
   },
   "prChecks": {

@@ -19,6 +19,7 @@ import {
   getHostedStateConfirmMessage,
   getHostedStateConfirmLabel
 } from './mobile-tasks-legacy-foundation'
+import { translate } from '../i18n/i18n'
 import { renderMobileTasksChrome } from './mobile-tasks-screen-chrome'
 import { renderMobileTasksListSurface } from './mobile-tasks-list-surface'
 import {
@@ -252,8 +253,8 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
 
       <ActionSheetModal
         visible={taskUiReady && mergeMethodProjectRow != null}
-        title="Merge method"
-        message="Choose how this pull request should be merged."
+        title={translate('tasks.legacy.mergeMethod')}
+        message={translate('tasks.legacy.chooseHowPullRequestMerged')}
         actions={
           mergeMethodProjectRow
             ? (['squash', 'merge', 'rebase'] as const).map((method) => ({
@@ -272,8 +273,8 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
         title="Merge method"
         message={
           mergeMethodTaskItem?.provider === 'gitlab'
-            ? 'Choose how this merge request should be merged.'
-            : 'Choose how this pull request should be merged.'
+            ? translate('tasks.legacy.chooseHowMergeRequestMerged')
+            : translate('tasks.legacy.chooseHowPullRequestMerged')
         }
         actions={
           mergeMethodTaskItem
@@ -283,7 +284,7 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
               ).map((method) => ({
                 label:
                   mergeMethodTaskItem.provider === 'gitlab' && method === 'merge'
-                    ? 'Merge'
+                    ? translate('tasks.legacy.merge')
                     : getHostedReviewMergeMethodLabel(method),
                 icon: GitBranch,
                 onPress: () => {
@@ -298,11 +299,15 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
       <ConfirmModal
         visible={taskUiReady && pendingHostedMerge != null}
         title={
-          pendingHostedMerge?.item.provider === 'gitlab' ? 'Merge Request' : 'Merge Pull Request'
+          pendingHostedMerge?.item.provider === 'gitlab'
+            ? translate('tasks.legacy.mergeRequest')
+            : translate('tasks.legacy.mergePullRequest')
         }
         message={pendingHostedMerge ? getHostedMergeConfirmMessage(pendingHostedMerge) : undefined}
         confirmLabel={
-          pendingHostedMerge ? getHostedReviewMergeMethodLabel(pendingHostedMerge.method) : 'Merge'
+          pendingHostedMerge
+            ? getHostedReviewMergeMethodLabel(pendingHostedMerge.method)
+            : translate('tasks.legacy.merge')
         }
         onConfirm={() => {
           if (!taskUiReady || !pendingHostedMerge) {
@@ -314,7 +319,7 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
       />
       <ConfirmModal
         visible={taskUiReady && pendingProjectGitHubMerge != null}
-        title="Merge Pull Request"
+        title={translate('tasks.legacy.mergePullRequest')}
         message={
           pendingProjectGitHubMerge
             ? getProjectGitHubMergeConfirmMessage(pendingProjectGitHubMerge)
@@ -323,7 +328,7 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
         confirmLabel={
           pendingProjectGitHubMerge
             ? getHostedReviewMergeMethodLabel(pendingProjectGitHubMerge.method)
-            : 'Merge'
+            : translate('tasks.legacy.merge')
         }
         onConfirm={() => {
           if (!taskUiReady || !pendingProjectGitHubMerge) {

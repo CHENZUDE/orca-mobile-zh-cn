@@ -951,6 +951,21 @@
       "textPlaceholder": "Text",
       "saveField": "Save field",
       "clearField": "Clear field"
+    },
+    "list": {
+      "updateOrcaDesktop": "Update Orca desktop",
+      "needsNewerDesktopRuntime": "This mobile Tasks view needs a newer desktop runtime.",
+      "connectLinearAccount": "Connect your Linear account",
+      "browseAssignedLinearIssues": "Browse and start work on your assigned Linear issues directly from Tasks.",
+      "connectLinear": "Connect Linear"
+    },
+    "legacy": {
+      "mergeMethod": "Merge method",
+      "chooseHowPullRequestMerged": "Choose how this pull request should be merged.",
+      "chooseHowMergeRequestMerged": "Choose how this merge request should be merged.",
+      "merge": "Merge",
+      "mergeRequest": "Merge Request",
+      "mergePullRequest": "Merge Pull Request"
     }
   },
   "prChecks": {

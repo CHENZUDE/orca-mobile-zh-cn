@@ -11,6 +11,7 @@ import { styles } from './mobile-tasks-legacy-styles'
 import { renderMobileTasksGitHubProjectList } from './mobile-tasks-github-project-list'
 import { renderMobileTasksLinearList } from './mobile-tasks-linear-list'
 import { renderMobileTasksProviderItemList } from './mobile-tasks-provider-item-list'
+import { translate } from '../i18n/i18n'
 
 export function renderMobileTasksListSurface(model: ConnectionPresentationModel) {
   const {
@@ -28,9 +29,9 @@ export function renderMobileTasksListSurface(model: ConnectionPresentationModel)
   return !tasksSupported ? (
     tasksUnsupported ? (
       <View style={styles.centered}>
-        <Text style={styles.emptyText}>Update Orca desktop</Text>
+        <Text style={styles.emptyText}>{translate('tasks.list.updateOrcaDesktop')}</Text>
         <Text style={styles.centeredHint}>
-          This mobile Tasks view needs a newer desktop runtime.
+          {translate('tasks.list.needsNewerDesktopRuntime')}
         </Text>
       </View>
     ) : (
@@ -41,9 +42,11 @@ export function renderMobileTasksListSurface(model: ConnectionPresentationModel)
   ) : provider === 'linear' && !linearConnected ? (
     <View style={styles.centered}>
       <TaskProviderLogo provider="linear" size={32} color={colors.textSecondary} />
-      <Text style={styles.emptyText}>Connect your Linear account</Text>
+      <Text style={styles.emptyText}>
+        {translate('tasks.list.connectLinearAccount')}
+      </Text>
       <Text style={styles.centeredHint}>
-        Browse and start work on your assigned Linear issues directly from Tasks.
+        {translate('tasks.list.browseAssignedLinearIssues')}
       </Text>
       <Pressable
         style={[styles.targetButton, styles.centerActionButton]}
@@ -58,7 +61,7 @@ export function renderMobileTasksListSurface(model: ConnectionPresentationModel)
           setShowLinearConnect(true)
         }}
       >
-        <Text style={styles.targetButtonText}>Connect Linear</Text>
+        <Text style={styles.targetButtonText}>{translate('tasks.list.connectLinear')}</Text>
       </Pressable>
     </View>
   ) : provider === 'github' && githubMode === 'project' ? (
