@@ -693,7 +693,10 @@
       "comment": "评论",
       "show": "展开",
       "count": "{{count}} 条评论",
-      "resolvedBy": "{{author}} 已解决该{{kind}}"
+      "resolvedBy": "{{author}} 已解决该{{kind}}",
+      "editPlaceholder": "编辑评论",
+      "edit": "编辑",
+      "delete": "删除"
     },
     "detail": {
       "type": "类型",

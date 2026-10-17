@@ -693,7 +693,10 @@
       "comment": "comment",
       "show": "Show",
       "count": "{{count}} comments",
-      "resolvedBy": "Resolved {{kind}} by {{author}}"
+      "resolvedBy": "Resolved {{kind}} by {{author}}",
+      "editPlaceholder": "Edit comment",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "detail": {
       "type": "Type",
