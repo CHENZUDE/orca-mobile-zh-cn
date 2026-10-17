@@ -14,7 +14,11 @@
     "addressLabel": "地址",
     "none": "无",
     "delete": "删除",
-    "reconnect": "重新连接"
+    "reconnect": "重新连接",
+    "refresh": "刷新",
+    "file": "文件",
+    "open": "打开",
+    "remove": "移除"
   },
   "pairing": {
     "missingCode": "缺少配对码",
@@ -1177,6 +1181,32 @@
       "newTab": "新建标签页",
       "desktopUpdateRequiredForQuickCommands": "使用快速命令需要更新电脑端 Orca",
       "checkingDesktopCapabilities": "正在检查电脑端能力 — 请稍后重试"
+    },
+    "sheets": {
+      "desktopUpdateRequiredForBrowserStreaming": "移动端浏览器投屏需要更新电脑端 Orca",
+      "browser": "浏览器",
+      "markdownNote": "Markdown 笔记",
+      "chooseAgentSessionForNotes": "为当前备注选择一个 Agent 会话。",
+      "notesCopied": "备注已复制",
+      "couldNotCopyNotes": "无法复制备注",
+      "markdown": "Markdown",
+      "copyPath": "复制路径",
+      "pathCopied": "路径已复制",
+      "couldNotCopyPath": "无法复制路径",
+      "chat": "会话",
+      "unsavedMarkdownChanges": "未保存的 Markdown 更改",
+      "copyOrDiscardDraftsBeforeLeaving": "离开前请复制或丢弃手机端草稿。",
+      "copyAllAndLeave": "全部复制并离开",
+      "couldNotCopyDrafts": "无法复制草稿",
+      "discardAndLeave": "丢弃并离开",
+      "discardChanges": "丢弃更改",
+      "replacePhoneDraftWithDesktop": "用电脑端最新文件覆盖手机端草稿吗？",
+      "renameTerminal": "重命名终端",
+      "terminalName": "终端名称",
+      "newBrowser": "新建浏览器",
+      "enterUrlOrBlankForNewTab": "输入网址，或留空以新建标签页。",
+      "shortcut": "快捷键",
+      "removeCustomShortcut": "要移除这个自定义快捷键吗？"
     }
   }
 }

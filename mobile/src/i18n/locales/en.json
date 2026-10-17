@@ -14,7 +14,11 @@
     "addressLabel": "Address",
     "none": "None",
     "delete": "Delete",
-    "reconnect": "Reconnect"
+    "reconnect": "Reconnect",
+    "refresh": "Refresh",
+    "file": "File",
+    "open": "Open",
+    "remove": "Remove"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -1177,6 +1181,32 @@
       "newTab": "New tab",
       "desktopUpdateRequiredForQuickCommands": "Desktop update required for quick commands",
       "checkingDesktopCapabilities": "Checking desktop capabilities — try again in a moment"
+    },
+    "sheets": {
+      "desktopUpdateRequiredForBrowserStreaming": "Desktop update required for mobile browser streaming",
+      "browser": "Browser",
+      "markdownNote": "Markdown Note",
+      "chooseAgentSessionForNotes": "Choose an agent session for the current notes.",
+      "notesCopied": "Notes copied",
+      "couldNotCopyNotes": "Couldn't copy notes",
+      "markdown": "Markdown",
+      "copyPath": "Copy Path",
+      "pathCopied": "Path copied",
+      "couldNotCopyPath": "Couldn't copy path",
+      "chat": "Chat",
+      "unsavedMarkdownChanges": "Unsaved markdown changes",
+      "copyOrDiscardDraftsBeforeLeaving": "Copy or discard phone drafts before leaving.",
+      "copyAllAndLeave": "Copy All & Leave",
+      "couldNotCopyDrafts": "Couldn't copy drafts",
+      "discardAndLeave": "Discard & Leave",
+      "discardChanges": "Discard Changes",
+      "replacePhoneDraftWithDesktop": "Replace the phone draft with the latest desktop file?",
+      "renameTerminal": "Rename Terminal",
+      "terminalName": "Terminal name",
+      "newBrowser": "New Browser",
+      "enterUrlOrBlankForNewTab": "Enter a URL, or leave blank for a new tab.",
+      "shortcut": "Shortcut",
+      "removeCustomShortcut": "Remove this custom shortcut?"
     }
   }
 }
