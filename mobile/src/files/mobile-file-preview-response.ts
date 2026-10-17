@@ -2,6 +2,7 @@ import type { MobileFileMedia } from './mobile-file-media'
 import { classifyMobileArtifact } from '../session/mobile-artifact-kind'
 import type { RpcFailure } from '../transport/types'
 import { isMarkdownPath } from './file-tree'
+import { translate } from '../i18n/i18n'
 import { isTerminalArtifactGrantError } from './terminal-artifact-grant-error'
 
 export type MobileFilePreviewTextKind = 'html' | 'markdown' | 'text'
@@ -58,13 +59,13 @@ export function previewErrorFromRefusal(error: RpcFailure['error']): MobileFileP
 export function previewError(message: string): MobileFilePreviewResult {
   const normalized = message.toLowerCase()
   if (normalized === 'binary_file' || normalized.includes('binary_file')) {
-    return { status: 'error', message: 'Binary preview unavailable', reconnect: false }
+    return { status: 'error', message: translate('filePreviewError.binaryUnavailable'), reconnect: false }
   }
   if (normalized === 'file_too_large' || normalized.includes('file_too_large')) {
-    return { status: 'error', message: 'File too large for mobile preview', reconnect: false }
+    return { status: 'error', message: translate('filePreviewError.tooLarge'), reconnect: false }
   }
   if (isTerminalArtifactGrantError(normalized)) {
-    return { status: 'error', message: 'Reload preview before saving', reconnect: false }
+    return { status: 'error', message: translate('filePreviewError.reloadBeforeSave'), reconnect: false }
   }
   if (
     normalized.includes('remote connection dropped') ||
@@ -72,7 +73,7 @@ export function previewError(message: string): MobileFilePreviewResult {
     normalized.includes('disconnected') ||
     normalized.includes('reconnect the ssh target')
   ) {
-    return { status: 'error', message: 'Unable to reach the desktop filesystem', reconnect: true }
+    return { status: 'error', message: translate('filePreviewError.cannotReachDesktop'), reconnect: true }
   }
   if (
     normalized.includes('enoent') ||
@@ -80,14 +81,14 @@ export function previewError(message: string): MobileFilePreviewResult {
     normalized.includes('not found') ||
     normalized.includes('does not exist')
   ) {
-    return { status: 'error', message: 'File not found', reconnect: false }
+    return { status: 'error', message: translate('filePreviewError.notFound'), reconnect: false }
   }
-  return { status: 'error', message: 'Unable to load preview', reconnect: false }
+  return { status: 'error', message: translate('filePreviewError.unableToLoad'), reconnect: false }
 }
 
 export function formatPreviewByteLength(byteLength: number): string {
   if (!Number.isFinite(byteLength) || byteLength < 0) {
-    return 'unknown size'
+    return translate('filePreview.unknownSize')
   }
   if (byteLength < 1024) {
     return `${byteLength} B`
@@ -130,7 +131,7 @@ function normalizeTextPreviewResult(
   result: unknown
 ): MobileFilePreviewResult {
   if (!result || typeof result !== 'object') {
-    return previewError('Unable to load preview')
+    return previewError(translate('filePreviewError.unableToLoad'))
   }
   const preview = result as {
     content?: unknown
@@ -142,7 +143,7 @@ function normalizeTextPreviewResult(
     return previewError('binary_file')
   }
   if (typeof preview.content !== 'string') {
-    return previewError('Unable to load preview')
+    return previewError(translate('filePreviewError.unableToLoad'))
   }
   const kind = textKindForPreviewPath(relativePath)
   if (preview.content.length === 0) {

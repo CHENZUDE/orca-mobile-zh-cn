@@ -1366,7 +1366,10 @@
     "provider": {
       "githubSubtitle": "Issues and pull requests",
       "gitlabSubtitle": "Issues and merge requests",
-      "linearSubtitle": "Assigned and team issues"
+      "linearSubtitle": "Assigned and team issues",
+      "githubLabel": "GitHub",
+      "gitlabLabel": "GitLab",
+      "linearLabel": "Linear"
     },
     "gitlabFilter": {
       "openSubtitle": "Open issues and merge requests",
@@ -1378,12 +1381,17 @@
       "allSubtitle": "Open issues across connected workspaces",
       "assignedSubtitle": "Issues assigned to you",
       "createdSubtitle": "Issues created by you",
-      "completedSubtitle": "Recently completed issues"
+      "completedSubtitle": "Recently completed issues",
+      "assignedLabel": "My Issues",
+      "createdLabel": "Created",
+      "completedLabel": "Completed"
     },
     "linearView": {
       "title": "Linear View",
       "listSubtitle": "Compact issue rows",
-      "boardSubtitle": "Grouped columns"
+      "boardSubtitle": "Grouped columns",
+      "listLabel": "List",
+      "boardLabel": "Board"
     },
     "linearGroup": {
       "title": "Group Linear Issues",
@@ -1411,25 +1419,41 @@
     "githubKind": {
       "issuesSubtitle": "GitHub issues",
       "prsSubtitle": "GitHub pull requests",
-      "projectSubtitle": "GitHub Projects views"
+      "projectSubtitle": "GitHub Projects views",
+      "issuesLabel": "Issues",
+      "prsLabel": "PRs",
+      "projectLabel": "Projects"
     },
     "issuePresets": {
       "openSubtitle": "Open GitHub issues",
-      "assignedSubtitle": "Open issues assigned to you"
+      "assignedSubtitle": "Open issues assigned to you",
+      "assignedLabel": "Assigned to me"
     },
     "prPresets": {
       "openSubtitle": "Open pull requests",
       "mineSubtitle": "Pull requests authored by you",
-      "reviewSubtitle": "Review requests assigned to you"
+      "reviewSubtitle": "Review requests assigned to you",
+      "mineLabel": "Mine",
+      "reviewLabel": "Needs review"
     },
     "gitlabView": {
       "projectSubtitle": "Merge requests and issues by repository",
-      "todosSubtitle": "Pending GitLab todos"
+      "todosSubtitle": "Pending GitLab todos",
+      "projectLabel": "Project MRs",
+      "todosLabel": "My Todos"
     },
     "sort": {
       "title": "Sort Tasks",
       "updatedSubtitle": "Newest activity first",
-      "repositorySubtitle": "Group by repository, then newest activity"
+      "repositorySubtitle": "Group by repository, then newest activity",
+      "updatedLabel": "Updated",
+      "repositoryLabel": "Repository"
+    },
+    "filter": {
+      "openLabel": "Open",
+      "mergedLabel": "Merged",
+      "closedLabel": "Closed",
+      "allLabel": "All"
     }
   },
   "sourceControl": {
@@ -1596,7 +1620,9 @@
   "filePreview": {
     "waitingForDesktop": "Waiting for desktop...",
     "emptyFile": "Empty file",
-    "title": "File preview"
+    "title": "File preview",
+    "unknownSize": "unknown size",
+    "unsavedEditsLost": "Unsaved edits will be lost."
   },
   "appUpdate": {
     "tapToUpdate": "Tap to update"
@@ -1634,5 +1660,24 @@
   },
   "prChip": {
     "createPullRequest": "Create pull request"
+  },
+  "filePreviewError": {
+    "binaryUnavailable": "Binary preview unavailable",
+    "tooLarge": "File too large for mobile preview",
+    "reloadBeforeSave": "Reload preview before saving",
+    "cannotReachDesktop": "Unable to reach the desktop filesystem",
+    "notFound": "File not found",
+    "unableToLoad": "Unable to load preview",
+    "unableToSave": "Unable to save file"
+  },
+  "connectionHealth": {
+    "pairingInvalid": "Pairing invalid — re-pair with your desktop",
+    "signInRequired": "Sign-in required on {{host}}",
+    "signInDetail": "Sign in to Orca on your desktop to reconnect",
+    "hostOffline": "{{host}} is offline",
+    "hostOfflineDetail": "Check it's awake, Orca is running, and you're signed in",
+    "cantConnectViaRelay": "Can't connect via Relay",
+    "connectingViaRelay": "Connecting via Relay…",
+    "cantReachDesktop": "Can't reach desktop"
   }
 }

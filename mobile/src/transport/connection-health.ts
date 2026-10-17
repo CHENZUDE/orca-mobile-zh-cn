@@ -1,6 +1,7 @@
 import { isTailscaleEndpoint } from '../../../src/shared/remote-runtime-tailscale-hint'
 import type { RelayHostReachability } from './relay-host-reachability'
 import type { MobileConnectionPath } from './stable-logical-rpc-client'
+import { translate } from '../i18n/i18n'
 import type { ConnectionState } from './types'
 
 // Why: thresholds for escalating connection UX from neutral
@@ -40,13 +41,13 @@ const RELAY_HOST_COPY: Record<
 > = {
   'signed-out': {
     kind: 'unreachable',
-    label: (host) => `Sign-in required on ${host}`,
-    detail: 'Sign in to Orca on your desktop to reconnect'
+    label: (host) => translate('connectionHealth.signInRequired', { host }),
+    detail: translate('connectionHealth.signInDetail')
   },
   'host-offline': {
     kind: 'unreachable',
-    label: (host) => `${host} is offline`,
-    detail: "Check it's awake, Orca is running, and you're signed in"
+    label: (host) => translate('connectionHealth.hostOffline', { host }),
+    detail: translate('connectionHealth.hostOfflineDetail')
   },
   // The cell refused this phone's relay credential (revoked, a month unused, or
   // desynced). A direct session would also rotate it, but re-pairing is the one
@@ -112,7 +113,7 @@ export function classifyConnection(args: {
   // Why: auth-failed means the desktop no longer recognizes this pairing (e.g. it
   // lost its device registry) — retrying can't fix it, only re-pairing can, so say so.
   if (state === 'auth-failed' || (args.pairingRejected && state !== 'connected')) {
-    return { kind: 'auth-failed', label: 'Pairing invalid — re-pair with your desktop' }
+    return { kind: 'auth-failed', label: translate('connectionHealth.pairingInvalid') }
   }
 
   if (state === 'connected') {
@@ -136,13 +137,13 @@ export function classifyConnection(args: {
   if (args.pendingPath === 'relay' && (state !== 'disconnected' || reconnectAttempts > 0)) {
     if (reconnectAttempts >= UNREACHABLE_ATTEMPTS) {
       if (lastConnectedAt == null) {
-        return { kind: 'unreachable', label: "Can't connect via Relay", reason: 'never-connected' }
+        return { kind: 'unreachable', label: translate('connectionHealth.cantConnectViaRelay'), reason: 'never-connected' }
       }
       if (now - lastConnectedAt >= STALE_SINCE_LAST_CONNECT_MS) {
-        return { kind: 'unreachable', label: "Can't connect via Relay", reason: 'stale' }
+        return { kind: 'unreachable', label: translate('connectionHealth.cantConnectViaRelay'), reason: 'stale' }
       }
     }
-    return { kind: 'normal', label: 'Connecting via Relay…' }
+    return { kind: 'normal', label: translate('connectionHealth.connectingViaRelay') }
   }
 
   if (state === 'disconnected') {
@@ -157,7 +158,7 @@ export function classifyConnection(args: {
     if (lastConnectedAt == null) {
       return {
         kind: 'unreachable',
-        label: "Can't reach desktop",
+        label: translate('connectionHealth.cantReachDesktop'),
         reason: 'never-connected',
         hint
       }
@@ -165,7 +166,7 @@ export function classifyConnection(args: {
     if (now - lastConnectedAt >= STALE_SINCE_LAST_CONNECT_MS) {
       return {
         kind: 'unreachable',
-        label: "Can't reach desktop",
+        label: translate('connectionHealth.cantReachDesktop'),
         reason: 'stale',
         hint
       }

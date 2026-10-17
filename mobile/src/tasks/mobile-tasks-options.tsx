@@ -27,8 +27,7 @@ import type { LinearIssue } from './mobile-tasks-provider-detail-types'
 export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
   {
     value: 'github',
-    label: 'GitHub',
-    subtitle: 'Issues and pull requests',
+    label: 'GitHub', labelKey: 'taskOptions.provider.githubLabel',
     subtitleKey: 'taskOptions.provider.githubSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
@@ -40,8 +39,7 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
   },
   {
     value: 'gitlab',
-    label: 'GitLab',
-    subtitle: 'Issues and merge requests',
+    label: 'GitLab', labelKey: 'taskOptions.provider.gitlabLabel',
     subtitleKey: 'taskOptions.provider.gitlabSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
@@ -53,8 +51,7 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
   },
   {
     value: 'linear',
-    label: 'Linear',
-    subtitle: 'Assigned and team issues',
+    label: 'Linear', labelKey: 'taskOptions.provider.linearLabel',
     subtitleKey: 'taskOptions.provider.linearSubtitle',
     renderIcon: (selected) => (
       <TaskProviderLogo
@@ -69,26 +66,22 @@ export const PROVIDER_OPTIONS: PickerOption<TaskProvider>[] = [
 export const GITLAB_FILTER_OPTIONS: PickerOption<GitLabFilter>[] = [
   {
     value: 'opened',
-    label: 'Open',
-    subtitle: 'Open issues and merge requests',
+    label: 'Open', labelKey: 'taskOptions.filter.openLabel',
     subtitleKey: 'taskOptions.gitlabFilter.openSubtitle'
   },
   {
     value: 'merged',
-    label: 'Merged',
-    subtitle: 'Merged merge requests',
+    label: 'Merged', labelKey: 'taskOptions.filter.mergedLabel',
     subtitleKey: 'taskOptions.gitlabFilter.mergedSubtitle'
   },
   {
     value: 'closed',
-    label: 'Closed',
-    subtitle: 'Closed issues and merge requests',
+    label: 'Closed', labelKey: 'taskOptions.filter.closedLabel',
     subtitleKey: 'taskOptions.gitlabFilter.closedSubtitle'
   },
   {
     value: 'all',
-    label: 'All',
-    subtitle: 'Any GitLab state',
+    label: 'All', labelKey: 'taskOptions.filter.allLabel',
     subtitleKey: 'taskOptions.gitlabFilter.allSubtitle'
   }
 ]
@@ -96,26 +89,22 @@ export const GITLAB_FILTER_OPTIONS: PickerOption<GitLabFilter>[] = [
 export const LINEAR_FILTER_OPTIONS: PickerOption<LinearFilter>[] = [
   {
     value: 'all',
-    label: 'All',
-    subtitle: 'Open issues across connected workspaces',
+    label: 'All', labelKey: 'taskOptions.filter.allLabel',
     subtitleKey: 'taskOptions.linearFilter.allSubtitle'
   },
   {
     value: 'assigned',
-    label: 'My Issues',
-    subtitle: 'Issues assigned to you',
+    label: 'My Issues', labelKey: 'taskOptions.linearFilter.assignedLabel',
     subtitleKey: 'taskOptions.linearFilter.assignedSubtitle'
   },
   {
     value: 'created',
-    label: 'Created',
-    subtitle: 'Issues created by you',
+    label: 'Created', labelKey: 'taskOptions.linearFilter.createdLabel',
     subtitleKey: 'taskOptions.linearFilter.createdSubtitle'
   },
   {
     value: 'completed',
-    label: 'Completed',
-    subtitle: 'Recently completed issues',
+    label: 'Completed', labelKey: 'taskOptions.linearFilter.completedLabel',
     subtitleKey: 'taskOptions.linearFilter.completedSubtitle'
   }
 ]
@@ -123,14 +112,12 @@ export const LINEAR_FILTER_OPTIONS: PickerOption<LinearFilter>[] = [
 export const LINEAR_VIEW_OPTIONS: PickerOption<LinearViewMode>[] = [
   {
     value: 'list',
-    label: 'List',
-    subtitle: 'Compact issue rows',
+    label: 'List', labelKey: 'taskOptions.linearView.listLabel',
     subtitleKey: 'taskOptions.linearView.listSubtitle'
   },
   {
     value: 'board',
-    label: 'Board',
-    subtitle: 'Grouped columns',
+    label: 'Board', labelKey: 'taskOptions.linearView.boardLabel',
     subtitleKey: 'taskOptions.linearView.boardSubtitle'
   }
 ]
@@ -198,20 +185,17 @@ export const DEFAULT_LINEAR_DISPLAY_PROPERTIES: LinearDisplayProperty[] = [
 export const GITHUB_KIND_OPTIONS: PickerOption<GitHubMode>[] = [
   {
     value: 'issues',
-    label: 'Issues',
-    subtitle: 'GitHub issues',
+    label: 'Issues', labelKey: 'taskOptions.githubKind.issuesLabel',
     subtitleKey: 'taskOptions.githubKind.issuesSubtitle'
   },
   {
     value: 'prs',
-    label: 'PRs',
-    subtitle: 'GitHub pull requests',
+    label: 'PRs', labelKey: 'taskOptions.githubKind.prsLabel',
     subtitleKey: 'taskOptions.githubKind.prsSubtitle'
   },
   {
     value: 'project',
-    label: 'Projects',
-    subtitle: 'GitHub Projects views',
+    label: 'Projects', labelKey: 'taskOptions.githubKind.projectLabel',
     subtitleKey: 'taskOptions.githubKind.projectSubtitle'
   }
 ]
@@ -219,14 +203,12 @@ export const GITHUB_KIND_OPTIONS: PickerOption<GitHubMode>[] = [
 export const ISSUE_PRESETS: PickerOption<GitHubPreset>[] = [
   {
     value: 'issues',
-    label: 'Open',
-    subtitle: 'Open GitHub issues',
+    label: 'Open', labelKey: 'taskOptions.filter.openLabel',
     subtitleKey: 'taskOptions.issuePresets.openSubtitle'
   },
   {
     value: 'my-issues',
-    label: 'Assigned to me',
-    subtitle: 'Open issues assigned to you',
+    label: 'Assigned to me', labelKey: 'taskOptions.issuePresets.assignedLabel',
     subtitleKey: 'taskOptions.issuePresets.assignedSubtitle'
   }
 ]
@@ -234,20 +216,17 @@ export const ISSUE_PRESETS: PickerOption<GitHubPreset>[] = [
 export const PR_PRESETS: PickerOption<GitHubPreset>[] = [
   {
     value: 'prs',
-    label: 'Open',
-    subtitle: 'Open pull requests',
+    label: 'Open', labelKey: 'taskOptions.filter.openLabel',
     subtitleKey: 'taskOptions.prPresets.openSubtitle'
   },
   {
     value: 'my-prs',
-    label: 'Mine',
-    subtitle: 'Pull requests authored by you',
+    label: 'Mine', labelKey: 'taskOptions.prPresets.mineLabel',
     subtitleKey: 'taskOptions.prPresets.mineSubtitle'
   },
   {
     value: 'review',
-    label: 'Needs review',
-    subtitle: 'Review requests assigned to you',
+    label: 'Needs review', labelKey: 'taskOptions.prPresets.reviewLabel',
     subtitleKey: 'taskOptions.prPresets.reviewSubtitle'
   }
 ]
@@ -255,14 +234,12 @@ export const PR_PRESETS: PickerOption<GitHubPreset>[] = [
 export const GITLAB_VIEW_OPTIONS: PickerOption<GitLabView>[] = [
   {
     value: 'project',
-    label: 'Project MRs',
-    subtitle: 'Merge requests and issues by repository',
+    label: 'Project MRs', labelKey: 'taskOptions.gitlabView.projectLabel',
     subtitleKey: 'taskOptions.gitlabView.projectSubtitle'
   },
   {
     value: 'todos',
-    label: 'My Todos',
-    subtitle: 'Pending GitLab todos',
+    label: 'My Todos', labelKey: 'taskOptions.gitlabView.todosLabel',
     subtitleKey: 'taskOptions.gitlabView.todosSubtitle'
   }
 ]
@@ -270,14 +247,12 @@ export const GITLAB_VIEW_OPTIONS: PickerOption<GitLabView>[] = [
 export const SORT_OPTIONS: PickerOption<TaskSort>[] = [
   {
     value: 'updated',
-    label: 'Updated',
-    subtitle: 'Newest activity first',
+    label: 'Updated', labelKey: 'taskOptions.sort.updatedLabel',
     subtitleKey: 'taskOptions.sort.updatedSubtitle'
   },
   {
     value: 'repository',
-    label: 'Repository',
-    subtitle: 'Group by repository, then newest activity',
+    label: 'Repository', labelKey: 'taskOptions.sort.repositoryLabel',
     subtitleKey: 'taskOptions.sort.repositorySubtitle'
   }
 ]

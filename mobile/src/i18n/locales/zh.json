@@ -1366,7 +1366,10 @@
     "provider": {
       "githubSubtitle": "Issues 和拥提请求",
       "gitlabSubtitle": "Issues 和合并请求",
-      "linearSubtitle": "分配给你的和团队的 Issues"
+      "linearSubtitle": "分配给你的和团队的 Issues",
+      "githubLabel": "GitHub",
+      "gitlabLabel": "GitLab",
+      "linearLabel": "Linear"
     },
     "gitlabFilter": {
       "openSubtitle": "开启的 Issues 和合并请求",
@@ -1378,12 +1381,17 @@
       "allSubtitle": "已连接工作区中开启的 Issues",
       "assignedSubtitle": "分配给你的 Issues",
       "createdSubtitle": "你创建的 Issues",
-      "completedSubtitle": "最近完成的 Issues"
+      "completedSubtitle": "最近完成的 Issues",
+      "assignedLabel": "我的任务",
+      "createdLabel": "我创建的",
+      "completedLabel": "已完成"
     },
     "linearView": {
       "title": "Linear 视图",
       "listSubtitle": "紧凑的 Issue 列表",
-      "boardSubtitle": "分组列表"
+      "boardSubtitle": "分组列表",
+      "listLabel": "列表",
+      "boardLabel": "看板"
     },
     "linearGroup": {
       "title": "Linear Issue 分组",
@@ -1411,25 +1419,41 @@
     "githubKind": {
       "issuesSubtitle": "GitHub Issues",
       "prsSubtitle": "GitHub 拥提请求",
-      "projectSubtitle": "GitHub Projects 视图"
+      "projectSubtitle": "GitHub Projects 视图",
+      "issuesLabel": "任务",
+      "prsLabel": "PR",
+      "projectLabel": "项目"
     },
     "issuePresets": {
       "openSubtitle": "开启的 GitHub Issues",
-      "assignedSubtitle": "分配给你的开启 Issues"
+      "assignedSubtitle": "分配给你的开启 Issues",
+      "assignedLabel": "分配给我的"
     },
     "prPresets": {
       "openSubtitle": "开启的拥提请求",
       "mineSubtitle": "你创建的拥提请求",
-      "reviewSubtitle": "分配给你的审阅请求"
+      "reviewSubtitle": "分配给你的审阅请求",
+      "mineLabel": "我创建的",
+      "reviewLabel": "待我评审"
     },
     "gitlabView": {
       "projectSubtitle": "按仓库划分的合并请求和 Issues",
-      "todosSubtitle": "待处理的 GitLab 待办"
+      "todosSubtitle": "待处理的 GitLab 待办",
+      "projectLabel": "项目 MR",
+      "todosLabel": "我的待办"
     },
     "sort": {
       "title": "任务排序",
       "updatedSubtitle": "最新活动优先",
-      "repositorySubtitle": "先按仓库，再按最新活动"
+      "repositorySubtitle": "先按仓库，再按最新活动",
+      "updatedLabel": "最近更新",
+      "repositoryLabel": "按仓库"
+    },
+    "filter": {
+      "openLabel": "未关闭",
+      "mergedLabel": "已合并",
+      "closedLabel": "已关闭",
+      "allLabel": "全部"
     }
   },
   "sourceControl": {
@@ -1596,7 +1620,9 @@
   "filePreview": {
     "waitingForDesktop": "等待桌面端...",
     "emptyFile": "空文件",
-    "title": "文件预览"
+    "title": "文件预览",
+    "unknownSize": "大小未知",
+    "unsavedEditsLost": "未保存的修改将会丢失。"
   },
   "appUpdate": {
     "tapToUpdate": "点按以更新"
@@ -1634,5 +1660,24 @@
   },
   "prChip": {
     "createPullRequest": "创建 Pull Request"
+  },
+  "filePreviewError": {
+    "binaryUnavailable": "无法预览二进制文件",
+    "tooLarge": "文件过大，无法在移动端预览",
+    "reloadBeforeSave": "保存前请重新加载预览",
+    "cannotReachDesktop": "无法连接到桌面端文件系统",
+    "notFound": "未找到文件",
+    "unableToLoad": "无法加载预览",
+    "unableToSave": "无法保存文件"
+  },
+  "connectionHealth": {
+    "pairingInvalid": "配对已失效 — 请与桌面端重新配对",
+    "signInRequired": "{{host}} 需要登录",
+    "signInDetail": "请在桌面端登录 Orca 以重新连接",
+    "hostOffline": "{{host}} 已离线",
+    "hostOfflineDetail": "请检查设备是否唤醒、Orca 是否运行、以及是否已登录",
+    "cantConnectViaRelay": "无法通过中继连接",
+    "connectingViaRelay": "正在通过中继连接…",
+    "cantReachDesktop": "无法连接到桌面端"
   }
 }

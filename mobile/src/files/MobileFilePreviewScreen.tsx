@@ -16,6 +16,7 @@ import {
   type MobileFilePreviewSource,
   type MobileFilePreviewResult
 } from './mobile-file-preview-request'
+import { translate } from '../i18n/i18n'
 import { ConfirmModal } from '../components/ConfirmModal'
 import { MobileFilePreviewBody } from './MobileFilePreviewBody'
 import {
@@ -96,7 +97,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
   const loadPreview = useCallback(async () => {
     const loadSourceKey = previewSourceKey
     if (!previewParams || !previewSource || loadSourceKey !== routePreviewSourceKey) {
-      setPreview(previewError(route.ok ? 'Unable to load preview' : route.message))
+      setPreview(previewError(route.ok ? t('filePreviewError.unableToLoad') : route.message))
       return
     }
     const preserveDirtyDraft =
@@ -104,10 +105,10 @@ export function MobileFilePreviewScreen({ route }: Props) {
       draftContentRef.current !== savedContentRef.current
     if (!client || connState !== 'connected') {
       if (preserveDirtyDraft) {
-        setSaveError('Waiting for desktop...')
+        setSaveError(t('filePreview.waitingForDesktop'))
         return
       }
-      setPreview({ status: 'waiting', message: 'Waiting for desktop...', reconnect: true })
+      setPreview({ status: 'waiting', message: t('filePreview.waitingForDesktop'), reconnect: true })
       return
     }
     if (!preserveDirtyDraft) {
@@ -141,7 +142,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
       }
       setPreview(result)
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Unable to load preview'
+      const message = err instanceof Error ? err.message : t('filePreviewError.unableToLoad')
       if (preserveDirtyDraft) {
         setSaveError(message)
         return
@@ -218,7 +219,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
         setSaveError(saveErrorMessageFromPreviewResult(result))
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Unable to save file'
+      const message = err instanceof Error ? err.message : t('filePreviewError.unableToSave')
       setSaveError(message)
     } finally {
       setSaving(false)
@@ -277,14 +278,14 @@ export function MobileFilePreviewScreen({ route }: Props) {
         imageHeight={Math.max(240, height - 160)}
         onDraftChange={setDraftContent}
         onImageError={() =>
-          setPreview({ status: 'error', message: 'Unable to load preview', reconnect: false })
+          setPreview({ status: 'error', message: t('filePreviewError.unableToLoad'), reconnect: false })
         }
         onRetry={retry}
       />
       <ConfirmModal
         visible={confirmingDiscard}
         title={t('session.sheets.discardChangesConfirm')}
-        message="Unsaved edits will be lost."
+        message={t('filePreview.unsavedEditsLost')}
         confirmLabel="Discard"
         cancelLabel="Stay"
         destructive
@@ -298,5 +299,5 @@ export function MobileFilePreviewScreen({ route }: Props) {
 function saveErrorMessageFromPreviewResult(result: MobileFilePreviewResult): string {
   return result.status === 'error' || result.status === 'waiting'
     ? result.message
-    : 'Unable to save file'
+    : translate('filePreviewError.unableToSave')
 }
