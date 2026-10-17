@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
 import { colors } from '../../theme/mobile-theme'
 import type { PRCheckRunDetails } from '../../../../src/shared/github/check-types'
@@ -16,6 +17,7 @@ export type DetailEntry =
 // (parity with the desktop ChecksPanel detail). Muted/monochrome and scrollable
 // so long CI output never breaks the sidebar layout.
 export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined }) {
+  const { t } = useTranslation()
   if (!entry || entry.status === 'loading') {
     return (
       <View style={styles.checkDetailArea}>
@@ -33,7 +35,7 @@ export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined })
   if (!entry.details) {
     return (
       <View style={styles.checkDetailArea}>
-        <Text style={styles.checkDetailText}>No details available.</Text>
+        <Text style={styles.checkDetailText}>{t('prChecks.noDetails')}</Text>
       </View>
     )
   }
@@ -47,7 +49,7 @@ export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined })
   return (
     <View style={styles.checkDetailArea}>
       {isEmpty ? (
-        <Text style={styles.checkDetailText}>No details available.</Text>
+        <Text style={styles.checkDetailText}>{t('prChecks.noDetails')}</Text>
       ) : (
         <>
           {content.summaryLines.map((line, index) => (
@@ -57,7 +59,7 @@ export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined })
           ))}
           {content.annotations.length > 0 ? (
             <View style={styles.checkDetailGroup}>
-              <Text style={styles.checkDetailGroupLabel}>Annotations</Text>
+              <Text style={styles.checkDetailGroupLabel}>{t('prChecks.annotations')}</Text>
               {content.annotations.map((annotation, index) => (
                 <View key={index}>
                   <Text style={styles.checkDetailLocator} numberOfLines={1}>
@@ -71,18 +73,22 @@ export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined })
                 </View>
               ))}
               {content.annotationsTruncated ? (
-                <Text style={styles.checkDetailText}>Showing first 20 annotations</Text>
+                <Text style={styles.checkDetailText}>{t('prChecks.showingFirstAnnotations')}</Text>
               ) : null}
             </View>
           ) : null}
           {content.jobs.length > 0 ? (
             <View style={styles.checkDetailGroup}>
-              <Text style={styles.checkDetailGroupLabel}>{content.jobsLabel}</Text>
+              <Text style={styles.checkDetailGroupLabel}>
+                {content.jobsLabel === 'Failed jobs'
+                  ? t('prChecks.failedJobs')
+                  : t('prChecks.jobs')}
+              </Text>
               {content.jobs.map((job, index) => (
                 <JobRow key={index} job={job} />
               ))}
               {content.jobsTruncated ? (
-                <Text style={styles.checkDetailText}>Showing first 100 jobs</Text>
+                <Text style={styles.checkDetailText}>{t('prChecks.showingFirstJobs')}</Text>
               ) : null}
             </View>
           ) : null}
@@ -93,20 +99,25 @@ export function PRCheckDetailView({ entry }: { entry: DetailEntry | undefined })
 }
 
 function JobRow({ job }: { job: CheckDetailJob }) {
+  const { t } = useTranslation()
   return (
     <View>
       <View style={styles.checkDetailStepRow}>
         <Text style={styles.checkDetailEmphasis} numberOfLines={1}>
           {job.name}
         </Text>
-        <Text style={styles.checkDetailText}>{job.state}</Text>
+        <Text style={styles.checkDetailText}>
+          {job.state === 'unknown' ? t('prChecks.unknown') : job.state}
+        </Text>
       </View>
       {job.failedSteps.map((step, index) => (
         <View key={index} style={styles.checkDetailStepRow}>
           <Text style={styles.checkDetailText} numberOfLines={1}>
             {step.name}
           </Text>
-          <Text style={styles.checkDetailText}>{step.state}</Text>
+          <Text style={styles.checkDetailText}>
+            {step.state === 'unknown' ? t('prChecks.unknown') : step.state}
+          </Text>
         </View>
       ))}
       {job.logTail ? (

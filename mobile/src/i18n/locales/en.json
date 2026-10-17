@@ -877,5 +877,14 @@
       "loaded": "Loaded",
       "loadsOlder": "Loads older results"
     }
+  },
+  "prChecks": {
+    "noDetails": "No details available.",
+    "annotations": "Annotations",
+    "showingFirstAnnotations": "Showing first 20 annotations",
+    "failedJobs": "Failed jobs",
+    "jobs": "Jobs",
+    "showingFirstJobs": "Showing first 100 jobs",
+    "unknown": "unknown"
   }
 }

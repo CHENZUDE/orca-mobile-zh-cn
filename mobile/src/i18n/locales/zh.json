@@ -877,5 +877,14 @@
       "loaded": "已加载",
       "loadsOlder": "加载更早的结果"
     }
+  },
+  "prChecks": {
+    "noDetails": "暂无详细信息。",
+    "annotations": "注释",
+    "showingFirstAnnotations": "仅显示前 20 条注释",
+    "failedJobs": "失败的作业",
+    "jobs": "作业",
+    "showingFirstJobs": "仅显示前 100 个作业",
+    "unknown": "未知"
   }
 }
