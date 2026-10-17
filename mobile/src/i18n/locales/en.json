@@ -644,7 +644,12 @@
       "noResults": "No results found.",
       "typeName": "Type a workspace name in the field below."
     },
-    "searchPlaceholder": "Type a name or search a source"
+    "searchPlaceholder": "Type a name or search a source",
+    "name": "Name",
+    "workspaceNamePlaceholder": "Workspace name",
+    "branchName": "Branch name",
+    "derivedFromName": "Derived from name",
+    "reuseBranch": "Reuse branch “{{branch}}”"
   },
   "quickCommand": {
     "label": "Label",

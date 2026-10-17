@@ -644,7 +644,12 @@
       "noResults": "未找到结果。",
       "typeName": "在下方字段中输入工作区名称。"
     },
-    "searchPlaceholder": "输入名称或搜索来源"
+    "searchPlaceholder": "输入名称或搜索来源",
+    "name": "名称",
+    "workspaceNamePlaceholder": "工作区名称",
+    "branchName": "分支名称",
+    "derivedFromName": "根据名称自动生成",
+    "reuseBranch": "复用分支 “{{branch}}”"
   },
   "quickCommand": {
     "label": "名称",
