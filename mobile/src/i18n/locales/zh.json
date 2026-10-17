@@ -943,5 +943,20 @@
     "unableHostPlatform": "无法确定主机平台。",
     "sessionQueued": "智能体会话已入队。",
     "failedToResume": "恢复会话失败。"
+  },
+  "diffReview": {
+    "reviewed": "已审阅",
+    "changed": "已变更",
+    "noteOne": "条备注",
+    "noteOther": "条备注",
+    "staleCount": "{{count}} 条过期",
+    "editFileNote": "编辑文件备注",
+    "stale": "已过期",
+    "previousHunk": "上一处变更块",
+    "nextHunk": "下一处变更块",
+    "hunk": "变更块",
+    "scopeBranch": "分支",
+    "scopeStaged": "已暂存",
+    "scopeUnstaged": "未暂存"
   }
 }

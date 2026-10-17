@@ -107,11 +107,13 @@ export function nextReviewIndexAfterMarkReviewed({
   return filter === 'unreviewed' && targetIndex > currentIndex ? targetIndex - 1 : targetIndex
 }
 
+// Why: returns an i18n key so the .tsx caller can localize it; this module is
+// a pure helper and cannot call useTranslation().
 export function mobileReviewScopeLabel(item: MobileDiffReviewQueueItem): string {
   if (item.scope === 'branch') {
-    return 'Branch'
+    return 'diffReview.scopeBranch'
   }
-  return item.scope === 'staged' ? 'Staged' : 'Unstaged'
+  return item.scope === 'staged' ? 'diffReview.scopeStaged' : 'diffReview.scopeUnstaged'
 }
 
 export function mobileReviewCountLabel(count: number, singular: string, plural: string): string {

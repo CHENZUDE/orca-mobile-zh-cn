@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import { ArrowDown, ArrowUp } from 'lucide-react-native'
 import type { DiffComment } from '../../../src/shared/diff-comment-types'
@@ -49,6 +50,7 @@ export function MobileDiffReviewFileSummary({
   onEditNote,
   onJumpHunk
 }: Props) {
+  const { t } = useTranslation()
   const hunkDisabled = diffState.kind !== 'ready' || diffState.hunks.length === 0
   const badgeColor = statusColor(item.status)
   return (
@@ -64,8 +66,8 @@ export function MobileDiffReviewFileSummary({
             {item.filePath}
           </Text>
           <Text style={styles.fileMeta} numberOfLines={1}>
-            {mobileReviewScopeLabel(item)}
-            {item.oldPath ? ` from ${item.oldPath}` : ''}
+            {t(mobileReviewScopeLabel(item))}
+            {item.oldPath ? t('git.fileRow.from', { path: item.oldPath }) : ''}
           </Text>
         </View>
       </View>
@@ -73,15 +75,25 @@ export function MobileDiffReviewFileSummary({
         <Text style={styles.fileMeta}>
           {currentIndex + 1}/{filteredCount}
         </Text>
-        {item.isReviewed ? <Text style={styles.reviewedPill}>Reviewed</Text> : null}
-        {item.changedSinceReview ? <Text style={styles.stalePill}>Changed</Text> : null}
+        {item.isReviewed ? (
+          <Text style={styles.reviewedPill}>{t('diffReview.reviewed')}</Text>
+        ) : null}
+        {item.changedSinceReview ? (
+          <Text style={styles.stalePill}>{t('diffReview.changed')}</Text>
+        ) : null}
         {item.noteCount > 0 ? (
           <Text style={styles.fileMeta}>
-            {mobileReviewCountLabel(item.noteCount, 'note', 'notes')}
+            {mobileReviewCountLabel(
+              item.noteCount,
+              t('diffReview.noteOne'),
+              t('diffReview.noteOther')
+            )}
           </Text>
         ) : null}
         {item.staleNoteCount > 0 ? (
-          <Text style={styles.staleText}>{item.staleNoteCount} stale</Text>
+          <Text style={styles.staleText}>
+            {t('diffReview.staleCount', { count: item.staleNoteCount })}
+          </Text>
         ) : null}
       </View>
       {fileNotes.length > 0 ? (
@@ -92,12 +104,14 @@ export function MobileDiffReviewFileSummary({
               style={({ pressed }) => [styles.fileNote, pressed && styles.fileNotePressed]}
               onPress={() => onEditNote(note)}
               accessibilityRole="button"
-              accessibilityLabel="Edit file note"
+              accessibilityLabel={t('diffReview.editFileNote')}
             >
               <Text style={styles.fileNoteText} numberOfLines={2}>
                 {note.body}
               </Text>
-              {staleCommentIds.has(note.id) ? <Text style={styles.staleText}>Stale</Text> : null}
+              {staleCommentIds.has(note.id) ? (
+                <Text style={styles.staleText}>{t('diffReview.stale')}</Text>
+              ) : null}
             </Pressable>
           ))}
         </View>
@@ -108,20 +122,20 @@ export function MobileDiffReviewFileSummary({
           disabled={hunkDisabled}
           onPress={() => onJumpHunk('previous')}
           accessibilityRole="button"
-          accessibilityLabel="Previous hunk"
+          accessibilityLabel={t('diffReview.previousHunk')}
         >
           <ArrowUp size={14} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.hunkButtonText}>Hunk</Text>
+          <Text style={styles.hunkButtonText}>{t('diffReview.hunk')}</Text>
         </Pressable>
         <Pressable
           style={({ pressed }) => [styles.hunkButton, pressed && styles.hunkButtonPressed]}
           disabled={hunkDisabled}
           onPress={() => onJumpHunk('next')}
           accessibilityRole="button"
-          accessibilityLabel="Next hunk"
+          accessibilityLabel={t('diffReview.nextHunk')}
         >
           <ArrowDown size={14} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.hunkButtonText}>Hunk</Text>
+          <Text style={styles.hunkButtonText}>{t('diffReview.hunk')}</Text>
         </Pressable>
       </View>
     </View>

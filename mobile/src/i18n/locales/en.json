@@ -943,5 +943,20 @@
     "unableHostPlatform": "Unable to determine host platform.",
     "sessionQueued": "Agent session queued.",
     "failedToResume": "Failed to resume session."
+  },
+  "diffReview": {
+    "reviewed": "Reviewed",
+    "changed": "Changed",
+    "noteOne": "note",
+    "noteOther": "notes",
+    "staleCount": "{{count}} stale",
+    "editFileNote": "Edit file note",
+    "stale": "Stale",
+    "previousHunk": "Previous hunk",
+    "nextHunk": "Next hunk",
+    "hunk": "Hunk",
+    "scopeBranch": "Branch",
+    "scopeStaged": "Staged",
+    "scopeUnstaged": "Unstaged"
   }
 }
