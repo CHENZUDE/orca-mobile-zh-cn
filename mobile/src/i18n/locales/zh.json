@@ -3,15 +3,7 @@
     "name": "Orca"
   },
   "common": {
-    "back": "返回",
-    "save": "保存",
-    "cancel": "取消",
-    "retry": "重试",
-    "loading": "加载中…",
-    "on": "开",
-    "off": "关",
-    "nameLabel": "名称",
-    "addressLabel": "地址"
+    "none": "无"
   },
   "pairing": {
     "missingCode": "缺少配对码",
@@ -654,18 +646,28 @@
     "add": "添加快捷命令"
   },
   "tasks": {
-    "comment": {
-      "addPlaceholder": "添加评论",
-      "send": "发送评论",
-      "reply": "回复",
-      "replyPlaceholder": "回复",
-      "resolveThread": "解决会话",
-      "reopenThread": "重新打开会话",
-      "thread": "会话",
-      "comment": "评论",
-      "show": "展开",
-      "count": "{{count}} 条评论",
-      "resolvedBy": "{{author}} 已解决该{{kind}}"
+    "detail": {
+      "type": "类型",
+      "status": "状态",
+      "assignee": "负责人",
+      "assignees": "负责人",
+      "project": "项目",
+      "description": "描述",
+      "checks": "检查",
+      "refresh": "刷新",
+      "rerunFailed": "重跑失败项",
+      "rerunAll": "全部重跑",
+      "noChecks": "未找到检查。",
+      "pipeline": "流水线",
+      "jobCount": "{{count}} 个作业",
+      "noPipelineRuns": "此 MR 暂无流水线记录。",
+      "subIssues": "子任务",
+      "noSubIssues": "没有子任务。",
+      "open": "打开",
+      "subIssueTitlePlaceholder": "子任务标题",
+      "addSubIssue": "添加子任务",
+      "discussion": "讨论",
+      "noComments": "暂无评论。"
     }
   }
 }

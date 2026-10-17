@@ -3,15 +3,7 @@
     "name": "Orca"
   },
   "common": {
-    "back": "Back",
-    "save": "Save",
-    "cancel": "Cancel",
-    "retry": "Retry",
-    "loading": "Loading…",
-    "on": "On",
-    "off": "Off",
-    "nameLabel": "Name",
-    "addressLabel": "Address"
+    "none": "None"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -654,18 +646,28 @@
     "add": "Add Quick Command"
   },
   "tasks": {
-    "comment": {
-      "addPlaceholder": "Add a comment",
-      "send": "Send comment",
-      "reply": "Reply",
-      "replyPlaceholder": "Reply",
-      "resolveThread": "Resolve thread",
-      "reopenThread": "Reopen thread",
-      "thread": "thread",
-      "comment": "comment",
-      "show": "Show",
-      "count": "{{count}} comments",
-      "resolvedBy": "Resolved {{kind}} by {{author}}"
+    "detail": {
+      "type": "Type",
+      "status": "Status",
+      "assignee": "Assignee",
+      "assignees": "Assignees",
+      "project": "Project",
+      "description": "Description",
+      "checks": "Checks",
+      "refresh": "Refresh",
+      "rerunFailed": "Rerun failed",
+      "rerunAll": "Rerun all",
+      "noChecks": "No checks found.",
+      "pipeline": "Pipeline",
+      "jobCount": "{{count}} jobs",
+      "noPipelineRuns": "No pipeline runs for this MR.",
+      "subIssues": "Sub-issues",
+      "noSubIssues": "No sub-issues.",
+      "open": "Open",
+      "subIssueTitlePlaceholder": "Sub-issue title",
+      "addSubIssue": "Add sub-issue",
+      "discussion": "Discussion",
+      "noComments": "No comments."
     }
   }
 }
