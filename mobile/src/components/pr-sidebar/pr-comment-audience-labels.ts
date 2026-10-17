@@ -1,18 +1,20 @@
 import type { PRCommentAudienceFilter } from '../../../../src/shared/pr-comment-audience'
 
+// Why: labels are i18n keys; this module is a pure helper and cannot call useTranslation().
 export const PR_COMMENT_AUDIENCE_FILTERS = [
-  { value: 'all', label: 'All' },
-  { value: 'human', label: 'Humans' },
-  { value: 'bot', label: 'Bots' }
-] satisfies { value: PRCommentAudienceFilter; label: string }[]
+  { value: 'all', labelKey: 'prComments.audienceAll' },
+  { value: 'human', labelKey: 'prComments.audienceHumans' },
+  { value: 'bot', labelKey: 'prComments.audienceBots' }
+] satisfies { value: PRCommentAudienceFilter; labelKey: string }[]
 
+// Why: returns an i18n key so the .tsx caller can localize it.
 export function getPRCommentAudienceEmptyLabel(filter: PRCommentAudienceFilter): string {
   switch (filter) {
     case 'bot':
-      return 'No bot comments.'
+      return 'prComments.noBotComments'
     case 'human':
-      return 'No human comments.'
+      return 'prComments.noHumanComments'
     case 'all':
-      return 'No comments yet.'
+      return 'prComments.noCommentsYet'
   }
 }

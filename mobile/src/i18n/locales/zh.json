@@ -985,5 +985,21 @@
     "removeHost": "移除主机",
     "removeHostConfirm": "要移除“{{name}}”吗？之后可以重新配对。",
     "remove": "移除"
+  },
+  "prComments": {
+    "description": "描述",
+    "loadDescriptionFailed": "无法加载描述，请点按刷新重试。",
+    "noDescription": "未提供描述。",
+    "comments": "评论",
+    "loadCommentsFailed": "无法加载评论，请点按刷新重试。",
+    "noCommentsYet": "暂无评论。",
+    "noBotComments": "没有机器人评论。",
+    "noHumanComments": "没有人工评论。",
+    "audienceAll": "全部",
+    "audienceHumans": "人工",
+    "audienceBots": "机器人",
+    "showMore": "再显示 {{count}} 条",
+    "showMoreOfTotal": "再显示 {{count}} 条，共 {{total}} 条",
+    "commentAction": "评论"
   }
 }

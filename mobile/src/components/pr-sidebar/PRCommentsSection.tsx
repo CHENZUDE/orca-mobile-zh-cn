@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronDown, ChevronRight } from 'lucide-react-native'
@@ -63,6 +64,7 @@ export function PRCommentsSection({
   actions,
   botAuthorOverrides
 }: Props) {
+  const { t } = useTranslation()
   // details is null while phase 2 (the heavy comments/body payload) is still loading.
   // A synthetic placeholder means phase 2 failed — do not paint that as empty success.
   const loadingDetails = details === null
@@ -123,22 +125,22 @@ export function PRCommentsSection({
 
   return (
     <>
-      <PRSection title="Description">
+      <PRSection title={t('prComments.description')}>
         {loadingDetails ? (
           <ActivityIndicator color={colors.textSecondary} />
         ) : detailsFailed ? (
           <Text style={styles.noDescription}>
-            Could not load description. Tap refresh to try again.
+            {t('prComments.loadDescriptionFailed')}
           </Text>
         ) : body.trim() ? (
           <CommentMarkdown content={body} variant="document" />
         ) : (
-          <Text style={styles.noDescription}>No description provided.</Text>
+          <Text style={styles.noDescription}>{t('prComments.noDescription')}</Text>
         )}
       </PRSection>
 
       <PRSection
-        title="Comments"
+        title={t('prComments.comments')}
         trailing={
           comments.length > 0 ? (
             <View style={styles.countChip}>
@@ -150,11 +152,11 @@ export function PRCommentsSection({
         {loadingDetails ? (
           <ActivityIndicator color={colors.textSecondary} />
         ) : detailsFailed ? (
-          <Text style={styles.empty}>Could not load comments. Tap refresh to try again.</Text>
+          <Text style={styles.empty}>{t('prComments.loadCommentsFailed')}</Text>
         ) : (
           <View style={styles.list}>
             {comments.length === 0 ? (
-              <Text style={styles.empty}>No comments yet.</Text>
+              <Text style={styles.empty}>{t('prComments.noCommentsYet')}</Text>
             ) : (
               <>
                 {isPr ? (
@@ -172,7 +174,7 @@ export function PRCommentsSection({
                           <Text
                             style={[styles.audienceTabText, active && styles.audienceTabTextActive]}
                           >
-                            {tab.label}
+                            {t(tab.labelKey)}
                           </Text>
                           <Text
                             style={[styles.audienceTabText, active && styles.audienceTabTextActive]}
@@ -185,7 +187,9 @@ export function PRCommentsSection({
                   </View>
                 ) : null}
                 {visible.length === 0 ? (
-                  <Text style={styles.empty}>{getPRCommentAudienceEmptyLabel(filter)}</Text>
+                  <Text style={styles.empty}>
+                    {t(getPRCommentAudienceEmptyLabel(filter))}
+                  </Text>
                 ) : (
                   <>
                     {shownGroups.map((group) => (
@@ -203,8 +207,14 @@ export function PRCommentsSection({
                         accessibilityRole="button"
                       >
                         <Text style={styles.showMoreText}>
-                          Show {Math.min(remaining, COMMENT_PAGE)} more
-                          {remaining > COMMENT_PAGE ? ` of ${remaining}` : ''}
+                          {remaining > COMMENT_PAGE
+                            ? t('prComments.showMoreOfTotal', {
+                                count: Math.min(remaining, COMMENT_PAGE),
+                                total: remaining
+                              })
+                            : t('prComments.showMore', {
+                                count: Math.min(remaining, COMMENT_PAGE)
+                              })}
                         </Text>
                       </Pressable>
                     ) : null}
@@ -216,8 +226,8 @@ export function PRCommentsSection({
             {canComment && actions ? (
               <View style={styles.rootComposer}>
                 <PRCommentComposer
-                  placeholder="Add a comment…"
-                  submitLabel="Comment"
+                  placeholder={t('tasks.comment.addPlaceholder')}
+                  submitLabel={t('prComments.commentAction')}
                   submitting={actions.isRootBusy}
                   onSubmit={actions.addRootComment}
                 />

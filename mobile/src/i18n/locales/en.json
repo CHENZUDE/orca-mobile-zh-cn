@@ -985,5 +985,21 @@
     "removeHost": "Remove Host",
     "removeHostConfirm": "Remove \"{{name}}\"? You can re-pair later.",
     "remove": "Remove"
+  },
+  "prComments": {
+    "description": "Description",
+    "loadDescriptionFailed": "Could not load description. Tap refresh to try again.",
+    "noDescription": "No description provided.",
+    "comments": "Comments",
+    "loadCommentsFailed": "Could not load comments. Tap refresh to try again.",
+    "noCommentsYet": "No comments yet.",
+    "noBotComments": "No bot comments.",
+    "noHumanComments": "No human comments.",
+    "audienceAll": "All",
+    "audienceHumans": "Humans",
+    "audienceBots": "Bots",
+    "showMore": "Show {{count}} more",
+    "showMoreOfTotal": "Show {{count}} more of {{total}}",
+    "commentAction": "Comment"
   }
 }
