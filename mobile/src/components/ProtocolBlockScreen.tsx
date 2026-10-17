@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useWallAppUpdate } from '../app-update/use-wall-app-update'
 import { openExternalLink } from '../platform/external-link'
 import { useRouteHandoff } from '../navigation/route-handoff'
@@ -67,6 +68,8 @@ function blockBody(verdict: BlockedVerdict, remedy: BlockRemedy, storeName: stri
 }
 
 export function ProtocolBlockScreen({ verdict }: Props) {
+  const { t } = useTranslation()
+
   const router = useRouteHandoff()
   const mobileUpdate = useWallAppUpdate()
   const remedy = blockRemedy(verdict)
@@ -119,7 +122,7 @@ export function ProtocolBlockScreen({ verdict }: Props) {
             router.replace('/')
           }}
         >
-          <Text style={styles.secondaryButtonText}>Back to hosts</Text>
+          <Text style={styles.secondaryButtonText}>{t('hosts.backToHosts')}</Text>
         </Pressable>
         <Text style={styles.recoveryNote}>{recoveryNote}</Text>
       </View>

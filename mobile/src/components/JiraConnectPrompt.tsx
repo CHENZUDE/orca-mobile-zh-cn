@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { TaskProviderLogo } from './TaskProviderLogo'
@@ -16,11 +17,13 @@ export function JiraConnectPrompt({
   disabled,
   onCheckAgain
 }: Props) {
+  const { t } = useTranslation()
   return (
     <View style={styles.centered}>
+
       <TaskProviderLogo provider="jira" size={32} color={colors.textSecondary} />
       <Text style={styles.emptyText}>
-        {unavailableReason ? 'Update Orca desktop' : 'Connect Jira on your desktop'}
+        {unavailableReason ? t('jiraConnect.updateDesktop') : t('jiraConnect.connectOnDesktop')}
       </Text>
       <Text style={styles.centeredHint}>
         {unavailableReason ??
@@ -37,7 +40,7 @@ export function JiraConnectPrompt({
           }
         }}
       >
-        <Text style={styles.checkAgainText}>Check again</Text>
+        <Text style={styles.checkAgainText}>{t('jiraConnect.checkAgain')}</Text>
       </Pressable>
     </View>
   )

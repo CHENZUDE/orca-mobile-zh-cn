@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
 import { Check, Download, Trash2 } from 'lucide-react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
@@ -48,6 +49,8 @@ export function VoiceModelList({
   onDownload,
   onDelete
 }: Props): React.JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <View style={disabled ? styles.disabled : undefined} pointerEvents={disabled ? 'none' : 'auto'}>
       {setup.models.map((model, idx) => {
@@ -80,7 +83,7 @@ export function VoiceModelList({
                   {isSelected ? (
                     <View style={styles.selectedTag}>
                       <Check size={14} color={colors.statusGreen} strokeWidth={2.4} />
-                      <Text style={styles.selectedText}>In use</Text>
+                      <Text style={styles.selectedText}>{t('voiceModels.inUse')}</Text>
                     </View>
                   ) : (
                     <Pressable

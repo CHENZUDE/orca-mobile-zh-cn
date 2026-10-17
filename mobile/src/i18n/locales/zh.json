@@ -1481,11 +1481,47 @@
     "viewSource": "查看 HTML 源代码"
   },
   "agentState": {
-    "monitoringBackgroundTasks": "正在监控后台任务",
+    "monitoringBackgroundTasks": "正在监视后台任务",
     "noRecentUpdate": "最近没有更新"
   },
   "workspaceDetail": {
     "noWorkspaceOpen": "还没有打开工作区",
     "pickAWorkspace": "请从侧边栏选择一个工作区，其终端会显示在这里。"
+  },
+  "hostDiagnostics": {
+    "viewDiagnostics": "查看网络诊断"
+  },
+  "hostProtocolGate": {
+    "checkingCompatibility": "正在检查主机兼容性"
+  },
+  "workspace": {
+    "sshConnection": "SSH 连接"
+  },
+  "hosts": {
+    "backToHosts": "返回主机列表"
+  },
+  "voiceModels": {
+    "inUse": "使用中"
+  },
+  "jiraConnect": {
+    "checkAgain": "重新检查",
+    "updateDesktop": "请更新 Orca 桌面端",
+    "connectOnDesktop": "请在桌面端连接 Jira"
+  },
+  "agentLaunch": {
+    "copyPrompt": "复制提示词"
+  },
+  "dragReorder": {
+    "dragToReorder": "拖动以排序",
+    "accessibilityHint": "使用上移和下移操作可在不拖动的情况下排序",
+    "moveUp": "上移",
+    "moveDown": "下移"
+  },
+  "hostRouteNotice": {
+    "dismiss": "关闭提示"
+  },
+  "authFailedBanner": {
+    "repair": "重新配对",
+    "repairNote": "请在 Orca 桌面端应用中重新连接或移除此主机。"
   }
 }

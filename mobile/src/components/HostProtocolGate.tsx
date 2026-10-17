@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, type ReactNode } from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { useHostClient } from '../transport/client-context'
@@ -14,6 +15,8 @@ type Props = {
 // Why: single choke point above every /h/[hostId] route so a blocked verdict replaces the
 // whole host UI (sidebar + detail stack) while the host list and other hosts stay usable.
 export function HostProtocolGate({ hostId, children }: Props) {
+  const { t } = useTranslation()
+
   const { client, state } = useHostClient(hostId)
   const gates = useHostStatusGates({ hostId, client, connState: state })
   const { compatVerdict, statusPending } = gates
@@ -47,7 +50,7 @@ export function HostProtocolGate({ hostId, children }: Props) {
       <View style={styles.pending}>
         <ActivityIndicator
           color={colors.textSecondary}
-          accessibilityLabel="Checking host compatibility"
+          accessibilityLabel={t('hostProtocolGate.checkingCompatibility')}
         />
       </View>
     )
@@ -81,7 +84,7 @@ export function HostProtocolGate({ hostId, children }: Props) {
           >
             <ActivityIndicator
               color={colors.textSecondary}
-              accessibilityLabel="Checking host compatibility"
+              accessibilityLabel={t('hostProtocolGate.checkingCompatibility')}
             />
           </View>
         ) : null}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef } from 'react'
 import { TextInput, type TextInputProps } from 'react-native'
 
@@ -13,6 +14,8 @@ export function MobileWorkspaceNameInput({
   focusKey,
   ...props
 }: MobileWorkspaceNameInputProps) {
+  const { t } = useTranslation()
+
   const inputRef = useRef<TextInput>(null)
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export function MobileWorkspaceNameInput({
   return (
     <TextInput
       ref={inputRef}
-      placeholder="Workspace name"
+      placeholder={t('workspaceDetail.namePlaceholder')}
       autoCapitalize="none"
       autoCorrect={false}
       showSoftInputOnFocus

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text } from 'react-native'
 import { authFailedBannerStyles as styles } from './auth-failed-banner-styles'
 
@@ -15,12 +16,14 @@ export function AuthFailedBannerActions({
   onRepair: () => void
   onRemove: () => void
 }) {
+  const { t } = useTranslation()
+
   return (
     <>
       <Pressable style={styles.action} onPress={onRepair}>
-        <Text style={styles.actionText}>Re-pair</Text>
+        <Text style={styles.actionText}>{t('authFailedBanner.repair')}</Text>
       </Pressable>
-      <Text style={styles.note}>Reconnect or remove this host from the Orca app.</Text>
+      <Text style={styles.note}>{t('authFailedBanner.repairNote')}</Text>
     </>
   )
 }

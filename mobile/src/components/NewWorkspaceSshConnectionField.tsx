@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import type { WorkspaceSshGate } from '../tasks/workspace-ssh-gate'
 import { workspaceSshStatusLabel } from '../tasks/workspace-ssh-gate'
@@ -12,9 +13,11 @@ export function NewWorkspaceSshConnectionField({
   sshGate: WorkspaceSshGate
   onConnect: () => void
 }) {
+  const { t } = useTranslation()
+
   return (
     <View style={styles.field}>
-      <Text style={styles.label}>SSH Connection</Text>
+      <Text style={styles.label}>{t('workspace.sshConnection')}</Text>
       <View style={styles.sshBox}>
         <View style={styles.sshRow}>
           <View

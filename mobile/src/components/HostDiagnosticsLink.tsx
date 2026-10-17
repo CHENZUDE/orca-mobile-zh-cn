@@ -1,16 +1,19 @@
+import { useTranslation } from 'react-i18next'
 import { ChevronRight } from 'lucide-react-native'
 import { Pressable, StyleSheet, Text } from 'react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 
 export function HostDiagnosticsLink({ onPress }: { onPress: () => void }): React.JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <Pressable
       style={styles.link}
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel="View network diagnostics"
+      accessibilityLabel={t('hostDiagnostics.viewDiagnostics')}
     >
-      <Text style={styles.text}>View network diagnostics</Text>
+      <Text style={styles.text}>{t('hostDiagnostics.viewDiagnostics')}</Text>
       <ChevronRight size={16} color={colors.textSecondary} />
     </Pressable>
   )

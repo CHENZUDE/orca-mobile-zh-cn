@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Activity } from 'lucide-react-native'
 import { Animated, StyleSheet, View } from 'react-native'
 import type { AgentWorkingMode } from '../../../src/shared/agent-status-types'
@@ -27,13 +28,15 @@ export function AgentSpinner({
   workingMode?: AgentWorkingMode
 }) {
   const monitoring = status === 'working' && workingMode === 'monitoring'
+  const { t } = useTranslation()
+
   const rotate = useWorkingRingRotation(status === 'working' && !monitoring)
 
   const color = STATUS_COLORS[status] ?? STATUS_COLORS.inactive
 
   if (monitoring) {
     return (
-      <View style={styles.wrapper} accessibilityLabel="Monitoring background tasks">
+      <View style={styles.wrapper} accessibilityLabel={t('agentState.monitoringBackgroundTasks')}>
         <Activity size={12} color={STATUS_COLORS.working} />
       </View>
     )

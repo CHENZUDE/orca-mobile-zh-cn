@@ -1487,5 +1487,41 @@
   "workspaceDetail": {
     "noWorkspaceOpen": "No workspace open",
     "pickAWorkspace": "Pick a workspace from the sidebar to open its terminal here."
+  },
+  "hostDiagnostics": {
+    "viewDiagnostics": "View network diagnostics"
+  },
+  "hostProtocolGate": {
+    "checkingCompatibility": "Checking host compatibility"
+  },
+  "workspace": {
+    "sshConnection": "SSH Connection"
+  },
+  "hosts": {
+    "backToHosts": "Back to hosts"
+  },
+  "voiceModels": {
+    "inUse": "In use"
+  },
+  "jiraConnect": {
+    "checkAgain": "Check again",
+    "updateDesktop": "Update Orca desktop",
+    "connectOnDesktop": "Connect Jira on your desktop"
+  },
+  "agentLaunch": {
+    "copyPrompt": "Copy prompt"
+  },
+  "dragReorder": {
+    "dragToReorder": "Drag to reorder",
+    "accessibilityHint": "Use the move up and move down actions to reorder without dragging",
+    "moveUp": "Move up",
+    "moveDown": "Move down"
+  },
+  "hostRouteNotice": {
+    "dismiss": "Dismiss notice"
+  },
+  "authFailedBanner": {
+    "repair": "Re-pair",
+    "repairNote": "Reconnect or remove this host from the Orca app."
   }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { X } from 'lucide-react-native'
 import { colors, spacing } from '../theme/mobile-theme'
@@ -24,6 +25,8 @@ export function HostRouteNoticeBanner({
   tone?: 'notice' | 'failure'
   onDismiss: () => void
 }) {
+  const { t } = useTranslation()
+
   return (
     <View
       style={[styles.banner, tone === 'failure' && styles.failure]}
@@ -34,7 +37,7 @@ export function HostRouteNoticeBanner({
       <Pressable
         onPress={onDismiss}
         accessibilityRole="button"
-        accessibilityLabel="Dismiss notice"
+        accessibilityLabel={t('hostRouteNotice.dismiss')}
         hitSlop={spacing.sm}
         style={styles.dismiss}
       >

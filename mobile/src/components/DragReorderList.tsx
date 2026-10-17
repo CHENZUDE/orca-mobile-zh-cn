@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect, type ReactNode } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
@@ -227,6 +228,8 @@ function DragReorderRow({
   onAccessibilityMove: (key: string, delta: number) => void
   children: ReactNode
 }): React.JSX.Element {
+  const { t } = useTranslation()
+
   const {
     positions,
     activeKey,
@@ -296,11 +299,11 @@ function DragReorderRow({
           style={styles.handle}
           accessible
           accessibilityRole="button"
-          accessibilityLabel="Drag to reorder"
-          accessibilityHint="Use the move up and move down actions to reorder without dragging"
+          accessibilityLabel={t('dragReorder.dragToReorder')}
+          accessibilityHint={t('dragReorder.accessibilityHint')}
           accessibilityActions={[
-            { name: 'moveUp', label: 'Move up' },
-            { name: 'moveDown', label: 'Move down' }
+            { name: 'moveUp', label: t('dragReorder.moveUp') },
+            { name: 'moveDown', label: t('dragReorder.moveDown') }
           ]}
           onAccessibilityAction={(event) => {
             if (event.nativeEvent.actionName === 'moveUp') {

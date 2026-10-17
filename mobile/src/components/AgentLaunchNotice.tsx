@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Pressable, StyleSheet, Text, View, type StyleProp, type TextStyle } from 'react-native'
 import { useClipboardWriter } from '../platform/clipboard'
@@ -30,6 +31,8 @@ export function AgentLaunchNotice({
   errorStyle
 }: Props) {
   const clipboard = useClipboardWriter()
+  const { t } = useTranslation()
+
   const [copyState, setCopyState] = useState<{ prompt: string; label: string } | null>(null)
   const availabilityMessage =
     availability === 'update-required'
@@ -44,7 +47,7 @@ export function AgentLaunchNotice({
     return null
   }
   const copyLabel =
-    copyState && copyState.prompt === undeliveredPrompt ? copyState.label : 'Copy prompt'
+    copyState && copyState.prompt === undeliveredPrompt ? copyState.label : t('agentLaunch.copyPrompt')
   return (
     <View style={styles.notice}>
       {confirmation ? <Text style={styles.successText}>{confirmation}</Text> : null}
@@ -59,7 +62,7 @@ export function AgentLaunchNotice({
             )
           }}
           accessibilityRole="button"
-          accessibilityLabel="Copy prompt"
+          accessibilityLabel={t('agentLaunch.copyPrompt')}
           hitSlop={spacing.sm}
         >
           <Text style={styles.copyText}>{copyLabel}</Text>
