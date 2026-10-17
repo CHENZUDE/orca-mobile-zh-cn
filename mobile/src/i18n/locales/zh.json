@@ -907,5 +907,19 @@
     "jobs": "作业",
     "showingFirstJobs": "仅显示前 100 个作业",
     "unknown": "未知"
+  },
+  "git": {
+    "committedOnBranch": "分支上的提交",
+    "loadingCommitted": "正在加载已提交变更...",
+    "committedUnavailable": "无法获取已提交变更。",
+    "fileRow": {
+      "openChangedFile": "打开变更文件 {{path}}",
+      "openCommittedChange": "打开已提交变更 {{path}}",
+      "from": "来自 {{path}}",
+      "unresolvedConflict": "冲突未解决",
+      "stage": "暂存 {{path}}",
+      "unstage": "取消暂存 {{path}}",
+      "discard": "丢弃 {{path}}"
+    }
   }
 }

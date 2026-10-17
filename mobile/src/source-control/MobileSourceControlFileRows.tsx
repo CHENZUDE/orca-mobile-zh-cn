@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronRight, FileText, Minus, Plus, Trash2 } from 'lucide-react-native'
 import type { SectionListRenderItem } from 'react-native'
@@ -27,6 +28,7 @@ export function makeRenderFileRow(
   const { busyAction, openingPath, openingBranchPath, openFile, runGitAction, setDiscardTarget } =
     state
   return function FileRow({ item }) {
+    const { t } = useTranslation()
     const rowBusy =
       busyAction === item.stageActionId ||
       busyAction === item.unstageActionId ||
@@ -45,7 +47,7 @@ export function makeRenderFileRow(
         ]}
         onPress={() => void openFile(item)}
         disabled={rowDisabled}
-        accessibilityLabel={`Open changed file ${item.path}`}
+        accessibilityLabel={t('git.fileRow.openChangedFile', { path: item.path })}
       >
         <View style={styles.statusBadge}>
           <Text style={[styles.statusBadgeText, { color: statusColor(item.status) }]}>
@@ -66,11 +68,11 @@ export function makeRenderFileRow(
           </Text>
           {item.oldPath ? (
             <Text style={styles.fileMeta} numberOfLines={1}>
-              from {item.oldPath}
+              {t('git.fileRow.from', { path: item.oldPath })}
             </Text>
           ) : item.conflictStatus === 'unresolved' ? (
             <Text style={styles.fileMeta} numberOfLines={1}>
-              Unresolved conflict
+              {t('git.fileRow.unresolvedConflict')}
             </Text>
           ) : null}
         </View>
@@ -88,7 +90,7 @@ export function makeRenderFileRow(
               void runGitAction(item.unstageActionId, 'git.unstage', { filePath: item.path })
             }
             hitSlop={8}
-            accessibilityLabel={`Unstage ${item.path}`}
+            accessibilityLabel={t('git.fileRow.unstage', { path: item.path })}
           >
             <Minus size={16} color={colors.textSecondary} strokeWidth={2.2} />
           </Pressable>
@@ -106,7 +108,7 @@ export function makeRenderFileRow(
                   void runGitAction(item.stageActionId, 'git.stage', { filePath: item.path })
                 }
                 hitSlop={8}
-                accessibilityLabel={`Stage ${item.path}`}
+                accessibilityLabel={t('git.fileRow.stage', { path: item.path })}
               >
                 <Plus size={16} color={colors.textSecondary} strokeWidth={2.2} />
               </Pressable>
@@ -121,7 +123,7 @@ export function makeRenderFileRow(
                 disabled={ioBusy}
                 onPress={() => setDiscardTarget(item)}
                 hitSlop={8}
-                accessibilityLabel={`Discard ${item.path}`}
+                accessibilityLabel={t('git.fileRow.discard', { path: item.path })}
               >
                 <Trash2 size={16} color={colors.statusRed} strokeWidth={2.1} />
               </Pressable>
@@ -150,6 +152,7 @@ type FooterState = Pick<
 >
 
 export function BranchCompareFooter({ state }: { state: FooterState }) {
+  const { t } = useTranslation()
   const {
     shouldShowBranchCompareSection,
     branchCompareSummaryText,
@@ -169,7 +172,7 @@ export function BranchCompareFooter({ state }: { state: FooterState }) {
     <View style={styles.branchCompareBlock}>
       <View style={styles.sectionHeader}>
         <View style={styles.branchSectionTitleBlock}>
-          <Text style={styles.sectionTitle}>Committed on Branch</Text>
+          <Text style={styles.sectionTitle}>{t('git.committedOnBranch')}</Text>
           {branchCompareSummaryText ? (
             <Text style={styles.branchSectionSubtitle} numberOfLines={1}>
               {branchCompareSummaryText}
@@ -181,7 +184,7 @@ export function BranchCompareFooter({ state }: { state: FooterState }) {
       {branchCompareState.kind === 'loading' ? (
         <View style={styles.branchStateRow}>
           <ActivityIndicator size="small" color={colors.textSecondary} />
-          <Text style={styles.branchStateText}>Loading committed changes...</Text>
+          <Text style={styles.branchStateText}>{t('git.loadingCommitted')}</Text>
         </View>
       ) : branchCompareState.kind === 'error' ? (
         <View style={styles.branchStateRow}>
@@ -190,7 +193,7 @@ export function BranchCompareFooter({ state }: { state: FooterState }) {
       ) : branchCompareResult && branchCompareResult.summary.status !== 'ready' ? (
         <View style={styles.branchStateRow}>
           <Text style={styles.branchStateText}>
-            {branchCompareResult.summary.errorMessage ?? 'Committed changes unavailable.'}
+            {branchCompareResult.summary.errorMessage ?? t('git.committedUnavailable')}
           </Text>
         </View>
       ) : (
@@ -213,7 +216,7 @@ export function BranchCompareFooter({ state }: { state: FooterState }) {
               ]}
               onPress={() => void openBranchDiff(entry)}
               disabled={rowDisabled}
-              accessibilityLabel={`Open committed change ${entry.path}`}
+              accessibilityLabel={t('git.fileRow.openCommittedChange', { path: entry.path })}
             >
               <View style={styles.statusBadge}>
                 <Text style={[styles.statusBadgeText, { color: statusColor(entry.status) }]}>

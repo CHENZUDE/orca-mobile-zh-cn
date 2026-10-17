@@ -907,5 +907,19 @@
     "jobs": "Jobs",
     "showingFirstJobs": "Showing first 100 jobs",
     "unknown": "unknown"
+  },
+  "git": {
+    "committedOnBranch": "Committed on Branch",
+    "loadingCommitted": "Loading committed changes...",
+    "committedUnavailable": "Committed changes unavailable.",
+    "fileRow": {
+      "openChangedFile": "Open changed file {{path}}",
+      "openCommittedChange": "Open committed change {{path}}",
+      "from": "from {{path}}",
+      "unresolvedConflict": "Unresolved conflict",
+      "stage": "Stage {{path}}",
+      "unstage": "Unstage {{path}}",
+      "discard": "Discard {{path}}"
+    }
   }
 }
