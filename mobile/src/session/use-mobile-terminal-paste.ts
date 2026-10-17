@@ -11,6 +11,7 @@ import {
   prepareMobileClipboardImageBase64,
   saveMobileClipboardImageAsTempFile
 } from './mobile-clipboard-image'
+import { translate } from '../i18n/i18n'
 import { resizeMobileClipboardImage } from './mobile-clipboard-image-resize'
 
 function buildMobileTerminalClipboardTextPayload(
@@ -103,7 +104,7 @@ export function useMobileTerminalPaste({
         onError()
         // eslint-disable-next-line no-console
         console.warn('[mobile-clip] paste oversized', { wrappedBytes })
-        showToast('Paste too large (max 256 KiB)', 1500)
+        showToast(translate('paste.tooLarge', { max: '256 KiB' }), 1500)
         return
       }
       // Why: paste lives in the accessory row and must not overtake pending IME text.
@@ -140,9 +141,9 @@ export function useMobileTerminalPaste({
       // eslint-disable-next-line no-console
       console.warn('[mobile-clip] paste failed', { name: err.name, message: err.message })
       if (isDisconnected) {
-        showToast('Paste failed (disconnected)', 1500)
+        showToast(translate('paste.failedDisconnected'), 1500)
       } else if (err.message === 'Clipboard image is too large') {
-        showToast('Image too large to paste', 1500)
+        showToast(translate('paste.imageTooLarge'), 1500)
       } else {
         showToast('Paste failed', 1500)
       }

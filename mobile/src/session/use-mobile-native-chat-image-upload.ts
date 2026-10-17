@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { CLIPBOARD_IMAGE_TOO_LARGE_ERROR } from '../../../src/shared/clipboard-image'
 import type { RpcClient } from '../transport/rpc-client'
 import type { ConnectionState } from '../transport/types'
+import { translate } from '../i18n/i18n'
 import { useMediaPicker } from '../platform/media-picker'
 import {
   ImageLibraryPermissionError,
@@ -95,15 +96,15 @@ export function useMobileNativeChatImageUpload(args: {
         const message = uploadError instanceof Error ? uploadError.message : String(uploadError)
         onError?.()
         if (connStateRef.current !== 'connected') {
-          showToast('Attach failed (disconnected)', 1500)
+          showToast(translate('attach.disconnected'), 1500)
           return
         }
         if (uploadError instanceof ImageLibraryPermissionError) {
-          showToast('Photo permission denied', 1500)
+          showToast(translate('attach.photoPermissionDenied'), 1500)
           return
         }
         if (message === CLIPBOARD_IMAGE_TOO_LARGE_ERROR) {
-          showToast('Image too large to attach', 1500)
+          showToast(translate('attach.imageTooLarge'), 1500)
           return
         }
         showToast('Attach failed', 1500)

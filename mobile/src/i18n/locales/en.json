@@ -1705,5 +1705,20 @@
       "manualLabel": "Manual",
       "manualSubtitle": "Desktop drag order"
     }
+  },
+  "attach": {
+    "disconnected": "Attach failed (disconnected)",
+    "photoPermissionDenied": "Photo permission denied",
+    "imageTooLarge": "Image too large to attach"
+  },
+  "paste": {
+    "tooLarge": "Paste too large (max {{max}})",
+    "failedDisconnected": "Paste failed (disconnected)",
+    "imageTooLarge": "Image too large to paste"
+  },
+  "diffComments": {
+    "saveFailed": "Failed to save note",
+    "deleteFailed": "Failed to delete note",
+    "copyFailed": "Couldn't copy notes"
   }
 }

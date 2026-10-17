@@ -14,6 +14,7 @@ import {
 } from './mobile-diff-comments'
 import type { DiffComment } from '../../../src/shared/diff-comment-types'
 import type { DiffNotesDelivery } from './mobile-session-route-types'
+import { translate } from '../i18n/i18n'
 import type { MobileSessionDocumentReadersModel } from './use-mobile-session-document-readers'
 
 export function useMobileSessionDiffComments(scope: MobileSessionDocumentReadersModel) {
@@ -102,7 +103,7 @@ export function useMobileSessionDiffComments(scope: MobileSessionDocumentReaders
       } catch (err) {
         setDiffComments(previous)
         triggerError()
-        showToast(err instanceof Error ? err.message : 'Failed to save note', 1600)
+        showToast(err instanceof Error ? err.message : translate('diffComments.saveFailed'), 1600)
         return false
       } finally {
         setDiffCommentBusy(false)
@@ -129,7 +130,7 @@ export function useMobileSessionDiffComments(scope: MobileSessionDocumentReaders
       } catch (err) {
         setDiffComments(previous)
         triggerError()
-        showToast(err instanceof Error ? err.message : 'Failed to delete note', 1600)
+        showToast(err instanceof Error ? err.message : translate('diffComments.deleteFailed'), 1600)
       } finally {
         setDiffCommentBusy(false)
       }
@@ -148,7 +149,7 @@ export function useMobileSessionDiffComments(scope: MobileSessionDocumentReaders
       showToast('Notes copied')
     } catch {
       triggerError()
-      showToast("Couldn't copy notes", 1600)
+      showToast(translate('diffComments.copyFailed'), 1600)
     }
   }, [clipboard, showToast])
 

@@ -1705,5 +1705,20 @@
       "manualLabel": "手动",
       "manualSubtitle": "桌面端拖拽顺序"
     }
+  },
+  "attach": {
+    "disconnected": "附加失败（已断开连接）",
+    "photoPermissionDenied": "相册权限被拒绝",
+    "imageTooLarge": "图片过大，无法附加"
+  },
+  "paste": {
+    "tooLarge": "粘贴内容过大（上限 {{max}}）",
+    "failedDisconnected": "粘贴失败（已断开连接）",
+    "imageTooLarge": "图片过大，无法粘贴"
+  },
+  "diffComments": {
+    "saveFailed": "保存备注失败",
+    "deleteFailed": "删除备注失败",
+    "copyFailed": "无法复制备注"
   }
 }
