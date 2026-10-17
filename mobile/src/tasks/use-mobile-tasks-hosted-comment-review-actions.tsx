@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useClipboardWriter } from '../platform/clipboard'
 import type { HostedMetadataActionsModel } from './use-mobile-tasks-hosted-metadata-actions'
 import {
@@ -98,7 +99,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
                   )
                 )
         if (written.ok === false) {
-          throw new Error(written.error ?? 'Failed to add comment')
+          throw new Error(written.error ?? translate('taskActions.failedToAddComment'))
         }
         const comment: DetailComment = written.comment ?? {
           id: `local-${Date.now()}`,
@@ -115,7 +116,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
             : current
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to add comment')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToAddComment'))
       } finally {
         setMutatingStatus(false)
       }
@@ -130,7 +131,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
         setCopiedLinkKey(key)
         scheduleMobileTaskCopyFeedbackReset(copiedLinkResetTimerRef, key, setCopiedLinkKey)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to copy link')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToCopyLink'))
       }
     },
     [clipboard]
@@ -143,7 +144,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
         setCopiedLinkKey(key)
         scheduleMobileTaskCopyFeedbackReset(copiedLinkResetTimerRef, key, setCopiedLinkKey)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to copy text')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToCopyText'))
       }
     },
     [clipboard]
@@ -172,7 +173,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
         )
         const result = githubReviewerRequest.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to request reviewers')
+          throw new Error(result.error ?? translate('taskActions.failedToRequestReviewers'))
         }
         const nextReviewRequests = (() => {
           const byLogin = new Map<string, GitHubAssignableUser>()
@@ -223,7 +224,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
           setItemReviewersDraft('')
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to request reviewers')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToRequestReviewers'))
       } finally {
         setMutatingStatus(false)
       }
@@ -275,7 +276,7 @@ export function useMobileTasksHostedCommentReviewActions(model: HostedMetadataAc
           )
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to refresh checks')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToRefreshChecks'))
       } finally {
         setMutatingStatus(false)
       }

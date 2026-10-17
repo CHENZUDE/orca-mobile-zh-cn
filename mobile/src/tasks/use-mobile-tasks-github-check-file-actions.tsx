@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { HostedCommentReviewActionsModel } from './use-mobile-tasks-hosted-comment-review-actions'
 import { useCallback } from './mobile-tasks-dependencies'
 import {
@@ -53,11 +54,11 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
         )
         const result = githubPullRequestChecksRerun.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to rerun checks')
+          throw new Error(result.error ?? translate('taskActions.failedToRerunChecks'))
         }
         setDetailRefreshSeq((current) => current + 1)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to rerun checks')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToRerunChecks'))
       } finally {
         setMutatingStatus(false)
       }
@@ -107,7 +108,7 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
             : current
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update viewed state')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToUpdateViewedState'))
       } finally {
         setMutatingStatus(false)
       }
@@ -152,7 +153,7 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
             : current
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to update review thread')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToUpdateReviewThread'))
       } finally {
         setMutatingStatus(false)
       }
@@ -202,7 +203,7 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
         const contents = githubPullRequestFileContentsRead.interpret(reply)
         setPrFileContents((current) => ({ ...current, [file.path]: contents }))
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load file contents')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToLoadFileContents'))
       } finally {
         setPrFileLoadingPath(null)
       }
@@ -245,7 +246,7 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
         )
         const result = githubReviewCommentWrite.interpret(reply)
         if (result.ok === false) {
-          throw new Error(result.error ?? 'Failed to add review comment')
+          throw new Error(result.error ?? translate('taskActions.failedToAddReviewComment'))
         }
         const comment: DetailComment = result.comment ?? {
           id: `local-${Date.now()}`,
@@ -266,7 +267,7 @@ export function useMobileTasksGithubCheckFileActions(model: HostedCommentReviewA
             : current
         )
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to add review comment')
+        setError(err instanceof Error ? err.message : translate('taskActions.failedToAddReviewComment'))
       } finally {
         setMutatingStatus(false)
       }

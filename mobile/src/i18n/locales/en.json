@@ -1753,5 +1753,17 @@
       "noCreditTitle": "No reset available",
       "noCreditMessage": "This account has no earned reset credits available."
     }
+  },
+  "taskActions": {
+    "failedToRerunChecks": "Failed to rerun checks",
+    "failedToUpdateViewedState": "Failed to update viewed state",
+    "failedToUpdateReviewThread": "Failed to update review thread",
+    "failedToLoadFileContents": "Failed to load file contents",
+    "failedToAddReviewComment": "Failed to add review comment",
+    "failedToAddComment": "Failed to add comment",
+    "failedToCopyLink": "Failed to copy link",
+    "failedToCopyText": "Failed to copy text",
+    "failedToRequestReviewers": "Failed to request reviewers",
+    "failedToRefreshChecks": "Failed to refresh checks"
   }
 }

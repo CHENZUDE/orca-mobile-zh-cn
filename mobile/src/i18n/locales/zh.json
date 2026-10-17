@@ -1753,5 +1753,17 @@
       "noCreditTitle": "暂无可用重置",
       "noCreditMessage": "该账号没有可用的已获得重置次数。"
     }
+  },
+  "taskActions": {
+    "failedToRerunChecks": "重新运行检查失败",
+    "failedToUpdateViewedState": "更新已读状态失败",
+    "failedToUpdateReviewThread": "更新评审线程失败",
+    "failedToLoadFileContents": "加载文件内容失败",
+    "failedToAddReviewComment": "添加评审评论失败",
+    "failedToAddComment": "添加评论失败",
+    "failedToCopyLink": "复制链接失败",
+    "failedToCopyText": "复制文本失败",
+    "failedToRequestReviewers": "请求评审人失败",
+    "failedToRefreshChecks": "刷新检查结果失败"
   }
 }
