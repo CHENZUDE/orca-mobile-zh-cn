@@ -1349,5 +1349,16 @@
       "updatedSubtitle": "最新活动优先",
       "repositorySubtitle": "先按仓库，再按最新活动"
     }
+  },
+  "sourceControl": {
+    "closeSourceControl": "关闭源代码管理",
+    "refreshSourceControl": "刷新源代码管理",
+    "title": "源代码管理",
+    "discardChange": "丢弃更改",
+    "discardChangesMessage": "确定要丢彨 \"{{path}}\" 的更改吗？此操作无法撤销。",
+    "switchBranch": "切换分支",
+    "pullRequestCreated": "拥提请求已创建",
+    "openPrInBrowser": "要在浏览器中打开吗？",
+    "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}"
   }
 }

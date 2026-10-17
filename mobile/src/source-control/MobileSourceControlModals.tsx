@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ActionSheetModal, type ActionSheetAction } from '../components/ActionSheetModal'
 import { ConfirmModal } from '../components/ConfirmModal'
 import { PickerModal } from '../components/PickerModal'
@@ -11,6 +12,8 @@ type Props = {
 }
 
 export function MobileSourceControlModals({ state, actionSheetActions }: Props) {
+  const { t } = useTranslation()
+
   const {
     branchDiffPreview,
     setBranchDiffPreview,
@@ -39,7 +42,7 @@ export function MobileSourceControlModals({ state, actionSheetActions }: Props) 
 
       <ActionSheetModal
         visible={showActionSheet}
-        title="Source Control"
+        title={t('sourceControl.title')}
         message={branchLabel}
         actions={actionSheetActions}
         onClose={() => setShowActionSheet(false)}
@@ -47,10 +50,10 @@ export function MobileSourceControlModals({ state, actionSheetActions }: Props) 
 
       <ConfirmModal
         visible={discardTarget !== null}
-        title="Discard Change"
+        title={t('sourceControl.discardChange')}
         message={
           discardTarget
-            ? `Discard changes to "${discardTarget.path}"? This cannot be undone.`
+            ? t('sourceControl.discardChangesMessage', { path: discardTarget.path })
             : undefined
         }
         confirmLabel="Discard"
@@ -69,7 +72,7 @@ export function MobileSourceControlModals({ state, actionSheetActions }: Props) 
 
       <PickerModal
         visible={showBranchPicker}
-        title="Switch Branch"
+        title={t('sourceControl.switchBranch')}
         options={(localBranches?.branches ?? []).map((b) => ({
           value: b,
           label: b,
@@ -88,11 +91,11 @@ export function MobileSourceControlModals({ state, actionSheetActions }: Props) 
 
       <ConfirmModal
         visible={createdPrUrl !== null}
-        title="Pull Request Created"
+        title={t('sourceControl.pullRequestCreated')}
         message={
           createdPrWarning
-            ? `Open it in your browser?\n\n${createdPrWarning}`
-            : 'Open it in your browser?'
+            ? t('sourceControl.openPrInBrowserWithWarning', { warning: createdPrWarning })
+            : t('sourceControl.openPrInBrowser')
         }
         confirmLabel="Open"
         onConfirm={() => {

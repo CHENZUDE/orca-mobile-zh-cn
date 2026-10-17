@@ -1349,5 +1349,16 @@
       "updatedSubtitle": "Newest activity first",
       "repositorySubtitle": "Group by repository, then newest activity"
     }
+  },
+  "sourceControl": {
+    "closeSourceControl": "Close source control",
+    "refreshSourceControl": "Refresh source control",
+    "title": "Source Control",
+    "discardChange": "Discard Change",
+    "discardChangesMessage": "Discard changes to \"{{path}}\"? This cannot be undone.",
+    "switchBranch": "Switch Branch",
+    "pullRequestCreated": "Pull Request Created",
+    "openPrInBrowser": "Open it in your browser?",
+    "openPrInBrowserWithWarning": "Open it in your browser?\\n\\n{{warning}}"
   }
 }

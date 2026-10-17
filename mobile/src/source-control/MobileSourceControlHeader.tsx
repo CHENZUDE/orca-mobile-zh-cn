@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import { ChevronLeft, ExternalLink, RefreshCw, X } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
@@ -28,6 +29,8 @@ export function MobileSourceControlHeader({
   onOpenPrWeb,
   prNumber = null
 }: Props) {
+  const { t } = useTranslation()
+
   return (
     <View style={styles.topBar}>
       {/* Two controls, not one with a conditional label: the dock's dismiss is a close, and a
@@ -38,7 +41,7 @@ export function MobileSourceControlHeader({
           onPress={onClose}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel="Close source control"
+          accessibilityLabel={t('sourceControl.closeSourceControl')}
         >
           <X size={22} color={colors.textSecondary} strokeWidth={2.2} />
         </Pressable>
@@ -86,7 +89,7 @@ export function MobileSourceControlHeader({
         disabled={ioBusy}
         hitSlop={8}
         accessibilityRole="button"
-        accessibilityLabel="Refresh source control"
+        accessibilityLabel={t('sourceControl.refreshSourceControl')}
       >
         <RefreshCw size={18} color={colors.textSecondary} strokeWidth={2.1} />
       </Pressable>
