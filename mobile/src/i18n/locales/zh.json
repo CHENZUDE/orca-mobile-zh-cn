@@ -858,6 +858,24 @@
       "linearIssue": "Linear issue",
       "loadingStates": "正在加载状态...",
       "noStates": "没有可用状态"
+    },
+    "providerPickers": {
+      "taskSource": "任务来源",
+      "repositories": "仓库",
+      "repositoriesSubtitle": "选择要查询哪些仓库。",
+      "allRepositories": "全部仓库",
+      "issueSources": "GitHub Issue 来源",
+      "issueSourcesSubtitle": "选择每个仓库从上游还是源仓库查询和创建工作。",
+      "noAlternateSources": "没有可用的备用 issue 来源。",
+      "querying": "正在查询",
+      "githubView": "GitHub 视图",
+      "pullRequests": "拉取请求",
+      "issues": "Issue",
+      "githubPages": "GitHub 分页",
+      "githubPagesSubtitle": "跳转到已加载或可用的结果页。",
+      "page": "第 {{page}} 页",
+      "loaded": "已加载",
+      "loadsOlder": "加载更早的结果"
     }
   }
 }

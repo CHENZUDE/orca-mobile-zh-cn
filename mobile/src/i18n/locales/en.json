@@ -858,6 +858,24 @@
       "linearIssue": "Linear issue",
       "loadingStates": "Loading states...",
       "noStates": "No states available"
+    },
+    "providerPickers": {
+      "taskSource": "Task Source",
+      "repositories": "Repositories",
+      "repositoriesSubtitle": "Choose which repositories to query.",
+      "allRepositories": "All repositories",
+      "issueSources": "GitHub Issue Sources",
+      "issueSourcesSubtitle": "Choose whether each repository queries and creates work from upstream or origin.",
+      "noAlternateSources": "No alternate issue sources available.",
+      "querying": "Querying",
+      "githubView": "GitHub View",
+      "pullRequests": "Pull Requests",
+      "issues": "Issues",
+      "githubPages": "GitHub Pages",
+      "githubPagesSubtitle": "Jump to a loaded or available result page.",
+      "page": "Page {{page}}",
+      "loaded": "Loaded",
+      "loadsOlder": "Loads older results"
     }
   }
 }
