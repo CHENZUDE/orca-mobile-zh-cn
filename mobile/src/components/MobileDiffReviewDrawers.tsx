@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 import { KeyboardAvoidingView, Pressable, Text, TextInput, View } from 'react-native'
 import { Check, Copy, FileText, Plus, Send, Trash2, X } from 'lucide-react-native'
@@ -37,6 +38,8 @@ export function MobileDiffReviewDrawers({ controller }: Props) {
 }
 
 function ReviewSheetContent({ controller, sheet }: Props & { sheet: ReviewSheet }) {
+  const { t } = useTranslation()
+
   switch (sheet.kind) {
     case 'actions':
       return <ReviewActionsContent controller={controller} />
@@ -45,9 +48,9 @@ function ReviewSheetContent({ controller, sheet }: Props & { sheet: ReviewSheet 
     case 'discard':
       return (
         <ConfirmContent
-          title="Discard File"
-          message={`Discard changes to "${sheet.target.filePath}"? This cannot be undone.`}
-          confirmLabel="Discard"
+          title={t('diffReview.drawers.discardTitle')}
+          message={t('diffReview.drawers.discardMessage', { path: sheet.target.filePath })}
+          confirmLabel={t('diffReview.footer.discard')}
           destructive
           onConfirm={() => {
             controller.closeSheet('discard')
@@ -64,13 +67,17 @@ function ReviewSheetContent({ controller, sheet }: Props & { sheet: ReviewSheet 
 }
 
 function ReviewActionsContent({ controller }: Props) {
+  const { t } = useTranslation()
+
   const overflowActions = useOverflowActions(controller)
   return (
     <ActionSheetContent
-      title="Review Actions"
+      title={t('diffReview.drawers.reviewActions')}
       message={
         controller.reviewedUnstagedCount > 0
-          ? `${controller.reviewedUnstagedCount} reviewed unstaged files can be staged`
+          ? t('diffReview.drawers.reviewedUnstagedCanStage', {
+              count: controller.reviewedUnstagedCount
+            })
           : undefined
       }
       actions={overflowActions}
@@ -80,11 +87,13 @@ function ReviewActionsContent({ controller }: Props) {
 }
 
 function SendNotesContent({ controller, load }: Props & { load: SendSheetState }) {
+  const { t } = useTranslation()
+
   const sendActions = useSendActions(controller, load)
   return (
     <ActionSheetContent
-      title="Send Notes"
-      message={sendSheetMessage(controller, load)}
+      title={t('diffReview.drawers.sendNotes')}
+      message={sendSheetMessage(controller, load, t)}
       actions={sendActions}
       onClose={() => controller.closeSheet('send')}
     />
@@ -95,12 +104,14 @@ function useSendActions(
   controller: ReturnType<typeof useMobileDiffReviewController>,
   load: SendSheetState
 ) {
+  const { t } = useTranslation()
   return useMemo<ActionSheetAction[]>(() => {
+
     const comments = controller.unsentComments
     const terminalActions =
       load.kind === 'ready' || load.kind === 'error'
         ? load.terminals.map((terminal) => ({
-            label: `${terminal.title || 'Terminal'} (${terminal.terminal.slice(0, 6)})`,
+            label: `${terminal.title || t('diffReview.drawers.terminal')} (${terminal.terminal.slice(0, 6)})`,
             icon: Send,
             disabled: comments.length === 0,
             skipAutoClose: true,
@@ -110,11 +121,11 @@ function useSendActions(
     return [
       ...terminalActions,
       {
-        label: 'New Agent Session',
+        label: t('diffReview.drawers.newAgentSession'),
         icon: Plus,
         disabled: comments.length === 0 || controller.agentLaunchAvailability !== 'available',
         ...(controller.agentLaunchAvailability === 'update-required'
-          ? { hint: 'Update Orca on your computer' }
+          ? { hint: t('diffReview.drawers.updateOrcaOnComputer') }
           : controller.agentLaunchAvailability === 'unverified'
             ? { hint: AGENT_LAUNCH_STATUS_UNREADABLE_MESSAGE }
             : {}),
@@ -122,7 +133,7 @@ function useSendActions(
         onPress: () => void controller.createTerminalAndSend(comments)
       },
       {
-        label: 'Copy Notes',
+        label: t('diffReview.drawers.copyNotes'),
         icon: Copy,
         disabled:
           controller.screenState.kind !== 'ready' || controller.screenState.comments.length === 0,
@@ -134,23 +145,25 @@ function useSendActions(
 
 function useOverflowActions(controller: ReturnType<typeof useMobileDiffReviewController>) {
   const sessionTabsAvailable = useWorkspaceOnPairedHost()
+  const { t } = useTranslation()
+
   return useMemo<ActionSheetAction[]>(
     () => [
       {
-        label: 'Copy Notes',
+        label: t('diffReview.drawers.copyNotes'),
         icon: Copy,
         disabled:
           controller.screenState.kind !== 'ready' || controller.screenState.comments.length === 0,
         onPress: () => void controller.copyNotes()
       },
       {
-        label: 'Send Unsent Notes',
+        label: t('diffReview.drawers.sendUnsentNotes'),
         icon: Send,
         disabled: controller.unsentComments.length === 0,
         onPress: () => void controller.openSendSheet()
       },
       {
-        label: 'Clear Sent Notes',
+        label: t('diffReview.drawers.clearSentNotes'),
         icon: Trash2,
         disabled:
           controller.screenState.kind !== 'ready' ||
@@ -159,14 +172,14 @@ function useOverflowActions(controller: ReturnType<typeof useMobileDiffReviewCon
         onPress: () => void controller.clearSentNotes()
       },
       {
-        label: 'Stage Reviewed Files',
+        label: t('diffReview.drawers.stageReviewedFiles'),
         icon: Check,
         disabled: controller.reviewedUnstagedCount === 0 || controller.busyAction !== null,
         skipAutoClose: true,
         onPress: () => void controller.stageReviewedFiles()
       },
       {
-        label: 'Mark Unreviewed',
+        label: t('diffReview.drawers.markUnreviewed'),
         icon: X,
         disabled:
           controller.screenState.kind !== 'ready' ||
@@ -178,7 +191,7 @@ function useOverflowActions(controller: ReturnType<typeof useMobileDiffReviewCon
       ...(sessionTabsAvailable
         ? [
             {
-              label: 'Open in Session',
+              label: t('diffReview.drawers.openInSession'),
               icon: FileText,
               disabled: !controller.currentItem || controller.currentItem.scope === 'branch',
               onPress: () => void controller.openInSession()
@@ -192,34 +205,39 @@ function useOverflowActions(controller: ReturnType<typeof useMobileDiffReviewCon
 
 function sendSheetMessage(
   controller: ReturnType<typeof useMobileDiffReviewController>,
-  load: SendSheetState
+  load: SendSheetState,
+  t: (key: string, opts?: { count: number }) => string
 ): string | undefined {
   return load.kind === 'loading'
-    ? 'Loading agent sessions...'
+    ? t('diffReview.drawers.loadingAgentSessions')
     : load.kind === 'error'
       ? load.message
-      : `${controller.unsentComments.length} unsent notes`
+      : t('diffReview.drawers.unsentNoteCount', { count: controller.unsentComments.length })
 }
 
 function NoteComposerContent({ controller, composer }: Props & { composer: ComposerState }) {
+  const { t } = useTranslation()
+
   return (
     <KeyboardAvoidingView behavior={hostOs() === 'ios' ? 'padding' : undefined}>
       <View style={styles.composerHeader}>
         <View>
           <Text style={styles.drawerTitle}>
-            {composer.mode === 'edit' ? 'Edit Note' : 'Add Note'}
+            {composer.mode === 'edit'
+              ? t('diffReview.drawers.editNote')
+              : t('diffReview.drawers.addNote')}
           </Text>
           <Text style={styles.drawerSubtitle}>
             {composer.mode === 'create' && composer.lineNumber > 0
-              ? `Line ${composer.lineNumber}`
-              : 'File note'}
+              ? t('diffReview.drawers.lineNumber', { line: composer.lineNumber })
+              : t('diffReview.drawers.fileNote')}
           </Text>
         </View>
         <Pressable
           style={({ pressed }) => [styles.iconButton, pressed && styles.iconButtonPressed]}
           onPress={controller.closeComposer}
           accessibilityRole="button"
-          accessibilityLabel="Cancel note"
+          accessibilityLabel={t('diffReview.drawers.cancelNote')}
         >
           <X size={18} color={colors.textPrimary} strokeWidth={2.2} />
         </Pressable>
@@ -230,9 +248,9 @@ function NoteComposerContent({ controller, composer }: Props & { composer: Compo
         onChangeText={controller.setComposerBody}
         multiline
         autoFocus
-        placeholder="Review note"
+        placeholder={t('diffReview.drawers.reviewNote')}
         placeholderTextColor={colors.textMuted}
-        accessibilityLabel={composerLabel(composer)}
+        accessibilityLabel={localizedComposerLabel(t, composer)}
       />
       <View style={styles.drawerButtonRow}>
         {composer.mode === 'edit' ? <DeleteNoteButton onPress={controller.deleteComment} /> : null}
@@ -242,24 +260,36 @@ function NoteComposerContent({ controller, composer }: Props & { composer: Compo
   )
 }
 
+type ComposerLabelKey = { key: string; line?: number }
+
 function composerLabel(
   composer: { mode: 'create'; lineNumber: number } | { mode: 'edit'; comment: DiffComment } | null
-): string {
+): ComposerLabelKey {
   return composer?.mode === 'create' && composer.lineNumber > 0
-    ? `Save note on line ${composer.lineNumber}`
-    : 'Review note'
+    ? { key: 'diffReview.drawers.saveNoteOnLine', line: composer.lineNumber }
+    : { key: 'diffReview.drawers.reviewNote' }
+}
+
+function localizedComposerLabel(
+  t: (key: string, opts?: { line: number }) => string,
+  composer: { mode: 'create'; lineNumber: number } | { mode: 'edit'; comment: DiffComment } | null
+): string {
+  const { key, line } = composerLabel(composer)
+  return line === undefined ? t(key) : t(key, { line })
 }
 
 function DeleteNoteButton({ onPress }: { onPress: () => Promise<void> }) {
+  const { t } = useTranslation()
+
   return (
     <Pressable
       style={({ pressed }) => [styles.secondaryButton, pressed && styles.buttonPressed]}
       onPress={() => void onPress()}
       accessibilityRole="button"
-      accessibilityLabel="Delete note"
+      accessibilityLabel={t('diffReview.drawers.deleteNote')}
     >
       <Trash2 size={14} color={colors.statusRed} strokeWidth={2.2} />
-      <Text style={styles.destructiveText}>Delete</Text>
+      <Text style={styles.destructiveText}>{t('common.delete')}</Text>
     </Pressable>
   )
 }
@@ -272,6 +302,8 @@ function SaveNoteButton({
   composer: ReturnType<typeof useMobileDiffReviewController>['composer']
 }) {
   const disabled = controller.composerBody.trim().length === 0
+  const { t } = useTranslation()
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -282,20 +314,22 @@ function SaveNoteButton({
       disabled={disabled}
       onPress={() => void controller.saveComposer()}
       accessibilityRole="button"
-      accessibilityLabel={composerLabel(composer)}
+      accessibilityLabel={localizedComposerLabel(t, composer)}
     >
       <Check size={14} color={colors.bgBase} strokeWidth={2.2} />
-      <Text style={styles.primaryButtonText}>Save</Text>
+      <Text style={styles.primaryButtonText}>{t('common.save')}</Text>
     </Pressable>
   )
 }
 
 function CompletionContent({ controller }: Props) {
+  const { t } = useTranslation()
   const noteCount =
+
     controller.screenState.kind === 'ready' ? controller.screenState.comments.length : 0
   return (
     <>
-      <Text style={styles.drawerTitle}>Review Complete</Text>
+      <Text style={styles.drawerTitle}>{t('diffReview.drawers.reviewComplete')}</Text>
       <Text style={styles.drawerSubtitle}>
         {mobileReviewCountLabel(controller.queue.length, 'file', 'files')} reviewed,{' '}
         {mobileReviewCountLabel(noteCount, 'note', 'notes')}
@@ -306,20 +340,20 @@ function CompletionContent({ controller }: Props) {
           disabled={controller.reviewedUnstagedCount === 0}
           onPress={() => void controller.stageReviewedFiles()}
           accessibilityRole="button"
-          accessibilityLabel="Stage reviewed files"
+          accessibilityLabel={t('diffReview.drawers.stageReviewedFiles')}
         >
           <Check size={14} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.secondaryButtonText}>Stage Reviewed</Text>
+          <Text style={styles.secondaryButtonText}>{t('diffReview.drawers.stageReviewed')}</Text>
         </Pressable>
         <Pressable
           style={({ pressed }) => [styles.primaryButton, pressed && styles.buttonPressed]}
           disabled={controller.unsentComments.length === 0}
           onPress={() => void controller.openSendSheet()}
           accessibilityRole="button"
-          accessibilityLabel="Send notes to agent"
+          accessibilityLabel={t('diffReview.drawers.sendNotesToAgent')}
         >
           <Send size={14} color={colors.bgBase} strokeWidth={2.2} />
-          <Text style={styles.primaryButtonText}>Send Notes</Text>
+          <Text style={styles.primaryButtonText}>{t('diffReview.drawers.sendNotes')}</Text>
         </Pressable>
       </View>
     </>

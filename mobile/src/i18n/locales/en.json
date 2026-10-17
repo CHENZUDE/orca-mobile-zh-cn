@@ -12,7 +12,8 @@
     "off": "Off",
     "nameLabel": "Name",
     "addressLabel": "Address",
-    "none": "None"
+    "none": "None",
+    "delete": "Delete"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -1056,6 +1057,35 @@
       "reviewed": "已审阅",
       "markReviewed": "标记已审阅",
       "nextFile": "下一个文件"
+    },
+    "drawers": {
+      "discardTitle": "丢弃文件",
+      "discardMessage": "确定要丢当 \"{{path}}\" 的更改吗？此操作无法撤销。",
+      "reviewActions": "审阅操作",
+      "reviewedUnstagedCanStage": "{{count}} 个已审阅未暂存文件可以暂存",
+      "sendNotes": "发送备注",
+      "terminal": "终端",
+      "newAgentSession": "新建 Agent 会话",
+      "updateOrcaOnComputer": "请在电脑上更新 Orca",
+      "copyNotes": "复制备注",
+      "sendUnsentNotes": "发送未发送备注",
+      "clearSentNotes": "清除已发送备注",
+      "stageReviewedFiles": "暂存已审阅文件",
+      "markUnreviewed": "标记为未审阅",
+      "openInSession": "在会话中打开",
+      "loadingAgentSessions": "正在加载 Agent 会话…",
+      "unsentNoteCount": "{{count}} 条未发送备注",
+      "editNote": "编辑备注",
+      "addNote": "添加备注",
+      "lineNumber": "第 {{line}} 行",
+      "fileNote": "文件备注",
+      "cancelNote": "取消备注",
+      "reviewNote": "审阅备注",
+      "saveNoteOnLine": "保存第 {{line}} 行的备注",
+      "deleteNote": "删除备注",
+      "reviewComplete": "审阅完成",
+      "stageReviewed": "暂存已审阅",
+      "sendNotesToAgent": "将备注发送给 Agent"
     }
   },
   "hostScreen": {
