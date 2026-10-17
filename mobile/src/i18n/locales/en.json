@@ -1402,5 +1402,9 @@
     "pullRequestCreated": "Pull Request Created",
     "openPrInBrowser": "Open it in your browser?",
     "openPrInBrowserWithWarning": "Open it in your browser?\\n\\n{{warning}}"
+  },
+  "nativeChat": {
+    "visualUnavailable": "Visualization unavailable",
+    "visualRetryHint": "Tries to load it again"
   }
 }

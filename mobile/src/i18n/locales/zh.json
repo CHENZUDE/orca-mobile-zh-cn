@@ -1402,5 +1402,9 @@
     "pullRequestCreated": "拥提请求已创建",
     "openPrInBrowser": "要在浏览器中打开吗？",
     "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}"
+  },
+  "nativeChat": {
+    "visualUnavailable": "无法显示可视化图表",
+    "visualRetryHint": "点击重试加载"
   }
 }

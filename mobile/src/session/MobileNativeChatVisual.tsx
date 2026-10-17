@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useCallback, useMemo, useState } from 'react'
 import { ActivityIndicator, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -45,6 +46,8 @@ export const MobileNativeChatVisual = memo(function MobileNativeChatVisual({
   const { state, retry } = useMobileNativeChatVisual(source, directive.file)
   // A frame that navigated away or kept crashing; cleared by the reader's retry.
   const [frameFailed, setFrameFailed] = useState(false)
+  const { t } = useTranslation()
+
   const [fullscreen, setFullscreen] = useState(false)
   const title = directive.title ?? DEFAULT_TITLE
   const onFrameFailed = useCallback(() => {
@@ -65,11 +68,11 @@ export const MobileNativeChatVisual = memo(function MobileNativeChatVisual({
       <Pressable
         onPress={onRetry}
         accessibilityRole="button"
-        accessibilityLabel="Visualization unavailable"
-        accessibilityHint="Tries to load it again"
+        accessibilityLabel={t('nativeChat.visualUnavailable')}
+        accessibilityHint={t('nativeChat.visualRetryHint')}
         style={styles.unavailable}
       >
-        <Text style={styles.unavailableText}>Visualization unavailable</Text>
+        <Text style={styles.unavailableText}>{t('nativeChat.visualUnavailable')}</Text>
       </Pressable>
     )
   }
