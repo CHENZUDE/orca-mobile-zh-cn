@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -38,13 +39,14 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
     taskUiReady,
     visibleGitHubProjectRows
   } = model
+  const { t } = useTranslation()
   return githubProjectLoading ? (
     <View style={styles.centered}>
       <ActivityIndicator size="small" color={colors.textSecondary} />
     </View>
   ) : !activeGitHubProject ? (
     <View style={styles.centered}>
-      <Text style={styles.emptyText}>Choose a GitHub project</Text>
+      <Text style={styles.emptyText}>{t('tasks.githubProjects.chooseProject')}</Text>
       <Pressable
         style={[styles.targetButton, styles.centerActionButton]}
         disabled={!taskUiReady}
@@ -55,7 +57,7 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
           setShowGitHubProjectPicker(true)
         }}
       >
-        <Text style={styles.targetButtonText}>Browse projects</Text>
+        <Text style={styles.targetButtonText}>{t('tasks.githubProjects.browseProjects')}</Text>
       </Pressable>
     </View>
   ) : githubProjectError ? (
@@ -68,7 +70,7 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
     </View>
   ) : !githubProjectTable || visibleGitHubProjectRows.length === 0 ? (
     <View style={styles.centered}>
-      <Text style={styles.emptyText}>No project items</Text>
+      <Text style={styles.emptyText}>{t('tasks.githubProjects.noProjectItems')}</Text>
     </View>
   ) : (
     <FlatList
@@ -101,7 +103,7 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
                 style={entry.collapsed ? styles.projectGroupChevronCollapsed : undefined}
               />
               <Text style={styles.projectGroupTitle} numberOfLines={1}>
-                {entry.group.label || 'Items'}
+                {entry.group.label || t('tasks.githubProjects.itemsGroup')}
               </Text>
               <Text style={styles.projectGroupMeta}>{projectGroupMeta(entry.group)}</Text>
             </Pressable>
@@ -141,10 +143,10 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
                 />
                 <Text style={styles.subtitle} numberOfLines={1}>
                   {row.itemType === 'PULL_REQUEST'
-                    ? 'Pull request'
+                    ? t('tasks.project.typePullRequest')
                     : row.itemType === 'ISSUE'
-                      ? 'Issue'
-                      : 'Project item'}{' '}
+                      ? t('tasks.project.typeIssue')
+                      : t('tasks.project.typeProjectItem')}{' '}
                   · {row.content.repository ?? githubProjectTable.project.title}
                   {row.content.number ? ` #${row.content.number}` : ''}
                 </Text>
@@ -154,12 +156,14 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
                   {githubProjectSummaryFields.slice(0, 4).map((field) => {
                     const value = projectFieldDisplayLabel(row, field)
                     const isEmpty = value === 'Empty'
+                    // Why: 'Empty' is a data sentinel emitted by the pure field helper;
+                    // only the presentation swaps it for a localized label.
                     return (
                       <View key={field.id} style={styles.projectFieldPill}>
                         <Text style={styles.projectFieldPillText} numberOfLines={1}>
                           {field.name}:{' '}
                           <Text style={isEmpty ? styles.projectFieldPillEmptyText : undefined}>
-                            {value}
+                            {isEmpty ? t('tasks.githubProjects.fieldEmpty') : value}
                           </Text>
                         </Text>
                       </View>
@@ -168,7 +172,8 @@ export function renderMobileTasksGitHubProjectList(model: ConnectionPresentation
                   {githubProjectSummaryFields.length > 4 ? (
                     <View style={styles.projectFieldPill}>
                       <Text style={styles.projectFieldPillText}>
-                        +{githubProjectSummaryFields.length - 4} fields
+                        +{githubProjectSummaryFields.length - 4}{' '}
+                        {t('tasks.githubProjects.fieldsSuffix')}
                       </Text>
                     </View>
                   ) : null}

@@ -768,7 +768,13 @@
       "chooseView": "Choose Project View",
       "view": "Project View",
       "unsupportedLayout": "Orca doesn't support this GitHub Project layout yet.",
-      "sortTitle": "Project Sort"
+      "sortTitle": "Project Sort",
+      "chooseProject": "Choose a GitHub project",
+      "browseProjects": "Browse projects",
+      "noProjectItems": "No project items",
+      "itemsGroup": "Items",
+      "fieldsSuffix": "fields",
+      "fieldEmpty": "Empty"
     },
     "sparse": {
       "newPreset": "New Sparse Preset",

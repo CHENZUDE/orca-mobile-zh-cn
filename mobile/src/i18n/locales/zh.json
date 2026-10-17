@@ -768,7 +768,13 @@
       "chooseView": "选择项目视图",
       "view": "项目视图",
       "unsupportedLayout": "Orca 暂不支持该 GitHub 项目布局。",
-      "sortTitle": "项目排序"
+      "sortTitle": "项目排序",
+      "chooseProject": "选择一个 GitHub 项目",
+      "browseProjects": "浏览项目",
+      "noProjectItems": "没有项目条目",
+      "itemsGroup": "条目",
+      "fieldsSuffix": "个字段",
+      "fieldEmpty": "空"
     },
     "sparse": {
       "newPreset": "新建稀疏检出预设",
