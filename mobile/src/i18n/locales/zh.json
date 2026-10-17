@@ -1223,5 +1223,20 @@
       "typeACommand": "输入命令…",
       "sendCommand": "发送命令"
     }
+  },
+  "prSidebar": {
+    "pullRequest": "拥提请求",
+    "refreshPullRequest": "刷新拥提请求",
+    "createPullRequest": "创建拥提请求",
+    "createPr": "创建 PR",
+    "linkedPrUnavailable": "已关联的 PR #{{number}} 不可用",
+    "noOpenPullRequest": "没有开启的拥提请求",
+    "refreshToCheckAgainOrCreate": "请刷新重试，或为当前分支新建一个 PR。",
+    "branchNotLinked": "分支 {{branch}} 尚未关联任何开启的 PR。",
+    "currentBranchNotLinked": "当前分支尚未关联任何开启的 PR。",
+    "linkAnExistingPullRequest": "关联已有的拥提请求",
+    "linkAnExistingPr": "关联已有的 PR",
+    "checkOutBranchBeforeCreatingPr": "请先切换到某个分支再创建拥提请求。",
+    "failedToCreatePullRequest": "创建拥提请求失败。"
   }
 }

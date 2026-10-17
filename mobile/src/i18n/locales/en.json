@@ -1223,5 +1223,20 @@
       "typeACommand": "Type a command…",
       "sendCommand": "Send command"
     }
+  },
+  "prSidebar": {
+    "pullRequest": "Pull request",
+    "refreshPullRequest": "Refresh pull request",
+    "createPullRequest": "Create pull request",
+    "createPr": "Create PR",
+    "linkedPrUnavailable": "Linked PR #{{number}} unavailable",
+    "noOpenPullRequest": "No open pull request",
+    "refreshToCheckAgainOrCreate": "Refresh to check again, or create a new PR for this branch.",
+    "branchNotLinked": "{{branch}} is not linked to an open PR.",
+    "currentBranchNotLinked": "The current branch is not linked to an open PR.",
+    "linkAnExistingPullRequest": "Link an existing pull request",
+    "linkAnExistingPr": "Link an existing PR",
+    "checkOutBranchBeforeCreatingPr": "Check out a branch before creating a pull request.",
+    "failedToCreatePullRequest": "Failed to create pull request."
   }
 }
