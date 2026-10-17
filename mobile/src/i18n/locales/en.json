@@ -876,6 +876,14 @@
       "page": "Page {{page}}",
       "loaded": "Loaded",
       "loadsOlder": "Loads older results"
+    },
+    "itemFields": {
+      "addLabels": "Add labels, comma separated",
+      "removeLabels": "Remove labels, comma separated",
+      "updateLabels": "Update labels",
+      "addUsernames": "Add usernames, comma separated",
+      "removeUsernames": "Remove usernames, comma separated",
+      "updateAssignees": "Update assignees"
     }
   },
   "prChecks": {

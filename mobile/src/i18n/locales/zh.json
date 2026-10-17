@@ -876,6 +876,14 @@
       "page": "第 {{page}} 页",
       "loaded": "已加载",
       "loadsOlder": "加载更早的结果"
+    },
+    "itemFields": {
+      "addLabels": "添加标签，用逗号分隔",
+      "removeLabels": "移除标签，用逗号分隔",
+      "updateLabels": "更新标签",
+      "addUsernames": "添加用户名，用逗号分隔",
+      "removeUsernames": "移除用户名，用逗号分隔",
+      "updateAssignees": "更新负责人"
     }
   },
   "prChecks": {
