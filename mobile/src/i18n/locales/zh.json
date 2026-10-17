@@ -903,6 +903,9 @@
       "addUsernames": "添加用户名，用逗号分隔",
       "removeUsernames": "移除用户名，用逗号分隔",
       "updateAssignees": "更新负责人"
+    },
+    "linearList": {
+      "changeStatusFrom": "将状态从“{{state}}”改为其他"
     }
   },
   "prChecks": {

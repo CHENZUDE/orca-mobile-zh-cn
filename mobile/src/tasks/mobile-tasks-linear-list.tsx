@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -36,6 +37,7 @@ export function renderMobileTasksLinearList(model: ConnectionPresentationModel) 
     setActionItem,
     setLinearStatusPickerItem
   } = model
+  const { t } = useTranslation()
   return loading ? (
     <View style={styles.centered}>
       <ActivityIndicator size="small" color={colors.textSecondary} />
@@ -82,7 +84,9 @@ export function renderMobileTasksLinearList(model: ConnectionPresentationModel) 
                     style={[styles.statusPillSelf, styles.linearStatePill]}
                     disabled={mutatingStatus}
                     accessibilityRole="button"
-                    accessibilityLabel={`Change status from ${issue.state.name}`}
+                    accessibilityLabel={t('tasks.linearList.changeStatusFrom', {
+                      state: issue.state.name
+                    })}
                     onPress={(event) => {
                       event.stopPropagation()
                       triggerMediumImpact()
@@ -170,7 +174,9 @@ export function renderMobileTasksLinearList(model: ConnectionPresentationModel) 
                   style={[styles.statusPill, styles.linearStatePill]}
                   disabled={mutatingStatus}
                   accessibilityRole="button"
-                  accessibilityLabel={`Change status from ${issue.state.name}`}
+                  accessibilityLabel={t('tasks.linearList.changeStatusFrom', {
+                    state: issue.state.name
+                  })}
                   onPress={(event) => {
                     event.stopPropagation()
                     triggerMediumImpact()

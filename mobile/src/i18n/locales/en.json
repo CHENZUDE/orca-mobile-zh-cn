@@ -903,6 +903,9 @@
       "addUsernames": "Add usernames, comma separated",
       "removeUsernames": "Remove usernames, comma separated",
       "updateAssignees": "Update assignees"
+    },
+    "linearList": {
+      "changeStatusFrom": "Change status from {{state}}"
     }
   },
   "prChecks": {
