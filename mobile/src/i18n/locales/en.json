@@ -1336,6 +1336,16 @@
       "browserFailed": "Failed to create browser",
       "browserNotReady": "Browser page is not available yet.",
       "browserCommandFailed": "Browser command failed"
+    },
+    "agentPicker": {
+      "otherRuntimeLabel": "Agents on Another Server",
+      "otherRuntimeHint": "Pair that server directly",
+      "detectingLabel": "Detecting Agents",
+      "noEnabledLabel": "No Enabled Agents",
+      "unavailableLabel": "Agent Presets Unavailable",
+      "unavailableHostHint": "Check the host connection",
+      "unavailableCopyHint": "Copy notes instead",
+      "newSessionHint": "New agent session"
     }
   },
   "prSidebar": {

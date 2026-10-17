@@ -1336,6 +1336,16 @@
       "browserFailed": "创建浏览器失败",
       "browserNotReady": "浏览器页面暂不可用。",
       "browserCommandFailed": "浏览器命令执行失败"
+    },
+    "agentPicker": {
+      "otherRuntimeLabel": "其他服务器上的代理",
+      "otherRuntimeHint": "请直接配对那台服务器",
+      "detectingLabel": "正在检测代理",
+      "noEnabledLabel": "没有已启用的代理",
+      "unavailableLabel": "无法获取代理预设",
+      "unavailableHostHint": "请检查主机连接",
+      "unavailableCopyHint": "可改为复制备注",
+      "newSessionHint": "新建代理会话"
     }
   },
   "prSidebar": {

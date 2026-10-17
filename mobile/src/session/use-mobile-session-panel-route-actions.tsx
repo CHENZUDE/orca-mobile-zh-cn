@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback } from 'react'
 import type { LayoutChangeEvent } from 'react-native'
 import { Bot } from 'lucide-react-native'
@@ -44,8 +45,8 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
     handleCreateTerminal
   } = scope
   const otherRuntimeAgentRow = {
-    label: 'Agents on Another Server',
-    hint: 'Pair that server directly',
+    label: translate('session.agentPicker.otherRuntimeLabel'),
+    hint: translate('session.agentPicker.otherRuntimeHint'),
     icon: Bot,
     disabled: true,
     onPress: () => {}
@@ -54,7 +55,7 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
     createTabAgentLoadState === 'loading'
       ? [
           {
-            label: 'Detecting Agents',
+            label: translate('session.agentPicker.detectingLabel'),
             icon: Bot,
             disabled: true,
             loading: true,
@@ -73,7 +74,7 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
         : createTabAgentLoadState === 'loaded'
           ? [
               {
-                label: 'No Enabled Agents',
+                label: translate('session.agentPicker.noEnabledLabel'),
                 icon: Bot,
                 disabled: true,
                 onPress: () => {}
@@ -84,8 +85,8 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
             : createTabAgentLoadState === 'error'
               ? [
                   {
-                    label: 'Agent Presets Unavailable',
-                    hint: 'Check the host connection',
+                    label: translate('session.agentPicker.unavailableLabel'),
+                    hint: translate('session.agentPicker.unavailableHostHint'),
                     icon: Bot,
                     disabled: true,
                     onPress: () => {}
@@ -98,7 +99,7 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
       : createTabAgentLoadState === 'loading'
         ? [
             {
-              label: 'Detecting Agents',
+              label: translate('session.agentPicker.detectingLabel'),
               icon: Bot,
               disabled: true,
               loading: true,
@@ -108,7 +109,7 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
         : createTabAgentOptions.length > 0
           ? createTabAgentOptions.map((option) => ({
               label: option.label,
-              hint: 'New agent session',
+              hint: translate('session.agentPicker.newSessionHint'),
               icon: Bot,
               onPress: () => {
                 const delivery = pendingDiffNotesDelivery
@@ -127,7 +128,7 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
           : createTabAgentLoadState === 'loaded'
             ? [
                 {
-                  label: 'No Enabled Agents',
+                  label: translate('session.agentPicker.noEnabledLabel'),
                   icon: Bot,
                   disabled: true,
                   onPress: () => {}
@@ -138,8 +139,8 @@ export function useMobileSessionPanelRouteActions(scope: MobileSessionPresentati
               : createTabAgentLoadState === 'error'
                 ? [
                     {
-                      label: 'Agent Presets Unavailable',
-                      hint: 'Copy notes instead',
+                      label: translate('session.agentPicker.unavailableLabel'),
+                      hint: translate('session.agentPicker.unavailableCopyHint'),
                       icon: Bot,
                       disabled: true,
                       onPress: () => {}
