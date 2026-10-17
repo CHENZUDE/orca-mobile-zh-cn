@@ -1152,6 +1152,12 @@
       "newWorkspace": "新建工作区",
       "closeSearch": "关闭搜索",
       "searchWorkspaces": "搜索工作区"
+    },
+    "options": {
+      "allHosts": "全部主机",
+      "allProjects": "全部项目",
+      "searchProjects": "搜索项目…",
+      "agentActivityLayout": "Agent 活动布局"
     }
   },
   "prComments": {

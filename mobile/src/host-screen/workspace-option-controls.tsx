@@ -23,6 +23,7 @@ import {
 import type { ExecutionHostId } from '../../../src/shared/execution-host'
 import type { WorktreeCardProperty } from '../../../src/shared/ui-chrome-types'
 import { hostScreenStyles as styles } from './host-screen-styles'
+import { translate } from '../i18n/i18n'
 import {
   phoneCardPropertyChoices,
   withoutPhoneHiddenProperties
@@ -74,7 +75,7 @@ function hostsValue({ controller, hosts }: WorkspaceOptionProps): string {
   return summarizeChecklist(
     checked.map((host) => host.label),
     hosts.length,
-    'All hosts'
+    translate('hostScreen.options.allHosts')
   )
 }
 
@@ -94,7 +95,7 @@ function HostsPage({ controller, hosts }: WorkspaceOptionProps) {
         {[
           <CheckRow
             key="all"
-            label="All hosts"
+            label={translate('hostScreen.options.allHosts')}
             checked={!visible}
             onPress={() => write(toggleAllVisibleHosts(hosts, visible))}
           />,
@@ -125,7 +126,7 @@ function projectsValue({ controller }: WorkspaceOptionProps): string {
   return summarizeChecklist(
     checked.map((repo) => repo.name),
     repos.length,
-    'All projects'
+    translate('hostScreen.options.allProjects')
   )
 }
 
@@ -143,15 +144,15 @@ function ProjectsPage({ controller }: WorkspaceOptionProps) {
         <MobileSearchField
           value={query}
           onChangeText={setQuery}
-          placeholder="Search projects…"
-          accessibilityLabel="Search projects"
+          placeholder={translate('hostScreen.options.searchProjects')}
+          accessibilityLabel={translate('hostScreen.options.searchProjects')}
         />
       </View>
       <OptionRowList>
         {[
           <CheckRow
             key="all"
-            label="All projects"
+            label={translate('hostScreen.options.allProjects')}
             checked={selected.length === 0}
             onPress={() => settings.setFilter('filterRepoIds', [])}
           />,
@@ -236,7 +237,9 @@ function propertiesPage(
         <CardPropertyRows controller={controller} choices={choices(controller)} />
         {withAgentLayout && (
           <>
-            <Text style={styles.filterSectionLabel}>Agent activity layout</Text>
+            <Text style={styles.filterSectionLabel}>
+              {translate('hostScreen.options.agentActivityLayout')}
+            </Text>
             <MobileSegmentedControl
               segments={WORKSPACE_AGENT_ACTIVITY_LAYOUT_CHOICES.map(({ id, label }) => ({
                 value: id,

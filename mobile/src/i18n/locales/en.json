@@ -1152,6 +1152,12 @@
       "newWorkspace": "New workspace",
       "closeSearch": "Close search",
       "searchWorkspaces": "Search workspaces"
+    },
+    "options": {
+      "allHosts": "All hosts",
+      "allProjects": "All projects",
+      "searchProjects": "Search projects…",
+      "agentActivityLayout": "Agent activity layout"
     }
   },
   "prComments": {
