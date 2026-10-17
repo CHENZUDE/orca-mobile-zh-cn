@@ -1042,7 +1042,11 @@
       "hintPushCount_one": "推送 {{count}} 个提交。",
       "hintPushCount_other": "推送 {{count}} 个提交。",
       "hintNothingToCommit": "没有可提交的内容，分支已是最新。"
-    }
+    },
+    "closeCommittedDiffPreview": "关闭已提交差异预览",
+    "waitingForDesktop": "等待电脑端响应…",
+    "noFileChanges": "没有文件更改",
+    "failedToLoadHistory": "加载历史失败"
   },
   "agentHistory": {
     "title": "智能体会话历史",
@@ -1143,7 +1147,8 @@
       "tooLargeForPreview": "该差异过大，无法在手机上预览。",
       "deletedFileHint": "该文件已删除。可添加文件备注或标记为已审阅。",
       "selectAFileToReview": "请选择要审阅的文件。",
-      "retryLoadingReview": "重试加载审阅"
+      "retryLoadingReview": "重试加载审阅",
+      "diffTruncatedForMobile": "差异过长，手机端预览已截断。"
     }
   },
   "hostScreen": {
@@ -1281,7 +1286,8 @@
       "newBrowser": "新建浏览器",
       "enterUrlOrBlankForNewTab": "输入网址，或留空以新建标签页。",
       "shortcut": "快捷键",
-      "removeCustomShortcut": "要移除这个自定义快捷键吗？"
+      "removeCustomShortcut": "要移除这个自定义快捷键吗？",
+      "discardChangesConfirm": "确定丢弃更改吗？"
     },
     "commandDock": {
       "dismissKeyboard": "隐藏键盘",
@@ -1448,5 +1454,12 @@
     "runHooks": "运行脚本",
     "alwaysTrustAndRun": "始终信任并运行",
     "dontRun": "不运行"
+  },
+  "files": {
+    "closeFiles": "关闭文件",
+    "backToSession": "返回会话",
+    "noFilesFound": "未找到文件",
+    "backToFiles": "返回文件列表",
+    "saveTerminalArtifact": "保存终端产物"
   }
 }

@@ -1042,7 +1042,11 @@
       "hintPushCount_one": "Push {{count}} commit.",
       "hintPushCount_other": "Push {{count}} commits.",
       "hintNothingToCommit": "Nothing to commit. Branch is up to date."
-    }
+    },
+    "closeCommittedDiffPreview": "Close committed diff preview",
+    "waitingForDesktop": "Waiting for desktop...",
+    "noFileChanges": "No file changes",
+    "failedToLoadHistory": "Failed to load history"
   },
   "agentHistory": {
     "title": "Agent Session History",
@@ -1143,7 +1147,8 @@
       "tooLargeForPreview": "This diff is too large for the mobile preview.",
       "deletedFileHint": "This file was deleted. Add a file note or mark it reviewed.",
       "selectAFileToReview": "Select a file to review.",
-      "retryLoadingReview": "Retry loading review"
+      "retryLoadingReview": "Retry loading review",
+      "diffTruncatedForMobile": "Diff truncated for mobile preview."
     }
   },
   "hostScreen": {
@@ -1281,7 +1286,8 @@
       "newBrowser": "New Browser",
       "enterUrlOrBlankForNewTab": "Enter a URL, or leave blank for a new tab.",
       "shortcut": "Shortcut",
-      "removeCustomShortcut": "Remove this custom shortcut?"
+      "removeCustomShortcut": "Remove this custom shortcut?",
+      "discardChangesConfirm": "Discard changes?"
     },
     "commandDock": {
       "dismissKeyboard": "Dismiss keyboard",
@@ -1448,5 +1454,12 @@
     "runHooks": "Run hooks",
     "alwaysTrustAndRun": "Always trust and run",
     "dontRun": "Don't run"
+  },
+  "files": {
+    "closeFiles": "Close files",
+    "backToSession": "Back to session",
+    "noFilesFound": "No files found",
+    "backToFiles": "Back to files",
+    "saveTerminalArtifact": "Save terminal artifact"
   }
 }

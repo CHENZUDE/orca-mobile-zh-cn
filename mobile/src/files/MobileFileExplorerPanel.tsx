@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ActivityIndicator,
@@ -60,6 +61,8 @@ export function MobileFileExplorerPanel(props: {
   const [error, setError] = useState<string | null>(null)
   const [legacyListTruncated, setLegacyListTruncated] = useState(false)
   const worktreeLabel = getWorktreeLabel(name, worktreeId)
+  const { t } = useTranslation()
+
 
   const loadDirectory = useCallback(
     async (relativePath: string) => {
@@ -299,7 +302,7 @@ export function MobileFileExplorerPanel(props: {
           style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
           onPress={() => onRequestClose?.()}
           hitSlop={8}
-          accessibilityLabel="Close files"
+          accessibilityLabel={t('files.closeFiles')}
         >
           <X size={20} color={colors.textSecondary} strokeWidth={2.2} />
         </Pressable>
@@ -309,7 +312,7 @@ export function MobileFileExplorerPanel(props: {
           onPress={() => router.back()}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel="Back to session"
+          accessibilityLabel={t('files.backToSession')}
         >
           <ChevronLeft size={22} color={colors.textSecondary} strokeWidth={2.2} />
         </Pressable>
@@ -342,7 +345,7 @@ export function MobileFileExplorerPanel(props: {
     <MobileLoadErrorState message={error} onRetry={rootRetry} />
   ) : rows.length === 0 ? (
     <View style={styles.state}>
-      <Text style={styles.emptyText}>No files found</Text>
+      <Text style={styles.emptyText}>{t('files.noFilesFound')}</Text>
     </View>
   ) : (
     <FlatList

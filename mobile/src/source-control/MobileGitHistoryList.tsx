@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import { ChevronDown, ChevronRight } from 'lucide-react-native'
@@ -38,6 +39,8 @@ export const MobileGitHistoryList = memo(function MobileGitHistoryList({
   bottomInset,
   refreshNonce = 0
 }: Props) {
+  const { t } = useTranslation()
+
   const forceReconnect = useForceReconnect()
   const [rows, setRows] = useState<MobileCommitRow[] | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -72,7 +75,9 @@ export const MobileGitHistoryList = memo(function MobileGitHistoryList({
         }
       } catch (err) {
         if (active) {
-          setError(err instanceof Error ? err.message : 'Failed to load history')
+          setError(
+            err instanceof Error ? err.message : t('git.failedToLoadHistory')
+          )
         }
       }
     })()
@@ -167,10 +172,10 @@ export const MobileGitHistoryList = memo(function MobileGitHistoryList({
                 connected ? (
                   <ActivityIndicator size="small" color={colors.textSecondary} />
                 ) : (
-                  <Text style={styles.empty}>Waiting for desktop...</Text>
+                  <Text style={styles.empty}>{t('git.waitingForDesktop')}</Text>
                 )
               ) : files.length === 0 ? (
-                <Text style={styles.empty}>No file changes</Text>
+                <Text style={styles.empty}>{t('git.noFileChanges')}</Text>
               ) : (
                 files.map((file) => (
                   <View key={file.path} style={styles.fileRow}>

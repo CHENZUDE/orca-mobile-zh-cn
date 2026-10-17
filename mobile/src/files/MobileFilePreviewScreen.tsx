@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Pressable, Text, View, useWindowDimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -36,6 +37,8 @@ type Props = {
 }
 
 export function MobileFilePreviewScreen({ route }: Props) {
+  const { t } = useTranslation()
+
   // Why: every workspace screen uses the handoff so it shares the route chunk; else the bundle overruns its asset budget.
   const router = useWorkspaceRouteHandoff()
   const previewParams = route.ok ? route.params : null
@@ -237,7 +240,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
             onPress={requestBack}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Back to files"
+            accessibilityLabel={t('files.backToFiles')}
           >
             <ChevronLeft size={22} color={colors.textSecondary} strokeWidth={2.2} />
           </Pressable>
@@ -254,7 +257,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
               style={[styles.saveButton, (!canSaveArtifact || saving) && styles.saveButtonDisabled]}
               onPress={() => void saveArtifact()}
               disabled={!canSaveArtifact || saving}
-              accessibilityLabel="Save terminal artifact"
+              accessibilityLabel={t('files.saveTerminalArtifact')}
             >
               <Save size={18} color={colors.textPrimary} strokeWidth={2.2} />
             </Pressable>
@@ -280,7 +283,7 @@ export function MobileFilePreviewScreen({ route }: Props) {
       />
       <ConfirmModal
         visible={confirmingDiscard}
-        title="Discard changes?"
+        title={t('session.sheets.discardChangesConfirm')}
         message="Unsaved edits will be lost."
         confirmLabel="Discard"
         cancelLabel="Stay"
