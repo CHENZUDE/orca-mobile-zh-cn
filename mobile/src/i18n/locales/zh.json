@@ -1041,7 +1041,22 @@
     "hunk": "变更块",
     "scopeBranch": "分支",
     "scopeStaged": "已暂存",
-    "scopeUnstaged": "未暂存"
+    "scopeUnstaged": "未暂存",
+    "footer": {
+      "stageFile": "暂存文件",
+      "stage": "暂存",
+      "unstageFile": "取消暂存文件",
+      "unstage": "取消暂存",
+      "discardFile": "丢弃文件更改",
+      "discard": "丢弃",
+      "previousFile": "上一个文件",
+      "addFileNote": "添加文件备注",
+      "note": "备注",
+      "markFileReviewed": "标记文件为已审阅",
+      "reviewed": "已审阅",
+      "markReviewed": "标记已审阅",
+      "nextFile": "下一个文件"
+    }
   },
   "hostScreen": {
     "sortBy": "排序方式",
