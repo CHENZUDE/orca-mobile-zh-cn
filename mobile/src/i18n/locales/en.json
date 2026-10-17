@@ -958,5 +958,23 @@
     "scopeBranch": "Branch",
     "scopeStaged": "Staged",
     "scopeUnstaged": "Unstaged"
+  },
+  "hostScreen": {
+    "sortBy": "Sort By",
+    "groupBy": "Group By",
+    "filter": "Filter",
+    "clearFilters": "Clear filters",
+    "workspaces": "Workspaces",
+    "hideSleeping": "Hide sleeping",
+    "hideDefaultBranch": "Hide default branch",
+    "deleteWorktree": "Delete Worktree",
+    "deleteWorktreeConfirm": "Delete \"{{name}}\" ({{branch}})?",
+    "delete": "Delete",
+    "sleep": "Sleep",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "removeHost": "Remove Host",
+    "removeHostConfirm": "Remove \"{{name}}\"? You can re-pair later.",
+    "remove": "Remove"
   }
 }

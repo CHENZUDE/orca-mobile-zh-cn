@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { openExternalLink } from '../platform/external-link'
 import { Pressable, Text, View } from 'react-native'
 import { Check, Moon } from 'lucide-react-native'
@@ -33,6 +34,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
     showNewWorktree,
     state
   } = controller
+  const { t } = useTranslation()
   const actionTarget = state.actionTarget
   // A server row's screens are offered by what that server supports, not the desktop.
   const actionServer = useWorkspaceServer({
@@ -46,7 +48,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
     <>
       <PickerModal
         visible={state.showSortPicker}
-        title="Sort By"
+        title={t('hostScreen.sortBy')}
         subtitle={WORKSPACE_VIEW_SHARED_NOTE}
         options={SORT_OPTIONS}
         selected={state.sortMode}
@@ -56,7 +58,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
 
       <PickerModal
         visible={state.showGroupPicker}
-        title="Group By"
+        title={t('hostScreen.groupBy')}
         subtitle={WORKSPACE_VIEW_SHARED_NOTE}
         options={GROUP_OPTIONS}
         selected={state.groupMode}
@@ -67,32 +69,32 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
       <BottomDrawer visible={state.showFilterModal} onClose={() => state.setShowFilterModal(false)}>
         <View style={styles.filterModalHeader}>
           <View style={styles.filterModalHeading}>
-            <Text style={styles.filterModalTitle}>Filter</Text>
+            <Text style={styles.filterModalTitle}>{t('hostScreen.filter')}</Text>
             <Text style={styles.filterModalSubtitle}>{WORKSPACE_VIEW_SHARED_NOTE}</Text>
           </View>
           {settings.activeFilterCount > 0 && (
             <Pressable onPress={settings.clearFilters}>
-              <Text style={styles.clearFiltersText}>Clear filters</Text>
+              <Text style={styles.clearFiltersText}>{t('hostScreen.clearFilters')}</Text>
             </Pressable>
           )}
         </View>
 
-        <Text style={styles.filterSectionLabel}>Workspaces</Text>
+        <Text style={styles.filterSectionLabel}>{t('hostScreen.workspaces')}</Text>
         <View style={styles.filterGroup}>
           <Pressable style={styles.filterRow} onPress={settings.toggleHideSleeping}>
-            <Text style={styles.filterRowText}>Hide sleeping</Text>
+            <Text style={styles.filterRowText}>{t('hostScreen.hideSleeping')}</Text>
             {state.filters.hideSleeping && <Check size={14} color={colors.textPrimary} />}
           </Pressable>
           <View style={styles.filterSeparator} />
           <Pressable style={styles.filterRow} onPress={settings.toggleHideDefaultBranch}>
-            <Text style={styles.filterRowText}>Hide default branch</Text>
+            <Text style={styles.filterRowText}>{t('hostScreen.hideDefaultBranch')}</Text>
             {state.filters.hideDefaultBranch && <Check size={14} color={colors.textPrimary} />}
           </Pressable>
         </View>
 
         {controller.sectionsResult.uniqueRepos.length > 1 && (
           <>
-            <Text style={styles.filterSectionLabel}>Repositories</Text>
+            <Text style={styles.filterSectionLabel}>{t('tasks.create.repository')}</Text>
             <View style={styles.filterGroup}>
               {controller.sectionsResult.uniqueRepos.map((repo, i) => (
                 <View key={repo.id}>
@@ -127,10 +129,12 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
         {state.confirmDelete ? (
           <View>
             <View style={styles.confirmContent}>
-              <Text style={styles.confirmTitle}>Delete Worktree</Text>
+              <Text style={styles.confirmTitle}>{t('hostScreen.deleteWorktree')}</Text>
               <Text style={styles.confirmMessage}>
-                Delete "{state.confirmDelete.displayName || state.confirmDelete.repo}" (
-                {state.confirmDelete.branch})?
+                {t('hostScreen.deleteWorktreeConfirm', {
+                  name: state.confirmDelete.displayName || state.confirmDelete.repo,
+                  branch: state.confirmDelete.branch
+                })}
               </Text>
             </View>
             <View style={styles.confirmButtons}>
@@ -142,7 +146,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
                 ]}
                 onPress={() => state.setConfirmDelete(null)}
               >
-                <Text style={styles.confirmBtnCancelText}>Cancel</Text>
+                <Text style={styles.confirmBtnCancelText}>{t('common.cancel')}</Text>
               </Pressable>
               <Pressable
                 style={({ pressed }) => [
@@ -158,7 +162,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
                   state.setActionTarget(null)
                 }}
               >
-                <Text style={styles.confirmBtnDestructiveText}>Delete</Text>
+                <Text style={styles.confirmBtnDestructiveText}>{t('hostScreen.delete')}</Text>
               </Pressable>
             </View>
           </View>
@@ -184,7 +188,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
                       ? []
                       : [
                           {
-                            label: 'Sleep',
+                            label: t('hostScreen.sleep'),
                             icon: Moon,
                             onPress: () => {
                               actions.putWorktreeToSleep(actionTarget)
@@ -193,14 +197,16 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
                           }
                         ]),
                     {
-                      label: isWorktreePinned(actionTarget, state.pinnedIds) ? 'Unpin' : 'Pin',
+                      label: isWorktreePinned(actionTarget, state.pinnedIds)
+                        ? t('hostScreen.unpin')
+                        : t('hostScreen.pin'),
                       onPress: () => {
                         actions.togglePin(actionTarget)
                         state.setActionTarget(null)
                       }
                     },
                     {
-                      label: 'Delete',
+                      label: t('hostScreen.delete'),
                       destructive: true,
                       onPress: () => state.setConfirmDelete(actionTarget)
                     }
@@ -214,9 +220,9 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
       {/* Host remove confirmation */}
       <ConfirmModal
         visible={state.confirmRemoveHost}
-        title="Remove Host"
-        message={`Remove "${state.hostName}"? You can re-pair later.`}
-        confirmLabel="Remove"
+        title={t('hostScreen.removeHost')}
+        message={t('hostScreen.removeHostConfirm', { name: state.hostName })}
+        confirmLabel={t('hostScreen.remove')}
         destructive
         onConfirm={() => void actions.handleRemoveHost()}
         onCancel={() => state.setConfirmRemoveHost(false)}

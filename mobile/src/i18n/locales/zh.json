@@ -958,5 +958,23 @@
     "scopeBranch": "分支",
     "scopeStaged": "已暂存",
     "scopeUnstaged": "未暂存"
+  },
+  "hostScreen": {
+    "sortBy": "排序方式",
+    "groupBy": "分组方式",
+    "filter": "筛选",
+    "clearFilters": "清除筛选",
+    "workspaces": "工作区",
+    "hideSleeping": "隐藏休眠中",
+    "hideDefaultBranch": "隐藏默认分支",
+    "deleteWorktree": "删除工作区",
+    "deleteWorktreeConfirm": "要删除“{{name}}”（{{branch}}）吗？",
+    "delete": "删除",
+    "sleep": "休眠",
+    "pin": "置顶",
+    "unpin": "取消置顶",
+    "removeHost": "移除主机",
+    "removeHostConfirm": "要移除“{{name}}”吗？之后可以重新配对。",
+    "remove": "移除"
   }
 }
