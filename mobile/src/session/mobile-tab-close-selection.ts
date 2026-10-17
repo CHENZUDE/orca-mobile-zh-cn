@@ -1,9 +1,10 @@
+import { translate } from '../i18n/i18n'
 export type BulkTabCloseMode = 'others' | 'left'
 
 /** Long-press sheet entries, in display order. */
 export const BULK_TAB_CLOSE_ACTIONS: { mode: BulkTabCloseMode; label: string }[] = [
-  { mode: 'others', label: 'Close Other Tabs' },
-  { mode: 'left', label: 'Close Tabs to the Left' }
+  { mode: 'others', label: translate('session.closeOtherTabs') },
+  { mode: 'left', label: translate('session.closeTabsToLeft') }
 ]
 
 type BulkClosableTab = {

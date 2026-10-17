@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { buildMobileDiffLines } from './mobile-diff-lines'
 import { buildMobileDiffReviewQueue } from './mobile-diff-review-queue'
 import {
@@ -76,7 +77,10 @@ export async function loadMobileDiffReviewBranchCompare(
     }
   } catch (err) {
     // A transport drop surfaces its own message verbatim; only a refusal falls back above.
-    return { result: null, error: err instanceof Error ? err.message : 'Committed changes failed' }
+    return {
+      result: null,
+      error: err instanceof Error ? err.message : translate('diffReview.committedChangesFailed')
+    }
   }
 }
 
@@ -91,7 +95,7 @@ export async function loadMobileDiffReviewSnapshot(
     !statusReply.ok &&
     isMobileGitUnavailable(statusReply.error?.code, statusReply.error?.message)
   ) {
-    return { kind: 'unavailable', message: 'Update Orca desktop to review changes on mobile.' }
+    return { kind: 'unavailable', message: translate('diffReview.updateDesktopToReview') }
   }
   let status
   try {
@@ -113,7 +117,7 @@ export async function loadMobileDiffReviewSnapshot(
   try {
     metadata = reviewWorktreeMetadataRead.interpret(worktreeReply)
   } catch (error) {
-    throw new Error(refusedRpcMessageOrFallback(error, 'Unable to load review notes'))
+    throw new Error(refusedRpcMessageOrFallback(error, translate('diffReview.unableToLoadNotes')))
   }
 
   const comments = normalizeMobileDiffComments(metadata.diffComments, worktreeId)
@@ -166,7 +170,7 @@ export async function loadMobileDiffReviewDiff(input: DiffLoadInput): Promise<Re
   try {
     result = pending.interpret(pending.reply)
   } catch (error) {
-    throw new Error(refusedRpcMessageOrFallback(error, 'Unable to load diff'))
+    throw new Error(refusedRpcMessageOrFallback(error, translate('diffReview.unableToLoadDiff')))
   }
   if (result.kind === 'binary') {
     return { kind: 'binary', itemKey: item.key }

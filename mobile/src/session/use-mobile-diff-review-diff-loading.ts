@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useEffect, useRef, useState } from 'react'
 import type { ConnectionState } from '../transport/types'
 import type { RpcClient } from '../transport/rpc-client'
@@ -42,7 +43,13 @@ export function useMobileDiffReviewDiffLoading(input: DiffLoadingInput): ReviewD
     const keepLoadedDiff = (fallback: ReviewDiffState) => (prev: ReviewDiffState) =>
       prev.kind === 'ready' && prev.itemKey === itemKey ? prev : fallback
     if (!client || connState !== 'connected') {
-      setDiffState(keepLoadedDiff({ kind: 'error', itemKey, message: 'Waiting for desktop...' }))
+      setDiffState(
+        keepLoadedDiff({
+          kind: 'error',
+          itemKey,
+          message: translate('filePreview.waitingForDesktop')
+        })
+      )
       return
     }
     let stale = false
@@ -65,7 +72,7 @@ export function useMobileDiffReviewDiffLoading(input: DiffLoadingInput): ReviewD
             keepLoadedDiff({
               kind: 'error',
               itemKey,
-              message: err instanceof Error ? err.message : 'Unable to load diff'
+              message: err instanceof Error ? err.message : translate('diffReview.unableToLoadDiff')
             })
           )
         }

@@ -681,7 +681,10 @@
     "noneYet": "还没有快速命令。",
     "noMatches": "没有匹配的快速命令。",
     "thisProject": "本项目",
-    "global": "全局"
+    "global": "全局",
+    "editBeforeRunning": "运行前请先编辑此快捷命令",
+    "failedToLoad": "加载快捷命令失败",
+    "failedToSave": "保存快捷命令失败"
   },
   "tasks": {
     "project": {
@@ -1168,7 +1171,14 @@
     },
     "truncatedForMobilePreview": "差异内容过长，已在移动端截断预览。",
     "addReviewNote": "添加评审备注",
-    "saveNote": "保存备注"
+    "saveNote": "保存备注",
+    "committedChangesFailed": "加载已提交的更改失败",
+    "updateDesktopToReview": "请更新 Orca 桌面端，才能在手机上评审更改。",
+    "unableToLoadNotes": "无法加载评审备注",
+    "unableToLoadDiff": "无法加载差异",
+    "unableToLoadReview": "无法加载评审",
+    "unableToCopyNotes": "无法复制评审备注",
+    "unableToLoadAgentSessions": "无法加载代理会话"
   },
   "hostScreen": {
     "sortBy": "排序方式",
@@ -1352,7 +1362,12 @@
       "unavailableHostHint": "请检查主机连接",
       "unavailableCopyHint": "可改为复制备注",
       "newSessionHint": "新建代理会话"
-    }
+    },
+    "savedAgentUnavailable": "此操作保存的代理在工作区主机上不可用。",
+    "noEnabledAgentDetected": "未在此工作区主机上检测到已启用的 AI 代理。",
+    "closeOtherTabs": "关闭其他标签页",
+    "closeTabsToLeft": "关闭左侧标签页",
+    "couldNotSendNotes": "发送备注失败"
   },
   "prSidebar": {
     "pullRequest": "拥提请求",
@@ -1389,7 +1404,9 @@
     "checkingReviewStatus": "正在检查评审状态…",
     "reviewCreationUnavailable": "当前服务商不支持创建评审",
     "createProviderReview": "创建{{review}}",
-    "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。"
+    "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。",
+    "failedToRefreshPullRequest": "刷新 Pull Request 失败。",
+    "failedToMergePullRequest": "合并 Pull Request 失败。"
   },
   "taskOptions": {
     "provider": {

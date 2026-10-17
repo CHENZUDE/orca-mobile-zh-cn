@@ -10,6 +10,7 @@ import { terminalRecordsEqual } from './mobile-terminal-records'
 import type { MobileNewTabAgentOption } from './mobile-new-tab-agent-options'
 import type { TerminalQuickCommand } from '../../../src/shared/terminal-quick-command-types'
 import type { MobileSessionTab, Terminal } from './mobile-session-route-types'
+import { translate } from '../i18n/i18n'
 import type { MobileSessionAttachmentsModel } from './use-mobile-session-attachments'
 import { isAgentSessionHandleProvider } from '../../../src/shared/agent-session-provider-handle'
 import { createMobileStructuredAgentSession } from './mobile-structured-agent-session-launch'
@@ -232,7 +233,8 @@ export function useMobileSessionTerminalCreateActions(scope: MobileSessionAttach
             .catch((err) => {
               triggerError()
               showToast(
-                options.errorToast ?? (err instanceof Error ? err.message : "Couldn't send notes"),
+                options.errorToast ??
+                  (err instanceof Error ? err.message : translate('session.couldNotSendNotes')),
                 1800
               )
             })
@@ -274,7 +276,7 @@ export function useMobileSessionTerminalCreateActions(scope: MobileSessionAttach
     const launch = buildMobileQuickCommandLaunch(command)
     if (!launch) {
       triggerError()
-      showToast('Edit this quick command before running it', 1800)
+      showToast(translate('quickCommand.editBeforeRunning'), 1800)
       return false
     }
     const label = command.label.trim() || 'Quick command'

@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useEffect, useRef, type Dispatch, type SetStateAction } from 'react'
 import type { DiffComment, MobileDiffReviewState } from '../../../src/shared/diff-comment-types'
 import type { ConnectionState } from '../transport/types'
@@ -52,7 +53,7 @@ export function useMobileDiffReviewSendActions(input: SendActionsInput) {
     try {
       await clipboard.writeText(formatDiffComments(screenState.comments))
     } catch (err) {
-      setActionError(err instanceof Error ? err.message : 'Unable to copy the review notes')
+      setActionError(err instanceof Error ? err.message : translate('diffReview.unableToCopyNotes'))
       return
     }
     triggerSuccess()
@@ -92,7 +93,7 @@ export function useMobileDiffReviewSendActions(input: SendActionsInput) {
   const sendPromptToTerminal = useCallback(
     async (terminal: string, comments: readonly DiffComment[]) => {
       if (!client || connState !== 'connected') {
-        throw new Error('Waiting for desktop...')
+        throw new Error(translate('filePreview.waitingForDesktop'))
       }
       // Marked by terminal handle, not by surface, so a paste orphaned here by native
       // chat would ride along with these notes (#10228). Diff review carries no device token.
@@ -125,7 +126,7 @@ export function useMobileDiffReviewSendActions(input: SendActionsInput) {
       // Reported, not thrown: the sheet's caller drops the promise, so a throw would show nothing.
       if (!client || connState !== 'connected') {
         closeSheet('send')
-        setActionError('Waiting for desktop...')
+        setActionError(translate('filePreview.waitingForDesktop'))
         return
       }
       if (agentLaunchInFlightRef.current) {
@@ -171,7 +172,7 @@ export function useMobileDiffReviewSendActions(input: SendActionsInput) {
 
   const openSendSheet = useCallback(async () => {
     if (!client || connState !== 'connected') {
-      setActionError('Waiting for desktop...')
+      setActionError(translate('filePreview.waitingForDesktop'))
       return
     }
     openSheet({ kind: 'send', load: { kind: 'loading' } })
@@ -182,13 +183,14 @@ export function useMobileDiffReviewSendActions(input: SendActionsInput) {
       let terminals
       terminals = interpretOrThrowRefusalMessage(
         () => reviewTerminalListRead.interpret(response),
-        'Unable to load agent sessions'
+        translate('diffReview.unableToLoadAgentSessions')
       )
       updateSendSheet({ kind: 'ready', terminals })
     } catch (err) {
       updateSendSheet({
         kind: 'error',
-        message: err instanceof Error ? err.message : 'Unable to load agent sessions',
+        message:
+          err instanceof Error ? err.message : translate('diffReview.unableToLoadAgentSessions'),
         terminals: []
       })
     }

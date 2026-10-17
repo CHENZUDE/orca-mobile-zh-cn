@@ -681,7 +681,10 @@
     "noneYet": "No quick commands yet.",
     "noMatches": "No matching quick commands.",
     "thisProject": "This project",
-    "global": "Global"
+    "global": "Global",
+    "editBeforeRunning": "Edit this quick command before running it",
+    "failedToLoad": "Failed to load quick commands",
+    "failedToSave": "Failed to save quick command"
   },
   "tasks": {
     "project": {
@@ -1168,7 +1171,14 @@
     },
     "truncatedForMobilePreview": "Diff truncated for mobile preview.",
     "addReviewNote": "Add review note",
-    "saveNote": "Save note"
+    "saveNote": "Save note",
+    "committedChangesFailed": "Committed changes failed",
+    "updateDesktopToReview": "Update Orca desktop to review changes on mobile.",
+    "unableToLoadNotes": "Unable to load review notes",
+    "unableToLoadDiff": "Unable to load diff",
+    "unableToLoadReview": "Unable to load review",
+    "unableToCopyNotes": "Unable to copy the review notes",
+    "unableToLoadAgentSessions": "Unable to load agent sessions"
   },
   "hostScreen": {
     "sortBy": "Sort By",
@@ -1352,7 +1362,12 @@
       "unavailableHostHint": "Check the host connection",
       "unavailableCopyHint": "Copy notes instead",
       "newSessionHint": "New agent session"
-    }
+    },
+    "savedAgentUnavailable": "The saved agent for this action is not available on this workspace host.",
+    "noEnabledAgentDetected": "No enabled AI agent was detected on this workspace host.",
+    "closeOtherTabs": "Close Other Tabs",
+    "closeTabsToLeft": "Close Tabs to the Left",
+    "couldNotSendNotes": "Couldn't send notes"
   },
   "prSidebar": {
     "pullRequest": "Pull request",
@@ -1389,7 +1404,9 @@
     "checkingReviewStatus": "Checking review status…",
     "reviewCreationUnavailable": "Review creation unavailable for this provider",
     "createProviderReview": "Create {{review}}",
-    "branchNotReadyForReview": "This branch is not ready for a {{review}} yet."
+    "branchNotReadyForReview": "This branch is not ready for a {{review}} yet.",
+    "failedToRefreshPullRequest": "Failed to refresh pull request.",
+    "failedToMergePullRequest": "Failed to merge pull request."
   },
   "taskOptions": {
     "provider": {

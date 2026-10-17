@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import type { GitHubPRMergeMethod, PRState } from '../../../src/shared/github/pull-request-types'
 import { githubRepoIdentityKey } from '../../../src/shared/github/repository-identity-key'
 import { classifyPrSidebarFailure } from './mobile-pr-sidebar-state'
@@ -166,7 +167,9 @@ export class PrActionsEngine {
         await this.cfg.refetch()
       } catch (err) {
         if (this.identity === identity) {
-          this.setError(err instanceof Error ? err.message : 'Failed to refresh pull request.')
+          this.setError(
+            err instanceof Error ? err.message : translate('prSidebar.failedToRefreshPullRequest')
+          )
         }
       }
       return
@@ -195,7 +198,9 @@ export class PrActionsEngine {
       await this.settle(identity, outcome, { onSuccess: () => {}, onRevert: () => {} })
     } catch (err) {
       if (this.identity === identity) {
-        this.setError(err instanceof Error ? err.message : 'Failed to merge pull request.')
+        this.setError(
+          err instanceof Error ? err.message : translate('prSidebar.failedToMergePullRequest')
+        )
       }
     } finally {
       this.clearBusyIfOwned(identity, { kind: 'merge' })

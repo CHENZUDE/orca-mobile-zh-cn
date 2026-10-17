@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import type { FlatList } from 'react-native'
 import type { DiffComment } from '../../../src/shared/diff-comment-types'
@@ -90,7 +91,9 @@ export function useMobileDiffReviewController(input: ControllerInput) {
     const keepReady = (fallback: ReviewScreenState) => (prev: ReviewScreenState) =>
       prev.kind === 'ready' ? prev : fallback
     if (!client || connState !== 'connected') {
-      setScreenState(keepReady({ kind: 'error', message: 'Waiting for desktop...' }))
+      setScreenState(
+        keepReady({ kind: 'error', message: translate('filePreview.waitingForDesktop') })
+      )
       return
     }
     setScreenState(keepReady({ kind: 'loading' }))
@@ -108,7 +111,7 @@ export function useMobileDiffReviewController(input: ControllerInput) {
         setScreenState(
           keepReady({
             kind: 'error',
-            message: err instanceof Error ? err.message : 'Unable to load review'
+            message: err instanceof Error ? err.message : translate('diffReview.unableToLoadReview')
           })
         )
       }
