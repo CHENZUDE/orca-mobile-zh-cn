@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 import {
   ActivityIndicator,
@@ -56,6 +57,7 @@ export function MobileSourceControlContent({ state }: Props) {
     openBranchDiff,
     runGitAction
   } = state
+  const { t } = useTranslation()
   const ioBusy = busyAction !== null || openingPath !== null || openingBranchPath !== null
   // Why: a capped listing can hide unstaged rows behind an all-staged prefix.
   const canStageAll = stageablePaths.length > 0 || status?.didHitLimit === true
@@ -99,7 +101,7 @@ export function MobileSourceControlContent({ state }: Props) {
         // Surface the reconnect state where the user is looking.
         <View style={styles.reconnectBanner}>
           <ActivityIndicator size="small" color={colors.statusAmber} />
-          <Text style={styles.reconnectBannerText}>Reconnecting to desktop...</Text>
+          <Text style={styles.reconnectBannerText}>{t('git.reconnecting')}</Text>
         </View>
       ) : null}
       <View style={hubStyles.changesControls}>
@@ -131,7 +133,7 @@ export function MobileSourceControlContent({ state }: Props) {
             ) : (
               <Plus size={15} color={colors.textPrimary} strokeWidth={2.2} />
             )}
-            <Text style={styles.bulkButtonText}>Stage All</Text>
+            <Text style={styles.bulkButtonText}>{t('git.stageAll')}</Text>
           </Pressable>
           <Pressable
             style={({ pressed }) => [
@@ -147,7 +149,7 @@ export function MobileSourceControlContent({ state }: Props) {
             ) : (
               <Minus size={15} color={colors.textPrimary} strokeWidth={2.2} />
             )}
-            <Text style={styles.bulkButtonText}>Unstage All</Text>
+            <Text style={styles.bulkButtonText}>{t('git.unstageAll')}</Text>
           </Pressable>
           <Pressable
             style={({ pressed }) => [
@@ -158,7 +160,7 @@ export function MobileSourceControlContent({ state }: Props) {
             onPress={() => setShowActionSheet(true)}
             disabled={ioBusy}
             hitSlop={8}
-            accessibilityLabel="Open source control actions"
+            accessibilityLabel={t('git.openActionsA11y')}
           >
             <MoreHorizontal size={18} color={colors.textPrimary} strokeWidth={2.1} />
           </Pressable>
@@ -167,8 +169,8 @@ export function MobileSourceControlContent({ state }: Props) {
 
       {!hasVisibleChanges ? (
         <View style={styles.state}>
-          <Text style={styles.stateTitle}>No local changes</Text>
-          <Text style={styles.stateText}>Working tree is clean.</Text>
+          <Text style={styles.stateTitle}>{t('git.noLocalChanges')}</Text>
+          <Text style={styles.stateText}>{t('git.workingTreeClean')}</Text>
         </View>
       ) : sections.length === 0 ? (
         // Why: RN SectionList with empty `sections` often skips ListFooterComponent,
@@ -216,16 +218,16 @@ export function MobileSourceControlContent({ state }: Props) {
               style={[styles.commitInput, styles.commitInputDisabled]}
               accessibilityRole="text"
               accessibilityState={{ disabled: true }}
-              accessibilityLabel="Commit message disabled. No staged files."
+              accessibilityLabel={t('git.commitDisabledA11y')}
             >
-              <Text style={styles.commitInputDisabledText}>No staged files</Text>
+              <Text style={styles.commitInputDisabledText}>{t('git.noStagedFiles')}</Text>
             </View>
           ) : (
             <TextInput
               style={styles.commitInput}
               value={commitMessage}
               onChangeText={setCommitMessage}
-              placeholder="Commit message"
+              placeholder={t('git.commitMessagePlaceholder')}
               placeholderTextColor={colors.textMuted}
               editable={busyAction === null && openingPath === null && openingBranchPath === null}
               returnKeyType="done"
@@ -247,8 +249,8 @@ export function MobileSourceControlContent({ state }: Props) {
               }
               accessibilityLabel={
                 generatingMessage
-                  ? 'Cancel commit message generation'
-                  : 'Generate commit message with AI'
+                  ? t('git.cancelGenerateA11y')
+                  : t('git.generateWithAiA11y')
               }
             >
               {generatingMessage ? (
@@ -267,8 +269,10 @@ export function MobileSourceControlContent({ state }: Props) {
             ]}
             onPress={primaryAction.onPress}
             disabled={primaryAction.disabled}
-            accessibilityLabel={primaryAction.accessibilityLabel}
-            accessibilityHint={primaryAction.accessibilityHint}
+            accessibilityLabel={t(primaryAction.accessibilityLabel)}
+            accessibilityHint={t(primaryAction.accessibilityHint, {
+              ...primaryAction.accessibilityHintValues
+            })}
           >
             {primaryAction.loading ? (
               <ActivityIndicator
@@ -282,7 +286,7 @@ export function MobileSourceControlContent({ state }: Props) {
                   createPrHeroActive && styles.commitButtonSecondaryText
                 ]}
               >
-                {primaryAction.label}
+                {t(primaryAction.label)}
               </Text>
             )}
           </Pressable>

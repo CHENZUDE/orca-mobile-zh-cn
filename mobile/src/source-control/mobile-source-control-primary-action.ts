@@ -14,9 +14,12 @@ type MobileSourceControlRemoteOpKind = SourceControlRemoteOpKind
 
 export type MobileSourceControlPrimaryAction = {
   kind: MobileSourceControlPrimaryActionKind
+  /** i18n key; the caller resolves it in the reader language. */
   label: string
   accessibilityLabel: string
   accessibilityHint: string
+  /** Interpolation values for the counted hint keys. */
+  accessibilityHintValues?: Record<string, string | number>
   disabled: boolean
   loading: boolean
   requiresForceWithLease?: boolean
@@ -72,6 +75,7 @@ export function buildMobileSourceControlPrimaryAction(
     label: getMobilePrimaryActionLabel(decision),
     accessibilityLabel: getMobilePrimaryActionLabel(decision),
     accessibilityHint: getMobilePrimaryActionHint(decision),
+    accessibilityHintValues: getMobilePrimaryActionHintValues(decision),
     disabled,
     loading: isLoadingDecision(decision, args.busyAction),
     requiresForceWithLease: decision.requiresForceWithLease,
@@ -127,69 +131,85 @@ function getMobileBranchCommitsAhead(
   return upstream?.hasUpstream ? upstream.ahead : undefined
 }
 
+// Why: returns i18n keys so the .tsx caller localizes them; this module is a pure helper.
 function getMobilePrimaryActionLabel(decision: MobileSourceControlPrimaryActionDecision): string {
   if (decision.requiresForceWithLease) {
-    return 'Force Push'
+    return 'git.primary.forcePush'
   }
   switch (decision.kind) {
     case 'commit':
-      return 'Commit'
+      return 'git.primary.commit'
     case 'stage':
-      return 'Stage All'
+      return 'git.stageAll'
     case 'push':
-      return 'Push'
+      return 'git.primary.push'
     case 'pull':
-      return 'Pull'
+      return 'git.primary.pull'
     case 'sync':
-      return 'Sync'
+      return 'git.primary.sync'
     case 'publish':
-      return 'Publish Branch'
+      return 'git.primary.publishBranch'
+  }
+}
+
+// Counted hints interpolate their numbers; the locale string owns the wording.
+function getMobilePrimaryActionHintValues(
+  decision: MobileSourceControlPrimaryActionDecision
+): Record<string, string | number> | undefined {
+  switch (decision.titleIntent) {
+    case 'sync_counts':
+      return { behind: decision.behind ?? 0, ahead: decision.ahead ?? 0 }
+    case 'pull_count':
+    case 'push_count':
+      return { count: decision.count ?? 0 }
+    default:
+      return undefined
   }
 }
 
 function getMobilePrimaryActionHint(decision: MobileSourceControlPrimaryActionDecision): string {
   switch (decision.titleIntent) {
     case 'commit_in_progress':
-      return 'Commit in progress.'
+      return 'git.primary.hintCommitInProgress'
     case 'force_push_in_progress':
-      return 'Force push in progress.'
+      return 'git.primary.hintForcePushInProgress'
     case 'action_in_progress':
     case 'remote_operation_in_progress':
-      return 'Remote operation in progress.'
+      return 'git.primary.hintRemoteInProgress'
     case 'remote_operation_blocks_commit':
-      return 'Try again once the remote operation finishes.'
+      return 'git.primary.hintRemoteBlocksCommit'
     case 'resolve_conflicts_before_commit':
-      return 'Resolve conflicts before committing.'
+      return 'git.primary.hintResolveConflicts'
     case 'commit_staged_changes':
-      return 'Commit staged changes.'
+      return 'git.primary.hintCommitStaged'
     case 'enter_commit_message':
-      return 'Enter a commit message to commit.'
+      return 'git.primary.hintEnterMessage'
     case 'stage_all_changes':
-      return 'Stage all changes.'
+      return 'git.primary.hintStageAll'
     case 'stage_file_to_commit':
-      return 'Stage at least one file to commit.'
+      return 'git.primary.hintStageOneFile'
     case 'checkout_branch_before_publish':
-      return 'Check out a branch before publishing commits.'
+      return 'git.primary.hintCheckoutBeforePublish'
     case 'checking_review_status':
-      return 'Checking review status.'
+      return 'git.primary.hintCheckingReview'
     case 'review_already_merged':
-      return 'Nothing to commit. The review is already merged.'
+      return 'git.primary.hintReviewMerged'
     case 'publish_branch':
-      return 'Publish this branch to origin.'
+      return 'git.primary.hintPublishBranch'
     case 'push_linked_review':
-      return 'Push updates to the linked review branch.'
+      return 'git.primary.hintPushLinkedReview'
     case 'linked_review_target_unavailable':
-      return 'The linked review branch is unavailable.'
+      return 'git.primary.hintLinkedReviewUnavailable'
     case 'force_push_with_lease':
-      return 'Force push with lease to update the remote branch.'
+      return 'git.primary.hintForcePushWithLease'
     case 'sync_counts':
-      return `Pull ${decision.behind ?? 0}, push ${decision.ahead ?? 0}.`
+      return 'git.primary.hintSyncCounts'
     case 'pull_count':
-      return `Pull ${decision.count ?? 0} commit${decision.count === 1 ? '' : 's'}.`
+      return 'git.primary.hintPullCount'
     case 'push_count':
-      return `Push ${decision.count ?? 0} commit${decision.count === 1 ? '' : 's'}.`
+      return 'git.primary.hintPushCount'
     case 'nothing_to_commit_up_to_date':
-      return 'Nothing to commit. Branch is up to date.'
+      return 'git.primary.hintNothingToCommit'
   }
 }
 
