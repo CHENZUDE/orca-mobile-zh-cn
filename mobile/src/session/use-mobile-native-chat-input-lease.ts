@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { NATIVE_CHAT_TURN_STATUS_COPY } from '../../../src/shared/native-chat-turn-status'
+import { translate } from '../i18n/i18n'
 import type { MobileNativeChatInputLockReason } from './MobileNativeChatView'
 
 export function useMobileNativeChatInputLease(args: {
@@ -102,15 +102,15 @@ export function mobileNativeChatComposerPlaceholder(
   afterStop?: 'queue' | 'send'
 ): string {
   if (lockReason === 'disconnected') {
-    return 'Reconnecting…'
+    return translate('chatTurn.reconnecting')
   }
   if (lockReason === 'waiting') {
-    return 'Waiting for terminal…'
+    return translate('chatTurn.waitingForTerminal')
   }
   if (afterStop) {
     return afterStop === 'queue'
-      ? NATIVE_CHAT_TURN_STATUS_COPY.queueAfterStop
-      : NATIVE_CHAT_TURN_STATUS_COPY.sendAfterStop
+      ? translate('chatTurn.queueAfterStop')
+      : translate('chatTurn.sendAfterStop')
   }
-  return 'Message, @files, /commands'
+  return translate('chatTurn.composerPlaceholder')
 }

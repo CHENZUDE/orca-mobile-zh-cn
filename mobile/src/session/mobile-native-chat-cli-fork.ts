@@ -3,6 +3,7 @@ import type { ActionSheetAction } from '../components/ActionSheetModal'
 import type { MobileSessionController } from './use-mobile-session-controller'
 import { agentForksConversations } from '../../../src/shared/agent-resume-argv'
 import { SESSION_TABS_CHAT_FORK_CLI_RUNTIME_CAPABILITY } from '../../../src/shared/session-tabs-runtime-capabilities'
+import { translate } from '../i18n/i18n'
 
 /** The whole host fork-and-create contract must be present before the phone offers its action. */
 export function canOfferMobileNativeChatCliFork(args: {
@@ -39,7 +40,7 @@ export function getMobileNativeChatCliForkActions(args: {
   }
   return [
     {
-      label: 'Resume in New CLI',
+      label: translate('nativeChat.resumeInNewCli'),
       icon: SquareTerminal,
       onPress: () => {
         args.onDismiss()

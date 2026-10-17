@@ -1575,7 +1575,8 @@
     "selectText": "选择文本",
     "opensImageFullSize": "以全尺寸打开图片",
     "copyMessage": "复制消息",
-    "loadEarlierMessages": "加载更早的消息"
+    "loadEarlierMessages": "加载更早的消息",
+    "resumeInNewCli": "在新 CLI 中继续"
   },
   "prReviewers": {
     "title": "审阅人",
@@ -1928,5 +1929,64 @@
     "changes": "更改",
     "pullRequest": "Pull Request",
     "workspace": "工作区"
+  },
+  "chatTurn": {
+    "thinking": "思考中",
+    "working": "处理中…",
+    "stopping": "正在停止…",
+    "stop": "停止",
+    "stopAgent": "停止智能体",
+    "toggleDetails": "切换轮次详情",
+    "workingFor": "已处理 {{duration}}",
+    "workedFor": "处理用时 {{duration}}",
+    "interruptedAfter": "中断于 {{duration}} 后",
+    "failedAfter": "失败于 {{duration}} 后",
+    "reconnecting": "正在重新连接…",
+    "waitingForTerminal": "正在等待终端…",
+    "queueAfterStop": "排队一条停止后运行的消息",
+    "sendAfterStop": "发送一条停止后运行的消息",
+    "composerPlaceholder": "消息、@文件、/命令",
+    "tools": "工具",
+    "collapse": "收起",
+    "waitingForDesktop": "正在等待桌面端…"
+  },
+  "sessionOptions": {
+    "default": "默认",
+    "notReported": "未报告",
+    "toggleOption": "切换{{name}}",
+    "chooseInAgentPicker": "在智能体选择器中选择…",
+    "closePicker": "关闭选择器",
+    "backToModels": "返回模型列表",
+    "selectModel": "选择模型",
+    "selectOption": "选择{{name}}",
+    "sentToAgentUnconfirmed": "已发送给智能体，尚未确认",
+    "setWhenSessionStarts": "会话启动时设置。",
+    "availableAfterSessionStart": "会话启动后可用。",
+    "model": "模型",
+    "notSet": "未设置",
+    "fast": "快速",
+    "options": "选项",
+    "on": "开启",
+    "off": "关闭",
+    "permissionsAccessible": "权限，{{name}}",
+    "modelAccessible": "模型，{{name}}"
+  },
+  "errors": {
+    "unableToLoadPullRequest": "无法加载 Pull Request",
+    "couldNotFitTerminal": "无法将终端适配到此屏幕",
+    "attachFailedReconnecting": "附加失败（正在重新连接）",
+    "sourceControlActionFailed": "源代码管理操作失败",
+    "commitFailed": "提交失败",
+    "failedToGenerateCommitMessage": "生成提交信息失败",
+    "failedToLaunchAgent": "启动智能体失败",
+    "failedToSaveReviewState": "保存评审状态失败",
+    "failedToSaveReview": "保存评审失败",
+    "failedToSaveReviewNotes": "保存评审备注失败",
+    "failedToUpdateTitle": "更新标题失败。",
+    "commentActionFailed": "评论操作失败",
+    "failedToCreatePullRequest": "创建 Pull Request 失败"
+  },
+  "hostedReview": {
+    "pushBeforeCreateFailed": "推送失败。请解决推送错误后重试。"
   }
 }

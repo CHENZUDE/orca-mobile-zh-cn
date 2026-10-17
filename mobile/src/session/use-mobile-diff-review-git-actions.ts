@@ -10,6 +10,7 @@ import { triggerError, triggerSuccess } from '../platform/haptics'
 import type { MobileDiffReviewQueueItem } from './mobile-diff-review-queue'
 import type { GitMutationMethod } from './mobile-diff-review-screen-model'
 import { mobileReviewCountLabel } from './mobile-diff-review-screen-model'
+import { translate } from '../i18n/i18n'
 
 type GitActionsInput = {
   client: RpcClient | null
@@ -41,13 +42,15 @@ export function useMobileDiffReviewGitActions(input: GitActionsInput) {
         })
         interpretOrThrowRefusalMessage(
           () => mutation.interpret(response),
-          'Source control action failed'
+          translate('errors.sourceControlActionFailed')
         )
         triggerSuccess()
         await loadReviewData()
       } catch (err) {
         triggerError()
-        setActionError(err instanceof Error ? err.message : 'Source control action failed')
+        setActionError(
+          err instanceof Error ? err.message : translate('errors.sourceControlActionFailed')
+        )
       } finally {
         setBusyAction(null)
       }

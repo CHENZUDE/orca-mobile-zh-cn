@@ -62,7 +62,7 @@ export function useMobileSessionDiffComments(scope: MobileSessionDocumentReaders
       })
       interpretOrThrowRefusalMessage(
         () => sessionWorktreeNotesWrite.interpret(response),
-        'Failed to save review notes'
+        translate('errors.failedToSaveReviewNotes')
       )
     },
     [client, connState, worktreeId]

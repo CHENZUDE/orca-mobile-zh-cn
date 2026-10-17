@@ -53,6 +53,7 @@ import { MobileNativeChatMessage } from './MobileNativeChatMessage'
 import { MobileNativeChatScrollHold } from './MobileNativeChatScrollHold'
 import { mobileNativeChatUnsentNotices } from './mobile-native-chat-unsent-notices'
 import type { MobileNativeChatStatus } from './use-mobile-native-chat-session'
+import { mobileNativeChatToolsLabel } from './mobile-native-chat-status-copy'
 
 /** Why the composer input is locked: the transport is disconnected, or the
  *  terminal subscription has not acknowledged its input lease yet. */
@@ -220,16 +221,11 @@ export function MobileNativeChatView({
 }: Props): React.JSX.Element {
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
-
   const [toolsExpanded, setToolsExpanded] = useState(false)
   // Lift the composer clear of the keyboard, plus the bottom safe-area so it
   // never sits under the home indicator / nav bar (mirrors the terminal dock).
   const bottomPad = keyboardInset > 0 ? keyboardInset + insets.bottom : insets.bottom
   const { fontScale, pinchGesture } = useMobileNativeChatPinchGesture()
-
-  // `data` is the list source: folded transcript + synthetic streaming bubble +
-  // route-owned accepted echoes. Memoize on the same deps so the
-  // downstream autoscroll effects/`renderItem` keep referential stability.
   const { data } = useMemo(
     () =>
       buildMobileNativeChatTransientData({
@@ -257,8 +253,7 @@ export function MobileNativeChatView({
 
   const handleSend = useCallback(
     async (text: string): Promise<boolean> => {
-      const accepted = await onSend(text)
-      if (!accepted) {
+      if (!(await onSend(text))) {
         return false
       }
       // The route-owned banner outlives this send; a success must retire it too,
@@ -270,9 +265,7 @@ export function MobileNativeChatView({
     },
     [onSend, onClearSendError, jumpToTail]
   )
-
   const loadEarlier = useCallback(() => onLoadEarlier?.(), [onLoadEarlier])
-
   const onScroll = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
       const { contentOffset } = e.nativeEvent
@@ -284,11 +277,7 @@ export function MobileNativeChatView({
     },
     [hasMore, loadingEarlier, loadEarlier, readerIsScrolling, recordScrollMetrics]
   )
-
-  // Per-turn status rows: one live indicator while the turn runs, then a settled
-  // "Worked for N" row. The structured lane owns them; the bridge lane keeps its
-  // three-dot indicator.
-  // The display status, decided once in the session hook.
+  // Structured turns own their status rows; the bridge lane keeps the three-dot indicator.
   const stopping = turnIndicator?.stopping === true
   const turns = useMobileNativeChatTurnDisclosure({
     messages: data,
@@ -323,7 +312,6 @@ export function MobileNativeChatView({
     ),
     [toolsExpanded, fontScale, onOpenFile, structuredActivityUi, turns, unsentNotices]
   )
-
   const history = useMobileNativeChatPageHistory(turns.listMessages, renderItem)
 
   const liveStatus = turns.liveLine ? (
@@ -337,18 +325,13 @@ export function MobileNativeChatView({
 
   const emptyState = mobileNativeChatEmptyState(status, agent ?? null, error)
   const showLoading = status === 'loading' && messages.length === 0
-
   const lockReason = useSettledMobileNativeChatInputLock(inputLockReason)
-  // Why only Send, terminal-backed only: that send types into the agent's prompt and can answer it,
-  // while drafting never does; the host queues a structured send behind it.
-  const expandedPromptOwnsSend =
-    !structuredActivityUi && !collapsedPrompt && (ask ?? permission ?? question) != null
-  const emptyStateView = emptyState ? (
+  const emptyStateView = emptyState && (
     <View style={styles.center}>
       <Text style={styles.emptyTitle}>{emptyState.title}</Text>
       <Text style={styles.emptySubtitle}>{emptyState.subtitle}</Text>
     </View>
-  ) : null
+  )
 
   // Whatever was already on screen: nothing here can act on a chat that cannot load, and its words
   // say why once, as a fresh open's do.
@@ -427,11 +410,10 @@ export function MobileNativeChatView({
             ) : (
               <ChevronsUpDown size={14} color={colors.textMuted} strokeWidth={2} />
             )}
-            <Text style={styles.chromeToggleLabel}>{toolsExpanded ? 'Collapse' : 'Tools'}</Text>
+            <Text style={styles.chromeToggleLabel}>{mobileNativeChatToolsLabel(toolsExpanded)}</Text>
           </Pressable>
         </View>
         {canStop ? (
-          // Only this phone's own request holds Stop: a repeat is how a stuck stop escalates.
           <MobileNativeChatStopButton
             onStop={onStop}
             held={agentWorking === true && turnIndicator?.stopRequestInFlight === true}
@@ -439,7 +421,6 @@ export function MobileNativeChatView({
         ) : null}
       </View>
       {sendErrorMessage ? (
-        // This banner is the only channel for a send failure — announce it.
         <View
           style={styles.sendError}
           accessibilityRole="alert"
@@ -469,10 +450,11 @@ export function MobileNativeChatView({
         onMicPressIn={onMicPressIn}
         onMicPressOut={onMicPressOut}
         disabled={lockReason !== null}
-        sendDisabled={expandedPromptOwnsSend}
+        sendDisabled={
+          !structuredActivityUi && !collapsedPrompt && (ask ?? permission ?? question) != null
+        }
         placeholder={mobileNativeChatComposerPlaceholder(lockReason, turnIndicator?.afterStop)}
-        filePaths={filePaths}
-        onNeedFiles={onNeedFiles}
+        {...{ filePaths, onNeedFiles }}
       />
     </View>
   )

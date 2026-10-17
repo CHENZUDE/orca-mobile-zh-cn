@@ -8,6 +8,7 @@ import {
   type SessionOptionDisabledReason,
   type SessionOptionSelectChoice
 } from '../../../src/shared/native-chat-session-options'
+import { translate } from '../i18n/i18n'
 
 export function mobileSessionOptionDisabledReason(
   reason: SessionOptionDisabledReason | undefined
@@ -15,9 +16,9 @@ export function mobileSessionOptionDisabledReason(
   // Exhaustive over SessionOptionDisabledReason so new keys are a compile error.
   switch (reason) {
     case 'set-when-session-starts':
-      return 'Set when the session starts.'
+      return translate('sessionOptions.setWhenSessionStarts')
     case 'available-after-session-start':
-      return 'Available after the session starts.'
+      return translate('sessionOptions.availableAfterSessionStart')
     case undefined:
       return null
   }
@@ -40,7 +41,7 @@ function selectedChoiceLabel(descriptor: SessionOptionDescriptor): string | null
 
 /** Value-only pill text — the category lives on the sheet title, not the pill. */
 export function mobileModelPillLabel(descriptor: SessionOptionDescriptor): string {
-  return selectedChoiceLabel(descriptor) ?? 'Model'
+  return selectedChoiceLabel(descriptor) ?? translate('sessionOptions.model')
 }
 
 export function mobileSessionOptionSummaryValue(descriptor: SessionOptionDescriptor): string {
@@ -48,12 +49,12 @@ export function mobileSessionOptionSummaryValue(descriptor: SessionOptionDescrip
   // marker say whether anything confirmed it. Reading "Not set" here while the
   // sheet showed the switch on made the two screens disagree.
   if (descriptor.kind.type === 'boolean') {
-    return descriptor.kind.currentValue ? 'On' : 'Off'
+    return translate(descriptor.kind.currentValue ? 'sessionOptions.on' : 'sessionOptions.off')
   }
   if (descriptor.valueSource === 'unknown') {
-    return 'Not set'
+    return translate('sessionOptions.notSet')
   }
-  return selectedChoiceLabel(descriptor) ?? 'Not set'
+  return selectedChoiceLabel(descriptor) ?? translate('sessionOptions.notSet')
 }
 
 export function mobileOptionsPillLabel(descriptors: readonly SessionOptionDescriptor[]): string {
@@ -68,12 +69,14 @@ export function mobileOptionsPillLabel(descriptors: readonly SessionOptionDescri
         labels.push(label)
       }
     } else if (descriptor.kind.currentValue === true) {
-      labels.push(descriptor.id === 'fastMode' ? 'Fast' : descriptor.label)
+      labels.push(
+        descriptor.id === 'fastMode' ? translate('sessionOptions.fast') : descriptor.label
+      )
     }
   }
   if (labels.length > 0) {
     return labels.join(' · ')
   }
   const effort = descriptors.find((descriptor) => descriptor.id === 'effort')
-  return effort ? effort.label : 'Options'
+  return effort ? effort.label : translate('sessionOptions.options')
 }

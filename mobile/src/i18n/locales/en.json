@@ -1575,7 +1575,8 @@
     "selectText": "Select text",
     "opensImageFullSize": "Opens the image full size",
     "copyMessage": "Copy message",
-    "loadEarlierMessages": "Load earlier messages"
+    "loadEarlierMessages": "Load earlier messages",
+    "resumeInNewCli": "Resume in New CLI"
   },
   "prReviewers": {
     "title": "Reviewers",
@@ -1928,5 +1929,64 @@
     "changes": "Changes",
     "pullRequest": "Pull Request",
     "workspace": "Workspace"
+  },
+  "chatTurn": {
+    "thinking": "Thinking",
+    "working": "Working…",
+    "stopping": "Stopping…",
+    "stop": "Stop",
+    "stopAgent": "Stop the agent",
+    "toggleDetails": "Toggle turn details",
+    "workingFor": "Working for {{duration}}",
+    "workedFor": "Worked for {{duration}}",
+    "interruptedAfter": "Interrupted after {{duration}}",
+    "failedAfter": "Failed after {{duration}}",
+    "reconnecting": "Reconnecting…",
+    "waitingForTerminal": "Waiting for terminal…",
+    "queueAfterStop": "Queue a message to run after the stop",
+    "sendAfterStop": "Send a message to run after the stop",
+    "composerPlaceholder": "Message, @files, /commands",
+    "tools": "Tools",
+    "collapse": "Collapse",
+    "waitingForDesktop": "Waiting for desktop..."
+  },
+  "sessionOptions": {
+    "default": "Default",
+    "notReported": "Not reported",
+    "toggleOption": "Toggle {{name}}",
+    "chooseInAgentPicker": "Choose in agent picker…",
+    "closePicker": "Close picker",
+    "backToModels": "Back to models",
+    "selectModel": "Select model",
+    "selectOption": "Select {{name}}",
+    "sentToAgentUnconfirmed": "Sent to the agent — not confirmed",
+    "setWhenSessionStarts": "Set when the session starts.",
+    "availableAfterSessionStart": "Available after the session starts.",
+    "model": "Model",
+    "notSet": "Not set",
+    "fast": "Fast",
+    "options": "Options",
+    "on": "On",
+    "off": "Off",
+    "permissionsAccessible": "Permissions, {{name}}",
+    "modelAccessible": "Model, {{name}}"
+  },
+  "errors": {
+    "unableToLoadPullRequest": "Unable to load pull request",
+    "couldNotFitTerminal": "Couldn't fit the terminal to this screen",
+    "attachFailedReconnecting": "Attach failed (reconnecting)",
+    "sourceControlActionFailed": "Source control action failed",
+    "commitFailed": "Commit failed",
+    "failedToGenerateCommitMessage": "Failed to generate commit message",
+    "failedToLaunchAgent": "Failed to launch agent",
+    "failedToSaveReviewState": "Failed to save review state",
+    "failedToSaveReview": "Failed to save review",
+    "failedToSaveReviewNotes": "Failed to save review notes",
+    "failedToUpdateTitle": "Failed to update title.",
+    "commentActionFailed": "Comment action failed",
+    "failedToCreatePullRequest": "Failed to create pull request"
+  },
+  "hostedReview": {
+    "pushBeforeCreateFailed": "Push failed. Resolve the push error, then try again."
   }
 }

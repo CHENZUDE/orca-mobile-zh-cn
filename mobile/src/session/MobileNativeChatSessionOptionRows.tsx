@@ -1,6 +1,7 @@
 // The pill and choice-row primitives the session-option card is built from, kept
 // beside it so the card file stays about layout and apply wiring.
 
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Switch, Text, View } from 'react-native'
 import { Check, ChevronDown, ChevronRight } from 'lucide-react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
@@ -119,13 +120,16 @@ function ToggleRow({
   grouped: boolean
   onToggle: (next: boolean) => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   return (
     <View style={[styles.row, grouped && styles.rowGrouped, disabled && styles.rowDisabled]}>
       <View style={styles.rowBody}>
         <Text style={styles.rowLabel}>{label}</Text>
       </View>
       {marker ? (
-        <Text style={styles.rowMarker}>{marker === 'default' ? 'Default' : 'Not reported'}</Text>
+        <Text style={styles.rowMarker}>
+          {marker === 'default' ? t('sessionOptions.default') : t('sessionOptions.notReported')}
+        </Text>
       ) : null}
       <Switch
         accessibilityLabel={label}
@@ -217,12 +221,13 @@ export function DescriptorRows({
   /** A choice whose name reads in a colour of its own, as Full access does. */
   choiceLabelColor?: (value: string) => string | undefined
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const locked = disabled || !descriptor.settable
   // Why: flip-only without a baseline is an action — never claim On/Off.
   if (descriptor.action?.type === 'toggle-command') {
     return (
       <ActionRow
-        label={`Toggle ${descriptor.label.toLowerCase()}`}
+        label={t('sessionOptions.toggleOption', { name: descriptor.label })}
         disabled={locked}
         grouped={grouped}
         onPress={onInvokeAction}
@@ -233,7 +238,7 @@ export function DescriptorRows({
   if (descriptor.action?.type === 'agent-picker') {
     return (
       <ActionRow
-        label="Choose in agent picker…"
+        label={t('sessionOptions.chooseInAgentPicker')}
         disabled={locked}
         grouped={grouped}
         onPress={onInvokeAction}

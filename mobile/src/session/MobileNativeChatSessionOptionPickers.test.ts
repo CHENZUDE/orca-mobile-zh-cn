@@ -2,6 +2,8 @@ import { createElement } from 'react'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { SessionOptionDescriptor } from '../../../src/shared/native-chat-session-options'
+import enCatalog from '../i18n/locales/en.json'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { MobileNativeChatSessionOptionPickers } from './MobileNativeChatSessionOptionPickers'
 import type { MobileNativeChatSessionOptionsController } from './use-mobile-native-chat-session-options'
 
@@ -87,7 +89,11 @@ describe('MobileNativeChatSessionOptionPickers', () => {
     }
     act(() => {
       renderer = create(
-        createElement(MobileNativeChatSessionOptionPickers, { controller, isWorking })
+        createElement(
+          I18nProvider,
+          null,
+          createElement(MobileNativeChatSessionOptionPickers, { controller, isWorking })
+        )
       )
     })
   }
@@ -241,8 +247,10 @@ describe('MobileNativeChatSessionOptionPickers', () => {
       }
     ])
     await act(async () => pill('Model').props.onPress())
-    expect(rowByText('Choose in agent picker…').props.accessibilityRole).toBe('button')
-    await act(async () => rowByText('Choose in agent picker…').props.onPress())
+    expect(rowByText(enCatalog.sessionOptions.chooseInAgentPicker).props.accessibilityRole).toBe(
+      'button'
+    )
+    await act(async () => rowByText(enCatalog.sessionOptions.chooseInAgentPicker).props.onPress())
     expect(invokeAction).toHaveBeenCalledWith('model')
   })
 
@@ -263,7 +271,8 @@ describe('MobileNativeChatSessionOptionPickers', () => {
       .findAll((node) => node.type === 'Text')
       .filter(
         (node) =>
-          (node.props as { children?: unknown }).children === 'Sent to the agent — not confirmed'
+          (node.props as { children?: unknown }).children ===
+          enCatalog.sessionOptions.sentToAgentUnconfirmed
       )
     expect(captions.length > 0).toBe(scenario.caption)
   })

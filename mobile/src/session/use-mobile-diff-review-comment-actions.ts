@@ -22,6 +22,7 @@ import {
   reviewDescriptorFromItem
 } from './mobile-diff-review-screen-model'
 import type { ReviewSheetIntents } from './mobile-diff-review-sheets'
+import { translate } from '../i18n/i18n'
 
 type CommentActionsInput = {
   client: RpcClient | null
@@ -75,7 +76,7 @@ export function useMobileDiffReviewCommentActions(input: CommentActionsInput) {
       })
       interpretOrThrowRefusalMessage(
         () => sessionWorktreeNotesWrite.interpret(response),
-        'Failed to save review state'
+        translate('errors.failedToSaveReviewState')
       )
     },
     [client, connState, worktreeId]
@@ -100,7 +101,7 @@ export function useMobileDiffReviewCommentActions(input: CommentActionsInput) {
           setScreenState(previous)
         }
         triggerError()
-        setActionError(err instanceof Error ? err.message : 'Failed to save review')
+        setActionError(err instanceof Error ? err.message : translate('errors.failedToSaveReview'))
         throw err
       }
     },

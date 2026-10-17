@@ -1,8 +1,9 @@
 import { useCallback, useState } from 'react'
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
 import { ChevronRight } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 import { nativeChatReasoningDisclosureKey } from '../../../src/shared/native-chat-reasoning-row'
-import { formatNativeChatActiveTurnLabel } from '../../../src/shared/native-chat-turn-status'
+import { describeNativeChatActiveTurnLabel } from '../../../src/shared/native-chat-turn-status'
 import type { NativeChatMessage } from '../../../src/shared/native-chat-types'
 import { INLINE_TEXT_SELECTION } from '../components/inline-text-selection'
 import { colors, spacing, typography } from '../theme/mobile-theme'
@@ -26,9 +27,11 @@ export function MobileNativeChatLiveLine({
   fontScale: number
   onOpenFile?: (relativePath: string) => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const { reasoning, reasoningExpanded } = line
   const open = reasoning !== null && reasoningExpanded
-  const label = formatNativeChatActiveTurnLabel(line)
+  const status = describeNativeChatActiveTurnLabel(line)
+  const label = status.source === 'activity' ? status.text : t(`chatTurn.${status.key}`)
   // Android has no inline selection; the finished row's long-press sheet copies the live text too.
   // It holds the block it opened for, so it outlives that block ending and never reopens by itself.
   const [actionsFor, setActionsFor] = useState<NativeChatMessage | null>(null)

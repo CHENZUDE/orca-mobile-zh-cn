@@ -1,6 +1,8 @@
 import { createElement } from 'react'
 import { act, create, type ReactTestInstance, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import enCatalog from '../i18n/locales/en.json'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 vi.mock('react-native', async () => {
   const React = await import('react')
@@ -49,7 +51,9 @@ describe('MobileNativeChatTurnStatus', () => {
     onToggleExpanded?: () => void
   }): ReactTestRenderer {
     act(() => {
-      renderer = create(createElement(MobileNativeChatTurnStatus, props))
+      renderer = create(
+        createElement(I18nProvider, null, createElement(MobileNativeChatTurnStatus, props))
+      )
     })
     return renderer!
   }
@@ -69,7 +73,7 @@ describe('MobileNativeChatTurnStatus', () => {
     const tree = render({ startedAt: Date.now(), workedSeconds: 184, onToggleExpanded })
     expect(labels(tree.root)).toEqual(['Worked for 3m 4s'])
     const button = tree.root.findByType('Pressable' as never)
-    expect(button.props.accessibilityLabel).toBe('Toggle turn details')
+    expect(button.props.accessibilityLabel).toBe(enCatalog.chatTurn.toggleDetails)
     expect(button.props.accessibilityState).toEqual({ expanded: false })
     act(() => button.props.onPress())
     expect(onToggleExpanded).toHaveBeenCalledOnce()

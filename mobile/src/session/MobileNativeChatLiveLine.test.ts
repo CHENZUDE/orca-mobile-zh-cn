@@ -2,6 +2,7 @@ import { createElement, type ReactNode } from 'react'
 import { act, create, type ReactTestInstance, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { NativeChatLiveReasoning } from '../../../src/shared/native-chat-reasoning-row'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 const pressableMounts = vi.hoisted(() => ({ count: 0 }))
 
@@ -67,18 +68,22 @@ describe('MobileNativeChatLiveLine', () => {
       reasoningExpanded?: boolean
     } = {}
   ) {
-    return createElement(MobileNativeChatLiveLine, {
-      line: {
-        thinking: true,
-        stopping: false,
-        activityText: null,
-        reasoning: null,
-        reasoningExpanded: false,
-        ...fields
-      },
-      onToggleReasoning,
-      fontScale: 1
-    })
+    return createElement(
+      I18nProvider,
+      null,
+      createElement(MobileNativeChatLiveLine, {
+        line: {
+          thinking: true,
+          stopping: false,
+          activityText: null,
+          reasoning: null,
+          reasoningExpanded: false,
+          ...fields
+        },
+        onToggleReasoning,
+        fontScale: 1
+      })
+    )
   }
   function render(fields: Parameters<typeof element>[0] = {}): ReactTestInstance {
     act(() => {

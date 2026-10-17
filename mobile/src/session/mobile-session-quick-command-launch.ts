@@ -4,6 +4,7 @@ import { triggerError } from '../platform/haptics'
 import type { TerminalQuickCommand } from '../../../src/shared/terminal-quick-command-types'
 import type { MobileNewTabAgentOption } from './mobile-new-tab-agent-options'
 import type { MobileSessionAttachmentsModel } from './use-mobile-session-attachments'
+import { translate } from '../i18n/i18n'
 
 /** Runs a saved quick command through the session's ordinary terminal creator. */
 export function launchMobileSessionQuickCommand(
@@ -34,7 +35,7 @@ export function launchMobileSessionQuickCommand(
   const launch = buildMobileQuickCommandLaunch(command)
   if (!launch) {
     triggerError()
-    scope.showToast('Edit this quick command before running it', 1800)
+    scope.showToast(translate('quickCommand.editBeforeRunning'), 1800)
     return false
   }
   const label = command.label.trim() || 'Quick command'

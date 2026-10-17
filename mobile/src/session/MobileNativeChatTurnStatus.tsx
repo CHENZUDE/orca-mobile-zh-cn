@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { ChevronRight } from 'lucide-react-native'
+import { useTranslation } from 'react-i18next'
 import {
-  formatNativeChatTurnStatusLabel,
-  NATIVE_CHAT_TURN_STATUS_COPY,
+  describeNativeChatTurnStatus,
+  formatNativeChatDuration,
   nativeChatElapsedSeconds
 } from '../../../src/shared/native-chat-turn-status'
 import type { AgentTurnOutcome } from '../../../src/shared/agent-turn-outcome'
@@ -44,9 +45,13 @@ export function MobileNativeChatTurnStatus({
   expanded?: boolean
   onToggleExpanded?: () => void
 }): React.JSX.Element {
+  const { t } = useTranslation()
   const settled = workedSeconds != null
   const elapsedSeconds = useElapsedSeconds(startedAt, !settled)
-  const label = formatNativeChatTurnStatusLabel({ workedSeconds, elapsedSeconds, verdict })
+  const status = describeNativeChatTurnStatus({ workedSeconds, elapsedSeconds, verdict })
+  const label = t(`chatTurn.${status.key}`, {
+    duration: formatNativeChatDuration(workedSeconds ?? elapsedSeconds)
+  })
 
   if (settled && onToggleExpanded) {
     return (
@@ -56,7 +61,7 @@ export function MobileNativeChatTurnStatus({
         hitSlop={6}
         accessibilityRole="button"
         accessibilityState={{ expanded }}
-        accessibilityLabel={NATIVE_CHAT_TURN_STATUS_COPY.toggleDetails}
+        accessibilityLabel={t('chatTurn.toggleDetails')}
       >
         <Text style={styles.label}>{label}</Text>
         <View style={expanded ? styles.caretOpen : undefined}>

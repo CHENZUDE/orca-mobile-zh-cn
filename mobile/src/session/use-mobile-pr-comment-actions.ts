@@ -20,6 +20,7 @@ import {
   buildReplyParams,
   buildResolveParams
 } from './pr-comment-actions'
+import { translate } from '../i18n/i18n'
 
 export type PrCommentMutations = {
   reply: (args: {
@@ -146,7 +147,7 @@ export function useMobilePrCommentActions(input: PrCommentActionsInput) {
         // Why: if a mutation (or the refetch) throws, still honor the boolean
         // contract — error haptic + message, return false — rather than rejecting.
         triggerError()
-        setError(err instanceof Error ? err.message : 'Comment action failed')
+        setError(err instanceof Error ? err.message : translate('errors.commentActionFailed'))
         return false
       } finally {
         inFlightRef.current.delete(key)

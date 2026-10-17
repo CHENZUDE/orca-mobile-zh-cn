@@ -99,16 +99,14 @@ export function MobileNativeChatComposer({
   onMicPressOut,
   disabled = false,
   sendDisabled = false,
-  placeholder = 'Message, @files, /commands',
+  placeholder,
   filePaths = NO_FILE_PATHS,
   onNeedFiles
 }: Props): React.JSX.Element {
   const { t } = useTranslation()
-
+  const resolvedPlaceholder = placeholder ?? t('chatTurn.composerPlaceholder')
   const [cursor, setCursor] = useState(0)
-  // Transiently drives the native caret after a mid-text autocomplete insert,
-  // then released on the next selection change so manual caret placement still
-  // works (a permanently controlled `selection` breaks it in React Native).
+  // Release after one selection change; permanent `selection` breaks RN caret placement.
   const [pendingSelection, setPendingSelection] = useState<{ start: number; end: number } | null>(
     null
   )
@@ -134,7 +132,6 @@ export function MobileNativeChatComposer({
     !sending &&
     !isAttaching &&
     !sessionOptionDispatching
-
   const trigger = useMemo(() => detectAutocompleteTrigger(value, cursor), [value, cursor])
   const suggestions = useMemo<ComposerSuggestion[]>(() => {
     if (!trigger) {
@@ -160,13 +157,11 @@ export function MobileNativeChatComposer({
       path
     }))
   }, [trigger, filePaths, agent, structuredCommands])
-
   useEffect(() => {
     if (trigger?.kind === 'file') {
       onNeedFiles?.(trigger.query)
     }
   }, [onNeedFiles, trigger?.kind, trigger?.query])
-
   useEffect(() => {
     mountedRef.current = true
     return () => {
@@ -174,11 +169,6 @@ export function MobileNativeChatComposer({
       sendSurfaceGenerationRef.current += 1
     }
   }, [])
-
-  const handleChange = (next: string): void => {
-    onChangeText(next)
-  }
-
   const pickSuggestion = (suggestion: ComposerSuggestion): void => {
     if (!trigger) {
       return
@@ -264,14 +254,14 @@ export function MobileNativeChatComposer({
             ref={inputRef}
             style={mobileNativeChatInputStyles.input}
             value={value}
-            onChangeText={handleChange}
+            onChangeText={onChangeText}
             // Controlled only transiently right after an autocomplete insert.
             selection={pendingSelection ?? undefined}
             onSelectionChange={(e) => {
               setCursor(e.nativeEvent.selection.end)
               setPendingSelection(null)
             }}
-            placeholder={placeholder}
+            placeholder={resolvedPlaceholder}
             placeholderTextColor={colors.textMuted}
             selectionColor={colors.accentBlue}
             multiline
@@ -355,7 +345,6 @@ export function MobileNativeChatComposer({
     </View>
   )
 }
-
 const styles = StyleSheet.create({
   attachmentStrip: {
     maxHeight: 76,

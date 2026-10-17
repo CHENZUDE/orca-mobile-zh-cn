@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native'
 import { ChevronLeft, X } from 'lucide-react-native'
 import { BottomDrawer } from '../components/BottomDrawer'
@@ -47,6 +48,7 @@ export function MobileNativeChatSessionOptionPickers({
   isWorking,
   sendInFlight = false
 }: MobileNativeChatSessionOptionPickersProps): React.JSX.Element | null {
+  const { t } = useTranslation()
   const [openDescriptorId, setOpenDescriptorId] = useState<string | null>(null)
   const [lastRequest, setLastRequest] = useState(controller.optionPickerRequest)
   if (controller.optionPickerRequest && lastRequest !== controller.optionPickerRequest) {
@@ -117,7 +119,9 @@ export function MobileNativeChatSessionOptionPickers({
       {permission && permissionChoice ? (
         <Pill
           label={permissionChoice.label}
-          accessibleName={`Permissions, ${permissionChoice.label}`}
+          accessibleName={t('sessionOptions.permissionsAccessible', {
+            name: permissionChoice.label
+          })}
           disabled={pillsBusy}
           labelColor={permissionChoiceColor(permissionChoice.value)}
           onPress={() => {
@@ -129,7 +133,7 @@ export function MobileNativeChatSessionOptionPickers({
       {model ? (
         <Pill
           label={pillLabel}
-          accessibleName={`Model, ${pillLabel}`}
+          accessibleName={t('sessionOptions.modelAccessible', { name: pillLabel })}
           disabled={isWorking || pillsBusy}
           onPress={openPicker}
         />
@@ -139,7 +143,11 @@ export function MobileNativeChatSessionOptionPickers({
           <View style={styles.sheet}>
             <View style={styles.sheetHeader}>
               <Pressable
-                accessibilityLabel={modelView || permissionView ? 'Close picker' : 'Back to models'}
+                accessibilityLabel={
+                  modelView || permissionView
+                    ? t('sessionOptions.closePicker')
+                    : t('sessionOptions.backToModels')
+                }
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.sheetNav, pressed && styles.pressed]}
                 onPress={modelView || permissionView ? closePicker : openPicker}
@@ -152,7 +160,9 @@ export function MobileNativeChatSessionOptionPickers({
                 )}
               </Pressable>
               <Text style={styles.sheetTitle}>
-                {modelView ? 'Select model' : `Select ${activeDescriptor.label.toLowerCase()}`}
+                {modelView
+                  ? t('sessionOptions.selectModel')
+                  : t('sessionOptions.selectOption', { name: activeDescriptor.label })}
               </Text>
               <View style={styles.sheetHeaderSide}>
                 {pendingId !== null ? (
@@ -161,7 +171,9 @@ export function MobileNativeChatSessionOptionPickers({
               </View>
             </View>
             {sessionOptionDispatchUnconfirmed(activeDescriptor) ? (
-              <SessionOptionCaption>Sent to the agent — not confirmed</SessionOptionCaption>
+              <SessionOptionCaption>
+                {t('sessionOptions.sentToAgentUnconfirmed')}
+              </SessionOptionCaption>
             ) : null}
             {reason ? <SessionOptionCaption>{reason}</SessionOptionCaption> : null}
             <View style={styles.choiceGroup}>

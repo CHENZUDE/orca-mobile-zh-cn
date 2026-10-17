@@ -11,6 +11,7 @@ import {
   hasExpandedCommitFailureDetails,
   summarizeCommitFailure
 } from './mobile-commit-failure-recovery'
+import { translate } from '../i18n/i18n'
 
 type Params = {
   client: RpcClient | null
@@ -117,7 +118,7 @@ export function useMobileCommitFailureRecovery({
       return notice.succeeded
     } catch (err) {
       triggerError()
-      setLaunchError(err instanceof Error ? err.message : 'Failed to launch agent')
+      setLaunchError(err instanceof Error ? err.message : translate('errors.failedToLaunchAgent'))
       return false
     } finally {
       inFlightRef.current = false

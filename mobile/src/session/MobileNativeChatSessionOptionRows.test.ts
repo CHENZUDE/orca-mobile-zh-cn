@@ -2,6 +2,8 @@ import { createElement } from 'react'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { describe, expect, it, vi } from 'vitest'
 import type { SessionOptionDescriptor } from '../../../src/shared/native-chat-session-options'
+import enCatalog from '../i18n/locales/en.json'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { DescriptorRows } from './MobileNativeChatSessionOptionRows'
 
 vi.mock('react-native', () => ({
@@ -31,12 +33,16 @@ function renderRows(descriptor: SessionOptionDescriptor): ReactTestRenderer {
   let renderer: ReactTestRenderer | null = null
   act(() => {
     renderer = create(
-      createElement(DescriptorRows, {
-        descriptor,
-        disabled: false,
-        onSetOption: vi.fn(),
-        onInvokeAction: vi.fn()
-      })
+      createElement(
+        I18nProvider,
+        null,
+        createElement(DescriptorRows, {
+          descriptor,
+          disabled: false,
+          onSetOption: vi.fn(),
+          onInvokeAction: vi.fn()
+        })
+      )
     )
   })
   if (!renderer) {
@@ -65,15 +71,15 @@ describe('DescriptorRows boolean', () => {
       name: 'a live unreported boolean is never labelled a default',
       valueSource: 'unknown',
       transport: 'agent-session',
-      shown: 'Not reported',
-      hidden: 'Default'
+      shown: enCatalog.sessionOptions.notReported,
+      hidden: enCatalog.sessionOptions.default
     },
     {
       name: 'a draft catalog default says so',
       valueSource: 'default',
       transport: 'catalog',
-      shown: 'Default',
-      hidden: 'Not reported'
+      shown: enCatalog.sessionOptions.default,
+      hidden: enCatalog.sessionOptions.notReported
     }
   ] as const)('$name', ({ valueSource, transport, shown, hidden }) => {
     const renderer = renderRows({ ...FAST, valueSource, transport })
@@ -86,7 +92,7 @@ describe('DescriptorRows boolean', () => {
   it('drops the marker once something has picked the value', () => {
     const labels = textOf(renderRows(FAST))
     expect(labels).not.toContain('Default')
-    expect(labels).not.toContain('Not reported')
+    expect(labels).not.toContain(enCatalog.sessionOptions.notReported)
   })
 
   it('shows the resolved value on the switch itself', () => {
