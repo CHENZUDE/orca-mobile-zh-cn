@@ -13,7 +13,8 @@
     "nameLabel": "Name",
     "addressLabel": "Address",
     "none": "None",
-    "delete": "Delete"
+    "delete": "Delete",
+    "reconnect": "Reconnect"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -1104,7 +1105,24 @@
     "unpin": "Unpin",
     "removeHost": "Remove Host",
     "removeHostConfirm": "Remove \"{{name}}\"? You can re-pair later.",
-    "remove": "Remove"
+    "remove": "Remove",
+    "header": {
+      "backToHosts": "Back to hosts",
+      "floatingWorkspace": "Floating Workspace",
+      "filterWorkspaces": "Filter workspaces",
+      "filterWorkspacesActive": "Filter workspaces, {{count}} active",
+      "sortBy": "Sort by {{label}}",
+      "groupWorkspaces": "Group workspaces",
+      "group": "Group",
+      "status": "Status",
+      "repo": "Repo",
+      "pr": "PR",
+      "accounts": "Accounts",
+      "tasks": "Tasks",
+      "newWorkspace": "New workspace",
+      "closeSearch": "Close search",
+      "searchWorkspaces": "Search workspaces"
+    }
   },
   "prComments": {
     "description": "Description",

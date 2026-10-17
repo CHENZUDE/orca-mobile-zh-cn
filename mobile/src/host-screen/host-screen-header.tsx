@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import {
   ChevronLeft,
@@ -39,6 +40,8 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
     state
   } = controller
 
+  const { t } = useTranslation()
+
   return (
     <View style={styles.topChrome}>
       <View style={styles.statusBar}>
@@ -46,7 +49,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
           style={styles.backButton}
           onPress={actions.leaveHost}
           accessibilityRole="button"
-          accessibilityLabel="Back to hosts"
+          accessibilityLabel={t('hostScreen.header.backToHosts')}
           hitSlop={8}
         >
           <ChevronLeft size={22} color={colors.textPrimary} />
@@ -93,10 +96,10 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
                       style={styles.reconnectButton}
                       onPress={() => void forceReconnectHost(hostId)}
                       accessibilityRole="button"
-                      accessibilityLabel="Reconnect"
+                      accessibilityLabel={t('common.reconnect')}
                       hitSlop={8}
                     >
-                      <Text style={styles.reconnectButtonText}>Reconnect</Text>
+                      <Text style={styles.reconnectButtonText}>{t('common.reconnect')}</Text>
                     </Pressable>
                   )
                 })()}
@@ -112,7 +115,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             onPress={actions.openFloatingWorkspace}
             disabled={connState !== 'connected'}
             accessibilityRole="button"
-            accessibilityLabel="Floating Workspace"
+            accessibilityLabel={t('hostScreen.header.floatingWorkspace')}
             hitSlop={8}
           >
             <SquareTerminal
@@ -126,7 +129,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             style={styles.sidebarCollapseButton}
             onPress={onHideSidebar}
             accessibilityRole="button"
-            accessibilityLabel="Hide sidebar"
+            accessibilityLabel={t('session.header.showSidebar')}
             hitSlop={8}
           >
             <PanelLeftClose size={14} color={colors.textSecondary} />
@@ -146,7 +149,9 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               ]}
               onPress={() => state.setShowFilterModal(true)}
               accessibilityRole="button"
-              accessibilityLabel={`Filter workspaces${settings.activeFilterCount > 0 ? `, ${settings.activeFilterCount} active` : ''}`}
+              accessibilityLabel={t('hostScreen.header.filterWorkspaces', {
+                count: settings.activeFilterCount
+              })}
             >
               <Filter
                 size={12}
@@ -167,7 +172,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               style={[styles.modeButton, styles.embeddedModeButton]}
               onPress={() => state.setShowSortPicker(true)}
               accessibilityRole="button"
-              accessibilityLabel={`Sort by ${settings.selectedSortLabel}`}
+              accessibilityLabel={t('hostScreen.header.sortBy', { label: settings.selectedSortLabel })}
             >
               <SlidersHorizontal size={14} color={colors.textSecondary} />
               <Text style={styles.sortLabel} numberOfLines={1}>
@@ -179,17 +184,17 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               style={[styles.modeButton, styles.embeddedModeButton]}
               onPress={() => state.setShowGroupPicker(true)}
               accessibilityRole="button"
-              accessibilityLabel="Group workspaces"
+              accessibilityLabel={t('hostScreen.header.groupWorkspaces')}
             >
               <Layers size={14} color={colors.textSecondary} />
               <Text style={styles.sortLabel} numberOfLines={1}>
                 {state.groupMode === 'none'
-                  ? 'Group'
+                  ? t('hostScreen.header.group')
                   : state.groupMode === 'workspaceStatus'
-                    ? 'Status'
+                    ? t('hostScreen.header.status')
                     : state.groupMode === 'repo'
-                      ? 'Repo'
-                      : 'PR'}
+                      ? t('hostScreen.header.repo')
+                      : t('hostScreen.header.pr')}
               </Text>
             </Pressable>
           </View>
@@ -205,7 +210,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               }
               disabled={connState !== 'connected'}
               accessibilityRole="button"
-              accessibilityLabel="Accounts"
+              accessibilityLabel={t('hostScreen.header.accounts')}
             >
               <UserCircle
                 size={16}
@@ -221,7 +226,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               onPress={() => actions.navigateFromHostList(`/h/${encodeURIComponent(hostId)}/tasks`)}
               disabled={connState !== 'connected'}
               accessibilityRole="button"
-              accessibilityLabel="Tasks"
+              accessibilityLabel={t('hostScreen.header.tasks')}
             >
               <List
                 size={16}
@@ -238,7 +243,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
                 onPress={actions.openFloatingWorkspace}
                 disabled={connState !== 'connected'}
                 accessibilityRole="button"
-                accessibilityLabel="Floating Workspace"
+                accessibilityLabel={t('hostScreen.header.floatingWorkspace')}
               >
                 <SquareTerminal
                   size={18}
@@ -255,7 +260,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               onPress={actions.openNewWorktreeModal}
               disabled={connState !== 'connected'}
               accessibilityRole="button"
-              accessibilityLabel="New workspace"
+              accessibilityLabel={t('hostScreen.header.newWorkspace')}
             >
               <Plus
                 size={16}
@@ -267,7 +272,11 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
               style={styles.embeddedToolbarIconButton}
               onPress={() => state.setShowSearch((s) => !s)}
               accessibilityRole="button"
-              accessibilityLabel={state.showSearch ? 'Close search' : 'Search workspaces'}
+              accessibilityLabel={
+                state.showSearch
+                  ? t('hostScreen.header.closeSearch')
+                  : t('hostScreen.header.searchWorkspaces')
+              }
             >
               {state.showSearch ? (
                 <X size={16} color={colors.textSecondary} />
@@ -283,7 +292,9 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             style={[styles.filterChip, settings.activeFilterCount > 0 && styles.filterChipActive]}
             onPress={() => state.setShowFilterModal(true)}
             accessibilityRole="button"
-            accessibilityLabel={`Filter workspaces${settings.activeFilterCount > 0 ? `, ${settings.activeFilterCount} active` : ''}`}
+            accessibilityLabel={t('hostScreen.header.filterWorkspaces', {
+              count: settings.activeFilterCount
+            })}
           >
             <Filter
               size={12}
@@ -303,7 +314,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             style={styles.modeButton}
             onPress={() => state.setShowSortPicker(true)}
             accessibilityRole="button"
-            accessibilityLabel={`Sort by ${settings.selectedSortLabel}`}
+            accessibilityLabel={t('hostScreen.header.sortBy', { label: settings.selectedSortLabel })}
           >
             <SlidersHorizontal size={14} color={colors.textSecondary} />
             <Text style={styles.sortLabel} numberOfLines={1}>
@@ -315,17 +326,17 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             style={styles.modeButton}
             onPress={() => state.setShowGroupPicker(true)}
             accessibilityRole="button"
-            accessibilityLabel="Group workspaces"
+            accessibilityLabel={t('hostScreen.header.groupWorkspaces')}
           >
             <Layers size={14} color={colors.textSecondary} />
             <Text style={styles.sortLabel} numberOfLines={1}>
               {state.groupMode === 'none'
-                ? 'Group'
+                ? t('hostScreen.header.group')
                 : state.groupMode === 'workspaceStatus'
-                  ? 'Status'
+                  ? t('hostScreen.header.status')
                   : state.groupMode === 'repo'
-                    ? 'Repo'
-                    : 'PR'}
+                    ? t('hostScreen.header.repo')
+                    : t('hostScreen.header.pr')}
             </Text>
           </Pressable>
 
@@ -338,7 +349,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             }
             disabled={connState !== 'connected'}
             accessibilityRole="button"
-            accessibilityLabel="Accounts"
+            accessibilityLabel={t('hostScreen.header.accounts')}
           >
             <UserCircle
               size={16}
@@ -351,7 +362,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             onPress={() => actions.navigateFromHostList(`/h/${encodeURIComponent(hostId)}/tasks`)}
             disabled={connState !== 'connected'}
             accessibilityRole="button"
-            accessibilityLabel="Tasks"
+            accessibilityLabel={t('hostScreen.header.tasks')}
           >
             <List
               size={16}
@@ -363,7 +374,11 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
             style={styles.searchToggle}
             onPress={() => state.setShowSearch((s) => !s)}
             accessibilityRole="button"
-            accessibilityLabel={state.showSearch ? 'Close search' : 'Search workspaces'}
+            accessibilityLabel={
+              state.showSearch
+                ? t('hostScreen.header.closeSearch')
+                : t('hostScreen.header.searchWorkspaces')
+            }
           >
             {state.showSearch ? (
               <X size={16} color={colors.textSecondary} />

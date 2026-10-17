@@ -13,7 +13,8 @@
     "nameLabel": "名称",
     "addressLabel": "地址",
     "none": "无",
-    "delete": "删除"
+    "delete": "删除",
+    "reconnect": "重新连接"
   },
   "pairing": {
     "missingCode": "缺少配对码",
@@ -1104,7 +1105,24 @@
     "unpin": "取消置顶",
     "removeHost": "移除主机",
     "removeHostConfirm": "要移除“{{name}}”吗？之后可以重新配对。",
-    "remove": "移除"
+    "remove": "移除",
+    "header": {
+      "backToHosts": "返回主机列表",
+      "floatingWorkspace": "悬浮工作区",
+      "filterWorkspaces": "筛选工作区",
+      "filterWorkspacesActive": "筛选工作区，{{count}} 个已启用",
+      "sortBy": "排序：{{label}}",
+      "groupWorkspaces": "分组工作区",
+      "group": "分组",
+      "status": "状态",
+      "repo": "仓库",
+      "pr": "PR",
+      "accounts": "账号",
+      "tasks": "任务",
+      "newWorkspace": "新建工作区",
+      "closeSearch": "关闭搜索",
+      "searchWorkspaces": "搜索工作区"
+    }
   },
   "prComments": {
     "description": "描述",
