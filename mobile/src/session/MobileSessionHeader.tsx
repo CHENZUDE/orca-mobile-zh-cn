@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { View, Text, ScrollView, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
@@ -63,6 +64,8 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
   } = controller
   const tabBarKeepsKeyboard = useKeyboardPersistingTaps('handled')
   const revealSidebar = useHostSidebarReveal()
+  const { t } = useTranslation()
+
   return (
     <SafeAreaView style={styles.sessionChrome} edges={['top']}>
       <View style={styles.sessionTopBar}>
@@ -72,7 +75,7 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
             onPress={revealSidebar}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Show sidebar"
+            accessibilityLabel={t('session.header.showSidebar')}
           >
             <PanelLeftOpen size={18} color={colors.textSecondary} />
           </Pressable>
@@ -82,14 +85,14 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
           onPress={requestLeaveSession}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel="Back to worktrees"
+          accessibilityLabel={t('session.header.backToWorktrees')}
         >
           <ChevronLeft size={22} color={colors.textSecondary} strokeWidth={2.2} />
         </Pressable>
 
         <View style={styles.sessionTitleBlock}>
           <Text style={styles.sessionTitle} numberOfLines={1}>
-            {worktreeName || 'Terminal'}
+            {worktreeName || t('session.header.terminal')}
           </Text>
           <Pressable
             style={styles.sessionMetaRow}
@@ -100,7 +103,9 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
               }
             }}
             accessibilityRole={showConnectionRetry ? 'button' : undefined}
-            accessibilityLabel={showConnectionRetry ? 'Reconnect to desktop' : undefined}
+            accessibilityLabel={showConnectionRetry
+              ? t('session.header.reconnectToDesktop')
+              : undefined}
           >
             <StatusDot state={connState} />
             <Text style={styles.sessionMetaText} numberOfLines={1}>
@@ -111,7 +116,7 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
         {!isFloatingWorkspaceRoute && (
           <MobileSessionHeaderIconButton
             active={activePanel === 'files'}
-            accessibilityLabel="Open file explorer"
+            accessibilityLabel={t('session.header.openFileExplorer')}
             icon={Folder}
             onPress={() => handlePanelTap('files')}
           />
@@ -119,7 +124,7 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
         {!isFolderWorkspaceRoute && !isFloatingWorkspaceRoute && (
           <MobileSessionHeaderIconButton
             active={activePanel === 'sourceControl'}
-            accessibilityLabel="Open source control"
+            accessibilityLabel={t('session.header.openSourceControl')}
             icon={GitBranch}
             onPress={() => handlePanelTap('sourceControl')}
           />
@@ -127,7 +132,7 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
         {showHeaderMoreButton ? (
           <MobileSessionHeaderIconButton
             active={activePanel === 'pr'}
-            accessibilityLabel="More session actions"
+            accessibilityLabel={t('session.header.moreSessionActions')}
             icon={MoreHorizontal}
             onPress={() => setShowHeaderMoreActions(true)}
           />
@@ -214,7 +219,7 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
               setCreateError('')
               setShowCreateTabDrawer(true)
             }}
-            accessibilityLabel="New tab"
+            accessibilityLabel={t('session.header.newTab')}
           >
             <Plus size={16} color={colors.textSecondary} strokeWidth={2.2} />
           </Pressable>
@@ -228,8 +233,8 @@ export function MobileSessionHeader({ controller }: { controller: MobileSessionC
               }
               showToast(
                 quickCommandsSupported === false
-                  ? 'Desktop update required for quick commands'
-                  : 'Checking desktop capabilities — try again in a moment',
+                  ? t('session.header.desktopUpdateRequiredForQuickCommands')
+                  : t('session.header.checkingDesktopCapabilities'),
                 1600
               )
             }}

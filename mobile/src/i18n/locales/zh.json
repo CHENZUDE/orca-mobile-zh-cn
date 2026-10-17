@@ -1146,5 +1146,19 @@
     "notePlaceholder": "写点备注",
     "connectTarget": "连接目标",
     "createWorktree": "创建工作区"
+  },
+  "session": {
+    "header": {
+      "showSidebar": "显示侧边栏",
+      "backToWorktrees": "返回工作树",
+      "terminal": "终端",
+      "reconnectToDesktop": "重新连接电脑",
+      "openFileExplorer": "打开文件浏览器",
+      "openSourceControl": "打开源代码管理",
+      "moreSessionActions": "更多会话操作",
+      "newTab": "新建标签页",
+      "desktopUpdateRequiredForQuickCommands": "使用快速命令需要更新电脑端 Orca",
+      "checkingDesktopCapabilities": "正在检查电脑端能力 — 请稍后重试"
+    }
   }
 }

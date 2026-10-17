@@ -1146,5 +1146,19 @@
     "notePlaceholder": "Write a note",
     "connectTarget": "Connect target",
     "createWorktree": "Create worktree"
+  },
+  "session": {
+    "header": {
+      "showSidebar": "Show sidebar",
+      "backToWorktrees": "Back to worktrees",
+      "terminal": "Terminal",
+      "reconnectToDesktop": "Reconnect to desktop",
+      "openFileExplorer": "Open file explorer",
+      "openSourceControl": "Open source control",
+      "moreSessionActions": "More session actions",
+      "newTab": "New tab",
+      "desktopUpdateRequiredForQuickCommands": "Desktop update required for quick commands",
+      "checkingDesktopCapabilities": "Checking desktop capabilities — try again in a moment"
+    }
   }
 }
