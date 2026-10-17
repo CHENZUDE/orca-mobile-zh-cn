@@ -894,7 +894,13 @@
       "githubPagesSubtitle": "Jump to a loaded or available result page.",
       "page": "Page {{page}}",
       "loaded": "Loaded",
-      "loadsOlder": "Loads older results"
+      "loadsOlder": "Loads older results",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "selectPage": "Select page, Page {{page}}",
+      "selectPageOf": "Select page, Page {{page}} of {{total}}",
+      "pageOf": "Page {{page}} of {{total}}",
+      "into": "into {{base}}"
     },
     "itemFields": {
       "addLabels": "Add labels, comma separated",

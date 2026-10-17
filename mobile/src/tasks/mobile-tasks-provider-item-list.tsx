@@ -80,7 +80,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
           <View style={styles.paginationFooter}>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Previous page"
+              accessibilityLabel={t('tasks.providerPickers.previousPage')}
               accessibilityState={{
                 disabled: githubCurrentPage === 0 || githubPaginationLoading
               }}
@@ -98,8 +98,11 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
               accessibilityRole="button"
               accessibilityLabel={
                 githubTotalCount === null
-                  ? `Select page, Page ${githubCurrentPage + 1}`
-                  : `Select page, Page ${githubCurrentPage + 1} of ${githubTotalPages}`
+                  ? t('tasks.providerPickers.selectPage', { page: githubCurrentPage + 1 })
+                  : t('tasks.providerPickers.selectPageOf', {
+                      page: githubCurrentPage + 1,
+                      total: githubTotalPages
+                    })
               }
               accessibilityState={{ disabled: githubPaginationLoading }}
               style={styles.paginationLabelButton}
@@ -113,13 +116,16 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
             >
               <Text style={styles.paginationLabel}>
                 {githubTotalCount === null
-                  ? `Page ${githubCurrentPage + 1}`
-                  : `Page ${githubCurrentPage + 1} of ${githubTotalPages}`}
+                  ? t('tasks.providerPickers.page', { page: githubCurrentPage + 1 })
+                  : t('tasks.providerPickers.pageOf', {
+                      page: githubCurrentPage + 1,
+                      total: githubTotalPages
+                    })}
               </Text>
             </Pressable>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Next page"
+              accessibilityLabel={t('tasks.providerPickers.nextPage')}
               accessibilityState={{
                 disabled:
                   (!githubCanLoadUncountedNextPage && githubCurrentPage >= githubTotalPages - 1) ||
@@ -202,7 +208,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
                     {branchSummary.head}
                   </Text>
                   <Text style={styles.branchMetaBase} numberOfLines={1}>
-                    into {branchSummary.base}
+                    {t('tasks.providerPickers.into', { base: branchSummary.base })}
                   </Text>
                 </View>
               ) : null}

@@ -894,7 +894,13 @@
       "githubPagesSubtitle": "跳转到已加载或可用的结果页。",
       "page": "第 {{page}} 页",
       "loaded": "已加载",
-      "loadsOlder": "加载更早的结果"
+      "loadsOlder": "加载更早的结果",
+      "previousPage": "上一页",
+      "nextPage": "下一页",
+      "selectPage": "选择页码，第 {{page}} 页",
+      "selectPageOf": "选择页码，第 {{page}} 页，共 {{total}} 页",
+      "pageOf": "第 {{page}} 页，共 {{total}} 页",
+      "into": "合入 {{base}}"
     },
     "itemFields": {
       "addLabels": "添加标签，用逗号分隔",
