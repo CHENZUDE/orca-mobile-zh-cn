@@ -1732,5 +1732,16 @@
       "inactiveClaudeLimitsWrongProvider": "未激活 Claude 账号的限额 provider 身份不正确",
       "inactiveCodexLimitsWrongProvider": "未激活 Codex 账号的限额 provider 身份不正确"
     }
+  },
+  "codexReset": {
+    "outcome": {
+      "resetTitle": "已重置速率限额",
+      "refreshedMessage": "Codex 用量已刷新。",
+      "alreadyAppliedTitle": "重置已生效",
+      "nothingToResetTitle": "没有可重置的项目",
+      "nothingToResetMessage": "当前没有已耗尽的 Codex 速率限额窗口。",
+      "noCreditTitle": "暂无可用重置",
+      "noCreditMessage": "该账号没有可用的已获得重置次数。"
+    }
   }
 }

@@ -1732,5 +1732,16 @@
       "inactiveClaudeLimitsWrongProvider": "Inactive Claude limits use the wrong provider identity",
       "inactiveCodexLimitsWrongProvider": "Inactive Codex limits use the wrong provider identity"
     }
+  },
+  "codexReset": {
+    "outcome": {
+      "resetTitle": "Rate limits reset",
+      "refreshedMessage": "Codex usage has been refreshed.",
+      "alreadyAppliedTitle": "Reset already applied",
+      "nothingToResetTitle": "Nothing to reset",
+      "nothingToResetMessage": "No eligible Codex rate-limit window is exhausted.",
+      "noCreditTitle": "No reset available",
+      "noCreditMessage": "This account has no earned reset credits available."
+    }
   }
 }

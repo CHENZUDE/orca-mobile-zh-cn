@@ -1,3 +1,4 @@
+import { translate } from '../i18n/i18n'
 import { formatResetCountdown } from '../../../src/shared/rate-limit-reset-format'
 import {
   buildCodexResetCreditExpectedScope,
@@ -93,18 +94,24 @@ export function getCodexResetCreditOutcomeCopy(outcome: CodexResetCreditOutcome)
 } {
   switch (outcome) {
     case 'reset':
-      return { title: 'Rate limits reset', message: 'Codex usage has been refreshed.' }
+      return {
+        title: translate('codexReset.outcome.resetTitle'),
+        message: translate('codexReset.outcome.refreshedMessage')
+      }
     case 'alreadyRedeemed':
-      return { title: 'Reset already applied', message: 'Codex usage has been refreshed.' }
+      return {
+        title: translate('codexReset.outcome.alreadyAppliedTitle'),
+        message: translate('codexReset.outcome.refreshedMessage')
+      }
     case 'nothingToReset':
       return {
-        title: 'Nothing to reset',
-        message: 'No eligible Codex rate-limit window is exhausted.'
+        title: translate('codexReset.outcome.nothingToResetTitle'),
+        message: translate('codexReset.outcome.nothingToResetMessage')
       }
     case 'noCredit':
       return {
-        title: 'No reset available',
-        message: 'This account has no earned reset credits available.'
+        title: translate('codexReset.outcome.noCreditTitle'),
+        message: translate('codexReset.outcome.noCreditMessage')
       }
   }
 }
