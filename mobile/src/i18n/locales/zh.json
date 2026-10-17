@@ -1570,7 +1570,22 @@
     "viewDiagnostics": "查看网络诊断"
   },
   "hostProtocolGate": {
-    "checkingCompatibility": "正在检查主机兼容性"
+    "checkingCompatibility": "正在检查主机兼容性",
+    "updateMobileTitle": "更新 Orca Mobile",
+    "updateDesktopTitle": "更新电脑上的 Orca",
+    "refreshBundleTitle": "刷新移动端工作区",
+    "refreshBundleBody": "该主机缓存的工作区已旧于桌面端要求，请重新连接此主机以下载最新版本。",
+    "mobileTooOldBody": "此桌面端需要更新版本的 Orca Mobile，请从{{storeName}}更新 Orca Mobile 后重试此主机。",
+    "bundleUnavailableBody": "此桌面端尚未包含移动端工作区，请更新电脑上的 Orca 后重试此主机。",
+    "bundleShellTooOldBody": "此桌面端的移动端工作区需要更新版本的 Orca Mobile，请从{{storeName}}更新 Orca Mobile 后重试此主机。",
+    "desktopTooOldBody": "此桌面端相对于当前 Orca Mobile 过旧，请更新电脑上的 Orca 后重试此主机。",
+    "openAppStore": "打开 App Store",
+    "appStoreName": "App Store",
+    "openGithubReleases": "打开 GitHub Releases",
+    "githubReleasesName": "GitHub Releases",
+    "getOrcaVersion": "获取 Orca {{version}}",
+    "recoveryNoteRefresh": "若此提示仍然存在，请移除该主机并重新配对。",
+    "recoveryNoteUpdated": "已经更新？请返回主机列表并刷新连接。若此提示仍然存在，请移除该主机并重新配对。"
   },
   "workspace": {
     "sshConnection": "SSH 连接",

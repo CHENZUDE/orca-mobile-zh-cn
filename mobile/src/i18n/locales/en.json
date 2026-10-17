@@ -1570,7 +1570,22 @@
     "viewDiagnostics": "View network diagnostics"
   },
   "hostProtocolGate": {
-    "checkingCompatibility": "Checking host compatibility"
+    "checkingCompatibility": "Checking host compatibility",
+    "updateMobileTitle": "Update Orca Mobile",
+    "updateDesktopTitle": "Update Orca on your computer",
+    "refreshBundleTitle": "Refresh the mobile workspace",
+    "refreshBundleBody": "The workspace cached for this host is older than the desktop expects. Reconnect to this host to download the current one.",
+    "mobileTooOldBody": "This desktop needs a newer Orca Mobile app. Update Orca Mobile from {{storeName}}, then try this host again.",
+    "bundleUnavailableBody": "This paired desktop app does not include the mobile workspace yet. Update Orca on your computer, then try this host again.",
+    "bundleShellTooOldBody": "This desktop's mobile workspace needs a newer Orca Mobile app. Update Orca Mobile from {{storeName}}, then try this host again.",
+    "desktopTooOldBody": "This paired desktop app is too old for your current Orca Mobile app. Update Orca on your computer, then try this host again.",
+    "openAppStore": "Open App Store",
+    "appStoreName": "the App Store",
+    "openGithubReleases": "Open GitHub Releases",
+    "githubReleasesName": "GitHub Releases",
+    "getOrcaVersion": "Get Orca {{version}}",
+    "recoveryNoteRefresh": "If this message stays, remove this host and pair it again.",
+    "recoveryNoteUpdated": "Already updated? Go back to Hosts and refresh the connection. If this message stays, remove this host and pair it again."
   },
   "workspace": {
     "sshConnection": "SSH Connection",
