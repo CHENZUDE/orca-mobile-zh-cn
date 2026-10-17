@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View, Text, Pressable, TextInput, Switch } from 'react-native'
 import { ChevronLeft } from 'lucide-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -83,6 +84,7 @@ export async function saveCustomKeys(keys: CustomKey[]): Promise<void> {
 }
 
 export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortcuts }: Props) {
+  const { t } = useTranslation()
   const [step, setStep] = useState<Step>('choose-type')
   const [shortcutKey, setShortcutKey] = useState('c')
   const [shortcutModifiers, setShortcutModifiers] = useState<TerminalShortcutModifier[]>(['ctrl'])
@@ -217,10 +219,10 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
           <View style={styles.backSpacer} />
         )}
         <Text style={styles.title}>
-          {step === 'choose-type' && 'Add Shortcut'}
-          {step === 'shortcut-combo' && 'Shortcut Combo'}
-          {step === 'special-keys' && 'Pick a key'}
-          {step === 'text-macro' && 'Text Macro'}
+          {step === 'choose-type' && t('customKey.title.chooseType')}
+          {step === 'shortcut-combo' && t('customKey.title.shortcutCombo')}
+          {step === 'special-keys' && t('customKey.title.pickKey')}
+          {step === 'text-macro' && t('customKey.title.textMacro')}
         </Text>
         <View style={styles.backSpacer} />
       </View>
@@ -231,7 +233,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
             style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
             onPress={() => setStep('shortcut-combo')}
           >
-            <Text style={styles.rowLabel}>Shortcut Combo</Text>
+            <Text style={styles.rowLabel}>{t('customKey.type.shortcutCombo')}</Text>
             <Text style={styles.rowHint}>Build Ctrl, Alt, and Shift key chords</Text>
           </Pressable>
           <View style={styles.separator} />
@@ -239,7 +241,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
             style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
             onPress={() => setStep('text-macro')}
           >
-            <Text style={styles.rowLabel}>Text Macro</Text>
+            <Text style={styles.rowLabel}>{t('customKey.type.textMacro')}</Text>
             <Text style={styles.rowHint}>Send custom text command</Text>
           </Pressable>
           {onManageShortcuts ? (
@@ -249,7 +251,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
                 style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
                 onPress={onManageShortcuts}
               >
-                <Text style={styles.rowLabel}>Manage Shortcuts</Text>
+                <Text style={styles.rowLabel}>{t('customKey.manageShortcuts')}</Text>
                 <Text style={styles.rowHint}>Show, hide, or reorder shortcut keys</Text>
               </Pressable>
             </>
@@ -277,7 +279,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Modifiers</Text>
+            <Text style={styles.sectionLabel}>{t('customKey.section.modifiers')}</Text>
             <View style={styles.mods}>
               {SHORTCUT_MODIFIERS.map((modifier) => {
                 const selected = shortcutModifiers.includes(modifier.id)
@@ -308,12 +310,12 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Key</Text>
+            <Text style={styles.sectionLabel}>{t('customKey.section.key')}</Text>
             <TextInput
               style={styles.keyInput}
               value={shortcutKey.length === 1 ? shortcutKey.toUpperCase() : ''}
               onChangeText={handleShortcutKeyInput}
-              placeholder={SPECIAL_KEY_BY_ID[shortcutKey]?.label ?? 'C'}
+              placeholder={SPECIAL_KEY_BY_ID[shortcutKey]?.label ?? t('customKey.keyPlaceholder')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="characters"
               autoCorrect={false}
@@ -323,7 +325,7 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
               style={({ pressed }) => [styles.moreLink, pressed && styles.moreLinkPressed]}
               onPress={() => setStep('special-keys')}
             >
-              <Text style={styles.moreLinkText}>More keys — Tab, arrows, F1–F12…</Text>
+              <Text style={styles.moreLinkText}>{t('customKey.moreKeys')}</Text>
             </Pressable>
           </View>
 
@@ -382,28 +384,28 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
       {step === 'text-macro' && (
         <View style={styles.group}>
           <View style={styles.macroForm}>
-            <Text style={styles.fieldLabel}>Label</Text>
+            <Text style={styles.fieldLabel}>{t('customKey.field.label')}</Text>
             <TextInput
               style={styles.fieldInput}
               value={macroLabel}
               onChangeText={setMacroLabel}
-              placeholder="e.g. Build"
+              placeholder={t('customKey.field.labelPlaceholder')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="none"
               autoCorrect={false}
             />
-            <Text style={styles.fieldLabel}>Command</Text>
+            <Text style={styles.fieldLabel}>{t('customKey.field.command')}</Text>
             <TextInput
               style={styles.fieldInput}
               value={macroText}
               onChangeText={setMacroText}
-              placeholder="e.g. pnpm build"
+              placeholder={t('customKey.field.commandPlaceholder')}
               placeholderTextColor={colors.textMuted}
               autoCapitalize="none"
               autoCorrect={false}
             />
             <View style={styles.switchRow}>
-              <Text style={styles.switchLabel}>Press Enter</Text>
+              <Text style={styles.switchLabel}>{t('customKey.field.pressEnter')}</Text>
               <Switch
                 value={macroEnter}
                 onValueChange={setMacroEnter}
