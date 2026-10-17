@@ -811,6 +811,15 @@
       "linearApiKeyLink": "Linear Settings / Security / New API key",
       "linearKeySecurity": "Your key is encrypted via the host OS keychain and stored locally.",
       "connect": "Connect"
+    },
+    "metadata": {
+      "labels": "Labels",
+      "assignees": "Assignees",
+      "loadingLabels": "Loading labels...",
+      "noLabels": "No labels in this repository.",
+      "loadingAssignees": "Loading assignees...",
+      "noAssignableUsers": "No assignable users found for this repository.",
+      "saveTitle": "Save title"
     }
   }
 }

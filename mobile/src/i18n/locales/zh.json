@@ -811,6 +811,15 @@
       "linearApiKeyLink": "Linear 设置 / 安全 / 新建 API 密钥",
       "linearKeySecurity": "你的密钥通过宿主机系统钥匙串加密，仅存储在本地。",
       "connect": "连接"
+    },
+    "metadata": {
+      "labels": "标签",
+      "assignees": "负责人",
+      "loadingLabels": "正在加载标签...",
+      "noLabels": "该仓库没有标签。",
+      "loadingAssignees": "正在加载负责人...",
+      "noAssignableUsers": "该仓库找不到可指派的用户。",
+      "saveTitle": "保存标题"
     }
   }
 }
