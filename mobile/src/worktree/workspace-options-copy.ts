@@ -5,6 +5,7 @@ import {
 
 /** The desktop's name for the control that opens these options, and for the options themselves. */
 export const WORKSPACE_OPTIONS_TITLE = 'Workspace options'
+export const WORKSPACE_OPTIONS_TITLE_KEY = 'workspaceOptions.title'
 
 /** The chip's corner badge, capped as on the desktop; null with no active filter. */
 export function workspaceOptionsBadgeText(activeFilterCount: number): string | null {

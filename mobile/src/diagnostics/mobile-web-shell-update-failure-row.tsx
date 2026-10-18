@@ -56,7 +56,7 @@ export function MobileWebShellUpdateFailureRow() {
   }
   return (
     <View testID="mobile-web-shell-update-failures">
-      <Text style={styles.sectionHeading}>{t('diagnostics.shell.sectionHeading')}</Text>
+      <Text style={styles.sectionHeading}>{t('settings.diagnostics.shell.sectionHeading')}</Text>
       <View style={styles.section}>
         <View style={styles.accordionBody}>
           {lines.map((line) => (

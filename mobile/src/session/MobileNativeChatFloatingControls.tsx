@@ -32,7 +32,9 @@ export function MobileNativeChatFloatingControls({
       {toolCallCount > 0 ? (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={toolsExpanded ? 'Collapse tool runs' : 'Expand tool runs'}
+          accessibilityLabel={
+            toolsExpanded ? t('nativeChat.collapseToolRuns') : t('nativeChat.expandToolRuns')
+          }
           style={({ pressed }) => [styles.toolsPill, pressed && styles.pressed]}
           onPress={onToggleTools}
         >
@@ -42,7 +44,9 @@ export function MobileNativeChatFloatingControls({
             <ChevronsUpDown size={14} color={colors.textSecondary} strokeWidth={2} />
           )}
           <Text style={styles.toolsPillLabel}>
-            {toolsExpanded ? 'Collapse' : `Tools · ${toolCallCount}`}
+            {toolsExpanded
+              ? t('chatTurn.collapse')
+              : `${t('chatTurn.tools')} · ${toolCallCount}`}
           </Text>
         </Pressable>
       ) : null}

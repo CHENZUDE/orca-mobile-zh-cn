@@ -1,6 +1,6 @@
 import { QrCode } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing } from '../theme/mobile-theme'
 
 export function MobileHomeEmptyState(props: {
@@ -27,9 +27,10 @@ export function MobileHomeEmptyState(props: {
       desc: t('home.emptyState.steps.connected.desc')
     }
   ]
+  // Scrolls because a phone in landscape is shorter than the hero and the steps together.
   return (
-    <View
-      style={[
+    <ScrollView
+      contentContainerStyle={[
         styles.emptyContainer,
         { paddingBottom: props.bottomInset },
         props.isWideLayout && {
@@ -63,14 +64,14 @@ export function MobileHomeEmptyState(props: {
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  emptyContainer: { flex: 1 },
+  emptyContainer: { flexGrow: 1 },
   emptyHero: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 32,

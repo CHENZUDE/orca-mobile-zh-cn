@@ -98,7 +98,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityLabel={t('htmlPreview.previewRenderedHtml')}
         >
           <Eye size={13} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.toggleText}>Preview</Text>
+          <Text style={styles.toggleText}>{t('htmlPreview.preview')}</Text>
         </Pressable>
         <Pressable
           style={[styles.toggle, mode === 'source' && styles.toggleActive]}
@@ -109,7 +109,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityLabel={t('htmlPreview.viewHtmlSource')}
         >
           <Code size={13} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.toggleText}>Source</Text>
+          <Text style={styles.toggleText}>{t('htmlPreview.source')}</Text>
         </Pressable>
       </View>
       {/* The Source tab shows what the author wrote, never the rewrite: the rewrite is a rendering

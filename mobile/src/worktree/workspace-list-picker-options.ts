@@ -1,14 +1,18 @@
 import type { PickerOption } from '../components/PickerModal'
-import type { MobileGroupMode, MobileSortMode } from './workspace-view-settings'
+import type {
+  WorkspaceGroupBy,
+  WorkspaceSortBy
+} from '../../../src/shared/workspace-view/workspace-view-options'
 
 // Why: the host may be headless, so the note can't promise a desktop sidebar.
 export const WORKSPACE_VIEW_SHARED_NOTE_KEY = 'workspaceView.syncedAcrossDevices'
 
-export const WORKSPACE_SORT_OPTIONS: PickerOption<MobileSortMode>[] = [
+export const WORKSPACE_SORT_OPTIONS: PickerOption<WorkspaceSortBy>[] = [
   // Why: desktop and persisted state keep the `smart` key, while mobile shows the product label.
   {
     value: 'smart',
     label: 'Agent activity',
+    labelKey: 'workspaceView.sort.smartLabel',
     subtitleKey: 'workspaceView.sort.smartSubtitle'
   },
   { value: 'name', label: 'Name', labelKey: 'workspaceView.sort.nameLabel', subtitleKey: 'workspaceView.sort.nameSubtitle' },
@@ -17,9 +21,9 @@ export const WORKSPACE_SORT_OPTIONS: PickerOption<MobileSortMode>[] = [
   { value: 'manual', label: 'Manual', labelKey: 'workspaceView.sort.manualLabel', subtitleKey: 'workspaceView.sort.manualSubtitle' }
 ]
 
-export const WORKSPACE_GROUP_OPTIONS: PickerOption<MobileGroupMode>[] = [
-  { value: 'none', label: 'No Grouping' },
-  { value: 'workspaceStatus', label: 'Status' },
-  { value: 'repo', label: 'Repository' },
-  { value: 'prStatus', label: 'PR Status' }
+export const WORKSPACE_GROUP_OPTIONS: PickerOption<WorkspaceGroupBy>[] = [
+  { value: 'none', label: 'No Grouping', labelKey: 'workspaceView.group.noneLabel' },
+  { value: 'workspace-status', label: 'Status', labelKey: 'workspaceView.group.statusLabel' },
+  { value: 'repo', label: 'Repository', labelKey: 'workspaceView.group.repoLabel' },
+  { value: 'pr-status', label: 'PR Status', labelKey: 'workspaceView.group.prStatusLabel' }
 ]

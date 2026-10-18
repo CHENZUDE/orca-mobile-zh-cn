@@ -207,7 +207,7 @@ export const MobileGitHistoryList = memo(function MobileGitHistoryList({
         </Text>
         {retry ? (
           <Pressable style={styles.retryButton} onPress={retry} accessibilityLabel="Retry">
-            <Text style={styles.retryText}>Retry</Text>
+            <Text style={styles.retryText}>{t('common.retry')}</Text>
           </Pressable>
         ) : null}
       </View>

@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { AskPrompt } from '../../../src/shared/native-chat-ask'
 import { NATIVE_CHAT_QUESTION_AUTO_ADVANCE_MS } from '../../../src/shared/native-chat-question-auto-advance'
 import { MobileNativeChatAsk } from './MobileNativeChatAsk'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 vi.mock('react-native', () => ({
   Keyboard: { dismiss: () => {} },
@@ -34,7 +35,11 @@ function render(prompt: AskPrompt, onAnswer = vi.fn(async () => true)): typeof o
   vi.useFakeTimers()
   act(() => {
     tree = create(
-      createElement(MobileNativeChatAsk, { prompt, onAnswer, onCancel: async () => true })
+      createElement(
+        I18nProvider,
+        null,
+        createElement(MobileNativeChatAsk, { prompt, onAnswer, onCancel: async () => true })
+      )
     )
   })
   return onAnswer

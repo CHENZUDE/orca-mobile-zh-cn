@@ -219,7 +219,7 @@ export function MobileNativeChatAsk({
           disabled={submitting}
           hitSlop={8}
         >
-          <Text style={styles.cancelText}>Cancel</Text>
+          <Text style={styles.cancelText}>{t('common.cancel')}</Text>
         </Pressable>
         {total > 1 ? (
           <Text style={styles.progress}>

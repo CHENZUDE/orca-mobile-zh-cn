@@ -10,6 +10,7 @@ vi.mock('react-native', () => ({
 }))
 
 import { AuthFailedBanner } from './AuthFailedBanner'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 type Presses = { retry: number; repair: number; remove: number }
 
@@ -17,12 +18,16 @@ function render(presses: Presses): ReactTestRenderer {
   const rendered: { tree: ReactTestRenderer | null } = { tree: null }
   act(() => {
     rendered.tree = create(
-      createElement(AuthFailedBanner, {
-        canRetry: true,
-        onRetry: () => (presses.retry += 1),
-        onRepair: () => (presses.repair += 1),
-        onRemove: () => (presses.remove += 1)
-      })
+      createElement(
+        I18nProvider,
+        null,
+        createElement(AuthFailedBanner, {
+          canRetry: true,
+          onRetry: () => (presses.retry += 1),
+          onRepair: () => (presses.repair += 1),
+          onRemove: () => (presses.remove += 1)
+        })
+      )
     )
   })
   if (rendered.tree === null) {
@@ -62,12 +67,16 @@ describe('the auth-failed banner in the app', () => {
     const rendered: { tree: ReactTestRenderer | null } = { tree: null }
     act(() => {
       rendered.tree = create(
-        createElement(AuthFailedBanner, {
-          canRetry: false,
-          onRetry: () => {},
-          onRepair: () => {},
-          onRemove: () => {}
-        })
+        createElement(
+          I18nProvider,
+          null,
+          createElement(AuthFailedBanner, {
+            canRetry: false,
+            onRetry: () => {},
+            onRepair: () => {},
+            onRemove: () => {}
+          })
+        )
       )
     })
     expect(rendered.tree === null ? [] : pressables(rendered.tree).map(labelOf)).toEqual([

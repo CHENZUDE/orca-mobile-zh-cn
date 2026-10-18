@@ -16,6 +16,9 @@ import {
   taskRepositoryMeta
 } from './mobile-tasks-legacy-foundation'
 import { styles } from './mobile-tasks-legacy-styles'
+import { PROVIDER_LABELS } from './mobile-task-view-options'
+import { jiraSiteLabel } from './jira-mobile-connection'
+import { translate } from '../i18n/i18n'
 
 export function useMobileTasksPickerProjection(model: DetailCommentRenderersModel) {
   const {
@@ -30,6 +33,7 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
     githubRepoSources,
     hostedRepos,
     items,
+    jiraConnection,
     linearTeams,
     provider,
     reposById,
@@ -69,12 +73,24 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
       : (linearTeams.find((team) => team.id === createTeamId) ?? linearTeams[0] ?? null)
   const selectedCreateTargetLabel =
     provider === 'github' || provider === 'gitlab'
-      ? ((selectedCreateTarget as RepoSummary | null)?.displayName ?? 'Select target')
-      : ((selectedCreateTarget as LinearTeam | null)?.name ?? 'Select target')
-  const providerLabel =
-    provider === 'github' ? 'GitHub' : provider === 'gitlab' ? 'GitLab' : 'Linear'
+      ? ((selectedCreateTarget as RepoSummary | null)?.displayName ??
+        translate('tasks.picker.selectTarget'))
+      : ((selectedCreateTarget as LinearTeam | null)?.name ??
+        translate('tasks.picker.selectTarget'))
+  const providerLabel = PROVIDER_LABELS[provider]
   const showHeaderCreateTask =
     provider === 'linear' || (provider === 'github' && githubMode === 'items')
+  const jiraSiteOptions = useMemo<PickerOption<string>[]>(
+    () => [
+      { value: 'all', label: translate('tasks.picker.allSites') },
+      ...jiraConnection.sites.map((site) => ({
+        value: site.id,
+        label: jiraSiteLabel(site),
+        subtitle: site.siteUrl
+      }))
+    ],
+    [jiraConnection.sites]
+  )
   const providerOptions = useMemo(
     () => PROVIDER_OPTIONS.filter((option) => visibleProviders.includes(option.value)),
     [visibleProviders]
@@ -108,13 +124,13 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
             ? githubIssueSourceRows[0]!.sources.prs
             : githubIssueSourceRows[0]!.sources.upstreamCandidate
         )
-      : `${githubIssueSourceRows.length} sources`
+      : translate('tasks.picker.sourceCount', { count: githubIssueSourceRows.length })
   const repoPickerLabel =
     effectiveRepoIds.size === 0 || selectedHostedRepos.length === hostedRepos.length
-      ? 'All repos'
+      ? translate('tasks.picker.allRepos')
       : selectedHostedRepos.length === 1
         ? selectedHostedRepos[0]!.displayName
-        : `${selectedHostedRepos.length} repos`
+        : translate('tasks.picker.repoCount', { count: selectedHostedRepos.length })
   const repoPickerSelectedRepo =
     effectiveRepoIds.size > 0 && selectedHostedRepos.length === 1 ? selectedHostedRepos[0]! : null
   const workspaceRepoOptions = useMemo<PickerOption<string>[]>(
@@ -159,7 +175,9 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
     }
     return entries
   }, [reposById, sortedItems, taskSort])
-  const sortLabel = SORT_OPTIONS.find((option) => option.value === taskSort)?.label ?? 'Updated'
+  const sortLabel =
+    SORT_OPTIONS.find((option) => option.value === taskSort)?.label ??
+    translate('taskOptions.sort.updatedLabel')
   const githubProjectFields = githubProjectTable?.selectedView.fields ?? []
   const githubProjectViewSort = githubProjectTable?.selectedView.sortByFields?.[0] ?? null
   const githubProjectSortField = githubProjectSortOverride
@@ -168,31 +186,48 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
   const githubProjectSortDirection =
     githubProjectSortOverride?.direction ?? githubProjectViewSort?.direction ?? null
   const githubProjectSortLabel = githubProjectSortField
-    ? `${githubProjectSortField.name} ${githubProjectSortDirection === 'DESC' ? 'desc' : 'asc'}`
-    : 'View order'
+    ? translate('tasks.picker.sortField', {
+        field: githubProjectSortField.name,
+        direction:
+          githubProjectSortDirection === 'DESC'
+            ? translate('tasks.picker.descendingShort')
+            : translate('tasks.picker.ascendingShort')
+      })
+    : translate('tasks.picker.viewOrder')
   const githubProjectFieldsLabel =
     githubProjectAvailableSummaryFields.length > 0
-      ? `${githubProjectSummaryFields.length}/${githubProjectAvailableSummaryFields.length} fields`
-      : 'Fields'
+      ? translate('tasks.picker.fieldsCount', {
+          selected: githubProjectSummaryFields.length,
+          total: githubProjectAvailableSummaryFields.length
+        })
+      : translate('tasks.picker.fields')
   const githubProjectSortOptions = useMemo<PickerOption<string>[]>(
     () => [
       {
         value: PROJECT_VIEW_DEFAULT_SORT,
-        label: 'View order',
+        label: translate('tasks.picker.viewOrder'),
         subtitle: githubProjectViewSort
-          ? `Uses ${githubProjectViewSort.field.name} ${githubProjectViewSort.direction.toLowerCase()}`
-          : 'Uses GitHub rank order'
+          ? translate('tasks.picker.usesFieldSort', {
+              field: githubProjectViewSort.field.name,
+              direction: githubProjectViewSort.direction.toLowerCase()
+            })
+          : translate('tasks.picker.usesGithubRankOrder')
       },
       ...githubProjectFields.map((field) => {
         const active = githubProjectSortOverride?.fieldId === field.id
         const nextDirection =
-          !active || githubProjectSortOverride.direction === 'DESC' ? 'ascending' : 'descending'
+          !active || githubProjectSortOverride.direction === 'DESC'
+            ? translate('tasks.picker.ascending')
+            : translate('tasks.picker.descending')
         return {
           value: field.id,
           label: field.name,
           subtitle: active
-            ? `Currently ${githubProjectSortOverride.direction.toLowerCase()} · tap for ${nextDirection}`
-            : 'Sort ascending'
+            ? translate('tasks.picker.currentDirectionTapFor', {
+                direction: githubProjectSortOverride.direction.toLowerCase(),
+                next: nextDirection
+              })
+            : translate('tasks.picker.sortAscending')
         }
       })
     ],
@@ -204,7 +239,9 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
         value: view.id,
         label: view.name,
         subtitle:
-          view.layout === 'TABLE_LAYOUT' ? `View #${view.number}` : 'Unsupported layout on mobile',
+          view.layout === 'TABLE_LAYOUT'
+            ? translate('tasks.picker.viewNumber', { number: view.number })
+            : translate('tasks.picker.unsupportedLayout'),
         disabled: view.layout !== 'TABLE_LAYOUT'
       })),
     [githubProjectViews]
@@ -213,6 +250,7 @@ export function useMobileTasksPickerProjection(model: DetailCommentRenderersMode
     createTargetOptions,
     selectedCreateTarget,
     selectedCreateTargetLabel,
+    jiraSiteOptions,
     providerLabel,
     showHeaderCreateTask,
     providerOptions,

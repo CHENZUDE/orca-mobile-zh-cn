@@ -9,9 +9,11 @@ import {
   GitBranch
 } from './mobile-tasks-dependencies'
 import { styles } from './mobile-tasks-legacy-styles'
+import { translate } from '../i18n/i18n'
 import { getRepoBadgeColor } from './mobile-tasks-legacy-foundation'
 import { renderMobileTasksGitHubViewControls } from './mobile-tasks-github-view-controls'
 import { renderMobileTasksLinearViewControls } from './mobile-tasks-linear-view-controls'
+import { renderMobileTasksJiraViewControls } from './mobile-tasks-jira-view-controls'
 
 export function renderMobileTasksProviderControls(model: ConnectionPresentationModel) {
   const {
@@ -94,7 +96,9 @@ export function renderMobileTasksProviderControls(model: ConnectionPresentationM
             }}
           >
             <Text style={styles.segmentSecondaryText}>
-              {gitlabView === 'project' ? 'Project MRs' : 'My Todos'}
+              {gitlabView === 'project'
+                ? translate('taskOptions.gitlabView.projectLabel')
+                : translate('taskOptions.gitlabView.todosLabel')}
             </Text>
           </Pressable>
           {gitlabView === 'project' && (
@@ -116,6 +120,8 @@ export function renderMobileTasksProviderControls(model: ConnectionPresentationM
 
       {renderMobileTasksLinearViewControls(model)}
 
+      {renderMobileTasksJiraViewControls(model)}
+
       {provider !== 'linear' && !(provider === 'github' && githubMode === 'project') ? (
         <Pressable
           style={styles.segmentButton}
@@ -128,7 +134,9 @@ export function renderMobileTasksProviderControls(model: ConnectionPresentationM
           }}
         >
           <GitBranch size={14} color={colors.textSecondary} />
-          <Text style={styles.segmentSecondaryText}>Sort: {sortLabel}</Text>
+          <Text style={styles.segmentSecondaryText}>
+            {translate('tasks.legacy.sortPrefix', { value: sortLabel })}
+          </Text>
         </Pressable>
       ) : null}
     </ScrollView>

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -12,6 +12,7 @@ import {
 } from './mobile-tasks-dependencies'
 import { linearWorkspaceSelect } from './mobile-task-runtime-operations'
 import { styles } from './mobile-tasks-legacy-styles'
+import { JIRA_FILTER_OPTIONS } from './mobile-task-view-options'
 import {
   GITLAB_VIEW_OPTIONS,
   GITLAB_FILTER_OPTIONS,
@@ -28,7 +29,7 @@ export function renderMobileTasksGitHubProjectFieldsPicker(model: ConnectionPres
     taskUiReady,
     toggleGitHubProjectFieldVisibility
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showGitHubProjectFieldsPicker}
@@ -80,7 +81,7 @@ export function renderMobileTasksGitLabViewPicker(model: ConnectionPresentationM
     showGitLabViewPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitLabViewPicker}
@@ -110,7 +111,7 @@ export function renderMobileTasksGitLabFilterPicker(model: ConnectionPresentatio
     showGitLabFilterPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitLabFilterPicker}
@@ -134,7 +135,7 @@ export function renderMobileTasksLinearFilterPicker(model: ConnectionPresentatio
     showLinearFilterPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showLinearFilterPicker}
@@ -165,7 +166,7 @@ export function renderMobileTasksLinearWorkspacePicker(model: ConnectionPresenta
     showLinearWorkspacePicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showLinearWorkspacePicker}
@@ -199,7 +200,7 @@ export function renderMobileTasksLinearTeamPicker(model: ConnectionPresentationM
     showLinearTeamPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showLinearTeamPicker}
@@ -278,7 +279,7 @@ export function renderMobileTasksLinearStatusPicker(model: ConnectionPresentatio
     setLinearStatusPickerItem,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && linearStatusPickerItem !== null}
@@ -341,5 +342,58 @@ export function renderMobileTasksLinearStatusPicker(model: ConnectionPresentatio
         )}
       </View>
     </BottomDrawer>
+  )
+}
+
+export function renderMobileTasksJiraFilterPicker(model: ConnectionPresentationModel) {
+  const {
+    jiraFilter,
+    persistTaskResumeState,
+    setAppliedQuery,
+    setJiraFilter,
+    setQuery,
+    setShowJiraFilterPicker,
+    showJiraFilterPicker,
+    taskUiReady
+  } = model
+  return (
+    <PickerModal
+      visible={taskUiReady && showJiraFilterPicker}
+      title="Jira Filter"
+      options={JIRA_FILTER_OPTIONS}
+      selected={jiraFilter}
+      onSelect={(filter) => {
+        setJiraFilter(filter)
+        setQuery('')
+        setAppliedQuery('')
+        persistTaskResumeState({ jiraPreset: filter, jiraQuery: '' })
+      }}
+      onClose={() => setShowJiraFilterPicker(false)}
+    />
+  )
+}
+
+export function renderMobileTasksJiraSitePicker(model: ConnectionPresentationModel) {
+  const {
+    jiraConnection,
+    jiraSiteOptions,
+    setItems,
+    setJiraConnection,
+    setShowJiraSitePicker,
+    showJiraSitePicker,
+    taskUiReady
+  } = model
+  return (
+    <PickerModal
+      visible={taskUiReady && showJiraSitePicker}
+      title="Jira Site"
+      options={jiraSiteOptions}
+      selected={jiraConnection.selection ?? ''}
+      onSelect={(siteId) => {
+        setJiraConnection((current) => ({ ...current, selection: siteId }))
+        setItems([])
+      }}
+      onClose={() => setShowJiraSitePicker(false)}
+    />
   )
 }

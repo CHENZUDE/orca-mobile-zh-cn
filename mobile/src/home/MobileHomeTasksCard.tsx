@@ -2,13 +2,14 @@ import { ChevronRight, ListTodo } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { TaskProviderLogo } from '../components/TaskProviderLogo'
-import type { TaskProvider } from '../tasks/mobile-task-providers'
+import type { TaskProvider } from '../../../src/shared/task-providers'
 import { colors, radii, spacing } from '../theme/mobile-theme'
 
 const TASK_PROVIDER_KEYS: Record<TaskProvider, string> = {
   github: 'home.tasks.providers.github',
   gitlab: 'home.tasks.providers.gitlab',
-  linear: 'home.tasks.providers.linear'
+  linear: 'home.tasks.providers.linear',
+  jira: 'home.tasks.providers.jira'
 }
 
 export function MobileHomeTasksCard(props: {

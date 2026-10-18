@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -46,7 +46,7 @@ export function renderMobileTasksCreateDrawer(model: ConnectionPresentationModel
     showCreateTask,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showCreateTask}
@@ -205,7 +205,7 @@ export function renderMobileTasksCreateTargetPicker(model: ConnectionPresentatio
     showCreateTask,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showCreateTask && showCreateTargetPicker}
@@ -241,7 +241,7 @@ export function renderMobileTasksLinearConnectDrawer(model: ConnectionPresentati
     showLinearConnect,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showLinearConnect}
@@ -325,7 +325,7 @@ export function renderMobileTasksWorkspaceCreateTargetPicker(model: ConnectionPr
     workspaceRepoPickerItem,
     workspaceRepos
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && workspaceRepoPickerItem != null}

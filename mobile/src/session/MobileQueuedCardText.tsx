@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { colors, typography } from '../theme/mobile-theme'
@@ -6,6 +7,7 @@ import { colors, typography } from '../theme/mobile-theme'
  *  never read, and Steer or Delete must not be a blind choice. Opened, a long one scrolls in a
  *  capped box. */
 export function MobileQueuedCardText({ text }: { text: string }): React.JSX.Element {
+  const { t } = useTranslation()
   const [expanded, setExpanded] = useState(false)
   const [clipped, setClipped] = useState(false)
   // The whole text laid out unseen at the card's width: more than two lines is what clips.
@@ -35,13 +37,17 @@ export function MobileQueuedCardText({ text }: { text: string }): React.JSX.Elem
       testID="queued-card-text"
       accessibilityRole="button"
       accessibilityState={{ expanded }}
-      accessibilityHint={expanded ? 'Shows less of the message' : 'Shows the whole message'}
+      accessibilityHint={
+        expanded ? t('nativeChat.queued.showsLess') : t('nativeChat.queued.showsWholeMessage')
+      }
       onPress={() => setExpanded(!expanded)}
     >
       <Text style={styles.body} numberOfLines={expanded ? undefined : 2}>
         {text}
       </Text>
-      <Text style={styles.caption}>{expanded ? 'Show less' : 'Show more'}</Text>
+      <Text style={styles.caption}>
+        {expanded ? t('nativeChat.queued.showLess') : t('nativeChat.queued.showMore')}
+      </Text>
     </Pressable>
   )
   // The press sits inside the scroll, so a drag scrolls and only a tap folds it.

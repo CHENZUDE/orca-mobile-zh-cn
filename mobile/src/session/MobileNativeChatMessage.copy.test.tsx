@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+﻿import { createElement, type ReactElement } from 'react'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { NativeChatMessage } from '../../../src/shared/native-chat-types'
@@ -30,6 +30,7 @@ vi.mock('./MobileNativeChatToolRun', () => ({ ToolRun: 'ToolRun' }))
 
 import { MobileNativeChatMessage } from './MobileNativeChatMessage'
 import { MobileNativeChatLongPressContent } from './MobileNativeChatLongPressContent'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 const first = '# Answer\n\n- first\n  - nested\n\n```ts\n  const x = 1\n```'
 const last = '| Name | Value |\n| --- | --- |\n| x | 1 |\n\nFinal paragraph.\n'
@@ -69,18 +70,15 @@ describe('iOS whole-message copy', () => {
     }
     return node
   }
-  function tapMessage() {
-    const body = renderer!.root
-      .findByType(MobileNativeChatLongPressContent)
-      .findAll((node) => String(node.type) === 'Pressable')[0]
-    act(() => body?.props.onPress?.())
-  }
-  // Every copy case starts from a tapped message, the only state that shows the button.
   function render(value = message) {
     act(() => {
-      renderer = create(createElement(MobileNativeChatMessage, { message: value }))
+      renderer = create(
+        createElement(I18nProvider, null, createElement(MobileNativeChatMessage, { message: value }))
+      )
     })
-    tapMessage()
+  }
+  function updateMessage(element: ReactElement) {
+    renderer!.update(createElement(I18nProvider, null, element))
   }
   beforeEach(() => {
     vi.clearAllMocks()
@@ -105,7 +103,7 @@ describe('iOS whole-message copy', () => {
           { type: 'text', text: last }
         ]
       }
-      act(() => renderer!.update(createElement(MobileNativeChatMessage, { message: current })))
+      act(() => updateMessage(createElement(MobileNativeChatMessage, { message: current })))
       const copy = copyButton()
       expect(copy.props.accessibilityRole).toBe('button')
       expect(copy.props.style({ pressed: false })[0]).toMatchObject({ width: 24, height: 24 })
@@ -122,11 +120,8 @@ describe('iOS whole-message copy', () => {
       for (const node of nodes('MobileMarkdown')) {
         expect(node.props.onLongPress).toBeUndefined()
       }
-      // A held press selects text natively: no actions sheet, and no copy toggle.
-      const press = body.findAll((node) => String(node.type) === 'Pressable')[0]
-      act(() => press?.props.onLongPress())
-      expect(nodes('MessageActionsSheet')).toHaveLength(0)
-      expect(copyButton()).toBeDefined()
+      // A held press selects text natively: the body claims no press of its own.
+      expect(body.findAll((node) => String(node.type) === 'Pressable')).toHaveLength(0)
       await act(async () => copy.props.onPress())
       expect(writeText.mock.calls).toEqual([[first + '\n\n' + last]])
       expect(nodes('MessageActionsSheet')).toHaveLength(0)
@@ -141,32 +136,23 @@ describe('iOS whole-message copy', () => {
     }
   )
 
-  it('shows the copy button only after a tap on the message, and hides it on the next', () => {
-    act(() => {
-      renderer = create(createElement(MobileNativeChatMessage, { message }))
-    })
-    const hasCopy = () =>
-      nodes('Pressable').some((node) => node.props.accessibilityLabel === 'Copy message')
-    const body = renderer!.root
-      .findByType(MobileNativeChatLongPressContent)
-      .findAll((node) => String(node.type) === 'Pressable')[0]
-    expect(hasCopy()).toBe(false)
-    expect(body?.props).toMatchObject({ accessible: false })
-    act(() => body?.props.onLongPress())
-    expect(hasCopy()).toBe(false)
-
-    tapMessage()
-    expect(hasCopy()).toBe(true)
-    tapMessage()
-    expect(hasCopy()).toBe(false)
-  })
+  it.each(['user', 'assistant'] as const)(
+    'shows the %s message copy button without a tap',
+    (role) => {
+      render({ ...message, role })
+      expect(copyButton()).toBeDefined()
+    }
+  )
 
   it.each([
     'Please repair this chart:\n::orca-visual{file="usage.html"}\nKeep this text.',
     '::orca-visual{file="usage.html"}'
   ])('copies the entire visible own source %j', async (text) => {
     render({ ...message, role: 'user', blocks: [{ type: 'text', text }] })
-    expect(nodes('Text').some((node) => node.props.children === text)).toBe(true)
+    // Drawn as written: your own message never renders a visual.
+    expect(nodes('MobileMarkdown')).toHaveLength(1)
+    expect(nodes('MobileMarkdown')[0]?.props.content).toBe(text)
+    expect(nodes('MobileMarkdown')[0]?.props.renderVisual).toBeUndefined()
     expect(copyButton().props.accessibilityRole).toBe('button')
     await act(async () => copyButton().props.onPress())
     expect(writeText.mock.calls).toEqual([[text]])
@@ -200,7 +186,7 @@ describe('iOS whole-message copy', () => {
     await act(async () => copyButton().props.onPress())
     expect(nodes('Check')).toHaveLength(1)
     act(() =>
-      renderer!.update(
+      updateMessage(
         createElement(MobileNativeChatMessage, {
           message: { ...message, blocks: [{ type: 'text', text: 'New source' }] }
         })
@@ -208,7 +194,7 @@ describe('iOS whole-message copy', () => {
     )
     expect(nodes('Check')).toHaveLength(0)
     expect(vi.getTimerCount()).toBe(0)
-    act(() => renderer!.update(createElement(MobileNativeChatMessage, { message })))
+    act(() => updateMessage(createElement(MobileNativeChatMessage, { message })))
     expect(nodes('Check')).toHaveLength(0)
     await act(async () => copyButton().props.onPress())
     act(() => renderer!.unmount())
@@ -247,7 +233,7 @@ describe('iOS whole-message copy', () => {
       render()
       act(() => copyButton().props.onPress())
       act(() =>
-        renderer!.update(
+        updateMessage(
           createElement(MobileNativeChatMessage, {
             message: { ...message, blocks: [{ type: 'text', text: 'Newest source' }] }
           })
@@ -285,13 +271,13 @@ describe('iOS whole-message copy', () => {
     render()
     act(() => copyButton().props.onPress())
     act(() =>
-      renderer!.update(
+      updateMessage(
         createElement(MobileNativeChatMessage, {
           message: { ...message, blocks: [{ type: 'text', text: 'Changed source' }] }
         })
       )
     )
-    act(() => renderer!.update(createElement(MobileNativeChatMessage, { message })))
+    act(() => updateMessage(createElement(MobileNativeChatMessage, { message })))
     await act(async () => pending.finish('success'))
     expect(nodes('Check')).toHaveLength(0)
     expect(alert).not.toHaveBeenCalled()
@@ -338,7 +324,7 @@ describe('iOS whole-message copy', () => {
       render()
       for (const text of ['Started', 'Middle source', 'Newest source']) {
         act(() =>
-          renderer!.update(
+          updateMessage(
             createElement(MobileNativeChatMessage, {
               message: { ...message, blocks: [{ type: 'text', text }] }
             })
@@ -386,7 +372,7 @@ describe('iOS whole-message copy', () => {
     render({ ...message, blocks: [{ type: 'image-ref', path: '/attachment.png' }] })
     expect(nodes('Pressable')).toHaveLength(0)
     act(() =>
-      renderer!.update(
+      updateMessage(
         createElement(MobileNativeChatMessage, {
           message: { ...message, blocks: [{ type: 'tool-call', name: 'Read', input: {} }] }
         })

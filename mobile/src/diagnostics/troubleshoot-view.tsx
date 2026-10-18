@@ -95,10 +95,10 @@ export function TroubleshootView({
           )}
           <Text style={styles.diagnosticButtonLabel}>
             {diagnosticStatus === 'running'
-              ? t('diagnostics.troubleshoot.running')
+              ? t('settings.diagnostics.troubleshoot.running')
               : diagnosticStatus === 'done'
-                ? t('diagnostics.troubleshoot.runAgain')
-                : t('diagnostics.troubleshoot.run')}
+                ? t('settings.diagnostics.troubleshoot.runAgain')
+                : t('settings.diagnostics.troubleshoot.run')}
           </Text>
         </Pressable>
 
@@ -110,7 +110,7 @@ export function TroubleshootView({
           onPress={onConnectionLog}
         >
           <ScrollText size={16} color={colors.textPrimary} />
-          <Text style={styles.diagnosticButtonLabel}>{t('diagnostics.troubleshoot.viewNetwork')}</Text>
+          <Text style={styles.diagnosticButtonLabel}>{t('settings.diagnostics.troubleshoot.viewNetwork')}</Text>
         </Pressable>
 
         {developerRow}
@@ -134,7 +134,7 @@ export function TroubleshootView({
           </View>
         )}
 
-        <Text style={styles.sectionHeading}>{t('diagnostics.troubleshoot.commonIssuesHeading')}</Text>
+        <Text style={styles.sectionHeading}>{t('settings.diagnostics.troubleshoot.commonIssuesHeading')}</Text>
 
         <View style={styles.section}>
           {troubleshootCommonIssues.map((section, i) => (

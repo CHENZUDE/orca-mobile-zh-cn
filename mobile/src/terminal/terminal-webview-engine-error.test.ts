@@ -2,6 +2,7 @@ import { createElement, createRef } from 'react'
 import { Platform } from 'react-native'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { I18nProvider } from '../i18n/I18nProvider'
 import { TerminalWebView } from './TerminalWebView'
 import type { TerminalWebViewHandle } from './terminal-webview-contract'
 
@@ -51,7 +52,9 @@ function createTerminalWebViewRenderer(
 ) {
   let renderer: ReactTestRenderer | null = null
   act(() => {
-    renderer = create(createElement(TerminalWebView, { onEngineError, ...props }))
+    renderer = create(
+      createElement(I18nProvider, null, createElement(TerminalWebView, { onEngineError, ...props }))
+    )
   })
   if (!renderer) {
     throw new Error('TerminalWebView did not render')

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   SHOW_MOBILE_DETAIL_METADATA_EDITORS,
@@ -19,6 +19,7 @@ import {
   Check
 } from './mobile-tasks-dependencies'
 import { styles } from './mobile-tasks-legacy-styles'
+import { detailPayloadBody } from './mobile-tasks-provider-detail-types'
 
 export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationModel) {
   const {
@@ -31,7 +32,7 @@ export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationMod
     updateGitHubPullRequestMetadata,
     updateGitLabIssueMetadata
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!actionItem || !detailPayload) {
     return null
   }
@@ -84,7 +85,7 @@ export function renderMobileTasksItemBodyEditor(model: ConnectionPresentationMod
     </>
   ) : (
     <MobileMarkdown
-      content={detailPayload.provider === 'linear' ? detailPayload.description : detailPayload.body}
+      content={detailPayloadBody(detailPayload)}
       fallback={t('tasks.detail.noDescription')}
     />
   )
@@ -103,7 +104,7 @@ export function renderMobileTasksItemReviewPanel(model: ConnectionPresentationMo
     requestGitHubReviewers,
     setItemReviewersDraft
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!actionItem || !detailPayload) {
     return null
   }
@@ -205,7 +206,7 @@ export function renderMobileTasksItemFiles(model: ConnectionPresentationModel) {
     toggleGitHubFileExpansion,
     toggleGitHubFileViewed
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!actionItem || !detailPayload) {
     return null
   }

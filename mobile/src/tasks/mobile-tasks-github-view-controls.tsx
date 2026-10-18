@@ -69,7 +69,9 @@ export function renderMobileTasksGitHubViewControls(model: ConnectionPresentatio
                   setShowGitHubIssueSourcePicker(true)
                 }}
               >
-                <Text style={styles.segmentSecondaryText}>Source: {githubIssueSourceLabel}</Text>
+                <Text style={styles.segmentSecondaryText}>
+                  {translate('tasks.picker.sourcePrefix', { value: githubIssueSourceLabel })}
+                </Text>
               </Pressable>
             ) : null}
           </>
@@ -112,7 +114,9 @@ export function renderMobileTasksGitHubViewControls(model: ConnectionPresentatio
                   setShowGitHubProjectSortPicker(true)
                 }}
               >
-                <Text style={styles.segmentSecondaryText}>Sort: {githubProjectSortLabel}</Text>
+                <Text style={styles.segmentSecondaryText}>
+                  {translate('tasks.picker.sortPrefix', { value: githubProjectSortLabel })}
+                </Text>
               </Pressable>
             ) : null}
             {githubProjectAvailableSummaryFields.length > 0 ? (
@@ -126,7 +130,9 @@ export function renderMobileTasksGitHubViewControls(model: ConnectionPresentatio
                   setShowGitHubProjectFieldsPicker(true)
                 }}
               >
-                <Text style={styles.segmentSecondaryText}>Fields: {githubProjectFieldsLabel}</Text>
+                <Text style={styles.segmentSecondaryText}>
+                  {translate('tasks.picker.fieldsPrefix', { value: githubProjectFieldsLabel })}
+                </Text>
               </Pressable>
             ) : null}
             {githubProjectTable ? (

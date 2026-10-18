@@ -166,7 +166,7 @@ function CenteredState({
           accessibilityLabel={translate('diffReview.body.retryLoadingReview')}
         >
           <RefreshCw size={14} color={colors.textPrimary} strokeWidth={2.2} />
-          <Text style={styles.retryText}>Retry</Text>
+          <Text style={styles.retryText}>{translate('common.retry')}</Text>
         </Pressable>
       ) : null}
     </View>

@@ -37,7 +37,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityLabel={t('htmlPreview.previewRendered')}
         >
           <Eye size={13} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.toggleText}>Preview</Text>
+          <Text style={styles.toggleText}>{t('htmlPreview.preview')}</Text>
         </Pressable>
         <Pressable
           style={[styles.toggle, mode === 'source' && styles.toggleActive]}
@@ -48,7 +48,7 @@ export function MobileHtmlPreview({ html, renderSource }: MobileHtmlPreviewProps
           accessibilityLabel={t('htmlPreview.viewSource')}
         >
           <Code size={13} color={colors.textSecondary} strokeWidth={2.2} />
-          <Text style={styles.toggleText}>Source</Text>
+          <Text style={styles.toggleText}>{t('htmlPreview.source')}</Text>
         </Pressable>
       </View>
       {mode === 'preview' ? (

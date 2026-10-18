@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   SHOW_MOBILE_PROJECT_METADATA_EDITORS,
@@ -18,7 +18,7 @@ export function renderMobileTasksProjectFieldEditors(model: ConnectionPresentati
     setProjectFieldDrafts,
     setProjectRowDetailError
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!projectRowItem) {
     return null
   }

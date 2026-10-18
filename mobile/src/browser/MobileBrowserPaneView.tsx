@@ -277,7 +277,7 @@ export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
                     ]}
                     onPress={() => void sendDialogCommand('browser.dialogDismiss')}
                   >
-                    <Text style={styles.dialogButtonText}>Cancel</Text>
+                    <Text style={styles.dialogButtonText}>{t('common.cancel')}</Text>
                   </Pressable>
                 ) : null}
                 <Pressable
@@ -290,7 +290,7 @@ export function MobileBrowserPaneView(props: MobileBrowserPaneViewProps) {
                   ]}
                   onPress={() => void sendDialogCommand('browser.dialogAccept')}
                 >
-                  <Text style={[styles.dialogButtonText, styles.dialogButtonPrimaryText]}>OK</Text>
+                  <Text style={[styles.dialogButtonText, styles.dialogButtonPrimaryText]}>{t('common.ok')}</Text>
                 </Pressable>
               </View>
             </View>

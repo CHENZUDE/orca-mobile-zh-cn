@@ -29,7 +29,12 @@
     "copied": "已复制",
     "copyLoaded": "复制已加载部分",
     "copy": "复制",
-    "couldNotCopy": "无法复制"
+    "couldNotCopy": "无法复制",
+    "ok": "确定",
+    "discard": "丢弃",
+    "send": "发送",
+    "somethingWentWrong": "出了点问题",
+    "tryAgain": "重试"
   },
   "pairing": {
     "missingCode": "缺少配对码",
@@ -38,7 +43,7 @@
     "orPasteCode": "或粘贴配对码",
     "pastePlaceholder": "orca://pair?code=… 或粘贴配对码",
     "tryAgain": "再试一次",
-    "connectWithThisDesktop": "与这台桌面配对?",
+    "connectWithThisDesktop": "与这台桌面配对？",
     "connect": "配对",
     "connecting": "连接中…",
     "confirm": {
@@ -104,7 +109,7 @@
     },
     "confirmRemove": {
       "title": "删除主机",
-      "message": "要删除 \"{{name}}\" 吗?之后可以重新配对。",
+      "message": "要删除 \"{{name}}\" 吗？之后可以重新配对。",
       "confirm": "删除"
     },
     "emptyState": {
@@ -136,7 +141,7 @@
     "progressA11y": "引导进度",
     "stepProgress": "第 {{current}} 步,共 {{total}} 步",
     "sessionView": {
-      "title": "希望如何打开会话?",
+      "title": "希望如何打开会话？",
       "body": "选择本机支持的智能体会话默认在终端还是对话界面中打开。长按会话标签可临时切换,后续可在设置中修改默认。",
       "choice": {
         "chat": "使用对话界面",
@@ -319,7 +324,7 @@
         "openSettings": "无法打开系统设置,请重试。"
       },
       "displayTest": {
-        "prompt": "通知收不到?",
+        "prompt": "通知收不到？",
         "detail": "通过 Orca 推送服务发送一条测试通知。",
         "send": "发送测试通知",
         "sending": "发送中…",
@@ -633,7 +638,8 @@
   "terminalShortcuts": {
     "group": {
       "shortcutBar": "快捷键栏",
-      "custom": "自定义快捷键"
+      "custom": "自定义快捷键",
+      "shortcutBarDescription": "切换按键可显示或隐藏，按住手柄拖动可排列终端快捷键栏上的顺序。"
     },
     "shortcutBarDescription": "切换按键可显示或隐藏，按住手柄拖动可排列终端快捷键栏上的顺序。",
     "resetDefaults": "恢复默认",
@@ -688,6 +694,9 @@
     "commandText": "命令内容",
     "promptPlaceholder": "让智能体调研此工作区",
     "supportsHint": "支持技能、文件路径和内置命令。",
+    "promptTooLong": "内容过长，无法保存。",
+    "promptTooLongForHost": "内容超出此主机限制。请更新主机上的 Orca，以保存更长的提示词。",
+    "promptCharacterCount": "{{used}} / {{max}} 个字符",
     "advanced": "高级",
     "appendEnter": "追加回车",
     "appendEnterDesc": "立即提交，而不是只插入文本。",
@@ -705,6 +714,12 @@
     "failedToSave": "保存快捷命令失败"
   },
   "tasks": {
+    "title": "任务",
+    "search": {
+      "projectView": "搜索项目视图…",
+      "jiraJql": "Jira JQL，例如 project = ABC AND statusCategory != Done",
+      "providerTasks": "搜索 {{provider}} 任务…"
+    },
     "project": {
       "repoNotInOrca": "仓库不在 Orca 中",
       "repoNotInOrcaBody": "{{repo}} 尚未添加到 Orca。请先在桌面端添加该仓库，然后刷新移动端任务。",
@@ -966,8 +981,10 @@
     "itemActions": {
       "kindMergeRequest": "合并请求",
       "kindGitlabTodo": "待办",
+      "kindJiraIssue": "Jira 工单",
       "kindLinearTicket": "Linear 工单",
       "openInGitlab": "在 GitLab 中打开",
+      "openInJira": "在 Jira 中打开",
       "openInLinear": "在 Linear 中打开",
       "reopen": "重新打开",
       "close": "关闭",
@@ -996,11 +1013,15 @@
     },
     "legacy": {
       "mergeMethod": "合并方式",
-      "chooseHowPullRequestMerged": "选择该拥提请求的合并方式。",
+      "chooseHowPullRequestMerged": "选择该拉取请求的合并方式。",
       "chooseHowMergeRequestMerged": "选择该合并请求的合并方式。",
       "merge": "合并",
       "mergeRequest": "合并请求",
-      "mergePullRequest": "合并拥提请求"
+      "mergePullRequest": "合并拉取请求",
+      "groupPrefix": "分组：{{value}}",
+      "orderPrefix": "排序：{{value}}",
+      "display": "显示",
+      "sortPrefix": "排序：{{value}}"
     },
     "subIssueDataUnavailable": "当前令牌无法获取子任务数据。",
     "mergeMethod": "合并方式",
@@ -1008,6 +1029,41 @@
     "rendererUiPlaceholder": "渲染界面",
     "github": {
       "openViewInGithub": "在 GitHub 中打开视图"
+    },
+    "picker": {
+      "allSites": "所有站点",
+      "selectTarget": "选择目标",
+      "sourceCount_one": "{{count}} 个来源",
+      "sourceCount_other": "{{count}} 个来源",
+      "allRepos": "所有仓库",
+      "repoCount_one": "{{count}} 个仓库",
+      "repoCount_other": "{{count}} 个仓库",
+      "viewOrder": "视图顺序",
+      "sortField": "{{field}} {{direction}}",
+      "ascendingShort": "升序",
+      "descendingShort": "降序",
+      "fieldsCount": "{{selected}}/{{total}} 个字段",
+      "fields": "字段",
+      "usesFieldSort": "按 {{field}} {{direction}}",
+      "usesGithubRankOrder": "使用 GitHub 排序顺序",
+      "ascending": "升序",
+      "descending": "降序",
+      "currentDirectionTapFor": "当前为{{direction}}，点击改为{{next}}",
+      "sortAscending": "按升序排列",
+      "viewNumber": "视图 #{{number}}",
+      "unsupportedLayout": "移动端不支持此布局",
+      "subtitleWithDefault": "{{subtitle}} · 默认",
+      "default": "默认",
+      "allWorkspaces": "所有工作区",
+      "workspace": "工作区",
+      "allTeams": "所有团队",
+      "oneTeam": "1 个团队",
+      "teamCount_one": "{{count}} 个团队",
+      "teamCount_other": "{{count}} 个团队",
+      "chooseProject": "选择项目",
+      "sourcePrefix": "来源：{{value}}",
+      "sortPrefix": "排序：{{value}}",
+      "fieldsPrefix": "字段：{{value}}"
     }
   },
   "prChecks": {
@@ -1186,7 +1242,7 @@
       "diffTruncatedForMobile": "差异过长，手机端预览已截断。"
     },
     "header": {
-      "openPrSidebar": "打开拥提请求侧栏",
+      "openPrSidebar": "打开拉取请求侧栏",
       "openReviewActions": "打开审阅操作"
     },
     "truncatedForMobilePreview": "差异内容过长，已在移动端截断预览。",
@@ -1274,7 +1330,7 @@
     "permanentlyDeletesOnGithub": "这将永久删除 GitHub 上的该评论。",
     "cancelEditingTitle": "取消编辑标题",
     "saveTitle": "保存标题",
-    "editPullRequestTitle": "编辑 Pull Request 标题"
+    "editPullRequestTitle": "编辑拉取请求标题"
   },
   "prConflicts": {
     "title": "冲突",
@@ -1390,55 +1446,68 @@
     "couldNotSendNotes": "发送备注失败"
   },
   "prSidebar": {
-    "pullRequest": "拥提请求",
-    "refreshPullRequest": "刷新拥提请求",
-    "createPullRequest": "创建拥提请求",
+    "pullRequest": "拉取请求",
+    "refreshPullRequest": "刷新拉取请求",
+    "createPullRequest": "创建拉取请求",
     "createPr": "创建 PR",
     "linkedPrUnavailable": "已关联的 PR #{{number}} 不可用",
-    "noOpenPullRequest": "没有开启的拥提请求",
+    "noOpenPullRequest": "没有开启的拉取请求",
     "refreshToCheckAgainOrCreate": "请刷新重试，或为当前分支新建一个 PR。",
     "branchNotLinked": "分支 {{branch}} 尚未关联任何开启的 PR。",
     "currentBranchNotLinked": "当前分支尚未关联任何开启的 PR。",
-    "linkAnExistingPullRequest": "关联已有的拥提请求",
+    "linkAnExistingPullRequest": "关联已有的拉取请求",
     "linkAnExistingPr": "关联已有的 PR",
-    "checkOutBranchBeforeCreatingPr": "请先切换到某个分支再创建拥提请求。",
-    "failedToCreatePullRequest": "创建拥提请求失败。",
-    "mergePullRequestConfirm": "确定合并拥提请求吗？",
+    "checkOutBranchBeforeCreatingPr": "请先切换到某个分支再创建拉取请求。",
+    "failedToCreatePullRequest": "创建拉取请求失败。",
+    "mergePullRequestConfirm": "确定合并拉取请求吗？",
     "mergeIntoBaseBranch": "这将把 #{{number}} 合并到目标分支。",
     "merge": "合并",
-    "closePullRequestConfirm": "确定关闭拥提请求吗？",
+    "closePullRequestConfirm": "确定关闭拉取请求吗？",
     "willBeClosedWithoutMerging": "#{{number}} 将被关闭，不作合并。",
     "close": "关闭",
-    "reopenPullRequestConfirm": "确定重新打开拥提请求吗？",
+    "reopenPullRequestConfirm": "确定重新打开拉取请求吗？",
     "willBeReopened": "#{{number}} 将被重新打开。",
     "reopen": "重新打开",
-    "mergePullRequest": "合并拥提请求",
+    "mergePullRequest": "合并拉取请求",
     "autoMergeWhenReady": "就绪自动合并",
     "toggleAutoMerge": "开关自动合并",
-    "closePullRequest": "关闭拥提请求",
-    "unlinkPullRequest": "取消关联拥提请求",
+    "closePullRequest": "关闭拉取请求",
+    "unlinkPullRequest": "取消关联拉取请求",
     "unlink": "取消关联",
-    "failedToUnlinkPullRequest": "取消关联拥提请求失败。",
-    "retryLoadingPr": "重试加载 Pull Request",
+    "failedToUnlinkPullRequest": "取消关联拉取请求失败。",
+    "retryLoadingPr": "重试加载拉取请求",
     "reviewStatusUnavailable": "无法获取评审状态",
     "checkingReviewStatus": "正在检查评审状态…",
     "reviewCreationUnavailable": "当前服务商不支持创建评审",
     "createProviderReview": "创建{{review}}",
     "branchNotReadyForReview": "该分支暂时还不能创建{{review}}。",
-    "failedToRefreshPullRequest": "刷新 Pull Request 失败。",
-    "failedToMergePullRequest": "合并 Pull Request 失败。",
+    "failedToRefreshPullRequest": "刷新拉取请求失败。",
+    "failedToMergePullRequest": "合并拉取请求失败。",
     "githubAccountNotConnected": "无权限，你的 GitHub 账号尚未连接。",
     "hostedReviewPanelUnavailable": "当前服务商不支持托管评审面板。",
-    "currentBranchUnavailable": "当前分支不可用。"
+    "currentBranchUnavailable": "当前分支不可用。",
+    "reopenPullRequest": "重新打开拉取请求"
   },
   "taskOptions": {
     "provider": {
-      "githubSubtitle": "Issues 和拥提请求",
+      "githubSubtitle": "Issues 和拉取请求",
       "gitlabSubtitle": "Issues 和合并请求",
       "linearSubtitle": "分配给你的和团队的 Issues",
       "githubLabel": "GitHub",
       "gitlabLabel": "GitLab",
-      "linearLabel": "Linear"
+      "linearLabel": "Linear",
+      "jiraLabel": "Jira",
+      "jiraSubtitle": "分配给你和由你报告的问题"
+    },
+    "jiraFilter": {
+      "assignedLabel": "我的问题",
+      "reportedLabel": "我报告的",
+      "allLabel": "全部",
+      "doneLabel": "已完成",
+      "assignedSubtitle": "分配给你的未解决问题",
+      "reportedSubtitle": "由你报告的未解决问题",
+      "allSubtitle": "所选站点中的未解决问题",
+      "doneSubtitle": "你最近解决的问题"
     },
     "gitlabFilter": {
       "openSubtitle": "开启的 Issues 和合并请求",
@@ -1487,7 +1556,7 @@
     },
     "githubKind": {
       "issuesSubtitle": "GitHub Issues",
-      "prsSubtitle": "GitHub 拥提请求",
+      "prsSubtitle": "GitHub 拉取请求",
       "projectSubtitle": "GitHub Projects 视图",
       "issuesLabel": "任务",
       "prsLabel": "PR",
@@ -1499,8 +1568,8 @@
       "assignedLabel": "分配给我的"
     },
     "prPresets": {
-      "openSubtitle": "开启的拥提请求",
-      "mineSubtitle": "你创建的拥提请求",
+      "openSubtitle": "开启的拉取请求",
+      "mineSubtitle": "你创建的拉取请求",
       "reviewSubtitle": "分配给你的审阅请求",
       "mineLabel": "我创建的",
       "reviewLabel": "待我评审"
@@ -1532,7 +1601,7 @@
     "discardChange": "丢弃更改",
     "discardChangesMessage": "确定要丢彨 \"{{path}}\" 的更改吗？此操作无法撤销。",
     "switchBranch": "切换分支",
-    "pullRequestCreated": "拥提请求已创建",
+    "pullRequestCreated": "拉取请求已创建",
     "openPrInBrowser": "要在浏览器中打开吗？",
     "openPrInBrowserWithWarning": "要在浏览器中打开吗？\\n\\n{{warning}}",
     "backToSession": "返回会话",
@@ -1545,7 +1614,9 @@
     "updateDesktopToUse": "请更新 Orca 桌面端，才能在手机上使用源代码管理。",
     "unableToLoad": "无法加载源代码管理",
     "unableToOpenDiff": "无法打开差异",
-    "unableToLoadCommittedDiff": "无法加载已提交的差异"
+    "unableToLoadCommittedDiff": "无法加载已提交的差异",
+    "unavailable": "源代码管理不可用",
+    "unableToLoadTitle": "加载失败"
   },
   "nativeChat": {
     "visualUnavailable": "无法显示可视化图表",
@@ -1571,12 +1642,24 @@
       "showLess": "收起",
       "showMore": "展开"
     },
+    "collapseToolRuns": "收起工具运行记录",
+    "expandToolRuns": "展开工具运行记录",
+    "queue": {
+      "paused": "已暂停",
+      "queued": "排队中",
+      "clearAllLabel": "删除所有排队消息",
+      "clearAll": "全部清空",
+      "label": "排队消息"
+    },
     "scrollToLatest": "滚动到最新",
     "selectText": "选择文本",
     "opensImageFullSize": "以全尺寸打开图片",
     "copyMessage": "复制消息",
     "loadEarlierMessages": "加载更早的消息",
     "resumeInNewCli": "在新 CLI 中继续"
+  },
+  "nativeChatImageViewer": {
+    "closeImage": "关闭图片"
   },
   "prReviewers": {
     "title": "审阅人",
@@ -1606,7 +1689,9 @@
     "viewSource": "查看 HTML 源代码",
     "previewRenderedHtml": "预览渲染后的 HTML",
     "viewHtmlSource": "查看 HTML 源码",
-    "title": "HTML 预览"
+    "title": "HTML 预览",
+    "preview": "预览",
+    "source": "源码"
   },
   "agentState": {
     "monitoringBackgroundTasks": "正在监视后台任务",
@@ -1614,7 +1699,8 @@
   },
   "workspaceDetail": {
     "noWorkspaceOpen": "还没有打开工作区",
-    "pickAWorkspace": "请从侧边栏选择一个工作区，其终端会显示在这里。"
+    "pickAWorkspace": "请从侧边栏选择一个工作区，其终端会显示在这里。",
+    "namePlaceholder": "工作区名称"
   },
   "hostDiagnostics": {
     "viewDiagnostics": "查看网络诊断"
@@ -1641,7 +1727,8 @@
     "sshConnection": "SSH 连接",
     "runOn": "运行位置",
     "failedToReadSshState": "读取 SSH 连接状态失败。",
-    "failedToConnectSshRepo": "连接 SSH 仓库失败。"
+    "failedToConnectSshRepo": "连接 SSH 仓库失败。",
+    "newWorkspace": "新建工作区"
   },
   "hosts": {
     "backToHosts": "返回主机列表",
@@ -1651,12 +1738,20 @@
     }
   },
   "voiceModels": {
-    "inUse": "使用中"
+    "inUse": "使用中",
+    "recommended": "推荐",
+    "apiKeySet": "已设置 API 密钥",
+    "setUpOnDesktop": "请在桌面端设置",
+    "use": "使用",
+    "deleteModel": "删除 {{name}}",
+    "downloadModel": "下载 {{name}}"
   },
   "jiraConnect": {
     "checkAgain": "重新检查",
     "updateDesktop": "请更新 Orca 桌面端",
-    "connectOnDesktop": "请在桌面端连接 Jira"
+    "connectOnDesktop": "请在桌面端连接 Jira",
+    "unreadable": "无法读取 Jira 凭据：{{error}}",
+    "addSite": "请在桌面端添加 Jira 站点。"
   },
   "agentLaunch": {
     "copyPrompt": "复制提示词"
@@ -1684,7 +1779,7 @@
     "viewRenderedPreview": "查看渲染后的 Markdown 预览"
   },
   "linkPr": {
-    "linkExisting": "关联已有 Pull Request",
+    "linkExisting": "关联已有拉取请求",
     "numberOrUrl": "PR 编号或 GitHub 链接"
   },
   "nativeChatPermission": {
@@ -1701,7 +1796,10 @@
   },
   "fileReader": {
     "copyReviewNotes": "复制评审备注",
-    "sendReviewNotesToAi": "将评审备注发送给 AI"
+    "sendReviewNotesToAi": "将评审备注发送给 AI",
+    "noReviewNotes": "没有审阅备注",
+    "reviewNoteCount_one": "{{count}} 条审阅备注",
+    "reviewNoteCount_other": "{{count}} 条审阅备注"
   },
   "commitFailure": {
     "title": "提交失败",
@@ -1720,7 +1818,9 @@
   },
   "fileExplorer": {
     "unavailableOnMobile": "移动端不可用",
-    "unableToLoadFiles": "无法加载文件"
+    "unableToLoadFiles": "无法加载文件",
+    "unableToLoadFolder": "无法加载文件夹",
+    "retryLoading": "重试加载 {{path}}"
   },
   "filePreview": {
     "waitingForDesktop": "等待桌面端...",
@@ -1740,6 +1840,8 @@
     "couldNotLoadWorkspaces": "无法从此主机加载工作树"
   },
   "workspaceOptions": {
+    "title": "工作区选项",
+    "backTo": "返回{{title}}",
     "clearFilters": "清除筛选"
   },
   "webShell": {
@@ -1752,7 +1854,14 @@
     "label": "智能体正在工作"
   },
   "markdownReader": {
-    "dismissKeyboard": "关闭键盘"
+    "dismissKeyboard": "关闭键盘",
+    "readOnly": "只读",
+    "changedOnDesktop": "已在桌面端更改",
+    "dismissKeyboardHint": "隐藏软件键盘并保持 Markdown 编辑器打开。",
+    "copySource": "复制 Markdown 源码",
+    "copyLoadedSource": "复制已加载的 Markdown 源码",
+    "previewTruncated": "预览已截断。",
+    "previewTruncatedWithSize": "预览已截断。文件大小：{{size}}。"
   },
   "nativeChatAsk": {
     "typeYourAnswer": "输入你的回答"
@@ -1769,7 +1878,7 @@
     "noCommits": "没有提交记录。"
   },
   "prChip": {
-    "createPullRequest": "创建 Pull Request"
+    "createPullRequest": "创建拉取请求"
   },
   "filePreviewError": {
     "binaryUnavailable": "无法预览二进制文件",
@@ -1803,6 +1912,7 @@
   "workspaceView": {
     "syncedAcrossDevices": "已在你的设备间同步",
     "sort": {
+      "smartLabel": "智能体活动",
       "smartSubtitle": "需要关注的智能体优先，然后按最近活动",
       "nameLabel": "名称",
       "nameSubtitle": "按名称字母排序",
@@ -1812,7 +1922,19 @@
       "repoSubtitle": "先按仓库，再按工作树名称",
       "manualLabel": "手动",
       "manualSubtitle": "桌面端拖拽顺序"
-    }
+    },
+    "group": {
+      "noneLabel": "不分组",
+      "statusLabel": "状态",
+      "repoLabel": "仓库",
+      "prStatusLabel": "PR 状态"
+    },
+    "folder": "文件夹",
+    "child": "子工作树",
+    "remoteHost": "远程主机",
+    "projectLabel": "项目 {{repo}}",
+    "childCount_one": "{{count}} 个子工作树",
+    "childCount_other": "{{count}} 个子工作树"
   },
   "attach": {
     "disconnected": "附加失败（已断开连接）",
@@ -1873,7 +1995,7 @@
     "failedToCopyText": "复制文本失败",
     "failedToRequestReviewers": "请求评审人失败",
     "failedToRefreshChecks": "刷新检查结果失败",
-    "failedToMergePullRequest": "合并 Pull Request 失败",
+    "failedToMergePullRequest": "合并拉取请求失败",
     "failedToUpdateStatus": "更新状态失败",
     "failedToReply": "回复失败",
     "failedToMerge": "合并失败",
@@ -1900,7 +2022,7 @@
     "failedToEditComment": "编辑评论失败",
     "failedToUpdateGitLabItem": "更新 GitLab 条目失败",
     "failedToUpdateGitHubIssue": "更新 GitHub 问题失败",
-    "failedToUpdateGitHubPullRequest": "更新 GitHub Pull Request 失败",
+    "failedToUpdateGitHubPullRequest": "更新 GitHub 拉取请求失败",
     "failedToCreateGitHubIssue": "创建 GitHub 问题失败",
     "failedToCreateGitLabIssue": "创建 GitLab 问题失败",
     "failedToCreateLinearIssue": "创建 Linear 问题失败",
@@ -1927,7 +2049,7 @@
     "sourceControl": "源代码管理",
     "agentSessionHistory": "代理会话历史",
     "changes": "更改",
-    "pullRequest": "Pull Request",
+    "pullRequest": "拉取请求",
     "workspace": "工作区"
   },
   "chatTurn": {
@@ -1972,7 +2094,7 @@
     "modelAccessible": "模型，{{name}}"
   },
   "errors": {
-    "unableToLoadPullRequest": "无法加载 Pull Request",
+    "unableToLoadPullRequest": "无法加载拉取请求",
     "couldNotFitTerminal": "无法将终端适配到此屏幕",
     "attachFailedReconnecting": "附加失败（正在重新连接）",
     "sourceControlActionFailed": "源代码管理操作失败",
@@ -1984,7 +2106,7 @@
     "failedToSaveReviewNotes": "保存评审备注失败",
     "failedToUpdateTitle": "更新标题失败。",
     "commentActionFailed": "评论操作失败",
-    "failedToCreatePullRequest": "创建 Pull Request 失败"
+    "failedToCreatePullRequest": "创建拉取请求 失败"
   },
   "hostedReview": {
     "pushBeforeCreateFailed": "推送失败。请解决推送错误后重试。"

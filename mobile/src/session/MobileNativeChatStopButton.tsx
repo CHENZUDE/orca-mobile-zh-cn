@@ -1,10 +1,9 @@
-import { Pressable, Text } from 'react-native'
+import { ActivityIndicator, Pressable, StyleSheet } from 'react-native'
 import { Square } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
 import { colors } from '../theme/mobile-theme'
-import { styles } from './mobile-native-chat-view-styles'
 
-/** The chat header's Stop. `held`: this phone's own Stop request is still in flight. */
+/** The composer's Stop, in Send's slot. `held`: this phone's own Stop request is still in flight. */
 export function MobileNativeChatStopButton({
   onStop,
   held
@@ -21,9 +20,27 @@ export function MobileNativeChatStopButton({
       disabled={held}
       hitSlop={8}
       accessibilityLabel={held ? label : t('chatTurn.stopAgent')}
+      accessibilityRole="button"
     >
-      <Square size={13} color={colors.statusRed} strokeWidth={2.4} fill={colors.statusRed} />
-      <Text style={styles.stopLabel}>{label}</Text>
+      {held ? (
+        <ActivityIndicator size="small" color={colors.statusRed} />
+      ) : (
+        <Square size={16} color={colors.statusRed} strokeWidth={2.4} fill={colors.statusRed} />
+      )}
     </Pressable>
   )
 }
+
+const styles = StyleSheet.create({
+  stopButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.bgRaised
+  },
+  pressed: {
+    opacity: 0.7
+  }
+})

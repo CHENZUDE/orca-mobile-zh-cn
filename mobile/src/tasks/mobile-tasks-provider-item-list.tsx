@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -31,7 +31,7 @@ import {
 } from './mobile-tasks-legacy-foundation'
 
 export function renderMobileTasksProviderItemList(model: ConnectionPresentationModel) {
-  const { t } = useTranslation()
+  const t = translate
   const {
     displayedEntries,
     emptyLabel,

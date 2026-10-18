@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -37,7 +37,7 @@ export function renderMobileTasksLinearList(model: ConnectionPresentationModel) 
     setActionItem,
     setLinearStatusPickerItem
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return loading ? (
     <View style={styles.centered}>
       <ActivityIndicator size="small" color={colors.textSecondary} />

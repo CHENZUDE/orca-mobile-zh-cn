@@ -3,6 +3,7 @@ import { act, create, type ReactTestRenderer } from 'react-test-renderer'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { MobileMarkdownReader } from './MobileMarkdownReader'
 import type { MarkdownDocState } from './mobile-session-route-types'
+import { I18nProvider } from '../i18n/I18nProvider'
 
 const mocks = vi.hoisted(() => ({
   dismissKeyboard: vi.fn(),
@@ -54,16 +55,20 @@ describe('MobileMarkdownReader', () => {
   function render(keyboardLift: number, doc: MarkdownDocState = readyDoc): ReactTestRenderer {
     act(() => {
       renderer = create(
-        createElement(MobileMarkdownReader, {
-          documentId: 'doc-1',
-          doc,
-          keyboardLift,
-          onRefresh: vi.fn(),
-          onChange: vi.fn(),
-          onSave: vi.fn(),
-          onCopy: vi.fn(),
-          onDiscard: vi.fn()
-        })
+        createElement(
+          I18nProvider,
+          null,
+          createElement(MobileMarkdownReader, {
+            documentId: 'doc-1',
+            doc,
+            keyboardLift,
+            onRefresh: vi.fn(),
+            onChange: vi.fn(),
+            onSave: vi.fn(),
+            onCopy: vi.fn(),
+            onDiscard: vi.fn()
+          })
+        )
       )
     })
     return renderer as unknown as ReactTestRenderer

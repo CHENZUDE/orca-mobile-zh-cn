@@ -7,6 +7,7 @@ import { voiceSettingsStyles as styles } from './voice-settings-styles'
 import { ChevronLeft, ChevronRight } from 'lucide-react-native'
 import { colors, spacing } from '../theme/mobile-theme'
 import { BottomDrawer } from '../components/BottomDrawer'
+import { MobileSegmentedControl } from '../components/MobileSegmentedControl'
 import { VoiceModelList } from '../components/VoiceModelList'
 import { useDictationSetupPoller } from '../dictation/use-dictation-setup-poller'
 import {
@@ -16,8 +17,6 @@ import {
 } from '../dictation/mobile-dictation-setup'
 
 const POLL_INTERVAL_MS = 1500
-
-const DICTATION_MODE_VALUES = ['toggle', 'hold'] as const
 
 type ModelBusyAction = { modelId: string; type: 'download' | 'select' | 'delete' }
 
@@ -38,6 +37,10 @@ export default function VoiceSettingsScreen({
   const [busyAction, setBusyAction] = useState<ModelBusyAction | null>(null)
   const requestEpoch = useRef(0)
   const [modelDrawerOpen, setModelDrawerOpen] = useState(false)
+  const dictationModes = [
+    { value: 'toggle', label: t('settings.voice.dictationMode.toggle') },
+    { value: 'hold', label: t('settings.voice.dictationMode.hold') }
+  ] as const
   const refresh = useCallback(async (): Promise<boolean | undefined> => {
     if (!operations) {
       return false
@@ -228,25 +231,12 @@ export default function VoiceSettingsScreen({
                   {t('settings.voice.dictationMode.subtitle')}
                 </Text>
               </View>
-              <View style={styles.segmented}>
-                {DICTATION_MODE_VALUES.map((value) => {
-                  const active = setup.dictationMode === value
-                  return (
-                    <Pressable
-                      key={value}
-                      accessibilityRole="radio"
-                      aria-checked={active}
-                      testID={`voice-mode-${value}`}
-                      onPress={() => void configure({ dictationMode: value })}
-                      style={[styles.segment, active && styles.segmentActive]}
-                    >
-                      <Text style={[styles.segmentText, active && styles.segmentTextActive]}>
-                        {t(`settings.voice.dictationMode.${value}`)}
-                      </Text>
-                    </Pressable>
-                  )
-                })}
-              </View>
+              <MobileSegmentedControl
+                segments={dictationModes}
+                selected={setup.dictationMode}
+                onSelect={(dictationMode) => void configure({ dictationMode })}
+                testIDPrefix="voice-mode-"
+              />
             </View>
           </View>
 

@@ -29,7 +29,12 @@
     "copied": "Copied",
     "copyLoaded": "Copy loaded",
     "copy": "Copy",
-    "couldNotCopy": "Couldn't copy"
+    "couldNotCopy": "Couldn't copy",
+    "ok": "OK",
+    "discard": "Discard",
+    "send": "Send",
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Try again"
   },
   "pairing": {
     "missingCode": "Missing pairing code",
@@ -633,7 +638,8 @@
   "terminalShortcuts": {
     "group": {
       "shortcutBar": "SHORTCUT BAR",
-      "custom": "CUSTOM SHORTCUTS"
+      "custom": "CUSTOM SHORTCUTS",
+      "shortcutBarDescription": "Toggle keys to show or hide them, and hold the grip to drag a key into the order you want on the terminal shortcut bar."
     },
     "shortcutBarDescription": "Toggle keys to show or hide them, and hold the grip to drag a key into the order you want on the terminal shortcut bar.",
     "resetDefaults": "Reset Defaults",
@@ -688,6 +694,9 @@
     "commandText": "Command Text",
     "promptPlaceholder": "Ask the agent to investigate this workspace",
     "supportsHint": "Supports skills, file paths, and built-in commands.",
+    "promptTooLong": "Too long to save.",
+    "promptTooLongForHost": "Too long for this host. Update Orca on the host to save longer prompts.",
+    "promptCharacterCount": "{{used}} / {{max}} characters",
     "advanced": "Advanced",
     "appendEnter": "Append Enter",
     "appendEnterDesc": "Submit immediately instead of only inserting text.",
@@ -705,6 +714,12 @@
     "failedToSave": "Failed to save quick command"
   },
   "tasks": {
+    "title": "Tasks",
+    "search": {
+      "projectView": "Search project view...",
+      "jiraJql": "Jira JQL, e.g. project = ABC AND statusCategory != Done",
+      "providerTasks": "Search {{provider}} tasks..."
+    },
     "project": {
       "repoNotInOrca": "Repository not in Orca",
       "repoNotInOrcaBody": "{{repo}} is not added to Orca. Add this repository from the desktop app, then refresh mobile Tasks.",
@@ -966,8 +981,10 @@
     "itemActions": {
       "kindMergeRequest": "Merge request",
       "kindGitlabTodo": "To-do",
+      "kindJiraIssue": "Jira issue",
       "kindLinearTicket": "Linear ticket",
       "openInGitlab": "Open in GitLab",
+      "openInJira": "Open in Jira",
       "openInLinear": "Open in Linear",
       "reopen": "Reopen",
       "close": "Close",
@@ -1000,7 +1017,11 @@
       "chooseHowMergeRequestMerged": "Choose how this merge request should be merged.",
       "merge": "Merge",
       "mergeRequest": "Merge Request",
-      "mergePullRequest": "Merge Pull Request"
+      "mergePullRequest": "Merge Pull Request",
+      "groupPrefix": "Group: {{value}}",
+      "orderPrefix": "Order: {{value}}",
+      "display": "Display",
+      "sortPrefix": "Sort: {{value}}"
     },
     "subIssueDataUnavailable": "Sub-issue data is unavailable for your token.",
     "mergeMethod": "Merge method",
@@ -1008,6 +1029,41 @@
     "rendererUiPlaceholder": "Renderer UI",
     "github": {
       "openViewInGithub": "Open view in GitHub"
+    },
+    "picker": {
+      "allSites": "All sites",
+      "selectTarget": "Select target",
+      "sourceCount_one": "{{count}} source",
+      "sourceCount_other": "{{count}} sources",
+      "allRepos": "All repos",
+      "repoCount_one": "{{count}} repo",
+      "repoCount_other": "{{count}} repos",
+      "viewOrder": "View order",
+      "sortField": "{{field}} {{direction}}",
+      "ascendingShort": "asc",
+      "descendingShort": "desc",
+      "fieldsCount": "{{selected}}/{{total}} fields",
+      "fields": "Fields",
+      "usesFieldSort": "Uses {{field}} {{direction}}",
+      "usesGithubRankOrder": "Uses GitHub rank order",
+      "ascending": "ascending",
+      "descending": "descending",
+      "currentDirectionTapFor": "Currently {{direction}} ? tap for {{next}}",
+      "sortAscending": "Sort ascending",
+      "viewNumber": "View #{{number}}",
+      "unsupportedLayout": "Unsupported layout on mobile",
+      "subtitleWithDefault": "{{subtitle}} ? Default",
+      "default": "Default",
+      "allWorkspaces": "All workspaces",
+      "workspace": "Workspace",
+      "allTeams": "All teams",
+      "oneTeam": "1 team",
+      "teamCount_one": "{{count}} team",
+      "teamCount_other": "{{count}} teams",
+      "chooseProject": "Choose project",
+      "sourcePrefix": "Source: {{value}}",
+      "sortPrefix": "Sort: {{value}}",
+      "fieldsPrefix": "Fields: {{value}}"
     }
   },
   "prChecks": {
@@ -1429,7 +1485,8 @@
     "failedToMergePullRequest": "Failed to merge pull request.",
     "githubAccountNotConnected": "Not permitted - your GitHub account is not connected.",
     "hostedReviewPanelUnavailable": "Hosted review panel unavailable for this provider.",
-    "currentBranchUnavailable": "Current branch unavailable."
+    "currentBranchUnavailable": "Current branch unavailable.",
+    "reopenPullRequest": "Reopen pull request"
   },
   "taskOptions": {
     "provider": {
@@ -1438,7 +1495,19 @@
       "linearSubtitle": "Assigned and team issues",
       "githubLabel": "GitHub",
       "gitlabLabel": "GitLab",
-      "linearLabel": "Linear"
+      "linearLabel": "Linear",
+      "jiraLabel": "Jira",
+      "jiraSubtitle": "Assigned and reported issues"
+    },
+    "jiraFilter": {
+      "assignedLabel": "My Issues",
+      "reportedLabel": "Reported",
+      "allLabel": "All",
+      "doneLabel": "Done",
+      "assignedSubtitle": "Unresolved issues assigned to you",
+      "reportedSubtitle": "Unresolved issues you reported",
+      "allSubtitle": "Unresolved issues across the selected sites",
+      "doneSubtitle": "Your recently resolved issues"
     },
     "gitlabFilter": {
       "openSubtitle": "Open issues and merge requests",
@@ -1545,7 +1614,9 @@
     "updateDesktopToUse": "Update Orca desktop to use Source Control on mobile.",
     "unableToLoad": "Unable to load source control",
     "unableToOpenDiff": "Unable to open diff",
-    "unableToLoadCommittedDiff": "Unable to load committed diff"
+    "unableToLoadCommittedDiff": "Unable to load committed diff",
+    "unavailable": "Source Control Unavailable",
+    "unableToLoadTitle": "Unable to Load"
   },
   "nativeChat": {
     "visualUnavailable": "Visualization unavailable",
@@ -1571,12 +1642,24 @@
       "showLess": "Show less",
       "showMore": "Show more"
     },
+    "collapseToolRuns": "Collapse tool runs",
+    "expandToolRuns": "Expand tool runs",
+    "queue": {
+      "paused": "Paused",
+      "queued": "Queued",
+      "clearAllLabel": "Delete every queued message",
+      "clearAll": "Clear all",
+      "label": "Queued messages"
+    },
     "scrollToLatest": "Scroll to latest",
     "selectText": "Select text",
     "opensImageFullSize": "Opens the image full size",
     "copyMessage": "Copy message",
     "loadEarlierMessages": "Load earlier messages",
     "resumeInNewCli": "Resume in New CLI"
+  },
+  "nativeChatImageViewer": {
+    "closeImage": "Close image"
   },
   "prReviewers": {
     "title": "Reviewers",
@@ -1606,7 +1689,9 @@
     "viewSource": "View HTML source",
     "previewRenderedHtml": "Preview rendered HTML",
     "viewHtmlSource": "View HTML source",
-    "title": "HTML preview"
+    "title": "HTML preview",
+    "preview": "Preview",
+    "source": "Source"
   },
   "agentState": {
     "monitoringBackgroundTasks": "Monitoring background tasks",
@@ -1614,7 +1699,8 @@
   },
   "workspaceDetail": {
     "noWorkspaceOpen": "No workspace open",
-    "pickAWorkspace": "Pick a workspace from the sidebar to open its terminal here."
+    "pickAWorkspace": "Pick a workspace from the sidebar to open its terminal here.",
+    "namePlaceholder": "Workspace name"
   },
   "hostDiagnostics": {
     "viewDiagnostics": "View network diagnostics"
@@ -1641,7 +1727,8 @@
     "sshConnection": "SSH Connection",
     "runOn": "Run on",
     "failedToReadSshState": "Failed to read SSH connection state.",
-    "failedToConnectSshRepo": "Failed to connect to SSH repository."
+    "failedToConnectSshRepo": "Failed to connect to SSH repository.",
+    "newWorkspace": "New workspace"
   },
   "hosts": {
     "backToHosts": "Back to hosts",
@@ -1651,12 +1738,20 @@
     }
   },
   "voiceModels": {
-    "inUse": "In use"
+    "inUse": "In use",
+    "recommended": "Recommended",
+    "apiKeySet": "API key set",
+    "setUpOnDesktop": "Set up on desktop",
+    "use": "Use",
+    "deleteModel": "Delete {{name}}",
+    "downloadModel": "Download {{name}}"
   },
   "jiraConnect": {
     "checkAgain": "Check again",
     "updateDesktop": "Update Orca desktop",
-    "connectOnDesktop": "Connect Jira on your desktop"
+    "connectOnDesktop": "Connect Jira on your desktop",
+    "unreadable": "Could not read Jira credentials: {{error}}",
+    "addSite": "Add a Jira site on your desktop."
   },
   "agentLaunch": {
     "copyPrompt": "Copy prompt"
@@ -1701,7 +1796,10 @@
   },
   "fileReader": {
     "copyReviewNotes": "Copy review notes",
-    "sendReviewNotesToAi": "Send review notes to AI"
+    "sendReviewNotesToAi": "Send review notes to AI",
+    "noReviewNotes": "No review notes",
+    "reviewNoteCount_one": "{{count}} review note",
+    "reviewNoteCount_other": "{{count}} review notes"
   },
   "commitFailure": {
     "title": "Commit failed",
@@ -1720,7 +1818,9 @@
   },
   "fileExplorer": {
     "unavailableOnMobile": "Unavailable on mobile",
-    "unableToLoadFiles": "Unable to load files"
+    "unableToLoadFiles": "Unable to load files",
+    "unableToLoadFolder": "Unable to load folder",
+    "retryLoading": "Retry loading {{path}}"
   },
   "filePreview": {
     "waitingForDesktop": "Waiting for desktop...",
@@ -1740,6 +1840,8 @@
     "couldNotLoadWorkspaces": "Could not load workspaces from this host"
   },
   "workspaceOptions": {
+    "title": "Workspace options",
+    "backTo": "Back to {{title}}",
     "clearFilters": "Clear filters"
   },
   "webShell": {
@@ -1752,7 +1854,14 @@
     "label": "Agent is working"
   },
   "markdownReader": {
-    "dismissKeyboard": "Dismiss keyboard"
+    "dismissKeyboard": "Dismiss keyboard",
+    "readOnly": "Read only",
+    "changedOnDesktop": "Changed on desktop",
+    "dismissKeyboardHint": "Hides the software keyboard and keeps the markdown editor open.",
+    "copySource": "Copy Markdown source",
+    "copyLoadedSource": "Copy loaded Markdown source",
+    "previewTruncated": "Preview truncated.",
+    "previewTruncatedWithSize": "Preview truncated. File size: {{size}}."
   },
   "nativeChatAsk": {
     "typeYourAnswer": "Type your answer"
@@ -1803,6 +1912,7 @@
   "workspaceView": {
     "syncedAcrossDevices": "Synced across your devices",
     "sort": {
+      "smartLabel": "Agent activity",
       "smartSubtitle": "Agents that need attention, then recent activity",
       "nameLabel": "Name",
       "nameSubtitle": "Alphabetical by name",
@@ -1812,7 +1922,19 @@
       "repoSubtitle": "Repository, then workspace name",
       "manualLabel": "Manual",
       "manualSubtitle": "Desktop drag order"
-    }
+    },
+    "group": {
+      "noneLabel": "No grouping",
+      "statusLabel": "Status",
+      "repoLabel": "Repository",
+      "prStatusLabel": "PR status"
+    },
+    "folder": "Folder",
+    "child": "Child",
+    "remoteHost": "Remote host",
+    "projectLabel": "Project {{repo}}",
+    "childCount_one": "{{count}} child",
+    "childCount_other": "{{count}} children"
   },
   "attach": {
     "disconnected": "Attach failed (disconnected)",

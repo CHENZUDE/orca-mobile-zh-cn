@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -49,7 +50,7 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
     setWorkspaceRepoPickerItem,
     workspaceRepos
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!actionItem) {
     return null
   }
@@ -59,7 +60,10 @@ export function renderMobileTasksItemActions(model: ConnectionPresentationModel)
         style={styles.actionRow}
         disabled={creatingKey === actionItem.key}
         onPress={() => {
-          if (actionItem.provider === 'linear' && workspaceRepos.length > 1) {
+          // Jira, like Linear, is not repo-scoped, so the target repo has to be asked for
+          // rather than defaulted to the first one.
+          const needsRepoChoice = actionItem.provider === 'linear' || actionItem.provider === 'jira'
+          if (needsRepoChoice && workspaceRepos.length > 1) {
             setWorkspaceRepoPickerItem(actionItem)
             return
           }

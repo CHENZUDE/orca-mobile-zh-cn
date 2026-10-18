@@ -55,10 +55,10 @@ export function MobileLinkPrForm({ client, worktreeId, onCancel, onLinked }: Pro
           onPress={onCancel}
           disabled={submitting}
           accessibilityRole="button"
-          accessibilityLabel="Cancel"
+          accessibilityLabel={t('common.cancel')}
           hitSlop={8}
         >
-          <Text style={styles.cancelText}>Cancel</Text>
+          <Text style={styles.cancelText}>{t('common.cancel')}</Text>
         </Pressable>
       </View>
       <Text style={styles.label}>{t('linkPr.numberOrUrl')}</Text>

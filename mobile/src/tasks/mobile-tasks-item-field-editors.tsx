@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   SHOW_MOBILE_DETAIL_METADATA_EDITORS,
@@ -40,7 +40,7 @@ export function renderMobileTasksItemFieldEditors(model: ConnectionPresentationM
     updateGitHubPullRequestMetadata,
     updateGitLabIssueMetadata
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!actionItem || !detailPayload) {
     return null
   }

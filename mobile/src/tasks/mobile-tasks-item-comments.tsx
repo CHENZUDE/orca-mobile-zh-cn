@@ -1,5 +1,4 @@
 import { type ReactNode, View, Text } from './mobile-tasks-dependencies'
-import { gitLabTodoTargetLabel } from './mobile-tasks-item-mapping'
 import { COMMENT_REACTION_EMOJI } from './mobile-tasks-options'
 import type { DetailCommentGroup } from './mobile-tasks-view-state-types'
 import type { TaskItem } from './mobile-tasks-project-workspace-types'
@@ -19,6 +18,9 @@ export function taskKindLabel(item: TaskItem): string {
   if (item.provider === 'gitlabTodo') {
     return 'tasks.itemActions.kindGitlabTodo'
   }
+  if (item.provider === 'jira') {
+    return 'tasks.itemActions.kindJiraIssue'
+  }
   return 'tasks.itemActions.kindLinearTicket'
 }
 
@@ -28,6 +30,9 @@ export function taskExternalOpenLabel(item: TaskItem): string {
   }
   if (item.provider === 'gitlab' || item.provider === 'gitlabTodo') {
     return 'tasks.itemActions.openInGitlab'
+  }
+  if (item.provider === 'jira') {
+    return 'tasks.itemActions.openInJira'
   }
   return 'tasks.itemActions.openInLinear'
 }

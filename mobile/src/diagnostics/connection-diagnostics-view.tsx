@@ -50,7 +50,7 @@ export function ConnectionDiagnosticsView({
         >
           <ChevronLeft size={22} color={colors.textSecondary} />
         </Pressable>
-        <Text style={styles.heading}>{t('diagnostics.connection.heading')}</Text>
+        <Text style={styles.heading}>{t('settings.diagnostics.connection.heading')}</Text>
       </View>
 
       {hostPicker}
@@ -58,7 +58,7 @@ export function ConnectionDiagnosticsView({
         <>
           <View style={styles.statusRow}>
             <Text style={styles.statusText}>
-              {state}{reconnectAttempts > 0 ? ` \u00b7 ${t('diagnostics.connection.attempt', { count: reconnectAttempts })}` : ''}
+              {state}{reconnectAttempts > 0 ? ` \u00b7 ${t('settings.diagnostics.connection.attempt', { count: reconnectAttempts })}` : ''}
             </Text>
             <Pressable style={styles.copyButton} onPress={() => void copyDiagnostics()}>
               {copied ? (
@@ -66,18 +66,18 @@ export function ConnectionDiagnosticsView({
               ) : (
                 <Copy size={14} color={colors.textSecondary} />
               )}
-              <Text style={styles.copyButtonText}>{copied ? t('diagnostics.connection.copied') : t('diagnostics.connection.copyReport')}</Text>
+              <Text style={styles.copyButtonText}>{copied ? t('settings.diagnostics.connection.copied') : t('settings.diagnostics.connection.copyReport')}</Text>
             </Pressable>
           </View>
           {diagnosis && (
             <View style={styles.diagnosisCard}>
-            <Text style={styles.diagnosisHeading}>{t('diagnostics.connection.diagnosisHeading')}</Text>
+            <Text style={styles.diagnosisHeading}>{t('settings.diagnostics.connection.diagnosisHeading')}</Text>
               <Text style={styles.diagnosisText}>{diagnosis.likelyCause}</Text>
               <Text style={styles.diagnosisNext}>{diagnosis.nextStep}</Text>
               {diagnosis.reportability === 'orca-relay' && (
                 <>
                   <Text style={styles.privacyHint}>
-                    {t('diagnostics.connection.privacyHint')}
+                    {t('settings.diagnostics.connection.privacyHint')}
                   </Text>
                   <Pressable
                     style={styles.sendButton}
@@ -91,12 +91,12 @@ export function ConnectionDiagnosticsView({
                     )}
                     <Text style={styles.sendButtonText}>
                       {submissionState === 'sending'
-                        ? t('diagnostics.connection.sending')
+                        ? t('settings.diagnostics.connection.sending')
                         : submissionState === 'sent'
-                          ? t('diagnostics.connection.sent')
+                          ? t('settings.diagnostics.connection.sent')
                           : submissionState === 'failed'
-                            ? t('diagnostics.connection.retry')
-                            : t('diagnostics.connection.send')}
+                            ? t('settings.diagnostics.connection.retry')
+                            : t('settings.diagnostics.connection.send')}
                     </Text>
                   </Pressable>
                 </>
@@ -107,12 +107,12 @@ export function ConnectionDiagnosticsView({
             <ConnectionLog entries={[...entries]} title={hostName} fillAvailableHeight />
           ) : (
             <Text style={styles.emptyText}>
-              {t('diagnostics.connection.noEvents')}
+              {t('settings.diagnostics.connection.noEvents')}
             </Text>
           )}
         </>
       ) : (
-        <Text style={styles.emptyText}>{t('diagnostics.connection.noHosts')}</Text>
+        <Text style={styles.emptyText}>{t('settings.diagnostics.connection.noHosts')}</Text>
       )}
     </View>
   )

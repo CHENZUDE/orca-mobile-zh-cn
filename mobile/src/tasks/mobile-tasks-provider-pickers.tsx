@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   PickerModal,
@@ -23,6 +23,7 @@ import {
   GITHUB_KIND_OPTIONS
 } from './mobile-tasks-legacy-foundation'
 import { styles } from './mobile-tasks-legacy-styles'
+import { normalizeJiraFilter } from './mobile-jira-issue-filters'
 
 export function renderMobileTasksProviderPicker(model: ConnectionPresentationModel) {
   const {
@@ -36,6 +37,7 @@ export function renderMobileTasksProviderPicker(model: ConnectionPresentationMod
     setGithubPreset,
     setItems,
     setLinearFilter,
+    setJiraFilter,
     setProvider,
     setQuery,
     setShowProviderPicker,
@@ -43,7 +45,7 @@ export function renderMobileTasksProviderPicker(model: ConnectionPresentationMod
     taskResumeRef,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showProviderPicker}
@@ -81,6 +83,11 @@ export function renderMobileTasksProviderPicker(model: ConnectionPresentationMod
           setLinearFilter(normalizeLinearFilter(resume.linearPreset))
           setQuery(nextQuery)
           setAppliedQuery(nextQuery.trim())
+        } else if (next === 'jira') {
+          const nextQuery = resume.jiraQuery ?? ''
+          setJiraFilter(normalizeJiraFilter(resume.jiraPreset))
+          setQuery(nextQuery)
+          setAppliedQuery(nextQuery.trim())
         } else {
           setQuery('')
           setAppliedQuery('')
@@ -103,7 +110,7 @@ export function renderMobileTasksRepoPicker(model: ConnectionPresentationModel) 
     taskUiReady,
     toggleRepoSelection
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer visible={taskUiReady && showRepoPicker} onClose={() => setShowRepoPicker(false)}>
       <View style={styles.sheetHeader}>
@@ -165,7 +172,7 @@ export function renderMobileTasksGitHubIssueSourcePicker(model: ConnectionPresen
     showGitHubIssueSourcePicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showGitHubIssueSourcePicker}
@@ -263,7 +270,7 @@ export function renderMobileTasksGitHubViewPicker(model: ConnectionPresentationM
     showGitHubKindPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitHubKindPicker}
@@ -311,7 +318,7 @@ export function renderMobileTasksGitHubPresetPicker(model: ConnectionPresentatio
     showGitHubPresetPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitHubPresetPicker}
@@ -351,7 +358,7 @@ export function renderMobileTasksPagePicker(model: ConnectionPresentationModel) 
     showGitHubPagePicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showGitHubPagePicker}

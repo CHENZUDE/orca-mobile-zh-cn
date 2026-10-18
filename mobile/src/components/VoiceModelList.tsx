@@ -70,13 +70,17 @@ export function VoiceModelList({
                   <Text style={styles.modelLabel} numberOfLines={1}>
                     {model.label}
                   </Text>
-                  {model.recommended ? <Text style={styles.recommended}>Recommended</Text> : null}
+                  {model.recommended ? (
+                    <Text style={styles.recommended}>{t('voiceModels.recommended')}</Text>
+                  ) : null}
                 </View>
                 <Text style={styles.modelMeta}>{modelMeta(model)}</Text>
               </View>
               {model.provider === 'openai' ? (
                 <Text style={styles.modelStateText}>
-                  {model.status === 'ready' ? 'API key set' : 'Set up on desktop'}
+                  {model.status === 'ready'
+                    ? t('voiceModels.apiKeySet')
+                    : t('voiceModels.setUpOnDesktop')}
                 </Text>
               ) : model.status === 'ready' ? (
                 <View style={styles.readyActions}>
@@ -97,7 +101,7 @@ export function VoiceModelList({
                       {selectBusy ? (
                         <ActivityIndicator size="small" color={colors.textSecondary} />
                       ) : (
-                        <Text style={styles.actionText}>Use</Text>
+                        <Text style={styles.actionText}>{t('voiceModels.use')}</Text>
                       )}
                     </Pressable>
                   )}
@@ -105,7 +109,7 @@ export function VoiceModelList({
                     style={({ pressed }) => [styles.iconButton, pressed && styles.actionPressed]}
                     disabled={anyBusy}
                     onPress={() => onDelete(model)}
-                    accessibilityLabel={'Delete ' + model.label}
+                    accessibilityLabel={t('voiceModels.deleteModel', { name: model.label })}
                   >
                     {deleteBusy ? (
                       <ActivityIndicator size="small" color={colors.statusRed} />
@@ -121,7 +125,7 @@ export function VoiceModelList({
                   style={({ pressed }) => [styles.iconButton, pressed && styles.actionPressed]}
                   disabled={anyBusy}
                   onPress={() => onDownload(model)}
-                  accessibilityLabel={'Download ' + model.label}
+                  accessibilityLabel={t('voiceModels.downloadModel', { name: model.label })}
                 >
                   {downloadBusy ? (
                     <ActivityIndicator size="small" color={colors.textSecondary} />

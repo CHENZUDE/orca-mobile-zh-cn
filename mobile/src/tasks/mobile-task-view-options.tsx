@@ -22,17 +22,25 @@ export const JIRA_FILTER_OPTIONS: PickerOption<JiraIssueFilter>[] = [
   {
     value: 'assigned',
     label: JIRA_FILTER_LABELS.assigned,
-    subtitle: 'Unresolved issues assigned to you'
+    labelKey: 'taskOptions.jiraFilter.assignedLabel',
+    subtitleKey: 'taskOptions.jiraFilter.assignedSubtitle'
   },
   {
     value: 'reported',
     label: JIRA_FILTER_LABELS.reported,
-    subtitle: 'Unresolved issues you reported'
+    labelKey: 'taskOptions.jiraFilter.reportedLabel',
+    subtitleKey: 'taskOptions.jiraFilter.reportedSubtitle'
   },
   {
     value: 'all',
     label: JIRA_FILTER_LABELS.all,
-    subtitle: 'Unresolved issues across the selected sites'
+    labelKey: 'taskOptions.jiraFilter.allLabel',
+    subtitleKey: 'taskOptions.jiraFilter.allSubtitle'
   },
-  { value: 'done', label: JIRA_FILTER_LABELS.done, subtitle: 'Your recently resolved issues' }
+  {
+    value: 'done',
+    label: JIRA_FILTER_LABELS.done,
+    labelKey: 'taskOptions.jiraFilter.doneLabel',
+    subtitleKey: 'taskOptions.jiraFilter.doneSubtitle'
+  }
 ]

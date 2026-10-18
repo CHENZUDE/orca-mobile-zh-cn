@@ -20,7 +20,6 @@ export function JiraConnectPrompt({
   const { t } = useTranslation()
   return (
     <View style={styles.centered}>
-
       <TaskProviderLogo provider="jira" size={32} color={colors.textSecondary} />
       <Text style={styles.emptyText}>
         {unavailableReason ? t('jiraConnect.updateDesktop') : t('jiraConnect.connectOnDesktop')}
@@ -28,8 +27,8 @@ export function JiraConnectPrompt({
       <Text style={styles.centeredHint}>
         {unavailableReason ??
           (credentialError
-            ? `Jira is saved but unreadable: ${credentialError}`
-            : 'Add your Jira site in Orca desktop under Settings → Integrations, then check again.')}
+            ? t('jiraConnect.unreadable', { error: credentialError })
+            : t('jiraConnect.addSite'))}
       </Text>
       <Pressable
         style={styles.checkAgainButton}

@@ -58,9 +58,9 @@ export function MobileMarkdownReader({
   const statusText = doc.saveError
     ? doc.saveError
     : doc.readOnlyReason
-      ? 'Read only'
+      ? t('markdownReader.readOnly')
       : doc.stale
-        ? 'Changed on desktop'
+        ? t('markdownReader.changedOnDesktop')
         : null
   const showRefresh = Boolean((doc.stale && !doc.isDirty) || !doc.editable)
   const showCopy = Boolean(doc.saveError || !doc.editable)
@@ -114,7 +114,7 @@ export function MobileMarkdownReader({
                 hitSlop={8}
                 accessibilityRole="button"
                 accessibilityLabel={t('markdownReader.dismissKeyboard')}
-                accessibilityHint="Hides the software keyboard and keeps the markdown editor open."
+                accessibilityHint={t('markdownReader.dismissKeyboardHint')}
               >
                 <View style={styles.keyboardDismissGlyph}>
                   <KeyboardIcon size={15} color={colors.textSecondary} strokeWidth={2} />
@@ -129,18 +129,18 @@ export function MobileMarkdownReader({
             ) : null}
             {showCopy ? (
               <Pressable style={styles.markdownFloatingButton} onPress={onCopy}>
-                <Text style={styles.markdownFloatingButtonText}>Copy</Text>
+                <Text style={styles.markdownFloatingButtonText}>{t('common.copy')}</Text>
               </Pressable>
             ) : null}
             {showRefresh ? (
               <Pressable style={styles.markdownFloatingButton} onPress={onRefresh}>
                 <RefreshCw size={13} color={colors.textPrimary} />
-                <Text style={styles.markdownFloatingButtonText}>Refresh</Text>
+                <Text style={styles.markdownFloatingButtonText}>{t('common.refresh')}</Text>
               </Pressable>
             ) : null}
             {doc.isDirty ? (
               <Pressable style={styles.markdownFloatingButton} onPress={onDiscard}>
-                <Text style={styles.markdownFloatingButtonText}>Discard</Text>
+                <Text style={styles.markdownFloatingButtonText}>{t('common.discard')}</Text>
               </Pressable>
             ) : null}
             {showSave ? (
@@ -156,7 +156,7 @@ export function MobileMarkdownReader({
                 {doc.saving ? (
                   <ActivityIndicator size="small" color={colors.textPrimary} />
                 ) : (
-                  <Text style={styles.markdownFloatingButtonText}>Save</Text>
+                  <Text style={styles.markdownFloatingButtonText}>{t('common.save')}</Text>
                 )}
               </Pressable>
             ) : null}

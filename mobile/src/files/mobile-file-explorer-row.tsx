@@ -24,6 +24,7 @@ type Props = {
 }
 
 export function MobileFileExplorerRow(props: Props) {
+  const { t } = useTranslation()
   const { item, expanded, onPreviewFile, onRetryDirectory, onToggleDirectory } = props
 
   if (item.kind === 'loading') {
@@ -31,7 +32,7 @@ export function MobileFileExplorerRow(props: Props) {
       <View style={[styles.inlineStatusRow, { paddingLeft: spacing.lg + item.depth * 18 }]}>
         <View style={styles.chevronSpacer} />
         <ActivityIndicator size="small" color={colors.textSecondary} />
-        <Text style={styles.inlineStatusText}>Loading...</Text>
+        <Text style={styles.inlineStatusText}>{t('common.loading')}</Text>
       </View>
     )
   }
@@ -41,7 +42,7 @@ export function MobileFileExplorerRow(props: Props) {
       <View style={[styles.inlineStatusRow, { paddingLeft: spacing.lg + item.depth * 18 }]}>
         <View style={styles.chevronSpacer} />
         <Text style={styles.inlineErrorText} numberOfLines={1}>
-          {item.message || 'Unable to load folder'}
+          {item.message || t('fileExplorer.unableToLoadFolder')}
         </Text>
         <Pressable
           style={({ pressed }) => [styles.inlineRetryButton, pressed && styles.rowPressed]}
@@ -49,9 +50,9 @@ export function MobileFileExplorerRow(props: Props) {
             triggerSelection()
             onRetryDirectory(item.relativePath)
           }}
-          accessibilityLabel={`Retry loading ${item.relativePath}`}
+          accessibilityLabel={t('fileExplorer.retryLoading', { path: item.relativePath })}
         >
-          <Text style={styles.inlineRetryText}>Retry</Text>
+          <Text style={styles.inlineRetryText}>{t('common.retry')}</Text>
         </Pressable>
       </View>
     )

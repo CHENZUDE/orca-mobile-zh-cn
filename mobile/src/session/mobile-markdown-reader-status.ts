@@ -1,4 +1,5 @@
 import { formatPreviewByteLength } from '../files/mobile-file-preview-response'
+import { translate } from '../i18n/i18n'
 import type { MarkdownDocState } from './mobile-session-route-types'
 
 /** The markdown floating bar's status line; a truncated preview reads like a file tab's note. */
@@ -10,11 +11,13 @@ export function markdownReaderStatusText(
   }
   if (doc.truncated) {
     return doc.byteLength === undefined
-      ? 'Preview truncated.'
-      : `Preview truncated. File size: ${formatPreviewByteLength(doc.byteLength)}.`
+      ? translate('markdownReader.previewTruncated')
+      : translate('markdownReader.previewTruncatedWithSize', {
+          size: formatPreviewByteLength(doc.byteLength)
+        })
   }
   if (doc.readOnlyReason) {
-    return 'Read only'
+    return translate('markdownReader.readOnly')
   }
-  return doc.stale ? 'Changed on desktop' : null
+  return doc.stale ? translate('markdownReader.changedOnDesktop') : null
 }

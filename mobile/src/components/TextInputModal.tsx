@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import {
   View,
@@ -34,7 +35,7 @@ export function TextInputModal({
   message,
   defaultValue = '',
   placeholder,
-  submitLabel = 'Save',
+  submitLabel,
   selectTextOnFocus = false,
   allowEmpty = false,
   keyboardType,
@@ -42,6 +43,7 @@ export function TextInputModal({
   onCancel,
   onAfterClose
 }: Props) {
+  const { t } = useTranslation()
   const [value, setValue] = useState(defaultValue)
   const [previousVisible, setPreviousVisible] = useState(visible)
   const [previousDefaultValue, setPreviousDefaultValue] = useState(defaultValue)
@@ -94,7 +96,7 @@ export function TextInputModal({
           style={({ pressed }) => [styles.cancelButton, pressed && styles.buttonPressed]}
           onPress={onCancel}
         >
-          <Text style={styles.cancelText}>Cancel</Text>
+          <Text style={styles.cancelText}>{t('common.cancel')}</Text>
         </Pressable>
         <Pressable
           style={({ pressed }) => [
@@ -105,7 +107,7 @@ export function TextInputModal({
           disabled={!canSubmit}
           onPress={handleSubmit}
         >
-          <Text style={styles.submitText}>{submitLabel}</Text>
+          <Text style={styles.submitText}>{submitLabel ?? t('common.save')}</Text>
         </Pressable>
       </View>
     </BottomDrawer>

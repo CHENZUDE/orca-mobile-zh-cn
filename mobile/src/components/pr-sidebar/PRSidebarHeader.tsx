@@ -158,7 +158,7 @@ function PRTitle({
             accessibilityRole="button"
             accessibilityLabel={t('prComments.cancelEditingTitle')}
           >
-            <Text style={composerStyles.cancelText}>Cancel</Text>
+            <Text style={composerStyles.cancelText}>{t('common.cancel')}</Text>
           </Pressable>
           <Pressable
             style={({ pressed }) => [composerStyles.submit, pressed && composerStyles.pressed]}
@@ -170,7 +170,7 @@ function PRTitle({
             {titleAction.saving ? (
               <ActivityIndicator size="small" color={colors.bgBase} />
             ) : (
-              <Text style={composerStyles.submitText}>Save</Text>
+              <Text style={composerStyles.submitText}>{t('common.save')}</Text>
             )}
           </Pressable>
         </View>

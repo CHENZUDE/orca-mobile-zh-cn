@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 
@@ -9,12 +10,13 @@ export function MobileLoadErrorState({
   message: string
   onRetry?: (() => void) | null
 }) {
+  const { t } = useTranslation()
   return (
     <View style={styles.state}>
       <Text style={styles.errorText}>{message}</Text>
       {onRetry ? (
         <Pressable style={styles.retryButton} onPress={onRetry} accessibilityRole="button">
-          <Text style={styles.retryText}>Retry</Text>
+          <Text style={styles.retryText}>{t('common.retry')}</Text>
         </Pressable>
       ) : null}
     </View>

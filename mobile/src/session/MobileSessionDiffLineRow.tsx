@@ -126,7 +126,7 @@ export function DiffLineRow({
               disabled={commentsBusy}
               onPress={onCancelComment}
             >
-              <Text style={styles.diffCommentSecondaryText}>Cancel</Text>
+              <Text style={styles.diffCommentSecondaryText}>{t('common.cancel')}</Text>
             </Pressable>
             <Pressable
               style={[

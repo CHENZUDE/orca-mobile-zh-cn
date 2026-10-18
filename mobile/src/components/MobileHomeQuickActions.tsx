@@ -71,7 +71,6 @@ export function MobileHomeQuickActions(props: Props) {
   return (
     <>
       <Text style={styles.sectionHeading}>{t('home.quickActions')}</Text>
-  const { t } = useTranslation()
 
       <View style={styles.quickActions}>
         <Pressable

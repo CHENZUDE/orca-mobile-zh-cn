@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { colors } from '../theme/mobile-theme'
@@ -229,6 +230,7 @@ export function MobileSourceControlPanel({
       : null
   const prWebNumber =
     prController.prSidebarState.kind === 'ready' ? prController.prSidebarState.data.pr.number : null
+  const { t } = useTranslation()
   const header = (
     <MobileSourceControlHeader
       embedded={embedded}
@@ -257,12 +259,14 @@ export function MobileSourceControlPanel({
     ) : screenState.kind === 'error' || screenState.kind === 'unavailable' ? (
       <View style={styles.state}>
         <Text style={styles.stateTitle}>
-          {screenState.kind === 'unavailable' ? 'Source Control Unavailable' : 'Unable to Load'}
+          {screenState.kind === 'unavailable'
+            ? t('sourceControl.unavailable')
+            : t('sourceControl.unableToLoadTitle')}
         </Text>
         <Text style={styles.stateText}>{screenState.message}</Text>
         {screenState.kind === 'error' && statusRetry ? (
           <Pressable style={styles.retryButton} onPress={statusRetry}>
-            <Text style={styles.retryText}>Retry</Text>
+            <Text style={styles.retryText}>{t('common.retry')}</Text>
           </Pressable>
         ) : null}
       </View>

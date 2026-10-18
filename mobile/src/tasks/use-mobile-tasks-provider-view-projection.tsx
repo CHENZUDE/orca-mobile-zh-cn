@@ -1,4 +1,7 @@
 import type { PickerProjectionModel } from './use-mobile-tasks-picker-projection'
+import { JIRA_FILTER_LABELS } from './mobile-jira-issue-filters'
+import { jiraSiteLabel } from './jira-mobile-connection'
+import { translate } from '../i18n/i18n'
 import {
   type PickerOption,
   githubProjectKey,
@@ -36,6 +39,8 @@ export function useMobileTasksProviderViewProjection(model: PickerProjectionMode
     items,
     linearDisplayProperties,
     linearFilter,
+    jiraFilter,
+    jiraConnection,
     linearGroupBy,
     linearOrderBy,
     linearTeamPropertyTouched,
@@ -54,34 +59,53 @@ export function useMobileTasksProviderViewProjection(model: PickerProjectionMode
     () =>
       githubPresetOptions.map((option) =>
         option.value === defaultGitHubPreset
-          ? { ...option, subtitle: option.subtitle ? `${option.subtitle} · Default` : 'Default' }
+          ? {
+              ...option,
+              subtitle: option.subtitle
+                ? translate('tasks.picker.subtitleWithDefault', { subtitle: option.subtitle })
+                : translate('tasks.picker.default')
+            }
           : option
       ),
     [defaultGitHubPreset, githubPresetOptions]
   )
   const githubPresetLabel =
-    githubPresetOptions.find((preset) => preset.value === githubPreset)?.label ?? 'Open'
+    githubPresetOptions.find((preset) => preset.value === githubPreset)?.label ??
+    translate('taskOptions.filter.openLabel')
   const gitlabFilterLabel =
-    GITLAB_FILTER_OPTIONS.find((filter) => filter.value === gitlabFilter)?.label ?? 'Open'
+    GITLAB_FILTER_OPTIONS.find((filter) => filter.value === gitlabFilter)?.label ??
+    translate('taskOptions.filter.openLabel')
+  const jiraFilterLabel = JIRA_FILTER_LABELS[jiraFilter]
+  const jiraSelectedSite =
+    jiraConnection.selection && jiraConnection.selection !== 'all'
+      ? (jiraConnection.sites.find((site) => site.id === jiraConnection.selection) ?? null)
+      : null
+  const jiraSiteChipLabel = jiraSelectedSite
+    ? jiraSiteLabel(jiraSelectedSite)
+    : translate('tasks.picker.allSites')
   const linearFilterLabel =
-    LINEAR_FILTER_OPTIONS.find((filter) => filter.value === linearFilter)?.label ?? 'All'
+    LINEAR_FILTER_OPTIONS.find((filter) => filter.value === linearFilter)?.label ??
+    translate('taskOptions.filter.allLabel')
   const linearViewLabel =
-    LINEAR_VIEW_OPTIONS.find((option) => option.value === linearViewMode)?.label ?? 'List'
+    LINEAR_VIEW_OPTIONS.find((option) => option.value === linearViewMode)?.label ??
+    translate('taskOptions.linearView.listLabel')
   const linearGroupLabel =
-    LINEAR_GROUP_OPTIONS.find((option) => option.value === linearGroupBy)?.label ?? 'No grouping'
+    LINEAR_GROUP_OPTIONS.find((option) => option.value === linearGroupBy)?.label ??
+    translate('taskOptions.linearGroup.none')
   const linearOrderLabel =
-    LINEAR_ORDER_OPTIONS.find((option) => option.value === linearOrderBy)?.label ?? 'Priority'
+    LINEAR_ORDER_OPTIONS.find((option) => option.value === linearOrderBy)?.label ??
+    translate('taskOptions.linearOrder.priority')
   const linearWorkspaceLabel =
     selectedLinearWorkspaceId === 'all'
-      ? 'All workspaces'
+      ? translate('tasks.picker.allWorkspaces')
       : (linearWorkspaces.find((workspace) => workspace.id === selectedLinearWorkspaceId)
           ?.organizationName ??
         linearWorkspaces.find((workspace) => workspace.id === selectedLinearWorkspaceId)
           ?.displayName ??
-        'Workspace')
+        translate('tasks.picker.workspace'))
   const linearWorkspaceOptions = useMemo<PickerOption<string>[]>(
     () => [
-      { value: 'all', label: 'All workspaces' },
+      { value: 'all', label: translate('tasks.picker.allWorkspaces') },
       ...linearWorkspaces.map((workspace) => ({
         value: workspace.id,
         label: workspace.organizationName ?? workspace.displayName ?? workspace.id
@@ -91,10 +115,11 @@ export function useMobileTasksProviderViewProjection(model: PickerProjectionMode
   )
   const linearTeamLabel =
     selectedLinearTeamIds.size === 0 || selectedLinearTeamIds.size === linearTeams.length
-      ? 'All teams'
+      ? translate('tasks.picker.allTeams')
       : selectedLinearTeamIds.size === 1
-        ? (linearTeams.find((team) => selectedLinearTeamIds.has(team.id))?.name ?? '1 team')
-        : `${selectedLinearTeamIds.size} teams`
+        ? (linearTeams.find((team) => selectedLinearTeamIds.has(team.id))?.name ??
+          translate('tasks.picker.oneTeam'))
+        : translate('tasks.picker.teamCount', { count: selectedLinearTeamIds.size })
   const effectiveLinearDisplayProperties = useMemo(() => {
     const next = new Set(linearDisplayProperties)
     if (linearGroupBy === 'status') {
@@ -161,12 +186,16 @@ export function useMobileTasksProviderViewProjection(model: PickerProjectionMode
     [linearGroupBy, linearIssueSections, linearIssuesForView]
   )
   const githubModeLabel =
-    githubMode === 'project' ? 'Projects' : githubKind === 'prs' ? 'PRs' : 'Issues'
+    githubMode === 'project'
+      ? translate('taskOptions.githubKind.projectLabel')
+      : githubKind === 'prs'
+        ? translate('taskOptions.githubKind.prsLabel')
+        : translate('taskOptions.githubKind.issuesLabel')
   const activeProjectLabel = githubProjectTable
     ? githubProjectTable.project.title
     : activeGitHubProject
       ? `${activeGitHubProject.owner} #${activeGitHubProject.number}`
-      : 'Choose project'
+      : translate('tasks.picker.chooseProject')
   const selectedGitHubProjectViewUrl = githubProjectTable
     ? `${githubProjectTable.project.url}/views/${githubProjectTable.selectedView.number}`
     : null
@@ -250,6 +279,8 @@ export function useMobileTasksProviderViewProjection(model: PickerProjectionMode
     githubPresetPickerOptions,
     githubPresetLabel,
     gitlabFilterLabel,
+    jiraFilterLabel,
+    jiraSiteChipLabel,
     linearFilterLabel,
     linearViewLabel,
     linearGroupLabel,

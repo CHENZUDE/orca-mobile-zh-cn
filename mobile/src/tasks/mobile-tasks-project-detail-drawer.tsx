@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -23,7 +23,8 @@ import {
   SHOW_MOBILE_PROJECT_METADATA_EDITORS,
   githubProjectOptionColor,
   canCreateWorkspaceFromProjectRow,
-  projectRowType
+  projectRowType,
+  TASK_SECONDARY_DRAWER_Z_INDEX
 } from './mobile-tasks-legacy-foundation'
 import { renderMobileTasksProjectFieldEditors } from './mobile-tasks-project-field-editors'
 import {
@@ -41,13 +42,15 @@ export function renderMobileTasksProjectMissingRepoDrawer(model: ConnectionPrese
     taskUiReady
   } = model
 
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && projectRepoNotInOrca != null}
       onClose={() => {
         setProjectRepoNotInOrca(null)
       }}
+      // Why: opens over the project detail, which renders after it in the shared host.
+      zIndex={TASK_SECONDARY_DRAWER_Z_INDEX}
     >
       {projectRepoNotInOrca ? (
         <View>
@@ -119,7 +122,7 @@ export function renderMobileTasksProjectDetailDrawer(model: ConnectionPresentati
     setProjectRowItem,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && projectRowItem != null}

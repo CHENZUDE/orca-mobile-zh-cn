@@ -208,8 +208,8 @@ export function FileReader({
               <MessageSquare size={14} color={colors.textSecondary} strokeWidth={2.2} />
               <Text style={styles.diffNotesTitle}>
                 {commentCount === 0
-                  ? 'No review notes'
-                  : `${commentCount} review ${commentCount === 1 ? 'note' : 'notes'}`}
+                  ? t('fileReader.noReviewNotes')
+                  : t('fileReader.reviewNoteCount', { count: commentCount })}
               </Text>
             </View>
             <View style={styles.diffNotesActions}>
@@ -223,7 +223,7 @@ export function FileReader({
                 accessibilityLabel={t('fileReader.copyReviewNotes')}
               >
                 <Copy size={13} color={colors.textSecondary} strokeWidth={2.2} />
-                <Text style={styles.diffNotesActionText}>Copy</Text>
+                <Text style={styles.diffNotesActionText}>{t('common.copy')}</Text>
               </Pressable>
               <Pressable
                 style={[
@@ -235,7 +235,7 @@ export function FileReader({
                 accessibilityLabel={t('fileReader.sendReviewNotesToAi')}
               >
                 <Send size={13} color={colors.textSecondary} strokeWidth={2.2} />
-                <Text style={styles.diffNotesActionText}>Send</Text>
+                <Text style={styles.diffNotesActionText}>{t('common.send')}</Text>
               </Pressable>
             </View>
           </View>

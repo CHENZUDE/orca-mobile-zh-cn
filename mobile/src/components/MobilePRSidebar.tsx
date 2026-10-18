@@ -202,7 +202,7 @@ function PrSidebarContent({
           accessibilityLabel={t('prSidebar.retryLoadingPr')}
         >
           <RotateCw size={14} color={colors.textPrimary} strokeWidth={2.2} />
-          <Text style={styles.retryText}>Retry</Text>
+          <Text style={styles.retryText}>{t('common.retry')}</Text>
         </Pressable>
       </View>
     )

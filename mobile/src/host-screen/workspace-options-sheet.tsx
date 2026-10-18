@@ -17,7 +17,7 @@ import {
 } from '../../../src/shared/workspace-view/workspace-view-options'
 import { getHostContextLabel } from '../../../src/shared/worktree/host-context-labels'
 import {
-  WORKSPACE_OPTIONS_TITLE,
+  WORKSPACE_OPTIONS_TITLE_KEY,
   WORKSPACE_VIEW_SHARED_NOTE_KEY
 } from '../worktree/workspace-options-copy'
 import { resolveWorktreeHostId } from '../worktree/worktree-host-context-labels'
@@ -85,7 +85,6 @@ function WorkspaceOptionsContent({
   pager: OptionPagerControls<WorkspaceViewOptionKey>
 }) {
   const { t } = useTranslation()
-
   const { settings, state } = controller
   const hosts = useWorkspaceOptionHosts(controller)
   const sections = getShownWorkspaceViewSections({
@@ -121,10 +120,10 @@ function WorkspaceOptionsContent({
           style={styles.optionBack}
           onPress={pager.close}
           accessibilityRole="button"
-          accessibilityLabel={`Back to ${WORKSPACE_OPTIONS_TITLE}`}
+          accessibilityLabel={t('workspaceOptions.backTo', { title: t(WORKSPACE_OPTIONS_TITLE_KEY) })}
         >
           <ChevronLeft size={16} color={colors.textSecondary} />
-          <Text style={styles.optionBackText}>{WORKSPACE_OPTIONS_TITLE}</Text>
+          <Text style={styles.optionBackText}>{t(WORKSPACE_OPTIONS_TITLE_KEY)}</Text>
         </Pressable>
         <Text style={[styles.filterModalTitle, styles.optionPageTitle]}>{pageOption.label}</Text>
         <pageControl.Page controller={controller} hosts={hosts} label={pageOption.label} />
@@ -135,7 +134,7 @@ function WorkspaceOptionsContent({
     <>
       <View style={styles.filterModalHeader}>
         <View style={styles.filterModalHeading}>
-          <Text style={styles.filterModalTitle}>{WORKSPACE_OPTIONS_TITLE}</Text>
+          <Text style={styles.filterModalTitle}>{t(WORKSPACE_OPTIONS_TITLE_KEY)}</Text>
           <Text style={styles.filterModalSubtitle}>{t(WORKSPACE_VIEW_SHARED_NOTE_KEY)}</Text>
         </View>
         {controller.activeFilterCount > 0 && (

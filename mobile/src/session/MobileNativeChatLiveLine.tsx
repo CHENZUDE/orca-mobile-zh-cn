@@ -1,14 +1,13 @@
-import { useCallback, useState } from 'react'
+import { useContext } from 'react'
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
 import { ChevronRight } from 'lucide-react-native'
 import { useTranslation } from 'react-i18next'
 import { nativeChatReasoningDisclosureKey } from '../../../src/shared/native-chat-reasoning-row'
 import { describeNativeChatActiveTurnLabel } from '../../../src/shared/native-chat-turn-status'
-import type { NativeChatMessage } from '../../../src/shared/native-chat-types'
 import { INLINE_TEXT_SELECTION } from '../components/inline-text-selection'
 import { colors, spacing, typography } from '../theme/mobile-theme'
-import { MobileNativeChatMessageActionsSheet } from './MobileNativeChatMessageActionsSheet'
 import { MobileNativeChatReasoningBody } from './MobileNativeChatReasoningRow'
+import { MobileNativeChatRowOverlaysContext } from './mobile-native-chat-row-overlays'
 import type { MobileNativeChatLiveLine as LiveLine } from './use-mobile-native-chat-turn-disclosure'
 
 /** The live turn's tail line: a spinner beside "Stopping…" once the person's Stop is ending the
@@ -33,10 +32,7 @@ export function MobileNativeChatLiveLine({
   const status = describeNativeChatActiveTurnLabel(line)
   const label = status.source === 'activity' ? status.text : t(`chatTurn.${status.key}`)
   // Android has no inline selection; the finished row's long-press sheet copies the live text too.
-  // It holds the block it opened for, so it outlives that block ending and never reopens by itself.
-  const [actionsFor, setActionsFor] = useState<NativeChatMessage | null>(null)
-  const liveMessage = reasoning?.message ?? null
-  const openActions = useCallback(() => setActionsFor(liveMessage), [liveMessage])
+  const { openActions } = useContext(MobileNativeChatRowOverlaysContext)
   return (
     <View>
       {/* One element for every state of the line, so TalkBack hears each new label; the body
@@ -73,15 +69,9 @@ export function MobileNativeChatLiveLine({
             markdown={reasoning.markdown}
             fontScale={fontScale}
             onOpenFile={onOpenFile}
-            onLongPress={INLINE_TEXT_SELECTION ? undefined : openActions}
+            onLongPress={INLINE_TEXT_SELECTION ? undefined : () => openActions(reasoning.message)}
           />
         </View>
-      ) : null}
-      {actionsFor ? (
-        <MobileNativeChatMessageActionsSheet
-          message={actionsFor}
-          onClose={() => setActionsFor(null)}
-        />
       ) : null}
     </View>
   )

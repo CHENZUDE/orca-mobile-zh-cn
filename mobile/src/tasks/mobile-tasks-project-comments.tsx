@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   View,
@@ -48,7 +48,7 @@ export function renderMobileTasksProjectComments(model: ConnectionPresentationMo
     toggleProjectGitHubReviewThread,
     updateProjectRowComment
   } = model
-  const { t } = useTranslation()
+  const t = translate
   if (!projectRowItem) {
     return null
   }

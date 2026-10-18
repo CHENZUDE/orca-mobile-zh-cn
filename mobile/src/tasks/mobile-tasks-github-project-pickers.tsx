@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -43,7 +43,7 @@ export function renderMobileTasksGitHubProjectPicker(model: ConnectionPresentati
     showGitHubProjectPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && showGitHubProjectPicker}
@@ -310,7 +310,7 @@ export function renderMobileTasksGitHubProjectViewPicker(model: ConnectionPresen
     showGitHubProjectViewPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitHubProjectViewPicker}
@@ -356,7 +356,7 @@ export function renderMobileTasksGitHubProjectSortPicker(model: ConnectionPresen
     showGitHubProjectSortPicker,
     taskUiReady
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <PickerModal
       visible={taskUiReady && showGitHubProjectSortPicker}

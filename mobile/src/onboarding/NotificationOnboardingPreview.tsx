@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native'
 import { OrcaLogo } from '../components/OrcaLogo'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
-import { useReducedMotionEnabled } from './use-reduced-motion'
+import { useReducedMotionEnabled } from '../platform/use-reduced-motion'
 
 const SAMPLE_KEYS = ['codexFinished', 'claudeNeedsInput'] as const
 

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { View, Text, Pressable, ActivityIndicator } from 'react-native'
 import { RefreshCw } from 'lucide-react-native'
@@ -28,6 +29,7 @@ export function MarkdownReader({
   onDiscard: () => void
   keyboardLift: number
 }) {
+  const { t } = useTranslation()
   // Native Keyboard events under-report the WebView editor's covered area, so prefer the larger WebView-measured inset.
   const [webviewKeyboardInset, setWebviewKeyboardInset] = useState(0)
   const effectiveKeyboardLift = Math.max(keyboardLift, webviewKeyboardInset)
@@ -83,22 +85,24 @@ export function MarkdownReader({
             onPress={onCopy}
             accessibilityRole="button"
             accessibilityLabel={
-              doc.truncated ? 'Copy loaded Markdown source' : 'Copy Markdown source'
+              doc.truncated
+                ? t('markdownReader.copyLoadedSource')
+                : t('markdownReader.copySource')
             }
           >
             <Text style={styles.markdownFloatingButtonText}>
-              {doc.truncated ? 'Copy loaded' : 'Copy'}
+              {doc.truncated ? t('common.copyLoaded') : t('common.copy')}
             </Text>
           </Pressable>
           {showRefresh ? (
             <Pressable style={styles.markdownFloatingButton} onPress={onRefresh}>
               <RefreshCw size={13} color={colors.textPrimary} />
-              <Text style={styles.markdownFloatingButtonText}>Refresh</Text>
+              <Text style={styles.markdownFloatingButtonText}>{t('common.refresh')}</Text>
             </Pressable>
           ) : null}
           {doc.isDirty ? (
             <Pressable style={styles.markdownFloatingButton} onPress={onDiscard}>
-              <Text style={styles.markdownFloatingButtonText}>Discard</Text>
+              <Text style={styles.markdownFloatingButtonText}>{t('common.discard')}</Text>
             </Pressable>
           ) : null}
           {showSave ? (
@@ -114,7 +118,7 @@ export function MarkdownReader({
               {doc.saving ? (
                 <ActivityIndicator size="small" color={colors.textPrimary} />
               ) : (
-                <Text style={styles.markdownFloatingButtonText}>Save</Text>
+                <Text style={styles.markdownFloatingButtonText}>{t('common.save')}</Text>
               )}
             </Pressable>
           ) : null}

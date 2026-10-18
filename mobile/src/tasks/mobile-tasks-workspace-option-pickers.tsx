@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { translate } from '../i18n/i18n'
 import type { ConnectionPresentationModel } from './use-mobile-tasks-connection-presentation'
 import {
   BottomDrawer,
@@ -29,7 +29,7 @@ export function renderMobileTasksWorkspaceBaseBranchPicker(model: ConnectionPres
     workspaceBaseBranchResults,
     workspaceCreateDraft
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && workspaceCreateDraft != null && showWorkspaceBaseBranchPicker}
@@ -123,7 +123,7 @@ export function renderMobileTasksWorkspaceSparsePicker(model: ConnectionPresenta
     workspaceSparsePresetsLoaded,
     workspaceSparsePresetsLoading
   } = model
-  const { t } = useTranslation()
+  const t = translate
   return (
     <BottomDrawer
       visible={taskUiReady && workspaceCreateDraft != null && showWorkspaceSparsePicker}

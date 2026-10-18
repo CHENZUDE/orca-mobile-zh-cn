@@ -46,11 +46,11 @@ export function useTroubleshootDiagnostics() {
       const hosts = await loadHosts()
       results.push(
         hosts.length > 0
-          ? { label: t('diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'pass', detail: t('diagnostics.troubleshoot.checks.pairedHosts.paired', { count: hosts.length }) }
-          : { label: t('diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'fail', detail: t('diagnostics.troubleshoot.checks.pairedHosts.none') }
+          ? { label: t('settings.diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'pass', detail: t('settings.diagnostics.troubleshoot.checks.pairedHosts.paired', { count: hosts.length }) }
+          : { label: t('settings.diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'fail', detail: t('settings.diagnostics.troubleshoot.checks.pairedHosts.none') }
       )
     } catch {
-      results.push({ label: t('diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'warn', detail: t('diagnostics.troubleshoot.checks.pairedHosts.unreadable') })
+      results.push({ label: t('settings.diagnostics.troubleshoot.checks.pairedHosts.label'), status: 'warn', detail: t('settings.diagnostics.troubleshoot.checks.pairedHosts.unreadable') })
     }
 
     if (!isCurrentRun()) {
@@ -69,14 +69,14 @@ export function useTroubleshootDiagnostics() {
       }
       results.push(
         resp.ok
-          ? { label: t('diagnostics.troubleshoot.checks.internet.label'), status: 'pass', detail: t('diagnostics.troubleshoot.checks.internet.connected') }
-          : { label: t('diagnostics.troubleshoot.checks.internet.label'), status: 'warn', detail: t('diagnostics.troubleshoot.checks.internet.unexpected') }
+          ? { label: t('settings.diagnostics.troubleshoot.checks.internet.label'), status: 'pass', detail: t('settings.diagnostics.troubleshoot.checks.internet.connected') }
+          : { label: t('settings.diagnostics.troubleshoot.checks.internet.label'), status: 'warn', detail: t('settings.diagnostics.troubleshoot.checks.internet.unexpected') }
       )
     } catch {
       if (!isCurrentRun()) {
         return
       }
-      results.push({ label: t('diagnostics.troubleshoot.checks.internet.label'), status: 'fail', detail: t('diagnostics.troubleshoot.checks.internet.disconnected') })
+      results.push({ label: t('settings.diagnostics.troubleshoot.checks.internet.label'), status: 'fail', detail: t('settings.diagnostics.troubleshoot.checks.internet.disconnected') })
     } finally {
       internetCheck.dispose()
       if (activeInternetCheckRef.current === internetCheck) {
@@ -103,13 +103,13 @@ export function useTroubleshootDiagnostics() {
           label: host.name,
           status: reachable ? 'pass' : 'fail',
           detail: reachable
-            ? t('diagnostics.troubleshoot.checks.hosts.reachable', { endpoint: formatEndpoint(host.endpoint) })
+            ? t('settings.diagnostics.troubleshoot.checks.hosts.reachable', { endpoint: formatEndpoint(host.endpoint) })
             : unreachableHostDetail(host.endpoint)
         })
         setChecks([...results])
       }
     } catch {
-      results.push({ label: t('diagnostics.troubleshoot.checks.hosts.label'), status: 'warn', detail: t('diagnostics.troubleshoot.checks.hosts.couldNotTest') })
+      results.push({ label: t('settings.diagnostics.troubleshoot.checks.hosts.label'), status: 'warn', detail: t('settings.diagnostics.troubleshoot.checks.hosts.couldNotTest') })
     }
 
     if (!isCurrentRun()) {
@@ -117,7 +117,7 @@ export function useTroubleshootDiagnostics() {
     }
 
     results.push({
-      label: t('diagnostics.troubleshoot.checks.platform.label'),
+      label: t('settings.diagnostics.troubleshoot.checks.platform.label'),
       status: 'pass',
       detail: `${Platform.OS} ${Platform.Version ?? ''}`
     })
