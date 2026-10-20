@@ -12,6 +12,7 @@ describe('the Workspace options chip', () => {
   })
 
   it("reads to screen readers as the desktop's trigger does", () => {
+    // Why the English instance: the catalog is the en fallback until a locale loads.
     expect(workspaceOptionsAccessibilityLabel(0)).toBe('Workspace options')
     expect(workspaceOptionsAccessibilityLabel(1)).toBe('Workspace options (1 filter active)')
     expect(workspaceOptionsAccessibilityLabel(3)).toBe('Workspace options (3 filters active)')

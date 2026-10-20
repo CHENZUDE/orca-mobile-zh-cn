@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import {
   workspaceOptionsAccessibilityLabel,
-  WORKSPACE_OPTIONS_TITLE
+  WORKSPACE_OPTIONS_TITLE_KEY
 } from '../worktree/workspace-options-copy'
 import { WorkspaceOptionsCountBadge } from './workspace-options-count-badge'
 import {
@@ -159,7 +159,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
                 ]}
                 numberOfLines={1}
               >
-                {WORKSPACE_OPTIONS_TITLE}
+                {t(WORKSPACE_OPTIONS_TITLE_KEY)}
               </Text>
               <WorkspaceOptionsCountBadge count={controller.activeFilterCount} />
             </Pressable>
@@ -266,7 +266,7 @@ export function HostScreenHeader({ controller }: { controller: HostScreenControl
                 controller.activeFilterCount > 0 && styles.filterChipTextActive
               ]}
             >
-              {WORKSPACE_OPTIONS_TITLE}
+              {t(WORKSPACE_OPTIONS_TITLE_KEY)}
             </Text>
             <WorkspaceOptionsCountBadge count={controller.activeFilterCount} />
           </Pressable>

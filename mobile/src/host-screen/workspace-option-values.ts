@@ -1,3 +1,5 @@
+import { translate } from '../i18n/i18n'
+
 /** A checklist option's value on the main sheet: all, none, the one checked item, or "N of M". */
 export function summarizeChecklist(
   checkedLabels: readonly string[],
@@ -8,9 +10,11 @@ export function summarizeChecklist(
     return allLabel
   }
   if (checkedLabels.length === 0) {
-    return 'None'
+    return translate('workspaceView.none')
   }
-  return checkedLabels.length === 1 ? checkedLabels[0] : `${checkedLabels.length} of ${total}`
+  return checkedLabels.length === 1
+    ? checkedLabels[0]
+    : translate('workspaceView.countOfTotal', { count: checkedLabels.length, total })
 }
 
 /** A pick-one option's value: the chosen choice's label. */

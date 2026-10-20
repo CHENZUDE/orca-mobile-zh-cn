@@ -1842,7 +1842,9 @@
   "workspaceOptions": {
     "title": "Workspace options",
     "backTo": "Back to {{title}}",
-    "clearFilters": "Clear filters"
+    "clearFilters": "Clear filters",
+    "activeFilters_one": "{{title}} ({{count}} filter active)",
+    "activeFilters_other": "{{title}} ({{count}} filters active)"
   },
   "webShell": {
     "connectToDownloadLatest": "Connect to this host to download the latest app",
@@ -1934,7 +1936,67 @@
     "remoteHost": "Remote host",
     "projectLabel": "Project {{repo}}",
     "childCount_one": "{{count}} child",
-    "childCount_other": "{{count}} children"
+    "childCount_other": "{{count}} children",
+    "label": {
+      "none": "None",
+      "status": "Status",
+      "pr": "PR",
+      "project": "Project",
+      "name": "Name",
+      "agentActivity": "Agent Activity",
+      "recent": "Recent",
+      "manual": "Manual",
+      "detailed": "Detailed",
+      "compact": "Compact",
+      "fullList": "Full list",
+      "branchName": "Branch name",
+      "branchFolderPath": "Branch / folder path"
+    },
+    "description": {
+      "smart": "Agents that need attention, then most recent activity.",
+      "manualSort": "Drag workspaces to arrange them within each group.",
+      "manualProjectOrder": "Drag projects to arrange them",
+      "recentProjectOrder": "Most recent workspace activity"
+    },
+    "cardProperty": {
+      "issue": "GitHub ticket",
+      "linear-issue": "Linear issue",
+      "jira-issue": "Jira issue",
+      "pr": "PR/MR link",
+      "automation": "Automation",
+      "comment": "Notes",
+      "cli": "Orca CLI",
+      "inline-agents": "Agent activity",
+      "branch": "Branch name",
+      "host": "Host"
+    },
+    "section": {
+      "show": "Show",
+      "group": "Group by",
+      "filters": "Filters"
+    },
+    "option": {
+      "hosts": "Hosts",
+      "projects": "Projects",
+      "groupBy": "Group by",
+      "sortBy": "Sort by",
+      "projectOrderBy": "Project order",
+      "cardLayout": "Card layout",
+      "cardProperties": "Show properties",
+      "cardDisplay": "Card display"
+    },
+    "filter": {
+      "hideSleeping": "Hide sleeping",
+      "exceptDefaultBranch": "Except default branch",
+      "hideDefaultBranch": "Hide default branch",
+      "hideAutomationCreated": "Hide automation-created",
+      "hideCliCreated": "Hide CLI-created",
+      "hideOtherClientWorkspaces": "Hide other-client workspaces",
+      "hideDetachedHead": "Hide detached HEAD"
+    },
+    "none": "None",
+    "hover": "Hover",
+    "countOfTotal": "{{count}} of {{total}}"
   },
   "attach": {
     "disconnected": "Attach failed (disconnected)",

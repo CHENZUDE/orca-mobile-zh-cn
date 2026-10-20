@@ -3,14 +3,6 @@ import { Text, View } from 'react-native'
 import { MobileSearchField } from '../components/MobileSearchField'
 import { MobileSegmentedControl } from '../components/MobileSegmentedControl'
 import {
-  WORKSPACE_AGENT_ACTIVITY_LAYOUT_CHOICES,
-  WORKSPACE_CARD_DISPLAY_CHOICES,
-  WORKSPACE_CARD_LAYOUT_CHOICES,
-  WORKSPACE_CARD_PROPERTY_CHOICES,
-  WORKSPACE_GROUP_BY_CHOICES,
-  WORKSPACE_PROJECT_ORDER_CHOICES,
-  WORKSPACE_SORT_BY_CHOICES,
-  getWorkspaceCardDisplayChoiceLabel,
   getWorkspaceCardPropertiesValue,
   type WorkspaceViewChoice,
   type WorkspaceViewOptionKey
@@ -24,10 +16,16 @@ import type { ExecutionHostId } from '../../../src/shared/execution-host'
 import type { WorktreeCardProperty } from '../../../src/shared/ui-chrome-types'
 import { hostScreenStyles as styles } from './host-screen-styles'
 import { translate } from '../i18n/i18n'
+import { withoutPhoneHiddenProperties } from './phone-card-property-choices'
 import {
-  phoneCardPropertyChoices,
-  withoutPhoneHiddenProperties
-} from './phone-card-property-choices'
+  AGENT_ACTIVITY_LAYOUT_OPTIONS,
+  CARD_LAYOUT_OPTIONS,
+  CARD_PROPERTY_OPTIONS,
+  GROUP_BY_OPTIONS,
+  PROJECT_ORDER_OPTIONS,
+  SORT_OPTIONS,
+  cardDisplayOptions
+} from './workspace-option-labels'
 import type { HostScreenController } from './use-host-screen-controller'
 import { CheckRow, ChoiceRows, OptionRowList, SwitchRow } from './workspace-option-rows'
 import { choiceLabel, summarizeChecklist } from './workspace-option-values'
@@ -52,22 +50,6 @@ export type WorkspaceOptionControl =
       value: (props: WorkspaceOptionProps) => string
       Page: ComponentType<WorkspaceOptionProps>
     }
-
-const CARD_PROPERTY_CHOICES = phoneCardPropertyChoices(WORKSPACE_CARD_PROPERTY_CHOICES)
-
-// Why folder rows: the desktop asks whether it has project groups, which the phone does not read;
-// the host lists folder workspaces only under a group, so their rows are that fact as it shows.
-function cardDisplayChoices(
-  controller: HostScreenController
-): WorkspaceViewChoice<WorktreeCardProperty>[] {
-  const hasProjectGroups = controller.state.worktrees.some(
-    (row) => row.workspaceKind === 'folder-workspace'
-  )
-  return phoneCardPropertyChoices(WORKSPACE_CARD_DISPLAY_CHOICES).map((choice) => ({
-    id: choice.id,
-    label: getWorkspaceCardDisplayChoiceLabel(choice, hasProjectGroups)
-  }))
-}
 
 function hostsValue({ controller, hosts }: WorkspaceOptionProps): string {
   const visible = controller.state.view.filters.visibleHostIds
@@ -194,7 +176,7 @@ function choicePage<Id extends string>(
 
 function CardPropertyRows(props: {
   controller: HostScreenController
-  choices: readonly WorkspaceViewChoice<WorktreeCardProperty>[]
+  choices: readonly { id: WorktreeCardProperty; label: string }[]
 }) {
   const { settings, state } = props.controller
   return (
@@ -219,13 +201,13 @@ function showPropertiesValue({ controller }: WorkspaceOptionProps): string {
     withoutPhoneHiddenProperties(controller.state.view.worktreeCardProperties),
     controller.state.view.compactWorktreeCards
   )
-  return value === 'hover' ? 'Hover' : value === null ? '' : String(value)
+  return value === 'hover' ? translate('workspaceView.hover') : value === null ? '' : String(value)
 }
 
 function propertiesPage(
   choices: (
     controller: HostScreenController
-  ) => readonly WorkspaceViewChoice<WorktreeCardProperty>[],
+  ) => readonly { id: WorktreeCardProperty; label: string }[],
   options: { value: (props: WorkspaceOptionProps) => string; withAgentLayout: boolean }
 ): Extract<WorkspaceOptionControl, { kind: 'page' }> {
   const { withAgentLayout } = options
@@ -241,9 +223,9 @@ function propertiesPage(
               {translate('hostScreen.options.agentActivityLayout')}
             </Text>
             <MobileSegmentedControl
-              segments={WORKSPACE_AGENT_ACTIVITY_LAYOUT_CHOICES.map(({ id, label }) => ({
-                value: id,
-                label
+              segments={AGENT_ACTIVITY_LAYOUT_OPTIONS.map((choice) => ({
+                value: choice.id,
+                label: choice.label
               }))}
               selected={controller.state.view.agentActivityDisplayMode}
               onSelect={controller.settings.setAgentActivityDisplayMode}
@@ -289,7 +271,7 @@ export const WORKSPACE_OPTION_CONTROLS: Record<WorkspaceViewOptionKey, Workspace
     framed: false,
     Row: ({ controller }) => (
       <MobileSegmentedControl
-        segments={WORKSPACE_GROUP_BY_CHOICES.map(({ id, label }) => ({ value: id, label }))}
+        segments={GROUP_BY_OPTIONS.map((choice) => ({ value: choice.id, label: choice.label }))}
         selected={controller.state.view.groupBy}
         onSelect={controller.settings.handleGroupChange}
         fill
@@ -298,26 +280,32 @@ export const WORKSPACE_OPTION_CONTROLS: Record<WorkspaceViewOptionKey, Workspace
     )
   },
   sortBy: choicePage(
-    WORKSPACE_SORT_BY_CHOICES,
+    SORT_OPTIONS,
     (controller) => controller.state.view.sortBy,
     (controller) => controller.settings.handleSortChange
   ),
   projectOrderBy: choicePage(
-    WORKSPACE_PROJECT_ORDER_CHOICES,
+    PROJECT_ORDER_OPTIONS,
     (controller) => controller.projectOrderBy,
     (controller) => controller.settings.setProjectOrderBy
   ),
   cardLayout: choicePage(
-    WORKSPACE_CARD_LAYOUT_CHOICES,
+    CARD_LAYOUT_OPTIONS,
     (controller) => (controller.state.view.compactWorktreeCards ? 'compact' : 'detailed'),
     (controller) => controller.settings.setCardLayout
   ),
-  cardProperties: propertiesPage(() => CARD_PROPERTY_CHOICES, {
+  cardProperties: propertiesPage(() => CARD_PROPERTY_OPTIONS, {
     value: showPropertiesValue,
     withAgentLayout: true
   }),
   // As the desktop, Card display shows no value.
-  cardDisplay: propertiesPage(cardDisplayChoices, { value: () => '', withAgentLayout: false }),
+  cardDisplay: propertiesPage(
+    (controller) =>
+      cardDisplayOptions(
+        controller.state.worktrees.some((row) => row.workspaceKind === 'folder-workspace')
+      ),
+    { value: () => '', withAgentLayout: false }
+  ),
   hideSleepingWorkspaces: filterSwitch('hideSleepingWorkspaces'),
   alwaysShowDefaultBranchWorkspace: filterSwitch('alwaysShowDefaultBranchWorkspace'),
   hideDefaultBranchWorkspace: filterSwitch('hideDefaultBranchWorkspace'),

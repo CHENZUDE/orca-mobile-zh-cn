@@ -1842,7 +1842,9 @@
   "workspaceOptions": {
     "title": "工作区选项",
     "backTo": "返回{{title}}",
-    "clearFilters": "清除筛选"
+    "clearFilters": "清除筛选",
+    "activeFilters_one": "{{title}}（{{count}} 个筛选条件已启用）",
+    "activeFilters_other": "{{title}}（{{count}} 个筛选条件已启用）"
   },
   "webShell": {
     "connectToDownloadLatest": "连接此主机以下载最新版本应用",
@@ -1934,7 +1936,67 @@
     "remoteHost": "远程主机",
     "projectLabel": "项目 {{repo}}",
     "childCount_one": "{{count}} 个子工作树",
-    "childCount_other": "{{count}} 个子工作树"
+    "childCount_other": "{{count}} 个子工作树",
+    "label": {
+      "none": "不分组",
+      "status": "状态",
+      "pr": "PR",
+      "project": "项目",
+      "name": "名称",
+      "agentActivity": "智能体活动",
+      "recent": "最近",
+      "manual": "手动",
+      "detailed": "详细",
+      "compact": "紧凑",
+      "fullList": "完整列表",
+      "branchName": "分支名称",
+      "branchFolderPath": "分支 / 文件夹路径"
+    },
+    "description": {
+      "smart": "需要关注的智能体优先，然后按最近活动。",
+      "manualSort": "拖动工作区以将它们排列在每个组中。",
+      "manualProjectOrder": "拖动项目进行排列",
+      "recentProjectOrder": "最近的工作区活动"
+    },
+    "cardProperty": {
+      "issue": "GitHub 票证",
+      "linear-issue": "Linear 议题",
+      "jira-issue": "Jira 议题",
+      "pr": "PR/MR 链接",
+      "automation": "自动化",
+      "comment": "备注",
+      "cli": "Orca CLI",
+      "inline-agents": "智能体活动",
+      "branch": "分支名称",
+      "host": "主机"
+    },
+    "section": {
+      "show": "显示",
+      "group": "分组依据",
+      "filters": "筛选条件"
+    },
+    "option": {
+      "hosts": "主机",
+      "projects": "项目",
+      "groupBy": "分组依据",
+      "sortBy": "排序方式",
+      "projectOrderBy": "项目排序",
+      "cardLayout": "卡片布局",
+      "cardProperties": "显示属性",
+      "cardDisplay": "卡片显示"
+    },
+    "filter": {
+      "hideSleeping": "隐藏休眠中",
+      "exceptDefaultBranch": "默认分支除外",
+      "hideDefaultBranch": "隐藏默认分支",
+      "hideAutomationCreated": "隐藏自动化创建的工作区",
+      "hideCliCreated": "隐藏 CLI 创建的工作区",
+      "hideOtherClientWorkspaces": "隐藏其他客户端工作区",
+      "hideDetachedHead": "隐藏分离 HEAD"
+    },
+    "none": "无",
+    "hover": "悬停",
+    "countOfTotal": "{{count}} / {{total}}"
   },
   "attach": {
     "disconnected": "附加失败（已断开连接）",

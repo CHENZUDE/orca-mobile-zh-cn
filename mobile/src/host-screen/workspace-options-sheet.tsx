@@ -11,7 +11,6 @@ import {
   type ExecutionHostId
 } from '../../../src/shared/execution-host'
 import {
-  WORKSPACE_VIEW_SECTION_LABELS,
   getShownWorkspaceViewSections,
   type WorkspaceViewOptionKey
 } from '../../../src/shared/workspace-view/workspace-view-options'
@@ -25,6 +24,7 @@ import { withServerHosts } from '../worktree/server-workspaces'
 import { hostScreenStyles as styles } from './host-screen-styles'
 import type { HostScreenController } from './use-host-screen-controller'
 import { DrillRow, OptionRowList } from './workspace-option-rows'
+import { OPTION_LABELS, SECTION_LABELS } from './workspace-option-labels'
 import { OptionPager, useOptionPager, type OptionPagerControls } from './workspace-options-pager'
 import {
   WORKSPACE_OPTION_CONTROLS,
@@ -120,7 +120,9 @@ function WorkspaceOptionsContent({
           style={styles.optionBack}
           onPress={pager.close}
           accessibilityRole="button"
-          accessibilityLabel={t('workspaceOptions.backTo', { title: t(WORKSPACE_OPTIONS_TITLE_KEY) })}
+          accessibilityLabel={t('workspaceOptions.backTo', {
+            title: t(WORKSPACE_OPTIONS_TITLE_KEY)
+          })}
         >
           <ChevronLeft size={16} color={colors.textSecondary} />
           <Text style={styles.optionBackText}>{t(WORKSPACE_OPTIONS_TITLE_KEY)}</Text>
@@ -145,18 +147,19 @@ function WorkspaceOptionsContent({
       </View>
 
       {sections.map(({ section, options }) => {
-        const sectionLabel = WORKSPACE_VIEW_SECTION_LABELS[section]
+        const sectionLabel = SECTION_LABELS[section]
         // Inline unframed rows sit above the section's card; every other row goes in the card.
         const bareRows: ReactNode[] = []
         const framedRows: ReactNode[] = []
         for (const option of options) {
           const control = WORKSPACE_OPTION_CONTROLS[option.key]
-          const props: WorkspaceOptionProps = { controller, hosts, label: option.label }
+          const label = OPTION_LABELS[option.key]
+          const props: WorkspaceOptionProps = { controller, hosts, label }
           if (control.kind === 'page') {
             framedRows.push(
               <DrillRow
                 key={option.key}
-                label={option.label}
+                label={label}
                 value={control.value(props)}
                 onPress={() => pager.open(option.key)}
               />
