@@ -11,6 +11,10 @@ type RelayBackgroundGraceDependencies = {
   clearTimer: typeof clearTimeout
 }
 
+export function isRelayBackgroundGraceMs(value: number): boolean {
+  return Number.isFinite(value) && value >= 0 && value <= 2 * 60 * 1000
+}
+
 export class MobileRelayBackgroundGraceTimer {
   private deadlineAt: number | null = null
   private generation = 0
@@ -21,9 +25,9 @@ export class MobileRelayBackgroundGraceTimer {
     private readonly onExpired: () => void
   ) {}
 
-  arm(): void {
+  arm(graceMs = RELAY_BACKGROUND_GRACE_MS): void {
     this.clear()
-    this.deadlineAt = this.dependencies.now() + RELAY_BACKGROUND_GRACE_MS
+    this.deadlineAt = this.dependencies.now() + graceMs
     const generation = this.generation
     this.timer = this.dependencies.setTimer(() => {
       if (generation !== this.generation || this.deadlineAt === null) {
@@ -32,7 +36,11 @@ export class MobileRelayBackgroundGraceTimer {
       this.timer = null
       this.deadlineAt = null
       this.onExpired()
-    }, RELAY_BACKGROUND_GRACE_MS)
+    }, graceMs)
+  }
+
+  get pending(): boolean {
+    return this.deadlineAt !== null
   }
 
   consumeExpired(): boolean {
@@ -58,6 +66,7 @@ type DirectGrace = Clearable & { arm(): void }
 export class MobileRelayBackgroundGrace {
   private foregroundState = true
   private retainedRelaySuspended = false
+  private graceMs = RELAY_BACKGROUND_GRACE_MS
   private readonly timer: MobileRelayBackgroundGraceTimer
 
   constructor(
@@ -73,6 +82,16 @@ export class MobileRelayBackgroundGrace {
 
   isForeground(): boolean {
     return this.foregroundState
+  }
+
+  setGraceMs(graceMs: number): void {
+    if (!isRelayBackgroundGraceMs(graceMs)) {
+      return
+    }
+    this.graceMs = graceMs
+    if (this.timer.pending) {
+      this.timer.arm(graceMs)
+    }
   }
 
   setForeground(foreground: boolean): void {
@@ -112,7 +131,7 @@ export class MobileRelayBackgroundGrace {
     this.directGrace.clear()
     this.logical.setRecoveryPath(null)
     if (retainsRelay) {
-      this.timer.arm()
+      this.timer.arm(this.graceMs)
       return
     }
     this.relayReconnect.clear()

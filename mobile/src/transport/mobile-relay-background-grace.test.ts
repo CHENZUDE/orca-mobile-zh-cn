@@ -69,4 +69,24 @@ describe('MobileRelayBackgroundGraceTimer', () => {
 
     expect(onExpired).not.toHaveBeenCalled()
   })
+
+  it('re-arms an already pending grace with the new duration', async () => {
+    vi.useFakeTimers()
+    const onExpired = vi.fn()
+    const timer = new MobileRelayBackgroundGraceTimer(
+      {
+        now: Date.now,
+        setTimer: (handler, ms) => setTimeout(handler, ms),
+        clearTimer: (handle) => clearTimeout(handle)
+      },
+      onExpired
+    )
+
+    timer.arm(30_000)
+    timer.arm(120_000)
+    await vi.advanceTimersByTimeAsync(119_999)
+    expect(onExpired).not.toHaveBeenCalled()
+    await vi.advanceTimersByTimeAsync(1)
+    expect(onExpired).toHaveBeenCalledOnce()
+  })
 })

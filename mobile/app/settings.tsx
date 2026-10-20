@@ -1,6 +1,7 @@
 import { Linking } from 'react-native'
 import { useRouter } from 'expo-router'
 import SettingsMenuScreen from '../src/settings/settings-menu-screen'
+import { ConnectionRetentionSettingsRows } from '../src/settings/connection-retention-settings-rows'
 import { PendingCredentialCleanupCard } from '../src/settings/pending-credential-cleanup-card'
 import { SettingsAppUpdateSection } from '../src/settings/settings-app-update-section'
 
@@ -11,6 +12,7 @@ export default function NativeSettingsRoute() {
       push={(route) => router.push(route)}
       openExternal={(url) => Linking.openURL(url)}
     >
+      <ConnectionRetentionSettingsRows />
       <SettingsAppUpdateSection />
       <PendingCredentialCleanupCard />
     </SettingsMenuScreen>

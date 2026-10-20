@@ -11,6 +11,8 @@ import {
   loadDisabledTerminalLiveInputHandles,
   loadHostSidebarWidth,
   loadPushNotificationsEnabled,
+  loadRelayBackgroundRetention,
+  loadRelayBackgroundRetentionMs,
   loadTerminalAutocompleteEnabled,
   loadTerminalLinkOpenMode,
   mobileShellBuildKind,
@@ -20,6 +22,7 @@ import {
   saveHostSidebarWidth,
   savePushNotificationsEnabled,
   saveTerminalAutocompleteEnabled,
+  saveRelayBackgroundRetention,
   saveTerminalLinkOpenMode
 } from './preferences'
 import {
@@ -505,6 +508,42 @@ describe('terminal link open mode preference', () => {
     await saveTerminalLinkOpenMode('phone-browser')
 
     expect(AsyncStorage.setItem).toHaveBeenCalledWith('orca:terminalLinkOpenMode', 'phone-browser')
+  })
+})
+
+describe('relay background retention preference', () => {
+  beforeEach(() => {
+    vi.mocked(AsyncStorage.getItem).mockReset()
+    vi.mocked(AsyncStorage.setItem).mockReset()
+  })
+
+  it('defaults to 30 seconds when unset', async () => {
+    vi.mocked(AsyncStorage.getItem).mockResolvedValue(null)
+
+    await expect(loadRelayBackgroundRetention()).resolves.toBe('30s')
+    await expect(loadRelayBackgroundRetentionMs()).resolves.toBe(30_000)
+    expect(AsyncStorage.getItem).toHaveBeenCalledWith('orca:relayBackgroundRetention')
+  })
+
+  it('loads only supported retention windows', async () => {
+    vi.mocked(AsyncStorage.getItem).mockResolvedValue('2m')
+    await expect(loadRelayBackgroundRetention()).resolves.toBe('2m')
+    await expect(loadRelayBackgroundRetentionMs()).resolves.toBe(120_000)
+
+    vi.mocked(AsyncStorage.getItem).mockResolvedValue('forever')
+    await expect(loadRelayBackgroundRetention()).resolves.toBe('30s')
+  })
+
+  it('falls back to the default when storage cannot be read', async () => {
+    vi.mocked(AsyncStorage.getItem).mockRejectedValue(new Error('storage unavailable'))
+
+    await expect(loadRelayBackgroundRetentionMs()).resolves.toBe(30_000)
+  })
+
+  it('persists the selected retention window', async () => {
+    await saveRelayBackgroundRetention('2m')
+
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith('orca:relayBackgroundRetention', '2m')
   })
 })
 

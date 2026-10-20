@@ -4,6 +4,7 @@ import { createStableLogicalRpcClient } from './stable-logical-rpc-client'
 import type { ConnectionLogSink, HostProfile } from './types'
 import { directPathForEndpoint } from './mobile-direct-endpoint-probe'
 import { startMobileEndpointLifecycle } from './mobile-endpoint-lifecycle'
+import { loadRelayBackgroundRetentionMs } from '../storage/preferences'
 
 export function openHostLogicalClient(host: HostProfile, onLog: ConnectionLogSink): RpcClient {
   // Why: the stable facade owns app-visible RPC/subscription state while the
@@ -17,6 +18,10 @@ export function openHostLogicalClient(host: HostProfile, onLog: ConnectionLogSin
   }
 
   const endpointLifecycle = startMobileEndpointLifecycle(logical, host, onLog)
+  void loadRelayBackgroundRetentionMs().then(
+    // Async: the in-memory default keeps the first background transition safe if storage is slow.
+    (graceMs) => endpointLifecycle.setRelayBackgroundGraceMs(graceMs)
+  )
   endpointLifecycle.setForeground(AppState.currentState === 'active')
   const appStateSubscription = AppState.addEventListener('change', (state) => {
     endpointLifecycle.setForeground(state === 'active')

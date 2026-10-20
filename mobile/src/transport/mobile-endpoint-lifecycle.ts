@@ -18,6 +18,7 @@ import type { StableLogicalRpcClient } from './stable-logical-rpc-client'
 
 type EndpointLifecycle = {
   setForeground(foreground: boolean): void
+  setRelayBackgroundGraceMs(graceMs: number): void
   nudge(reason: ForegroundNudgeReason): void
   stop(): void
 }
@@ -33,6 +34,7 @@ export function startMobileEndpointLifecycle(
 ): EndpointLifecycle {
   let stopped = false
   let foreground = true
+  let relayBackgroundGraceMs: number | null = null
   let owner: EndpointOwner
 
   const startSupervisor = async (relay: MobileRelayEndpoint): Promise<void> => {
@@ -40,6 +42,9 @@ export function startMobileEndpointLifecycle(
       return
     }
     const supervisor = createSupervisor(logical, initialHost, relay, onLog)
+    if (relayBackgroundGraceMs != null) {
+      supervisor.setRelayBackgroundGraceMs(relayBackgroundGraceMs)
+    }
     owner.stop()
     owner = supervisor
     supervisor.setForeground(foreground)
@@ -48,6 +53,9 @@ export function startMobileEndpointLifecycle(
 
   if (initialHost.relay) {
     owner = createSupervisor(logical, initialHost, initialHost.relay, onLog)
+    if (relayBackgroundGraceMs != null) {
+      owner.setRelayBackgroundGraceMs(relayBackgroundGraceMs)
+    }
     void owner.start()
   } else {
     owner = new MobileRelayDirectUpgradeController(logical, initialHost, {
@@ -66,6 +74,10 @@ export function startMobileEndpointLifecycle(
     setForeground(next) {
       foreground = next
       owner.setForeground(next)
+    },
+    setRelayBackgroundGraceMs(graceMs) {
+      relayBackgroundGraceMs = graceMs
+      owner.setRelayBackgroundGraceMs(graceMs)
     },
     nudge(reason) {
       // Why: a focus nudge can precede the AppState listener; keep the closure in

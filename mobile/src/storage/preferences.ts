@@ -269,6 +269,39 @@ export async function saveTerminalLinkOpenMode(mode: MobileTerminalLinkOpenMode)
   await persistMirrored(TERMINAL_LINK_OPEN_MODE_KEY, mode)
 }
 
+export type MobileRelayBackgroundRetention = '30s' | '1m' | '2m'
+
+const RELAY_BACKGROUND_RETENTION_KEY = 'orca:relayBackgroundRetention'
+export const DEFAULT_RELAY_BACKGROUND_RETENTION: MobileRelayBackgroundRetention = '30s'
+export const RELAY_BACKGROUND_RETENTION_MS: Record<MobileRelayBackgroundRetention, number> = {
+  '30s': 30_000,
+  '1m': 60_000,
+  '2m': 120_000
+}
+
+function isRelayBackgroundRetention(value: unknown): value is MobileRelayBackgroundRetention {
+  return value === '30s' || value === '1m' || value === '2m'
+}
+
+export async function loadRelayBackgroundRetention(): Promise<MobileRelayBackgroundRetention> {
+  try {
+    const raw = await AsyncStorage.getItem(RELAY_BACKGROUND_RETENTION_KEY)
+    return isRelayBackgroundRetention(raw) ? raw : DEFAULT_RELAY_BACKGROUND_RETENTION
+  } catch {
+    return DEFAULT_RELAY_BACKGROUND_RETENTION
+  }
+}
+
+export async function loadRelayBackgroundRetentionMs(): Promise<number> {
+  return RELAY_BACKGROUND_RETENTION_MS[await loadRelayBackgroundRetention()]
+}
+
+export async function saveRelayBackgroundRetention(
+  retention: MobileRelayBackgroundRetention
+): Promise<void> {
+  await persistMirrored(RELAY_BACKGROUND_RETENTION_KEY, retention)
+}
+
 function stringArray(value: unknown): string[] {
   return Array.isArray(value)
     ? value.filter((item): item is string => typeof item === 'string')

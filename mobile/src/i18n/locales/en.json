@@ -547,6 +547,23 @@
           }
         }
       }
+    },
+    "connection": {
+      "retention": {
+        "group": {
+          "heading": "BACKGROUND CONNECTION",
+          "body": "Keep a connected cloud-relay link alive for this long after Orca moves to the background. The system can still suspend the app or drop the network path earlier."
+        },
+        "row": {
+          "label": "Keep cloud-relay connection"
+        },
+        "30s": "30 seconds",
+        "1m": "1 minute",
+        "2m": "2 minutes",
+        "errors": {
+          "save": "Could not save the connection setting. Try again."
+        }
+      }
     }
   },
   "host": {
