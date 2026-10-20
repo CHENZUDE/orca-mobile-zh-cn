@@ -1,6 +1,7 @@
 import { Activity, Edit3, PowerOff, RefreshCw } from 'lucide-react-native'
 import type { ActionSheetAction } from './components/ActionSheetModal'
 import type { ConnectionState, HostProfile } from './transport/types'
+import { translate } from './i18n/i18n'
 
 /** Builds the home-screen host long-press menu. Navigation and second drawers
  *  defer until this sheet's native Modal has unmounted —
@@ -29,7 +30,7 @@ export function getHostListActionSheetActions(args: {
 
   return [
     {
-      label: args.hasEverConnected && isLive ? 'Reconnect' : 'Connect',
+      label: translate(args.hasEverConnected && isLive ? 'common.reconnect' : 'common.connect'),
       icon: RefreshCw,
       onPress: () => {
         args.onDismiss()
@@ -39,7 +40,7 @@ export function getHostListActionSheetActions(args: {
     ...(isLive
       ? [
           {
-            label: 'Disconnect',
+            label: translate('common.disconnect'),
             icon: PowerOff,
             onPress: () => {
               args.onDismiss()
@@ -49,7 +50,7 @@ export function getHostListActionSheetActions(args: {
         ]
       : []),
     {
-      label: 'Network diagnostics',
+      label: translate('settings.diagnostics.connection.heading'),
       icon: Activity,
       closeBeforePress: true,
       onPress: () => {
@@ -57,7 +58,7 @@ export function getHostListActionSheetActions(args: {
       }
     },
     {
-      label: 'Edit host',
+      label: translate('navigation.editHost'),
       icon: Edit3,
       closeBeforePress: true,
       onPress: () => {
@@ -66,7 +67,7 @@ export function getHostListActionSheetActions(args: {
       }
     },
     {
-      label: 'Remove',
+      label: translate('common.remove'),
       destructive: true,
       closeBeforePress: true,
       onPress: () => {

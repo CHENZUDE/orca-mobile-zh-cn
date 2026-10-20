@@ -6,6 +6,8 @@
     }
   },
   "common": {
+    "connect": "连接",
+    "disconnect": "断开连接",
     "back": "返回",
     "save": "保存",
     "cancel": "取消",

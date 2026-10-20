@@ -6,6 +6,8 @@
     }
   },
   "common": {
+    "connect": "Connect",
+    "disconnect": "Disconnect",
     "back": "Back",
     "save": "Save",
     "cancel": "Cancel",
