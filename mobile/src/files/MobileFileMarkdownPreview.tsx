@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { MobileMarkdownPreviewImage } from './MobileMarkdownPreviewImage'
+import type { MobileFilePreviewRpcSender } from './mobile-file-preview-operations'
 import { useState } from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 import { Code, Pencil } from 'lucide-react-native'
@@ -16,7 +18,10 @@ type Props = {
   content: string
   truncated: boolean
   byteLength: number
+  client?: MobileFilePreviewRpcSender | null
+  worktreeId?: string
   initialLine?: number
+  onOpenFile?: (pathText: string) => void
 }
 
 export function MobileFileMarkdownPreview({
@@ -24,7 +29,10 @@ export function MobileFileMarkdownPreview({
   content,
   truncated,
   byteLength,
-  initialLine
+  initialLine,
+  client,
+  worktreeId,
+  onOpenFile
 }: Props) {
   const { t } = useTranslation()
   const [mode, setMode] = useState<'preview' | 'source'>(() => (initialLine ? 'source' : 'preview'))
@@ -79,7 +87,24 @@ export function MobileFileMarkdownPreview({
       {mode === 'preview' ? (
         <ScrollView style={styles.scroll} contentContainerStyle={styles.markdownContent}>
           {truncated ? <MobileFilePreviewTruncatedNote byteLength={byteLength} /> : null}
-          <MobileMarkdown content={content} />
+          <MobileMarkdown
+            content={content}
+            onOpenFile={onOpenFile}
+            renderImage={
+              worktreeId
+                ? (href, alt) => (
+                    <MobileMarkdownPreviewImage
+                      key={`${worktreeId}:${relativePath}:${href}`}
+                      client={client ?? null}
+                      worktreeId={worktreeId}
+                      documentPath={relativePath}
+                      href={href}
+                      alt={alt}
+                    />
+                  )
+                : undefined
+            }
+          />
         </ScrollView>
       ) : (
         <MobileFilePreviewSourceText

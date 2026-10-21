@@ -39,6 +39,8 @@ function outcomeCopy(t: Translator, failure: MobileWebShellUpdateFailure): strin
         : t('settings.diagnostics.shell.outcome.blockedReason', { reason: wallCopy(t, failure.wall) })
     case 'native-route':
       return t('settings.diagnostics.shell.outcome.nativeRoute')
+    case 'route-unavailable':
+      return t('settings.diagnostics.shell.outcome.routeUnavailable')
     case 'failed':
       return t('settings.diagnostics.shell.outcome.failed')
     case 'waiting':

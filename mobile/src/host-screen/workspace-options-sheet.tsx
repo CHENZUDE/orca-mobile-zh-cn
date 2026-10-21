@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useMemo, type ReactNode } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { ChevronLeft } from 'lucide-react-native'
 import { colors } from '../theme/mobile-theme'
 import { useBackClaim } from '../navigation/use-back-claim'
@@ -76,6 +76,22 @@ export function WorkspaceOptionsSheet({ controller }: { controller: HostScreenCo
   )
 }
 
+/** The phone's own changes the desktop has not answered; a slow answer is not a refusal. */
+function WorkspaceOptionsPending({ settings }: Pick<HostScreenController, 'settings'>) {
+  const { pending, stale } = settings.pendingViewChanges
+  if (!pending.some((change) => change.kind === 'view')) {
+    return null
+  }
+  return (
+    <View style={styles.optionPending} accessibilityLiveRegion="polite">
+      <ActivityIndicator size="small" color={colors.textMuted} />
+      <Text style={styles.filterModalSubtitle}>
+        {stale ? 'Still waiting for the desktop' : 'Saving to the desktop'}
+      </Text>
+    </View>
+  )
+}
+
 // Its own component so the host list is built only while the sheet is open.
 function WorkspaceOptionsContent({
   controller,
@@ -138,6 +154,7 @@ function WorkspaceOptionsContent({
         <View style={styles.filterModalHeading}>
           <Text style={styles.filterModalTitle}>{t(WORKSPACE_OPTIONS_TITLE_KEY)}</Text>
           <Text style={styles.filterModalSubtitle}>{t(WORKSPACE_VIEW_SHARED_NOTE_KEY)}</Text>
+          <WorkspaceOptionsPending settings={settings} />
         </View>
         {controller.activeFilterCount > 0 && (
           <Pressable onPress={settings.clearFilters}>

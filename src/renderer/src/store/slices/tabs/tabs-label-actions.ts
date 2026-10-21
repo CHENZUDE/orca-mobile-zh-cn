@@ -1,11 +1,13 @@
 import { emitNativeChatToggled } from '@/lib/native-chat-telemetry'
 import type { TuiAgent } from '../../../../../shared/tui-agent'
+import type { AppState } from '../../types'
 import type { TabsSlice, TabsSliceGet, TabsSliceSet } from './tabs-slice-contract'
 import { findTabAndWorktree, patchTab, updateGroup } from '../tab-group-state'
 import {
   applyTabOrderSortValues,
   dedupeTabOrder,
-  partitionPinnedTabOrder
+  partitionPinnedTabOrder,
+  reorderProjectedTabOrder
 } from '../../../../../shared/workspace-layout/tab-order'
 import {
   mirrorTabPinnedToHost,
@@ -13,6 +15,8 @@ import {
   patchTerminalTabRow
 } from './tabs-host-mirroring'
 import { sendTabChangeToLayoutOwner } from '../../terminals/tab-change-through-layout-owner'
+import { recordTabOrderInLayoutOwner } from './tab-order-layout-owner'
+import { withPreviewEnded } from './tab-preview-flag'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../../shared/layout-owner-switch'
 
 function oppositeViewMode(mode: 'terminal' | 'chat'): 'terminal' | 'chat' {
@@ -51,6 +55,14 @@ export function createTabsLabelActions(
     mirrorTabViewModeToHost(get(), tabId, mode)
   }
 
+  // Why: launchAgent lives on the legacy terminal tab (keyed by entityId); toggle telemetry attributes by it.
+  function launchAgentOf(state: AppState, worktreeId: string, entityId: string): TuiAgent | null {
+    return (
+      (state.tabsByWorktree[worktreeId] ?? []).find((terminal) => terminal.id === entityId)
+        ?.launchAgent ?? null
+    )
+  }
+
   /** `to`: the mode main switched to, which a frame may already show. */
   function toggleTabViewModeHere(tabId: string, to?: 'terminal' | 'chat'): void {
     let toggled: {
@@ -70,11 +82,7 @@ export function createTabsLabelActions(
           ? 'chat'
           : 'terminal'
       const nextMode = oppositeViewMode(fromMode)
-      // Why: launchAgent lives on the legacy terminal tab (keyed by entityId); resolve it here so toggle telemetry can attribute by agent.
-      const agent =
-        (state.tabsByWorktree[found.worktreeId] ?? []).find(
-          (terminal) => terminal.id === found.tab.entityId
-        )?.launchAgent ?? null
+      const agent = launchAgentOf(state, found.worktreeId, found.tab.entityId)
       toggled = { from: fromMode, to: nextMode, agent }
       return {
         ...patchTab(state.unifiedTabsByWorktree, tabId, { viewMode: nextMode }),
@@ -96,7 +104,13 @@ export function createTabsLabelActions(
   /** Tab-bar id → the mode last sent to main and not yet answered: a toggle flips from that. */
   const viewModeSent = new Map<string, { mode: 'terminal' | 'chat' }>()
 
-  function sendViewMode(tabId: string, mode: 'terminal' | 'chat', local: () => void): boolean {
+  /** `shown`: the switch's own effects once main's frame draws it. */
+  function sendViewMode(
+    tabId: string,
+    mode: 'terminal' | 'chat',
+    local: () => void,
+    shown?: () => void
+  ): boolean {
     const state = get()
     // Why an object: only this send's answer clears its entry, not an earlier send's of the same mode.
     const entry = { mode }
@@ -113,7 +127,13 @@ export function createTabsLabelActions(
         settle()
         local()
       },
-      settle
+      {
+        shown: () => {
+          settle()
+          shown?.()
+        },
+        refused: settle
+      }
     )
     if (sent) {
       viewModeSent.set(tabId, entry)
@@ -122,25 +142,42 @@ export function createTabsLabelActions(
   }
 
   function sendViewModeToggle(tabId: string): boolean {
-    const shown = findTabAndWorktree(get().unifiedTabsByWorktree, tabId)?.tab.viewMode
-    const to = oppositeViewMode(
-      viewModeSent.get(tabId)?.mode ?? (shown === 'chat' ? 'chat' : 'terminal')
+    const found = findTabAndWorktree(get().unifiedTabsByWorktree, tabId)
+    const shown = found?.tab.viewMode
+    const from = viewModeSent.get(tabId)?.mode ?? (shown === 'chat' ? 'chat' : 'terminal')
+    const to = oppositeViewMode(from)
+    return sendViewMode(
+      tabId,
+      to,
+      () => toggleTabViewModeHere(tabId, to),
+      () =>
+        emitNativeChatToggled({
+          from,
+          to,
+          agent: found ? launchAgentOf(get(), found.worktreeId, found.tab.entityId) : null
+        })
     )
-    return sendViewMode(tabId, to, () => toggleTabViewModeHere(tabId, to))
   }
 
   return {
     reorderUnifiedTabs: (groupId, tabIds, opts) => {
       let reordered = false
+      const changes: { worktreeId: string; from: string[]; to: string[] }[] = []
       set((state) => {
         for (const [worktreeId, groups] of Object.entries(state.groupsByWorktree)) {
           const group = groups.find((candidate) => candidate.id === groupId)
           if (!group) {
             continue
           }
-          // Why: dedupe at the store boundary so each tab keeps one canonical position and later group ops don't branch on duplicate ids.
-          const nextTabOrder = dedupeTabOrder(tabIds)
+          // Projected orders own placement; only complete local orders own membership.
+          const nextTabOrder = opts?.projectedMoveTabId
+            ? reorderProjectedTabOrder(group.tabOrder, tabIds, opts.projectedMoveTabId)
+            : dedupeTabOrder(tabIds)
+          if (nextTabOrder === group.tabOrder) {
+            return state
+          }
           reordered = true
+          changes.push({ worktreeId, from: group.tabOrder, to: nextTabOrder })
           const orderMap = new Map(nextTabOrder.map((id, index) => [id, index]))
           return {
             groupsByWorktree: {
@@ -158,6 +195,12 @@ export function createTabsLabelActions(
         }
         return state
       })
+      // Switch point: main takes the window's new order unless the caller already asked it.
+      if (ORCA_LAYOUT_OWNER_IS_MAIN && !opts?.layoutOwnerHandled) {
+        for (const change of changes) {
+          recordTabOrderInLayoutOwner(get(), groupId, change)
+        }
+      }
       if (reordered && opts?.recordInteraction !== false) {
         get().recordFeatureInteraction?.('terminal-tabs')
       }
@@ -190,15 +233,15 @@ export function createTabsLabelActions(
       }
     },
 
-    setUnifiedTabColor: (tabId, color) => {
+    setUnifiedTabColor: (tabId, color, opts) => {
       const exists = get().getTab(tabId) !== null
       set((state) => patchTab(state.unifiedTabsByWorktree, tabId, { color }) ?? state)
-      if (exists) {
+      if (exists && opts?.recordInteraction !== false) {
         get().recordFeatureInteraction?.('terminal-tabs')
       }
     },
 
-    pinTab: (tabId) => {
+    pinTab: (tabId, opts) => {
       const exists = get().getTab(tabId) !== null
       set((state) => {
         const found = findTabAndWorktree(state.unifiedTabsByWorktree, tabId)
@@ -207,7 +250,7 @@ export function createTabsLabelActions(
         }
         const { tab, worktreeId } = found
         const tabs = (state.unifiedTabsByWorktree[worktreeId] ?? []).map((candidate) =>
-          candidate.id === tabId ? { ...candidate, isPinned: true, isPreview: false } : candidate
+          candidate.id === tabId ? withPreviewEnded({ ...candidate, isPinned: true }) : candidate
         )
         const groups = state.groupsByWorktree[worktreeId] ?? []
         const group = groups.find((candidate) => candidate.id === tab.groupId)
@@ -231,12 +274,12 @@ export function createTabsLabelActions(
         }
       })
       mirrorTabPinnedToHost(get(), tabId, true)
-      if (exists) {
+      if (exists && opts?.recordInteraction !== false) {
         get().recordFeatureInteraction?.('terminal-tabs')
       }
     },
 
-    unpinTab: (tabId) => {
+    unpinTab: (tabId, opts) => {
       const exists = get().getTab(tabId) !== null
       set((state) => {
         const found = findTabAndWorktree(state.unifiedTabsByWorktree, tabId)
@@ -268,7 +311,7 @@ export function createTabsLabelActions(
         }
       })
       mirrorTabPinnedToHost(get(), tabId, false)
-      if (exists) {
+      if (exists && opts?.recordInteraction !== false) {
         get().recordFeatureInteraction?.('terminal-tabs')
       }
     }

@@ -1,11 +1,13 @@
 import { z } from 'zod'
-import { isTerminalLeafId, parsePaneKey } from '../stable-pane-id'
-import { isValidHostTerminalTabId } from '../terminal-tab-id'
-import type { TuiAgent } from '../tui-agent'
-import { isTuiAgent } from '../tui-agent-config'
-import { TerminalPaneLayoutNodeSchema } from './session-tabs-schemas-params'
-import { TerminalOrphanGroupLayout } from './terminal-orphan-params'
-import { sleepingAgentSessionRecordSchema } from '../workspace-session-sleeping-agents'
+import { isTerminalLeafId } from '../stable-pane-id'
+import { SleepCommand, WakeCommand } from './workspace-layout-sleep-wake-params'
+import { RenameTabsCommand } from './workspace-layout-rename-tabs-params'
+import { SetGroupRatiosCommand, SetPaneRatiosCommand } from './workspace-layout-ratio-params'
+import {
+  ApplyDefaultTabsCommand,
+  CreateTerminalTabCommand,
+  NewGroupSplit
+} from './workspace-layout-terminal-tab-params'
 
 export const LayoutSubscribeParams = z
   .object({
@@ -16,6 +18,13 @@ export const LayoutSubscribeParams = z
 
 export const LayoutUnsubscribeParams = z.object({
   subscriptionId: z.string().min(1, 'Missing subscriptionId')
+})
+
+/** A paired desktop's view of the server's workspaces: each one's shown group, null for none. */
+export const LayoutReportViewParams = z.object({
+  activeGroupByWorkspace: z.record(z.string().min(1), z.string().min(1).nullable()),
+  /** A re-send after a reconnect, not a change the user made: it never outranks a live report. */
+  refresh: z.literal(true).optional()
 })
 
 const OnPane = {
@@ -32,13 +41,8 @@ const SplitPaneCommand = z.object({
   newLeafId: z.string().refine(isTerminalLeafId).optional()
 })
 
-/** Main marks a close as the user's; the window cannot send that mark. `automatic`: not the
- *  user's close (the pane's terminal ended), so no launch in it was stopped by the user. */
-const ClosePaneCommand = z.object({
-  type: z.literal('closePane'),
-  ...OnPane,
-  automatic: z.literal(true).optional()
-})
+/** Main marks a close as the user's; the window cannot send that mark. */
+const ClosePaneCommand = z.object({ type: z.literal('closePane'), ...OnPane })
 
 /** A title is trimmed and non-empty; null clears it. */
 const RenamePaneCommand = z.object({
@@ -54,12 +58,12 @@ const MovePaneCommand = z.object({
   side: z.enum(['left', 'right', 'top', 'bottom'])
 })
 
-/** The tab's tree with its new ratios; main refuses one whose panes differ from its own. */
-const SetPaneRatiosCommand = z.object({
-  type: z.literal('setPaneRatios'),
+/** The pane a tab's chat view shows; null clears it. */
+const SetChatPaneCommand = z.object({
+  type: z.literal('setChatPane'),
   workspace: OnPane.workspace,
   tabId: OnPane.tabId,
-  root: TerminalPaneLayoutNodeSchema
+  leafId: z.union([z.string().min(1), z.null()])
 })
 
 const EqualizePanesCommand = z.object({
@@ -86,13 +90,6 @@ const SplitGroupCommand = z.object({
   direction: z.enum(['left', 'right', 'up', 'down'])
 })
 
-/** The workspace's group tree with its new ratios; main refuses one whose groups differ. */
-const SetGroupRatiosCommand = z.object({
-  type: z.literal('setGroupRatios'),
-  workspace: OnPane.workspace,
-  groupLayout: TerminalOrphanGroupLayout
-})
-
 /**
  * The window's close of one tab it already closed; main records a terminal's close with the
  * window's reason. An editor tab's close records nothing.
@@ -103,14 +100,6 @@ const CloseTabsCommand = z.object({
   tabIds: z.tuple([z.string().min(1)]),
   recordClose: z.enum(['user', 'cleanup']).optional()
 })
-
-/** An open into a new group, named by the command's groupId, beside this one (NewGroupSplit). */
-const NewGroupSplit = z
-  .object({
-    besideGroupId: z.string().min(1),
-    direction: z.enum(['left', 'right', 'up', 'down'])
-  })
-  .optional()
 
 /** An edit-mode file's restorable record, as the window saves it. */
 const EditorFileRecord = z.object({
@@ -135,6 +124,7 @@ const OpenEditorTabCommand = z.object({
   file: EditorFileRecord.optional(),
   groupId: z.string().min(1).optional(),
   preview: z.literal(true).optional(),
+  createdAt: z.number().int().nonnegative().optional(),
   split: NewGroupSplit
 })
 
@@ -145,35 +135,11 @@ const MovePaneToNewTabCommand = z.object({
   groupId: z.string().min(1),
   index: z.number().int().nonnegative().optional(),
   /** The terminal the window's pane shows now, when it has one. */
-  windowDetach: z.object({ ptyId: z.string().min(1).max(512).nullable() })
-})
-
-/**
- * A terminal tab under the ids the window drew it with: its callers and the pane's terminal need
- * them at once. Main refuses an id another tab holds; the same create again changes nothing.
- */
-const CreateTerminalTabCommand = z.object({
-  type: z.literal('createTerminalTab'),
-  workspace: OnPane.workspace,
-  tabId: z.string().refine(isValidHostTerminalTabId),
-  leafId: z.string().refine(isTerminalLeafId),
-  groupId: z.string().min(1).optional(),
-  viewMode: z.enum(['terminal', 'chat']).optional(),
-  createdAt: z.number().int().nonnegative().optional(),
-  creation: z
-    .object({
-      defaultTitle: z.string().min(1).optional(),
-      shellOverride: z.string().min(1).optional(),
-      startupCwd: z.string().min(1).optional(),
-      forceHostRuntime: z.literal(true).optional(),
-      launchAgent: z
-        .custom<TuiAgent>((value) => typeof value === 'string' && isTuiAgent(value))
-        .optional()
-    })
-    .optional(),
-  /** Only into a workspace with no tab in main's copy; otherwise nothing is created. */
-  initial: z.literal('activation').optional(),
-  split: NewGroupSplit
+  windowDetach: z.object({
+    ptyId: z.string().min(1).max(512).nullable(),
+    /** The pane's folder, where an unbound pane's new shell starts. */
+    startupCwd: z.string().min(1).optional()
+  })
 })
 
 const AiVaultTitle = z.object({
@@ -222,6 +188,24 @@ const OpenBrowserTabCommand = z.object({
   groupId: z.string().min(1).optional(),
   afterTabId: z.string().min(1).optional(),
   index: z.number().int().nonnegative().optional(),
+  createdAt: z.number().int().nonnegative().optional(),
+  browserCreatedAt: z.number().int().nonnegative().optional(),
+  split: NewGroupSplit
+})
+
+/**
+ * A chat tab under the id the window drew it with: status and attention address it at once. The
+ * same open again changes nothing; an id another tab holds is refused.
+ */
+const OpenAgentSessionTabCommand = z.object({
+  type: z.literal('openAgentSessionTab'),
+  ...OnTab,
+  sessionId: z.string().min(1),
+  agent: z.string().min(1),
+  groupId: z.string().min(1).optional(),
+  afterTabId: z.string().min(1).optional(),
+  index: z.number().int().nonnegative().optional(),
+  createdAt: z.number().int().nonnegative().optional(),
   split: NewGroupSplit
 })
 
@@ -252,6 +236,23 @@ const SetBrowserTabProfileCommand = z.object({
 })
 
 const PromotePreviewTabCommand = z.object({ type: z.literal('promotePreviewTab'), ...OnTab })
+
+/** The window applied the workspace's default tabs (or it had none); main records it, once. */
+const SetDefaultTabsAppliedCommand = z.object({
+  type: z.literal('setDefaultTabsApplied'),
+  workspace: OnPane.workspace
+})
+
+/** A simulator tab under the id the window drew it with, which is also its entity. */
+const OpenSimulatorTabCommand = z.object({
+  type: z.literal('openSimulatorTab'),
+  ...OnTab,
+  groupId: z.string().min(1).optional(),
+  afterTabId: z.string().min(1).optional(),
+  index: z.number().int().nonnegative().optional(),
+  createdAt: z.number().int().nonnegative().optional(),
+  split: NewGroupSplit
+})
 
 /**
  * Restored editor tabs the window moved to the workspace that owns their file (F42): the window
@@ -292,38 +293,13 @@ const RenameEditorFilesCommand = z.object({
     .min(1)
 })
 
-/** Pane keys of the command's own tab only, so a sleep or wake never reaches past it. */
-function paneKeysNameTab(command: { tabId: string; paneKeys: string[] }): boolean {
-  return command.paneKeys.every((paneKey) => parsePaneKey(paneKey)?.tabId === command.tabId)
-}
-
-/** The window's sleep of panes of one tab it already stopped; main records how each resumes. */
-const SleepCommand = z
-  .object({
-    type: z.literal('sleep'),
-    ...OnTab,
-    paneKeys: z.array(z.string().min(1)).min(1),
-    records: z.array(sleepingAgentSessionRecordSchema)
-  })
-  .refine(paneKeysNameTab)
-  .refine((command) =>
-    command.records.every(
-      (record) =>
-        record.worktreeId === command.workspace && command.paneKeys.includes(record.paneKey)
-    )
-  )
-
-/** The window's wake of the one pane it shows; never more, so agents are not resumed in bulk. */
-const WakeCommand = z
-  .object({ type: z.literal('wake'), ...OnTab, paneKeys: z.tuple([z.string().min(1)]) })
-  .refine(paneKeysNameTab)
-
 /**
  * A window's layout command (`layout.apply`, registered only in a layout-owner build). The window
  * names what it acts on; main mints every new id but a created terminal tab's
  * (see CreateTerminalTabCommand), a browser tab's and page's, which the window already shows
- * (see OpenBrowserTabCommand), an editor tab's (see OpenEditorTabCommand), and the group an open
- * into a new split makes (see NewGroupSplit).
+ * (see OpenBrowserTabCommand), an editor tab's (see OpenEditorTabCommand), a chat tab's (see
+ * OpenAgentSessionTabCommand), a simulator tab's (see OpenSimulatorTabCommand), and the group an
+ * open into a new split makes (see NewGroupSplit).
  */
 export const LayoutApplyParams = z.object({
   command: z.discriminatedUnion('type', [
@@ -334,11 +310,13 @@ export const LayoutApplyParams = z.object({
     EqualizePanesCommand,
     MovePaneCommand,
     SetPaneRatiosCommand,
+    SetChatPaneCommand,
     MoveTabCommand,
     SplitGroupCommand,
     SetGroupRatiosCommand,
     CloseTabsCommand,
     RenameTabCommand,
+    RenameTabsCommand,
     SetTabPropsCommand,
     MovePaneToNewTabCommand,
     OpenBrowserTabCommand,
@@ -347,10 +325,14 @@ export const LayoutApplyParams = z.object({
     ReplaceBrowserPageCommand,
     SetBrowserTabProfileCommand,
     OpenEditorTabCommand,
+    OpenAgentSessionTabCommand,
     PromotePreviewTabCommand,
+    OpenSimulatorTabCommand,
     MoveTabToWorkspaceCommand,
     RenameEditorFilesCommand,
     SleepCommand,
-    WakeCommand
+    WakeCommand,
+    SetDefaultTabsAppliedCommand,
+    ApplyDefaultTabsCommand
   ])
 })

@@ -410,7 +410,8 @@
           "blockedReason": "Blocked: {{reason}}.",
           "nativeRoute": "Showed the native screen.",
           "failed": "Showed the failure screen.",
-          "waiting": "Waited for the host."
+          "waiting": "Waited for the host.",
+          "routeUnavailable": "Showed that the screen is not available."
         },
         "reason": {
           "no-connection": "not connected to the host",
@@ -442,7 +443,9 @@
           "bundle-unavailable": "the host has no workspace bundle",
           "bundle-shell-too-old": "this app is too old for the saved bundle",
           "host-too-old-for-bundle": "the host is too old for the saved bundle",
-          "bundle-too-old-for-host": "the saved bundle is too old for the host"
+          "bundle-too-old-for-host": "the saved bundle is too old for the host",
+          "page-route-unlisted": "the host's workspace does not include this screen",
+          "page-route-grant-missing": "this screen needs a newer app"
         }
       },
       "connection": {
@@ -579,6 +582,7 @@
         "title": "System default",
         "subtitle": "Use the agent’s own login"
       },
+      "refreshAccounts": "Refresh accounts",
       "footer": "Add or re-authenticate accounts from desktop Settings → Accounts.",
       "errors": {
         "invalidSnapshot": "Invalid accounts snapshot from host",
@@ -1083,7 +1087,16 @@
       "sourcePrefix": "Source: {{value}}",
       "sortPrefix": "Sort: {{value}}",
       "fieldsPrefix": "Fields: {{value}}"
-    }
+    },
+    "refreshLabel": {
+      "github": "Refresh GitHub work",
+      "gitlab": "Refresh GitLab work items",
+      "linear": "Refresh Linear",
+      "jira": "Refresh Jira issues"
+    },
+    "newGithubIssue": "New GitHub issue",
+    "newLinearIssue": "New Linear issue",
+    "connectLinear": "Connect Linear"
   },
   "prChecks": {
     "noDetails": "No details available.",
@@ -1675,7 +1688,8 @@
     "opensImageFullSize": "Opens the image full size",
     "copyMessage": "Copy message",
     "loadEarlierMessages": "Load earlier messages",
-    "resumeInNewCli": "Resume in New CLI"
+    "resumeInNewCli": "Resume in New CLI",
+    "addToMessage": "Add to message"
   },
   "nativeChatImageViewer": {
     "closeImage": "Close image"
@@ -1811,7 +1825,8 @@
   },
   "nativeChatToolRun": {
     "showMore": "Show more",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "result": "Result"
   },
   "fileReader": {
     "copyReviewNotes": "Copy review notes",
@@ -2149,6 +2164,7 @@
     "queueAfterStop": "Queue a message to run after the stop",
     "sendAfterStop": "Send a message to run after the stop",
     "composerPlaceholder": "Message, @files, /commands",
+    "composerPlaceholderForAgent": "Message {{name}}",
     "tools": "Tools",
     "collapse": "Collapse",
     "waitingForDesktop": "Waiting for desktop..."
@@ -2172,7 +2188,8 @@
     "on": "On",
     "off": "Off",
     "permissionsAccessible": "Permissions, {{name}}",
-    "modelAccessible": "Model, {{name}}"
+    "modelAccessible": "Model, {{name}}",
+    "permissions": "Permissions"
   },
   "errors": {
     "unableToLoadPullRequest": "Unable to load pull request",

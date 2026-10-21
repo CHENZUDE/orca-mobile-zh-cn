@@ -49,7 +49,8 @@ export class MobileEndpointSupervisor {
   private readonly logRelay: RelayRecoveryLog
   private readonly directProbe: DirectReturnProbe
   private readonly directGrace: MobileRelayDirectGraceTimer
-  private readonly backgroundGrace: MobileRelayBackgroundGrace
+  // Public: the lifecycle forwards the user's retention choice to it.
+  readonly backgroundGrace: MobileRelayBackgroundGrace
   private readonly sessionEstablisher: MobileRelaySessionEstablisher
 
   constructor(

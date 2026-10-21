@@ -9,10 +9,16 @@ import {
   RefreshCw,
   Plus
 } from './mobile-tasks-dependencies'
+import { MobileTasksHostSubtitle } from './mobile-tasks-host-subtitle'
 import { styles } from './mobile-tasks-legacy-styles'
 import { translate } from '../i18n/i18n'
 import { renderMobileTasksProviderControls } from './mobile-tasks-provider-controls'
 import { renderMobileTasksSearchControl } from './mobile-tasks-search-control'
+
+// Same wording as the desktop task page's icon buttons.
+function refreshLabel(provider: 'github' | 'gitlab' | 'linear' | 'jira'): string {
+  return translate(`tasks.refreshLabel.${provider}`)
+}
 
 export function renderMobileTasksChrome(model: ConnectionPresentationModel) {
   const { setTaskCopyFeedbackRootRef } = model
@@ -33,6 +39,7 @@ export function renderMobileTasksStatusBar(model: ConnectionPresentationModel) {
     githubMode,
     githubProjectLoading,
     headerVerdict,
+    hostId,
     linearConnected,
     loading,
     provider,
@@ -62,12 +69,18 @@ export function renderMobileTasksStatusBar(model: ConnectionPresentationModel) {
         <ChevronLeft size={22} color={colors.textPrimary} />
       </Pressable>
       <View style={styles.titleWrap}>
-        <StatusDot state={connState} verdict={headerVerdict} />
-        <Text style={styles.title}>{translate('tasks.title')}</Text>
+        <View style={styles.titleLine}>
+          <StatusDot state={connState} verdict={headerVerdict} />
+          <Text style={styles.title}>{translate('tasks.title')}</Text>
+        </View>
+        <MobileTasksHostSubtitle hostId={hostId} />
       </View>
       <Pressable
         style={styles.iconButton}
         disabled={!taskUiReady || loading || refreshing || githubProjectLoading}
+        hitSlop={8}
+        accessibilityRole="button"
+        accessibilityLabel={refreshLabel(provider)}
         onPress={() => {
           if (!taskUiReady) {
             return
@@ -85,6 +98,15 @@ export function renderMobileTasksStatusBar(model: ConnectionPresentationModel) {
         <Pressable
           style={styles.iconButton}
           disabled={!taskUiReady}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel={
+            provider === 'github'
+              ? translate('tasks.newGithubIssue')
+              : linearConnected
+                ? translate('tasks.newLinearIssue')
+                : translate('tasks.connectLinear')
+          }
           onPress={() => {
             if (!taskUiReady) {
               return

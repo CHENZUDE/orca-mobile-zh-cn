@@ -14,6 +14,7 @@ import { upgradeDirectMobileRelay } from './mobile-relay-direct-upgrade'
 import { directPathForEndpoint } from './mobile-direct-endpoint-probe'
 import { MobileRelayDirectUpgradeController } from './mobile-relay-direct-upgrade-controller'
 import { defaultCancelTimer, defaultScheduleTimer } from './timer-scheduler'
+import { setRelayBackgroundGraceMs } from './mobile-endpoint-supervisor-support'
 import type { StableLogicalRpcClient } from './stable-logical-rpc-client'
 
 type EndpointLifecycle = {
@@ -23,8 +24,10 @@ type EndpointLifecycle = {
   stop(): void
 }
 
-type EndpointOwner = EndpointLifecycle & {
+type EndpointOwner = Omit<EndpointLifecycle, 'setRelayBackgroundGraceMs'> & {
   start(): Promise<void>
+  /** The background-grace holder the retention setting is forwarded to. */
+  backgroundGrace: { setGraceMs(graceMs: number): void }
 }
 
 export function startMobileEndpointLifecycle(
@@ -43,7 +46,7 @@ export function startMobileEndpointLifecycle(
     }
     const supervisor = createSupervisor(logical, initialHost, relay, onLog)
     if (relayBackgroundGraceMs != null) {
-      supervisor.setRelayBackgroundGraceMs(relayBackgroundGraceMs)
+      setRelayBackgroundGraceMs(supervisor.backgroundGrace, relayBackgroundGraceMs)
     }
     owner.stop()
     owner = supervisor
@@ -54,7 +57,7 @@ export function startMobileEndpointLifecycle(
   if (initialHost.relay) {
     owner = createSupervisor(logical, initialHost, initialHost.relay, onLog)
     if (relayBackgroundGraceMs != null) {
-      owner.setRelayBackgroundGraceMs(relayBackgroundGraceMs)
+      setRelayBackgroundGraceMs(owner.backgroundGrace, relayBackgroundGraceMs)
     }
     void owner.start()
   } else {
@@ -77,7 +80,7 @@ export function startMobileEndpointLifecycle(
     },
     setRelayBackgroundGraceMs(graceMs) {
       relayBackgroundGraceMs = graceMs
-      owner.setRelayBackgroundGraceMs(graceMs)
+      setRelayBackgroundGraceMs(owner.backgroundGrace, graceMs)
     },
     nudge(reason) {
       // Why: a focus nudge can precede the AppState listener; keep the closure in

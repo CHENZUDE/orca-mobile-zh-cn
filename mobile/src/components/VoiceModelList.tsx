@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-nati
 import { Check, Download, Trash2 } from 'lucide-react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import {
+  dictationModelRowAction,
   isModelInFlight,
   type MobileSpeechModel,
   type MobileSpeechSetup
@@ -50,13 +51,11 @@ export function VoiceModelList({
   onDelete
 }: Props): React.JSX.Element {
   const { t } = useTranslation()
-
   return (
     <View style={disabled ? styles.disabled : undefined} pointerEvents={disabled ? 'none' : 'auto'}>
       {setup.models.map((model, idx) => {
         const anyBusy = busyAction !== null
-        const isSelected = model.id === setup.selectedModelId
-        const inFlight = isModelInFlight(model)
+        const action = dictationModelRowAction(model, setup.selectedModelId)
         const rowBusy = busyAction?.modelId === model.id
         const selectBusy = rowBusy && busyAction?.type === 'select'
         const downloadBusy = rowBusy && busyAction?.type === 'download'
@@ -70,24 +69,20 @@ export function VoiceModelList({
                   <Text style={styles.modelLabel} numberOfLines={1}>
                     {model.label}
                   </Text>
-                  {model.recommended ? (
-                    <Text style={styles.recommended}>{t('voiceModels.recommended')}</Text>
-                  ) : null}
+                  {model.recommended ? <Text style={styles.recommended}>Recommended</Text> : null}
                 </View>
                 <Text style={styles.modelMeta}>{modelMeta(model)}</Text>
               </View>
-              {model.provider === 'openai' ? (
+              {action === 'needs-api-key' ? (
                 <Text style={styles.modelStateText}>
-                  {model.status === 'ready'
-                    ? t('voiceModels.apiKeySet')
-                    : t('voiceModels.setUpOnDesktop')}
+                  {t('voiceModels.setUpOnDesktop')}
                 </Text>
-              ) : model.status === 'ready' ? (
+              ) : action === 'in-use' || action === 'use' ? (
                 <View style={styles.readyActions}>
-                  {isSelected ? (
+                  {action === 'in-use' ? (
                     <View style={styles.selectedTag}>
                       <Check size={14} color={colors.statusGreen} strokeWidth={2.4} />
-                      <Text style={styles.selectedText}>{t('voiceModels.inUse')}</Text>
+                      <Text style={styles.selectedText}>In use</Text>
                     </View>
                   ) : (
                     <Pressable
@@ -96,36 +91,44 @@ export function VoiceModelList({
                         pressed && styles.actionPressed
                       ]}
                       disabled={anyBusy}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Use ${model.label}`}
+                      accessibilityState={{ disabled: anyBusy }}
                       onPress={() => onUseModel(model)}
                     >
                       {selectBusy ? (
                         <ActivityIndicator size="small" color={colors.textSecondary} />
                       ) : (
-                        <Text style={styles.actionText}>{t('voiceModels.use')}</Text>
+                        <Text style={styles.actionText}>Use</Text>
                       )}
                     </Pressable>
                   )}
-                  <Pressable
-                    style={({ pressed }) => [styles.iconButton, pressed && styles.actionPressed]}
-                    disabled={anyBusy}
-                    onPress={() => onDelete(model)}
-                    accessibilityLabel={t('voiceModels.deleteModel', { name: model.label })}
-                  >
-                    {deleteBusy ? (
-                      <ActivityIndicator size="small" color={colors.statusRed} />
-                    ) : (
-                      <Trash2 size={18} color={colors.statusRed} strokeWidth={2.2} />
-                    )}
-                  </Pressable>
+                  {/* A cloud model has nothing on this computer to delete. */}
+                  {model.provider === 'openai' ? null : (
+                    <Pressable
+                      style={({ pressed }) => [styles.iconButton, pressed && styles.actionPressed]}
+                      disabled={anyBusy}
+                      onPress={() => onDelete(model)}
+                      accessibilityLabel={t('voiceModels.deleteModel', { name: model.label })}
+                    >
+                      {deleteBusy ? (
+                        <ActivityIndicator size="small" color={colors.statusRed} />
+                      ) : (
+                        <Trash2 size={18} color={colors.statusRed} strokeWidth={2.2} />
+                      )}
+                    </Pressable>
+                  )}
                 </View>
-              ) : inFlight ? (
+              ) : action === 'downloading' ? (
                 <ActivityIndicator size="small" color={colors.textSecondary} />
               ) : (
                 <Pressable
                   style={({ pressed }) => [styles.iconButton, pressed && styles.actionPressed]}
                   disabled={anyBusy}
                   onPress={() => onDownload(model)}
+                  accessibilityRole="button"
                   accessibilityLabel={t('voiceModels.downloadModel', { name: model.label })}
+                  accessibilityState={{ disabled: anyBusy }}
                 >
                   {downloadBusy ? (
                     <ActivityIndicator size="small" color={colors.textSecondary} />
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
   },
   recommended: { color: colors.statusGreen, fontSize: 10, fontWeight: '700' },
   modelMeta: { color: colors.textMuted, fontSize: typography.metaSize, marginTop: 2 },
-  modelStateText: { color: colors.textMuted, fontSize: typography.metaSize },
+  modelStateText: { color: colors.textMuted, fontSize: typography.metaSize, flexShrink: 1 },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',

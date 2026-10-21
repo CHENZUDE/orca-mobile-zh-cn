@@ -16,6 +16,15 @@ export function suspendRelayIfStillConnected(
   }
 }
 
+// Why: the user picks the retention window in Settings, so the supervisor only
+// forwards it; the grace object owns re-arming an already-pending timer.
+export function setRelayBackgroundGraceMs(
+  backgroundGrace: { setGraceMs(graceMs: number): void },
+  graceMs: number
+): void {
+  backgroundGrace.setGraceMs(graceMs)
+}
+
 export function liveRelayLeaseExpiry(
   logical: StableLogicalRpcClient,
   stopped: boolean,

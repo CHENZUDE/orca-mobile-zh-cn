@@ -1,6 +1,6 @@
 import { translate } from '../i18n/i18n'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useForceReconnect } from '../transport/client-context'
+import { useForceReconnect } from '../transport/host-client-hooks'
 import { useWorkspaceClient } from '../transport/use-workspace-client'
 import type { RpcClient } from '../transport/rpc-client'
 import { connectionRetryAction } from '../transport/connection-retry-action'

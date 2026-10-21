@@ -20,6 +20,7 @@ type Params = {
   stagedEntries: MobileCommitFailureRecovery['stagedEntries']
   sendGitRequest: SendGitRequest
   sendCommitRequest: (message: string) => Promise<unknown>
+  cancelGenerateCommitMessage: () => void
   runGitSyncSteps: () => Promise<void>
   runGitWorkflow: RunGitWorkflow
   loadStatus: (options?: LoadStatusOptions) => Promise<boolean>
@@ -38,7 +39,8 @@ export function useMobileSourceControlCommitRunners(params: Params) {
     commitMessage,
     stagedEntries,
     sendGitRequest,
-    sendCommitRequest,
+    sendCommitRequest: sendCommitRequestOnly,
+    cancelGenerateCommitMessage,
     runGitSyncSteps,
     runGitWorkflow,
     loadStatus,
@@ -49,6 +51,15 @@ export function useMobileSourceControlCommitRunners(params: Params) {
     setCommitMessage,
     recordCommitFailure
   } = params
+  // Why: as on desktop, committing the box's message cancels a running generation so its late
+  // reply cannot refill the box the commit empties.
+  const sendCommitRequest = useCallback(
+    (message: string) => {
+      cancelGenerateCommitMessage()
+      return sendCommitRequestOnly(message)
+    },
+    [cancelGenerateCommitMessage, sendCommitRequestOnly]
+  )
 
   const commit = useCallback(async () => {
     const message = commitMessage.trim()

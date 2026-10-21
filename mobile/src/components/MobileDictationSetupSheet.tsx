@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Pressable, StyleSheet, Switch, Text, View } from 'react-native'
 import { Check, Download } from 'lucide-react-native'
 import { BottomDrawer } from './BottomDrawer'
@@ -8,6 +8,7 @@ import type { RpcClient } from '../transport/rpc-client'
 import { triggerError, triggerSuccess } from '../platform/haptics'
 import { useDictationSetupPoller } from '../dictation/use-dictation-setup-poller'
 import {
+  dictationModelRowAction,
   downloadDictationModel,
   fetchDictationSetup,
   isModelInFlight,
@@ -33,8 +34,8 @@ function formatSize(bytes: number | null | undefined): string {
   return `${Math.round(bytes / 1_000_000)} MB`
 }
 
-// Lets the user enable dictation and download a speech model on the paired
-// desktop, from the phone. Polls while a download is in flight.
+// Lets the user enable dictation and download or pick a speech model on the paired
+// computer, from the phone. Polls while a download is in flight.
 export function MobileDictationSetupSheet({ visible, client, onClose, onReady }: Props) {
   const { t } = useTranslation()
   const [setup, setSetup] = useState<MobileSpeechSetup | null>(null)
@@ -81,7 +82,7 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
         await refreshSetup()
       } catch (err) {
         triggerError()
-        setError(err instanceof Error ? err.message : 'Download failed')
+        setError(err instanceof Error ? err.message : t('settings.voice.errors.download'))
       } finally {
         setBusy(null)
       }
@@ -132,9 +133,7 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
           a nested capped ScrollView cut off the lower controls. */}
       <View>
         <Text style={styles.heading}>{t('dictationSetup.heading')}</Text>
-        <Text style={styles.subtitle}>
-          {t('dictationSetup.subtitle')}
-        </Text>
+        <Text style={styles.subtitle}>{t('dictationSetup.subtitle')}</Text>
 
         {setup === null ? (
           <View style={styles.loading}>
@@ -148,8 +147,8 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
             </View>
 
             {setup.models.map((model) => {
-              const isSelected = model.id === setup.selectedModelId
               const inFlight = isModelInFlight(model)
+              const action = dictationModelRowAction(model, setup.selectedModelId)
               const rowBusy = busy === model.id
               return (
                 <View key={model.id} style={styles.modelRow}>
@@ -161,37 +160,40 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
                       ) : null}
                     </View>
                     <Text style={styles.modelMeta}>
-                      {model.provider === 'openai' ? t('dictationSetup.openaiApi') : formatSize(model.sizeBytes)}
+                      {model.provider === 'openai'
+                        ? t('dictationSetup.openaiApi')
+                        : formatSize(model.sizeBytes)}
                       {inFlight && model.progress != null
                         ? ` · ${Math.round(model.progress * 100)}%`
                         : model.status === 'extracting'
-                          ? t('dictationSetup.extracting')
+                          ? ' · extracting…'
                           : ''}
                     </Text>
                   </View>
-                  {model.provider === 'openai' ? (
+                  {action === 'needs-api-key' ? (
                     <Text style={styles.modelStateText}>
-                      {model.status === 'ready' ? t('dictationSetup.apiKeySet') : t('dictationSetup.setUpOnDesktop')}
+                      {t('dictationSetup.setUpOnDesktop')}
                     </Text>
-                  ) : model.status === 'ready' ? (
-                    isSelected ? (
-                      <View style={styles.selectedTag}>
-                        <Check size={14} color={colors.statusGreen} strokeWidth={2.4} />
-                        <Text style={styles.selectedText}>{t('dictationSetup.inUse')}</Text>
-                      </View>
-                    ) : (
-                      <Pressable
-                        style={({ pressed }) => [
-                          styles.actionButton,
-                          pressed && styles.actionPressed
-                        ]}
-                        disabled={rowBusy}
-                        onPress={() => void handleUseModel(model)}
-                      >
-                        <Text style={styles.actionText}>{t('dictationSetup.use')}</Text>
-                      </Pressable>
-                    )
-                  ) : inFlight ? (
+                  ) : action === 'in-use' ? (
+                    <View style={styles.selectedTag}>
+                      <Check size={14} color={colors.statusGreen} strokeWidth={2.4} />
+                      <Text style={styles.selectedText}>{t('dictationSetup.inUse')}</Text>
+                    </View>
+                  ) : action === 'use' ? (
+                    <Pressable
+                      style={({ pressed }) => [
+                        styles.actionButton,
+                        pressed && styles.actionPressed
+                      ]}
+                      disabled={rowBusy}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('dictationSetup.use')}
+                      accessibilityState={{ disabled: rowBusy }}
+                      onPress={() => void handleUseModel(model)}
+                    >
+                      <Text style={styles.actionText}>{t('dictationSetup.use')}</Text>
+                    </Pressable>
+                  ) : action === 'downloading' ? (
                     <ActivityIndicator size="small" color={colors.textSecondary} />
                   ) : (
                     <Pressable
@@ -200,6 +202,9 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
                         pressed && styles.actionPressed
                       ]}
                       disabled={rowBusy}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('voiceModels.downloadModel', { name: model.label })}
+                      accessibilityState={{ disabled: rowBusy }}
                       onPress={() => void handleDownload(model)}
                     >
                       {rowBusy ? (
@@ -262,7 +267,7 @@ const styles = StyleSheet.create({
     fontWeight: '700'
   },
   modelMeta: { color: colors.textMuted, fontSize: typography.metaSize, marginTop: 2 },
-  modelStateText: { color: colors.textMuted, fontSize: typography.metaSize },
+  modelStateText: { color: colors.textMuted, fontSize: typography.metaSize, flexShrink: 1 },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',

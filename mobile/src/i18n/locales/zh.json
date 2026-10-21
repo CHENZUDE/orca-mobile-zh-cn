@@ -410,7 +410,8 @@
           "blockedReason": "已阻止:{{reason}}。",
           "nativeRoute": "已显示原生页面。",
           "failed": "已显示错误页面。",
-          "waiting": "正在等待桌面。"
+          "waiting": "正在等待桌面。",
+          "routeUnavailable": "显示该界面不可用。"
         },
         "reason": {
           "no-connection": "未连接到主机",
@@ -442,7 +443,9 @@
           "bundle-unavailable": "主机没有工作区 bundle",
           "bundle-shell-too-old": "本 App 版本过旧,不兼容已保存的 bundle",
           "host-too-old-for-bundle": "主机版本过旧,不兼容已保存的 bundle",
-          "bundle-too-old-for-host": "已保存的 bundle 过旧,不兼容主机"
+          "bundle-too-old-for-host": "已保存的 bundle 过旧,不兼容主机",
+          "page-route-unlisted": "主机的工作区不包含此界面",
+          "page-route-grant-missing": "此界面需要更新版本的应用"
         }
       },
       "connection": {
@@ -579,6 +582,7 @@
         "title": "系统默认",
         "subtitle": "使用智能体自身的登录"
       },
+      "refreshAccounts": "刷新账户",
       "footer": "请在桌面 设置 → 账户 中添加或重新登录账户。",
       "errors": {
         "invalidSnapshot": "主机的账户快照无效",
@@ -1083,7 +1087,16 @@
       "sourcePrefix": "来源：{{value}}",
       "sortPrefix": "排序：{{value}}",
       "fieldsPrefix": "字段：{{value}}"
-    }
+    },
+    "refreshLabel": {
+      "github": "刷新 GitHub 工作",
+      "gitlab": "刷新 GitLab 工作项",
+      "linear": "刷新 Linear",
+      "jira": "刷新 Jira 问题"
+    },
+    "newGithubIssue": "新建 GitHub issue",
+    "newLinearIssue": "新建 Linear issue",
+    "connectLinear": "连接 Linear"
   },
   "prChecks": {
     "noDetails": "暂无详细信息。",
@@ -1675,7 +1688,8 @@
     "opensImageFullSize": "以全尺寸打开图片",
     "copyMessage": "复制消息",
     "loadEarlierMessages": "加载更早的消息",
-    "resumeInNewCli": "在新 CLI 中继续"
+    "resumeInNewCli": "在新 CLI 中继续",
+    "addToMessage": "添加到消息"
   },
   "nativeChatImageViewer": {
     "closeImage": "关闭图片"
@@ -1811,7 +1825,8 @@
   },
   "nativeChatToolRun": {
     "showMore": "展开更多",
-    "showLess": "收起"
+    "showLess": "收起",
+    "result": "结果"
   },
   "fileReader": {
     "copyReviewNotes": "复制评审备注",
@@ -2149,6 +2164,7 @@
     "queueAfterStop": "排队一条停止后运行的消息",
     "sendAfterStop": "发送一条停止后运行的消息",
     "composerPlaceholder": "消息、@文件、/命令",
+    "composerPlaceholderForAgent": "给 {{name}} 发消息",
     "tools": "工具",
     "collapse": "收起",
     "waitingForDesktop": "正在等待桌面端…"
@@ -2172,7 +2188,8 @@
     "on": "开启",
     "off": "关闭",
     "permissionsAccessible": "权限，{{name}}",
-    "modelAccessible": "模型，{{name}}"
+    "modelAccessible": "模型，{{name}}",
+    "permissions": "权限"
   },
   "errors": {
     "unableToLoadPullRequest": "无法加载拉取请求",

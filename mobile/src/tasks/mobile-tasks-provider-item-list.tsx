@@ -41,7 +41,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
     githubLoadingTargetPage,
     githubMode,
     githubPaginationLoading,
-    githubTotalCount,
+    githubCountedTotalPages,
     githubTotalPages,
     handleGitHubPageChange,
     insets,
@@ -97,7 +97,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
             <Pressable
               accessibilityRole="button"
               accessibilityLabel={
-                githubTotalCount === null
+                githubCountedTotalPages === null
                   ? t('tasks.providerPickers.selectPage', { page: githubCurrentPage + 1 })
                   : t('tasks.providerPickers.selectPageOf', {
                       page: githubCurrentPage + 1,
@@ -115,7 +115,7 @@ export function renderMobileTasksProviderItemList(model: ConnectionPresentationM
               }}
             >
               <Text style={styles.paginationLabel}>
-                {githubTotalCount === null
+                {githubCountedTotalPages === null
                   ? t('tasks.providerPickers.page', { page: githubCurrentPage + 1 })
                   : t('tasks.providerPickers.pageOf', {
                       page: githubCurrentPage + 1,

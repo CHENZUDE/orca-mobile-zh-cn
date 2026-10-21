@@ -7,15 +7,18 @@ import { Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import type { CompatVerdict } from '../transport/protocol-compat'
 import type { MobileWebBundleCompatVerdict } from '../transport/mobile-web-bundle-compat'
+import type { PageRouteRefusalVerdict } from '../mobile-web-shell/page-route-policy'
 
 const RELEASES_URL = 'https://github.com/stablyai/orca/releases'
 const IOS_APP_STORE_URL = 'itms-apps://apps.apple.com/app/orca-ide/id6766130217'
 
-/** Every wall this screen renders: the protocol one and the bundle one. Both are terminal — there
- *  is no native workspace to fall back to, so the only way out is updating one of the two apps. */
+/** Every wall this screen renders: the protocol one, the bundle one and the page route one. All are
+ *  terminal — there is no native workspace to fall back to, so the only way out is updating one of
+ *  the two apps. */
 export type BlockedVerdict =
   | Extract<CompatVerdict, { kind: 'blocked' }>
   | Extract<MobileWebBundleCompatVerdict, { kind: 'blocked' }>
+  | PageRouteRefusalVerdict
 
 type Props = {
   verdict: BlockedVerdict
@@ -29,9 +32,11 @@ function blockRemedy(verdict: BlockedVerdict): BlockRemedy {
   switch (verdict.reason) {
     case 'mobile-too-old':
     case 'bundle-shell-too-old':
+    case 'page-route-grant-missing':
       return 'update-mobile'
     case 'desktop-too-old':
     case 'bundle-unavailable':
+    case 'page-route-unlisted':
       return 'update-desktop'
     case 'bundle-incompatible':
       return verdict.side === 'desktop' ? 'update-desktop' : 'refresh-bundle'
@@ -55,9 +60,6 @@ function blockBody(verdict: BlockedVerdict, remedy: BlockRemedy, storeName: stri
   }
   if (verdict.reason === 'mobile-too-old') {
     return translate('hostProtocolGate.mobileTooOldBody', { storeName })
-  }
-  if (verdict.reason === 'bundle-unavailable') {
-    return translate('hostProtocolGate.bundleUnavailableBody')
   }
   if (remedy === 'update-mobile') {
     return translate('hostProtocolGate.bundleShellTooOldBody', { storeName })

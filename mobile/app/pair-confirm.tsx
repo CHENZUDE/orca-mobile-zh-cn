@@ -10,7 +10,7 @@ import {
   type PreProfilePairingAttempt
 } from '../src/transport/pre-profile-pairing-coordinator'
 import type { ConnectionLogEntry } from '../src/transport/types'
-import { useRefreshHostClient } from '../src/transport/client-context'
+import { useRefreshHostClient } from '../src/transport/host-client-hooks'
 import { colors, spacing, radii, typography } from '../src/theme/mobile-theme'
 import { ConnectionLog } from '../src/components/ConnectionLog'
 import {
@@ -145,7 +145,13 @@ export default function PairConfirmScreen() {
 
   return (
     <View ref={setPairConfirmRootRef} style={[styles.container, containerPadding]}>
-      <Pressable style={styles.backButton} onPress={cancel}>
+      <Pressable
+        style={styles.backButton}
+        onPress={cancel}
+        hitSlop={8}
+        accessibilityRole="button"
+        accessibilityLabel={t('common.back')}
+      >
         <ChevronLeft size={22} color={colors.textSecondary} />
       </Pressable>
 
