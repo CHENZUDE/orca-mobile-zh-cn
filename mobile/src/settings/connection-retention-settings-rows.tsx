@@ -93,12 +93,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.textMuted,
     letterSpacing: 0.5,
-    marginBottom: spacing.xs
+    marginBottom: spacing.xs,
+    paddingHorizontal: spacing.xs
   },
   groupDescription: {
     fontSize: typography.bodySize - 1,
     color: colors.textSecondary,
-    lineHeight: 20
+    lineHeight: 20,
+    paddingHorizontal: spacing.xs
   },
   section: {
     marginTop: spacing.sm,
