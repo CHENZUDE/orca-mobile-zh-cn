@@ -1,3 +1,7 @@
+> **这是 Orca 手机版的中文汉化构建**，非官方出品。
+> 安卓安装包（APK）在 [Releases 页面](https://github.com/CHENZUDE/orca-mobile-zh-cn/releases) 下载，与官方 Orca 可同时安装，互不影响。
+> 中文用户从这里开始；下方是上游原版的英文说明。
+
 <h1 align="center">
   <a href="https://onOrca.dev"><img src="resources/build/icon.png" alt="Orca" width="64" valign="middle" /></a> Orca
 </h1>
